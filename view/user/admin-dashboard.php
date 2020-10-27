@@ -1,5 +1,8 @@
 <?php
     include '../../commons/session.php';
+    if(($_SESSION["user"]["role_id"] != '1')) {	
+        header('location:../home.php?noPermission=1');
+    }
 ?>
 <html>
     <head>

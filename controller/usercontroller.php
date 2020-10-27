@@ -229,9 +229,8 @@ if(isset($_REQUEST["status"]))
                 $img = "".time()."_".$img;
                 // Obtain temporary location
                 $tmp = $_FILES["image"]["tmp_name"];
-                $destination = "../images/Avatars/user_images/$img";
-                move_uploaded_file($tmp, $destination);
-                
+                $destination = dirname(__FILE__) ."../images/Avatars/user_images/$img";
+                move_uploaded_file($tmp, $destination);                
             }
             else 
             {
