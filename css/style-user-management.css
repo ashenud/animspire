@@ -1,0 +1,56 @@
+.cont .user-details {
+             height: 520px;
+             width: 980px;
+             position: absolute;
+             z-index: 1;
+             bottom: 20px;
+             right: 15px;
+             background-color: white;
+             overflow-x: hidden;
+             box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2), 0 6px 8px rgba(0, 0, 0, 0.19);
+             font-family: 'Roboto', sans-serif;
+}
+.user-details .top-buttons{
+    padding-top: 10px;
+}
+.top-buttons #adduser{
+    padding: 6px;
+    margin-left: 25px;
+    margin-top: 10px;
+    width: 150px;
+}
+.top-buttons h4{
+   padding: 8px;
+}
+.user-details #user-table{
+            border-collapse: collapse;
+            width: 100%;
+}
+#user-table th{
+     padding: 4px 3px 2px 4px;
+     border: 1px solid #A569BD;
+     text-align: left;
+     background-color: #6C3483;
+     color: white;
+     font-weight: 800;
+     font-size: 15px;
+     height: 40px;
+}
+#user-table td{
+     border: 1px solid #A569BD;
+     text-align: left;
+     background-color: #9B59B6;
+     color: white;
+     font-weight: 600;
+     font-size: 15px;
+}
+#user-table button{
+     font-size: 14px;
+     text-align: center;
+     text-decoration: none;
+     cursor: pointer;
+     width: 60px;
+     height: 30px;
+     padding: 2px;
+     margin: 2px 0 2px 2px;
+}

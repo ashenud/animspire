@@ -1,0 +1,67 @@
+.cont .profile {
+             height: 480px;
+             width: 950px;
+             position: absolute;
+             z-index: 1;
+             bottom: 40px;
+             right: 30px;
+             background-color: white;
+             overflow-x: hidden;
+             border-radius: 20px;
+             box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2), 0 6px 8px rgba(0, 0, 0, 0.19);
+             
+             }
+.profile .profile-image img{
+               border: 2px solid #912299;
+               margin: 60px 35px 35px 40px;
+               border-radius: 15px;
+             }
+.profile .v1{
+             border-left: 2px solid #912299;
+             height: 125px;
+             position: absolute;
+             left: 255px;
+             margin-left: -3px;
+             top: 85px;
+             }
+.profile .name{
+              position: absolute;
+              top: 85px;
+              left: 290px; 
+              width: 300px;
+               }
+.profile .email{
+              position: absolute;
+              top: 85px;
+              left: 590px; 
+             }
+.profile .role{
+              position: absolute;
+              top: 135px;
+              left: 290px; 
+             }
+.profile .dob{
+              position: absolute;
+              top: 135px;
+              left: 590px; 
+             }
+.profile .phone{
+              position: absolute;
+              top: 185px;
+              left: 290px; 
+             }  
+.profile .gender{
+              position: absolute;
+              top: 185px;
+              left: 590px; 
+             }
+.profile hr{
+            border: 1px solid #912299;
+            margin: 35px ;     
+            }
+.profile .button{
+              position: absolute;
+              top: 360px;
+              left: 235px; 
+             }              
+             
