@@ -34,7 +34,7 @@
                 <a><img src="../../images/Animspire-Logo.png" id="logo"></a>
                 <a href="user-management.php"><i class="fa fa-fw fa-home"></i><br>User Mng</a>
                 <hr>
-                <a href="#services"><i class="fa fa-fw fa-wrench"></i><br>Reports</a>
+                <a href="admin-reports-management.php"><i class="fa fa-fw fa-wrench"></i><br>Reports</a>
                 <hr>
                 <a href="#clients"><i class="fa fa-fw fa-user"></i><br>Backup</a>
                 <hr>
@@ -76,12 +76,19 @@
                        <div class="col-md-4" style="padding: 12px 70px 1px 70px;">
                              <h4>USER DETAILS</h4>
                         </div>
-                        <div class="col-md-4">
-
+                        <div class="col-md-4" id="search">
+                            <div id="search" style="margin: 5px 25px auto auto">
+                                <div class="input-group mb-3">
+                                    <input type="text" class="form-control" placeholder="Search" style="margin-top: 3px">
+                                    <div class="input-group-append" >
+                                        <button class="btn btn-success" type="submit" style="margin-top: 3px; padding: 10px"><span class="fa fa-lg fa-search" ></span></button>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
                    </div>
                </div>
-              <div id="data_section" class="scroll"> 
+              <div id="data_section" class="scroll" style="overflow-y:scroll;"> 
                 <table id="user-table" border="1"  >
                     <tr>
                     <th ></th>

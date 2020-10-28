@@ -98,8 +98,8 @@
          {
              if($current_pw_encode==$new_pw_encode)
              {
-//                 $msg="Please Enter different password!";
-//                 $msg=base64_encode($msg);
+                // $msg="Please Enter different password!";
+                // $msg=base64_encode($msg);
                  $userId = base64_encode($userId);  /// encoding user id
             ?>
                 <script> alert("Please Enter different password!");</script>

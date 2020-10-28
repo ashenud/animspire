@@ -126,5 +126,41 @@ class User{
         }
         $result = $con->query($sql) or die($con->error);
     }
-    
+
+    function getRoles() {
+        $con = $GLOBALS['con'];
+        $sql = "SELECT 
+                    *
+                FROM 
+                    user_role u
+                ORDER BY
+                    u.role_id";
+        $results = $con->query($sql);
+        return $results;
+    }
+
+    function getUsersForRole($role) {
+        $con = $GLOBALS['con'];
+        $sql = "SELECT 
+                    u.user_id AS id,
+                    CONCAT(u.user_fname, ' ', u.user_lname) AS name,
+                    u.user_email AS email,
+                    u.user_phone AS phone,
+                    ur.role_name AS designation,
+                    ud.department_name AS department,
+                    IF((u.user_gender = 0),'Male','Female') AS gender
+                FROM 
+                    user u
+                        INNER JOIN
+                    user_role ur ON u.user_role = ur.role_id
+                        INNER JOIN
+                    user_department ud ON ur.department_id = ud.department_id
+                WHERE
+                    u.user_status = 1
+                    $role";
+
+        $results = $con->query($sql);
+        return $results;
+    }
+
 }
