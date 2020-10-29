@@ -76,20 +76,23 @@
                        <div class="col-md-4" style="padding: 12px 70px 1px 70px;">
                              <h4>USER DETAILS</h4>
                         </div>
-                        <div class="col-md-4" id="search">
-                            <div id="search" style="margin: 5px 25px auto auto">
+                        <div class="col-md-4">
+                            <div class="search" style="margin: 4px 15px 4px 4px">
                                 <div class="input-group mb-3">
-                                    <input type="text" class="form-control" placeholder="Search" style="margin-top: 3px">
+                                    <input type="text" class="form-control" placeholder="Search" style="margin-top: 5px; width: 160px">
                                     <div class="input-group-append" >
-                                        <button class="btn btn-success" type="submit" style="margin-top: 3px; padding: 10px"><span class="fa fa-lg fa-search" ></span></button>
+                                        <button class="btn btn-success" type="submit" style="margin-top: 5px; padding: 10px"><span class="fa fa-lg fa-search" ></span></button>
                                     </div>
                                 </div>
                             </div>
                         </div>
                    </div>
                </div>
-              <div id="data_section" class="scroll" style="overflow-y:scroll;"> 
-                <table id="user-table" border="1"  >
+                <div>
+                    <div class="col-md-12">&nbsp;</div>
+                </div>
+              <div id="data_section" class="scroll" style="display: box; overflow-y:scroll;"> 
+                <table id="user-table" border="1" style="overflow-y:scroll;">
                     <tr>
                     <th ></th>
                     <th width="30px">&nbsp;ID</th>

@@ -128,12 +128,16 @@
                     <label for="phone">Contact No :</label>
                     <input type="text" class="form-control" id="phone" placeholder="Phone Number" name="phone" >
                    </div>
-                   <div class="form-group" style="margin-left: 27px; width: 47%" >
+                   <div class="form-group" style="margin-left: 27px; width: 39%" >
                     <label for="image">Image :</label>
                     <div class="custom-file">
-                    <input type="file" class="custom-file-input" id="image" name="image" style="margin-top:3px" >
+                     <input type="file" class="custom-file-input" id="image" name="image" style="margin-top:3px" onchange="readURL(this)" >
+                     
                     <label class="custom-file-label" for="customFile">Choose file</label>
                     </div>
+                   </div>
+                    <div class="form-group" style="margin-left: 27px; width: 6%" >
+                    <img id="prev_img" src="../../images/Avatars/user_images/" style="width: 50px; height: 50px; margin-top: 20px " />
                    </div>
                 </div>
              <div class="clearfix">
@@ -151,6 +155,23 @@
    
    ?>
     <script src="../../js/user_validation.js"></script>
+    <script type="text/javascript">
+      
+        function readURL(input) {
+        if (input.files && input.files[0]) {
+        var reader = new FileReader();
+
+        reader.onload = function (e) {
+            $('#prev_img')
+            .attr('src', e.target.result)
+            .height(50)
+            .width(50);
+        };
+
+        reader.readAsDataURL(input.files[0]);
+        }
+        }   
+        </script>
     
     
             <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>

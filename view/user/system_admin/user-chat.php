@@ -68,16 +68,23 @@
             </div>
             
             <div class="report-generation">
-                <div class="top-buttons">
-                    <div class="row">
-                       <div class="col-md-4">
-                           <select id="admin-name" class="form-control" required="required">
-                               <option value="">Select System Admin</option>
-                               <option>----</option>
-                           </select>
+                   <div class="row">
+                       <div class="col-md-12" style="padding: 18px 70px 1px 70px; text-align: center">
+                             <h4>Report Generation</h4>
                         </div>
-                       <div class="col-md-4">
-                             <button name="report-generate-2" class="btn btn-success" id="report-generate-2">Generate Report</button>
+                   </div>
+                   <div class="row">
+                        <div class="col-md-12">
+                             &nbsp;
+                        </div>
+                   </div>
+                <div class="top-buttons">
+                   <div class="row">
+                        <div class="col-md-6">
+                            <a href="admin-reports-management_1.php"><button name="report-generate-1" class="btn btn-success" id="report-generate">Report of Backup Details</button></a>
+                        </div>
+                       <div class="col-md-6">
+                           <a href="admin-reports-management_2.php"><button name="report-generate-2" class="btn btn-success" id="report-generate">Report of System Users</button></a>
                         </div>
                    </div>
                </div>
