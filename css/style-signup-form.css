@@ -24,6 +24,20 @@
     /* border-radius: 30px; */
   }
 
+  .cont .user-details {
+    padding: 5px;
+    height: 520px;
+    width: 980px;
+    position: absolute;
+    z-index: 1;
+    bottom: 20px;
+    right: 15px;
+    background-color: white;
+    overflow-x: hidden;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2), 0 6px 8px rgba(0, 0, 0, 0.19);
+    font-family: 'Roboto', sans-serif;
+}
+
 /* Style the horizontal ruler */
 hr {
   border: 1px solid #f1f1f1;

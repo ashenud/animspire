@@ -1,7 +1,7 @@
 
 <?php
-include '../../../commons/session.php';
-include '../../../model/user_model.php';
+include '../../../../commons/session.php';
+include '../../../../model/user_model.php';
 $userObj = new User();
 
 $role ="";

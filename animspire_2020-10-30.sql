@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 192.168.1.110
--- Generation Time: Oct 29, 2020 at 02:54 AM
+-- Generation Time: Oct 30, 2020 at 05:04 AM
 -- Server version: 10.4.15-MariaDB-1:10.4.15+maria~bionic-log
 -- PHP Version: 7.4.11
 
@@ -20,6 +20,33 @@ SET time_zone = "+00:00";
 --
 -- Database: `animspire`
 --
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `backup_details`
+--
+
+CREATE TABLE `backup_details` (
+  `backup_id` int(11) NOT NULL,
+  `user_id` int(11) NOT NULL,
+  `backup_reference` bigint(20) NOT NULL,
+  `description` varchar(255) NOT NULL,
+  `backup_time` timestamp NOT NULL DEFAULT current_timestamp()
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `backup_details`
+--
+
+INSERT INTO `backup_details` (`backup_id`, `user_id`, `backup_reference`, `description`, `backup_time`) VALUES
+(1, 1, 878057317368, 'Backup done by Damith Menaka', '2020-10-29 22:29:02'),
+(2, 1, 867146058026, 'Backup done by Damith Menaka', '2020-10-29 22:29:42'),
+(3, 1, 252089990023, 'Backup done by Damith Menaka', '2020-10-29 22:29:55'),
+(4, 1, 539896341774, 'Backup done by Damith Menaka', '2020-10-29 22:31:10'),
+(5, 1, 124618088591, 'Backup done by Damith Menaka', '2020-10-29 22:34:08'),
+(6, 1, 709423907556, 'Backup done by Damith Menaka', '2020-10-29 22:37:44'),
+(7, 1, 776526063494, 'Backup done by Damith Menaka', '2020-10-29 23:31:11');
 
 -- --------------------------------------------------------
 
@@ -153,14 +180,15 @@ CREATE TABLE `user` (
 --
 
 INSERT INTO `user` (`user_id`, `user_fname`, `user_lname`, `user_email`, `user_role`, `user_dob`, `user_gender`, `user_phone`, `user_image`, `user_create_date`, `user_update_date`, `user_status`) VALUES
-(1, 'Damith', 'Menaka', 'damith@gmail.com', '1', '1997-08-09', 0, '0712974466', '1596361520_M5.png', '2020-06-26 14:54:39', '2020-10-27 16:32:17', 1),
+(1, 'Damith', 'Menaka', 'damith@gmail.com', '1', '1997-08-09', 0, '0712974466', '1604014460_K8.jpg', '2020-06-26 14:54:39', '2020-10-29 23:34:20', 1),
 (2, 'Yuresh', 'Yasintha', 'yuresh@gmail.com', '2', '1997-12-03', 0, '0758996325', '1596361541_M1.png', '2020-07-03 12:06:02', '2020-08-05 15:19:07', 1),
 (3, 'Rushan', 'Tharanga', 'rushan.tharanga@gmail.com', '3', '1991-06-15', 0, '0776859696', '1595930399_M3.png', '2020-07-28 15:29:59', '2020-07-28 09:59:59', 1),
 (4, 'Madumika', 'Vithange', 'madumika.v@gmail.com', '4', '1994-02-09', 1, '0756665544', '1596442575_F8.png', '2020-08-03 13:46:15', '2020-08-03 13:54:02', 1),
 (5, 'Kashun', 'Thilina', 'kashun.thilina@gmail.com', '1', '1988-02-03', 0, '0772224142', '1603816798_M8.png', '2020-10-27 08:27:20', '2020-10-27 16:39:58', 1),
 (6, 'Imesha', 'Thilini', 'imesha.thilini@gmail.com', '2', '1989-12-08', 1, '0716364666', '1603820673_F8.png', '2020-10-27 08:29:36', '2020-10-27 17:44:33', 1),
 (7, 'Sachitha', 'Maduranga', 'sachitha.m@gmail.com', '3', '1994-12-08', 0, '0778887799', '1603767657_M8.png', '2020-10-27 08:30:57', '2020-10-27 03:00:57', 1),
-(8, 'Janaka', 'Rukantha', 'janaka.r@gmail.com', '4', '1994-10-07', 0, '0771234455', '1603767718_M4.png', '2020-10-27 08:31:58', '2020-10-27 03:01:58', 1);
+(8, 'Janaka', 'Rukantha', 'janaka.r@gmail.com', '4', '1994-10-07', 0, '0771234455', '1603767718_M4.png', '2020-10-27 08:31:58', '2020-10-27 03:01:58', 1),
+(9, 'Nimal', 'Perera', 'Nimal@gmail.com', '2', '1981-06-01', 0, '0712758810', '1604014235_M8.png', '2020-10-29 23:46:36', '2020-10-29 23:30:35', 1);
 
 -- --------------------------------------------------------
 
@@ -209,7 +237,8 @@ INSERT INTO `user_login` (`user_login_id`, `user_login_username`, `user_login_pa
 (5, 'kashun.thilina@gmail.com', '40bd001563085fc35165329ea1ff5c5ecbdbbeef', 5, 1),
 (6, 'imesha.thilini@gmail.com', '40bd001563085fc35165329ea1ff5c5ecbdbbeef', 6, 1),
 (7, 'sachitha.m@gmail.com', '40bd001563085fc35165329ea1ff5c5ecbdbbeef', 7, 1),
-(8, 'janaka.r@gmail.com', '40bd001563085fc35165329ea1ff5c5ecbdbbeef', 8, 1);
+(8, 'janaka.r@gmail.com', '40bd001563085fc35165329ea1ff5c5ecbdbbeef', 8, 1),
+(9, 'Nimal@gmail.com', '40bd001563085fc35165329ea1ff5c5ecbdbbeef', 9, 1);
 
 -- --------------------------------------------------------
 
@@ -236,6 +265,12 @@ INSERT INTO `user_role` (`role_id`, `role_name`, `department_id`) VALUES
 --
 -- Indexes for dumped tables
 --
+
+--
+-- Indexes for table `backup_details`
+--
+ALTER TABLE `backup_details`
+  ADD PRIMARY KEY (`backup_id`);
 
 --
 -- Indexes for table `customer`
@@ -290,6 +325,12 @@ ALTER TABLE `user_role`
 --
 
 --
+-- AUTO_INCREMENT for table `backup_details`
+--
+ALTER TABLE `backup_details`
+  MODIFY `backup_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+
+--
 -- AUTO_INCREMENT for table `customer`
 --
 ALTER TABLE `customer`
@@ -317,7 +358,7 @@ ALTER TABLE `freelancer_login`
 -- AUTO_INCREMENT for table `user`
 --
 ALTER TABLE `user`
-  MODIFY `user_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
+  MODIFY `user_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
 
 --
 -- AUTO_INCREMENT for table `user_department`
@@ -329,7 +370,7 @@ ALTER TABLE `user_department`
 -- AUTO_INCREMENT for table `user_login`
 --
 ALTER TABLE `user_login`
-  MODIFY `user_login_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
+  MODIFY `user_login_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

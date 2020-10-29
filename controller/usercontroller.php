@@ -80,7 +80,7 @@ if(isset($_REQUEST["status"]))
                 $img = "".time()."_".$img;
                 // Obtain temporary location
                 $tmp = $_FILES["image"]["tmp_name"];
-                $destination = "../images/Avatars/user_images/$img";
+                $destination = "../../images/Avatars/user_images/$img";
                 move_uploaded_file($tmp, $destination);
                 
             }
@@ -110,7 +110,7 @@ if(isset($_REQUEST["status"]))
              $msgSuccess = base64_encode($msgSuccess);
              
              ?>
-              <script>window.location = "../view/user/user-management.php?msgSuccess=<?php echo $msgSuccess; ?>" </script>
+              <script>window.location = "../view/user/system_admin/admin-user-management.php?msgSuccess=<?php echo $msgSuccess; ?>" </script>
              <?php
             }
             
@@ -123,7 +123,7 @@ if(isset($_REQUEST["status"]))
             $msg = base64_encode($msg);
             
             ?>
-              <script>window.location = "../view/user/add-user.php?msg=<?php echo $msg; ?>" </script>
+              <script>window.location = "../view/user/system_admin/admin-user-add.php?msg=<?php echo $msg; ?>" </script>
             <?php
         }
             
@@ -141,7 +141,7 @@ if(isset($_REQUEST["status"]))
         $msgSuccess = base64_encode($msgSuccess);
         
         ?>
-            <script>window.location = "../view/user/user-management.php?msgSuccess=<?php echo $msgSuccess; ?>" </script>  
+            <script>window.location = "../view/user/system_admin/admin-user-management.php?msgSuccess=<?php echo $msgSuccess; ?>" </script>  
         <?php
         
         break;
@@ -158,7 +158,7 @@ if(isset($_REQUEST["status"]))
         $msgSuccess = base64_encode($msgSuccess);
         
         ?>
-            <script>window.location = "../view/user/user-management.php?msgSuccess=<?php echo $msgSuccess; ?>" </script>  
+            <script>window.location = "../view/user/system_admin/admin-user-management.php?msgSuccess=<?php echo $msgSuccess; ?>" </script>  
         <?php
         break;
     
@@ -229,7 +229,7 @@ if(isset($_REQUEST["status"]))
                 $img = "".time()."_".$img;
                 // Obtain temporary location
                 $tmp = $_FILES["image"]["tmp_name"];
-                $destination = dirname(__FILE__) ."../images/Avatars/user_images/$img";
+                $destination = dirname(__FILE__) ."../../images/Avatars/user_images/$img";
                 move_uploaded_file($tmp, $destination);                
             }
             else 
@@ -254,7 +254,7 @@ if(isset($_REQUEST["status"]))
              $msgSuccess = base64_encode($msgSuccess);
              
              ?>
-              <script>window.location = "../view/user/user-management.php?msgSuccess=<?php echo $msgSuccess; ?>" </script>
+              <script>window.location = "../view/user/system_admin/admin-user-management.php?msgSuccess=<?php echo $msgSuccess; ?>" </script>
              <?php
             }
             
@@ -267,7 +267,7 @@ if(isset($_REQUEST["status"]))
             $msg = base64_encode($msg);
             
             ?>
-              <script>window.location = "../view/user/edit-user.php?msg=<?php echo $msg; ?>" </script>
+              <script>window.location = "../view/user/system_admin/admin-user-edit.php?msg=<?php echo $msg; ?>" </script>
             <?php
         }
             

@@ -5,6 +5,7 @@
     
     $userLoginObj = new userLogin();
     $userObj = new User();
+    $adminObj = new Admin();
     
     $status = $_REQUEST["status"];
     
@@ -98,8 +99,8 @@
          {
              if($current_pw_encode==$new_pw_encode)
              {
-//                 $msg="Please Enter different password!";
-//                 $msg=base64_encode($msg);
+                  // $msg="Please Enter different password!";
+                  // $msg=base64_encode($msg);
                  $userId = base64_encode($userId);  /// encoding user id
             ?>
                 <script> alert("Please Enter different password!");</script>
@@ -123,8 +124,8 @@
                  }
                  else 
                  {
-//                     $msg="Confirm password is incorrect!";
-//                     $msg=base64_encode($msg);
+                      // $msg="Confirm password is incorrect!";
+                      // $msg=base64_encode($msg);
                      $userId = base64_encode($userId);   /// encoding user id
                  ?>
                     <script> alert("Confirm password is incorrect!");</script>
@@ -136,8 +137,8 @@
          }
          else
          {
-//             $msg="Current Password is incorret!";
-//             $msg=base64_encode($msg);
+              // $msg="Current Password is incorret!";
+              // $msg=base64_encode($msg);
              $userId = base64_encode($userId);   /// encoding user id
           ?>   
            <script> alert("Current Password is incorret!"); </script>    
@@ -158,16 +159,74 @@
          <?php
          
      break;
- 
-     
+
+
+    
+    case "backup_db":
+
+        $connect = new PDO("mysql:host=192.168.1.110;dbname=animspire", "root", "2486");
+         
+        $all_tables = $_POST['table'];  ///collecting tables from post
+        $output = '';
+    
+        foreach($all_tables as $table) {
+            $show_table_query = "SHOW CREATE TABLE " . $table . "";
+            $statement = $connect->prepare($show_table_query);
+            $statement->execute();
+            $show_table_result = $statement->fetchAll();
+
+            foreach($show_table_result as $show_table_row) {
+                $output .= "\n\n" . $show_table_row["Create Table"] . ";\n\n";
+            }
+
+            $select_query = "SELECT * FROM " . $table . "";
+            $statement = $connect->prepare($select_query);
+            $statement->execute();
+            $total_row = $statement->rowCount();
+
+            for($count=0; $count<$total_row; $count++) {
+                $single_result = $statement->fetch(PDO::FETCH_ASSOC);
+                $table_column_array = array_keys($single_result);
+                $table_value_array = array_values($single_result);
+                $output .= "\nINSERT INTO $table (";
+                $output .= "" . implode(", ", $table_column_array) . ") VALUES (";
+                $output .= "'" . implode("','", $table_value_array) . "');\n";
+            }
+        }
+
+
+        $file_name = 'database_backup_on_' . date('y-m-d') . '.sql';
+        $file_handle = fopen($file_name, 'w+');
+        fwrite($file_handle, $output);
+        fclose($file_handle);
+        header('Content-Description: File Transfer');
+        header('Content-Type: application/octet-stream');
+        header('Content-Disposition: attachment; filename=' . basename($file_name));
+        header('Content-Transfer-Encoding: binary');
+        header('Expires: 0');
+        header('Cache-Control: must-revalidate');
+        header('Pragma: public');
+        header('Content-Length: ' . filesize($file_name));
+        ob_clean();
+        flush();
+        readfile($file_name);
+        unlink($file_name);
+
+
+        /* keep backup history */
+        $userId = $_SESSION["user"]["user_id"];
+        $user_name = $_SESSION["user"]["firstname"]." ".$_SESSION["user"]["lastname"];
+        $description = 'Backup done by '.$user_name;
+        $backup_reference = rand(100000000000, 900000000000);
+
+        $result = $adminObj->insertBackupData($userId,$description,$backup_reference);        
+        
+    break;     
  
     default:
      echo "Invalid Parameters";
-     
- 
         
  }
-  
 
 
 ?>

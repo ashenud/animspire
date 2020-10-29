@@ -17,7 +17,7 @@
                 <h3 style="font-size: 45px;"><b>Hello!</b></h3>
                 <p style="font-size: 20px;">Sign in to your account</p>
                 
-                <!-- Alert message -->
+                <!-- Danger message -->
                 <?php
                 if(isset($_GET["msg"]))
                 {

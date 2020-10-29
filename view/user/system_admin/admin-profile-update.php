@@ -1,49 +1,42 @@
 <?php
-    include '../../commons/session.php';
+    include '../../../commons/session.php';
 ?>
 <html>
-    <head>
-        <?php
-      
-      include '../../model/user_model.php';
-      $userObj = new User(); /// Create User Object
-      $roleResult = $userObj->getUserRoles(); 
-      
-      if(!isset($_REQUEST["user_id"]))
-      {
-          ?>
-            <script> window.location = "../../../index.php"</script>
-          <?php
-      }
-      
-      $userId = $_REQUEST["user_id"];
-      $userId = base64_decode($userId);
-      
-      $userResult = $userObj->viewUser($userId);
-      
-      $userRow = $userResult->fetch_assoc();
-     
-      ?>
-            
+    <head>            
       <title>User Update Profile</title>
       <meta charset="utf-8">
       <meta name="viewport" content="width=device-width, initial-scale=1">  
-      <link rel='stylesheet' type="text/css" href="../../css/style-signup-form.css"/>
-      <link rel='stylesheet' type="text/css" href="../../bootstrap/css/mdb.min.css"/>
-      <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css">
-      <!-- Font Awesome -->
-      <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.11.2/css/all.css">
-      <!-- Google Fonts Roboto -->
-      <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700&display=swap">
+      <link rel='stylesheet' type="text/css" href="../../../css/style-signup-form.css"/>
+      <?php include '../../../includes/dashboard_includes_css.php';?>
+      <?php include '../../../includes/dashboard_includes_script.php'; ?>
         
+        <?php
       
-        
+            include '../../../model/user_model.php';
+            $userObj = new User(); /// Create User Object
+            $roleResult = $userObj->getUserRoles(); 
+            
+            if(!isset($_REQUEST["user_id"]))
+            {
+                ?>
+                    <script> window.location = "../../../index.php"</script>
+                <?php
+            }
+            
+            $userId = $_REQUEST["user_id"];
+            $userId = base64_decode($userId);
+            
+            $userResult = $userObj->viewUser($userId);
+            
+            $userRow = $userResult->fetch_assoc();
+     
+        ?>        
         
     </head>
     
-    <body  style="background-image: url('../../images/background-image.png');">
+    <body  style="background-image: url('../../../images/background-image.png');">
         
-        <form id="editUser" enctype="multipart/form-data" method="post" action="../../controller/usercontroller.php?status=edit_user">
+        <form id="editUser" enctype="multipart/form-data" method="post" action="../../../controller/usercontroller.php?status=edit_user">
               <div class="cont">
                   <input type="hidden" name="user_id" value="<?php echo $userId ?>"/>
                <div class="row">
@@ -181,7 +174,7 @@
                     </div>
                    </div>
                     <div class="form-group" style="margin-left: 27px; width: 6%" >
-                    <img id="prev_img" src="../../images/Avatars/user_images/<?php echo $userRow["user_image"]; ?>" style="width: 50px; height: 50px; margin-top: 20px " />
+                    <img id="prev_img" src="../../../images/Avatars/user_images/<?php echo $userRow["user_image"]; ?>" style="width: 50px; height: 50px; margin-top: 20px " />
                    </div>
                 </div>
              <div class="clearfix">
@@ -194,31 +187,23 @@
         
         
     </body>
-   <?php
-    include '../../includes/bootstrap_script_includes.php';
    
-   ?>
-    <script src="../../js/user_validation.js"></script>
+    <script src="../../../js/user_validation.js"></script>
     <script type="text/javascript">
       
         function readURL(input) {
-        if (input.files && input.files[0]) {
-        var reader = new FileReader();
+            if (input.files && input.files[0]) {
+                var reader = new FileReader();
 
-        reader.onload = function (e) {
-            $('#prev_img')
-            .attr('src', e.target.result)
-            .height(50)
-            .width(50);
-        };
+                reader.onload = function (e) {
+                    $('#prev_img')
+                        .attr('src', e.target.result)
+                        .height(50)
+                        .width(50);
+                };
 
-        reader.readAsDataURL(input.files[0]);
+                reader.readAsDataURL(input.files[0]);
+            }
         }
-        }   
-        </script>
-    
-    
-            <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-            <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
-            <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"></script>
+    </script>
 </html>

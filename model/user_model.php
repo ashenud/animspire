@@ -164,3 +164,55 @@ class User{
     }
 
 }
+
+class Admin {
+
+    function getAllDbTables() {
+        $connect = new PDO("mysql:host=192.168.1.110;dbname=animspire", "root", "2486");
+        $get_all_table_query = "SHOW TABLES";
+        $statement = $connect->prepare($get_all_table_query);
+        $statement->execute();
+        $results = $statement->fetchAll();
+        return $results;
+    }
+
+    function insertBackupData($userId,$description,$backup_reference) {
+        $con = $GLOBALS['con'];
+        $sql = "INSERT 
+                    INTO 
+                backup_details
+                    (user_id, description, backup_reference)
+                VALUES
+                    ('$userId', '$description', '$backup_reference')";
+        $results = $con->query($sql);
+
+        if ($results) {
+            return 1;
+        }
+        else {
+            return 0;
+        }
+    }
+
+    function getDbBackupData($role){
+        $con = $GLOBALS['con'];
+        $sql = "SELECT
+                    bd.backup_id,
+                    bd.backup_reference AS reference,
+                    DATE(bd.backup_time) AS date,
+                    TIME(bd.backup_time) AS time,
+                    bd.description
+                FROM
+                    user u
+                        INNER JOIN 
+                    user_role ur ON u.user_role = ur.role_id
+                        INNER JOIN 
+                    backup_details bd ON bd.user_id = u.user_id
+                WHERE
+                    u.user_status = 1
+                    $role";
+
+        $results = $con->query($sql);
+        return $results;
+    }
+}

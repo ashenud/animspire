@@ -46,7 +46,7 @@
     height: 90px;
     width: 1010px;
     position: absolute;
-    z-index: 1;
+    z-index: 2;
     background-image: linear-gradient(90deg, #834d9b, #d04ed6); 
 }
 .top-navbar img{
@@ -54,6 +54,19 @@
     float: right;
 }
 .top-navbar button{
+    float: right;
+    color: white;
+}
+.top-navbar .notify-btn{
+    background: none;
+    border: none;
+    padding: 0;
+}
+.top-navbar .notify-btn:focus{
+    outline: none;
+}
+
+.top-navbar .home-btn{
     margin: 25px auto 25px auto;
     float: right;
     color: white;
@@ -67,22 +80,20 @@
     
 }
 .top-navbar i:hover{
-    font-size: 42px;
     color: tomato;
-    
 }
 .top-navbar button:hover{
     color: white;
 }
 
-.dropdown dropdown-menu{
-    font-size: 15px;
-    float: right;
-    margin: 50px 50px 20px 30px;
-    position: relative;
-    z-index: 1;
-    
+.dropdown .dropdown-menu{
+    margin: -10px 47px;    
 }
+
+.dropdown-toggle::after {
+    display: none;
+}
+
 .top-navbar .alert{
     margin: 23px 120px 25px 25px;
     float: right;
@@ -90,55 +101,65 @@
 }
 </style>
 <div class="sidebar">
-                <a><img src="../../../images/Animspire-Logo.png" id="logo"></a>
-                <!--- Admin functions  --->
-                <a href="user-management.php"><i class="fa fa-fw fa-home"></i><br>User Mng</a>
-                <hr>
-                <a href="admin-reports-management.php"><i class="fa fa-fw fa-file-alt"></i><br>Reports</a>
-                <hr>
-                <a href="#Backup"><i class="fa fa-fw fa-user"></i><br>Backup</a>
-                <hr>
-                <a href="#Chat"><i class="fa fa-fw fa-envelope"></i><br>Chat</a>
-                <hr>
-                <!--- Project Manager functions  --->
-                <a href="user-management.php"><i class="fa fa-fw fa-tasks"></i><br>Projects</a>
-                <hr>
-                <a href="admin-reports-management.php"><i class="fa fa-fw fa-file-alt"></i><br>Reports</a>
-                <hr>
-                <a href="#Backup"><i class="fa fa-fw fa-user"></i><br>Performance</a>
-                <hr>
-                <a href="#Chat"><i class="fa fa-fw fa-tools"></i><br>Tools</a>
-                <hr>
-                <!--- Marketing Manager functions  --->
-                <a href="user-management.php"><i class="fa fa-fw fa-user"></i><br>Clients</a>
-                <hr>
-                <a href="admin-reports-management.php"><i class="fa fa-fw fa-clipboard-list"></i><br>Quotation</a>
-                <hr>
-                <a href="#Backup"><i class="fa fa-fw fa-tasks"></i><br>Projects</a>
-                <hr>
-                <a href="#Chat"><i class="fa fa-fw fa-file-alt"></i><br>Reports</a>
-                <hr>
-                <!--- Finance Manager functions  --->
-                <a href="user-management.php"><i class="fa fa-fw  fa-file-invoice-dollar"></i><br>Finance</a>
-                <hr>
-                <a href="admin-reports-management.php"><i class="fa fa-fw fa-clipboard-list"></i><br>Quotation</a>
-                <hr>
-                <a href="#Chat"><i class="fa fa-fw fa-file-alt"></i><br>Reports</a>
-                <hr>
-                <a href="../../../controller/userlogincontroller.php?status=logout"><img src="../../../images/icons/logout.png" alt="Logout" style="width:50px;height:50px;margin-top: 140px; margin-left: 5px"></a>
-                
+    <a href="./admin-dashboard.php"><img src="../../../images/Animspire-Logo.png" id="logo"></a>
+    <!--- Admin functions  --->
+    <a href="./admin-user-management.php"><i class="fa fa-fw fa-home"></i><br>User Mng</a>
+    <hr>
+    <a href="./admin-reports-management.php"><i class="fa fa-fw fa-file-alt"></i><br>Reports</a>
+    <hr>
+    <a href="./admin-backup-database.php"><i class="fa fa-fw fa-user"></i><br>Backup</a>
+    <hr>
+    <a href="#Chat"><i class="fa fa-fw fa-envelope"></i><br>Chat</a>
+    <hr>
+    <a href="../../../controller/userlogincontroller.php?status=logout"><img src="../../../images/icons/logout.png"
+            alt="Logout" style="width:50px;height:50px;margin-top: 140px; margin-left: 5px"></a>
+
+</div>
+<div class="top-navbar">
+    <a href="./admin-profile.php?user_id=<?php echo $userId; ?>"><img
+            src="../../../images/Avatars/user_images/<?php echo $_SESSION["user"]["user_image"]; ?>" id="prfile-pic"
+            style="height: 50px; width: 50px; border: 2px solid white; border-radius: 50px;" /></a>
+    <a href="./admin-dashboard.php" name="home" class="btn btn-primary home-btn">Home</a>
+    <div class="dropdown">
+        <button id="notiyf-menu" class="dropdown-toggle notify-btn" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            <i class="fa fa-fw fa-bell"></i>
+        </button>
+        <div class="dropdown-menu" aria-labelledby="notiyf-menu">
+            <a class="dropdown-item" href="#">Action</a>
+            <a class="dropdown-item" href="#">Another action</a>
+            <a class="dropdown-item" href="#">View All Notifications</a>
+        </div>
+    </div>
+    <a href="#Chat"><i class="fa fa-fw fa-envelope" style="margin: 25px auto 20px 30px;"></i></a>
+
+    <!-- Success message -->
+    <?php
+        if(isset($_GET["msgSuccess"]))
+        {
+        $msgSuccess=  base64_decode($_GET["msgSuccess"]);
+        ?>
+        <div class="alert alert-success" style="padding: 10px; height: 45px;">
+            <p><?php
+                echo $msgSuccess;
+                ?>
+            </p>
+        </div>
+        <?php
+        }
+    ?>
+    <!-- Danger message -->
+    <?php
+        if(isset($_GET["msg"]))
+        {
+            $msg=  base64_decode($_GET["msg"]);
+        ?>
+            <div class="alert alert-danger" style="padding: 5px; height: 35px;">
+                <p><?php
+                    echo $msg;
+                    ?>
+                </p>
             </div>
-            <div class="top-navbar">
-                <a href="user-profile.php?user_id=<?php echo $userId; ?>"><img src="../../../images/Avatars/user_images/<?php echo $_SESSION["user"]["user_image"]; ?>" id="prfile-pic" style="height: 50px; width: 50px; border: 2px solid white; border-radius: 50px;"/></a>
-                <button href="#Home" name="home" class="btn btn-primary">Home</button>
-                <div class="dropdown">
-                <a href="#" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i class="fa fa-fw fa-bell" ></i></a>
-                    <div class="dropdown-menu">
-                        <a class="dropdown-item" href="#">Action</a>
-                        <a class="dropdown-item" href="#">Another action</a>
-                        <div class="dropdown-divider"></div>
-                        <a class="dropdown-item active" href="#">View All Notifications</a>
-                  </div>
-                </div>
-                <a href="#Chat"><i class="fa fa-fw fa-envelope" style="margin: 25px auto 20px 30px;"></i></a>
-            </div>
+        <?php
+        }
+    ?>
+</div>
