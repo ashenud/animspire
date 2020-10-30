@@ -172,7 +172,7 @@
                 }
                 else {
                     ?>
-                        <a class="dropdown-item" href="#">No Messages</a>
+                        <a class="dropdown-item" href="#">No New Messages</a>
                     <?php
                 }
             ?>

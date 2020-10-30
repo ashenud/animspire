@@ -48,7 +48,7 @@
               if($role_id==2)
               {
             ?>
-            <script>window.location = "../view/user/marketing_manager/project-manager-dashoboard.php"</script>
+            <script>window.location = "../view/user/project_manager/pro-manager-dashboard.php"</script>
             <?php
               }
               if($role_id==3)
