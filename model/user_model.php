@@ -163,6 +163,92 @@ class User{
         return $results;
     }
 
+    function getUserDetails($user_id) {
+        $con = $GLOBALS['con'];
+        $sql = "SELECT 
+                    *
+                FROM 
+                    user u
+                WHERE
+                    u.user_status = 1
+                    AND u.user_id = $user_id
+                LIMIT 1";
+
+        $results = $con->query($sql);
+        return $results;
+    }
+
+    function getMessages($user_id,$chat_id) {
+
+        $con = $GLOBALS['con'];
+        $sql = "SELECT
+                    *
+                FROM            
+                    (   
+                        (SELECT
+                                u1.user_fname AS receiver,
+                                u2.user_fname AS sender,
+                                c.message,
+                                c.send_date
+                            FROM
+                                user u1
+                                    INNER JOIN
+                                communication c ON u1.user_id = c.receiver_id
+                                    INNER JOIN
+                                user u2 ON u2.user_id = c.sender_id
+                            WHERE
+                                u1.user_status = 1
+                                AND c.receiver_id = '$user_id'
+                                AND c.sender_id = '$chat_id'
+                        )    
+                        UNION (
+
+                            SELECT
+                                u1.user_fname AS receiver,
+                                u2.user_fname AS sender,
+                                c.message,
+                                c.send_date
+                            FROM
+                                user u1
+                                    INNER JOIN
+                                communication c ON u1.user_id = c.receiver_id
+                                    INNER JOIN
+                                user u2 ON u2.user_id = c.sender_id
+                            WHERE
+                                u2.user_status = 1
+                                AND c.receiver_id = '$chat_id'
+                                AND c.sender_id = '$user_id'
+                        ) 
+                        ORDER BY
+                            send_date DESC
+                        LIMIT 15
+                    ) AS messages
+                ORDER BY send_date ASC";
+
+        $results = $con->query($sql);
+        return $results;
+    }
+
+    function sendMessage($receiver_id,$sender_id,$message) {
+
+        $con = $GLOBALS['con'];
+        $sql = "INSERT 
+                    INTO 
+                communication
+                    (sender_id, receiver_id, message)
+                VALUES
+                    ('$sender_id', '$receiver_id', '$message')";
+        $results = $con->query($sql);
+
+        if ($results) {
+            return 1;
+        }
+        else {
+            return 0;
+        }
+    }
+
+
 }
 
 class Admin {

@@ -15,7 +15,9 @@
       
         include '../../../model/user_model.php';
         $userObj = new User(); /// Create User Object
-        $roleResult = $userObj->getUserRoles();  
+        $roleResult = $userObj->getUserRoles(); 
+        $user_id = $_SESSION["user"]["user_id"];
+        $userId = base64_encode($user_id);
      
       ?>
         

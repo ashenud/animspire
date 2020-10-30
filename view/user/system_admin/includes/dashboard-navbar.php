@@ -109,7 +109,7 @@
     <hr>
     <a href="./admin-backup-database.php"><i class="fa fa-fw fa-user"></i><br>Backup</a>
     <hr>
-    <a href="#Chat"><i class="fa fa-fw fa-envelope"></i><br>Chat</a>
+    <a href="./admin-chat.php"><i class="fa fa-fw fa-envelope"></i><br>Chat</a>
     <hr>
     <a href="../../../controller/userlogincontroller.php?status=logout"><img src="../../../images/icons/logout.png"
             alt="Logout" style="width:50px;height:50px;margin-top: 140px; margin-left: 5px"></a>

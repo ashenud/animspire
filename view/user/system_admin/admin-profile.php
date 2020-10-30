@@ -22,11 +22,12 @@
                <?php
             }
             
-            $userId = $_REQUEST["user_id"];
-            $userId = base64_decode($userId);
+            $user_id = $_REQUEST["user_id"];
+            $user_id = base64_decode($user_id);
+            $userId = base64_encode($user_id);
             
             /// get the specific user information
-            $userResult = $userObj->viewUser($userId);
+            $userResult = $userObj->viewUser($user_id);
             ///convert into an assosiative arry
             $userRow = $userResult->fetch_assoc();
         ?>
@@ -114,7 +115,7 @@
                                     <label for="confirm_password">Confirm Password :</label>
                                     <input type="password" class="form-control" id="confirm_pw" name="confirm_pw" placeholder="Confirm New Password" required="required"/>
                                 </div>
-                                <input type="hidden" value="<?php echo $userId; ?>" id="user_id" name="user_id">
+                                <input type="hidden" value="<?php echo $user_id; ?>" id="user_id" name="user_id">
                             </div>
                         </div>
                         <div class="modal-footer">

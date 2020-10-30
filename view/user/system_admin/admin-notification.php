@@ -5,12 +5,12 @@
     <head>
         <?php
          
-        include '../../model/user_model.php';
-        $userObj = new User();
-        $userResults = $userObj->getAllUsers();
-        
-        $userId = $_SESSION["user"]["user_id"];
-        $userId = base64_encode($userId);
+            include '../../model/user_model.php';
+            $userObj = new User();
+            $userResults = $userObj->getAllUsers();
+            
+            $user_id = $_SESSION["user"]["user_id"];
+            $userId = base64_encode($user_id);
         
         ?>
         

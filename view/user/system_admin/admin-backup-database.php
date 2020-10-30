@@ -16,6 +16,9 @@
             $adminObj = new Admin();
             $dbTables = $adminObj->getAllDbTables();
 
+            $user_id = $_SESSION["user"]["user_id"];
+            $userId = base64_encode($user_id);
+
             /* echo '<pre>';
             print_r($dbTables);
             echo '</pre>'; die(); */
@@ -72,7 +75,7 @@
                     if (count > 0) {
                         $('#export_form').submit();
                     } else {
-                        alert("Please Select Atleast one table for Export");
+                        swal("You got a error!", "Please Select Atleast one table for Export!", "error");
                         return false;
                     }
                 });

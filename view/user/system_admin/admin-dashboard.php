@@ -16,8 +16,8 @@
             $userObj = new User();
             $userRoleResult = $userObj->getAllUsers();
             
-            $userId = $_SESSION["user"]["user_id"];
-            $userId = base64_encode($userId);
+            $user_id = $_SESSION["user"]["user_id"];
+            $userId = base64_encode($user_id);
         
         ?>
         
