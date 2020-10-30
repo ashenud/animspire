@@ -67,7 +67,7 @@
 }
 
 .top-navbar .home-btn{
-    margin: 25px auto 25px auto;
+    margin: 25px 20px 25px 20px;
     float: right;
     color: white;
 }
@@ -76,7 +76,7 @@
     float: right;
     color: white;
     text-shadow: 1.5px 1.5px 2px #000000;
-    margin: 25px 50px 20px 30px;
+    margin: 25px 20px 20px 20px;
     
 }
 .top-navbar i:hover{
@@ -99,6 +99,19 @@
     float: right;
     width: 450px;
 }
+
+.badge.msg-label {
+    position: relative;
+    padding: 5px 5px;
+    width: 25px;
+    height: 25px;
+    border-radius: 50%;
+    font-size: 15px;
+    top: 20px;
+    right: -50px;
+    margin-right: -30px;
+}
+
 </style>
 <div class="sidebar">
     <a href="./admin-dashboard.php"><img src="../../../images/Animspire-Logo.png" id="logo"></a>
@@ -130,7 +143,42 @@
             <a class="dropdown-item" href="#">View All Notifications</a>
         </div>
     </div>
-    <a href="#Chat"><i class="fa fa-fw fa-envelope" style="margin: 25px auto 20px 30px;"></i></a>
+    <div class="dropdown">
+        <button id="msg-menu" class="dropdown-toggle notify-btn" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            <?php
+                $count = $userObj->getNotifyMessages($userId)->num_rows;
+                $messages = $userObj->getNotifyMessages($userId);
+                if(0<$count && $count<5) {
+                    echo "<span class='badge badge-danger msg-label'>";
+                    echo $count;
+                    echo "</span>";
+                }
+                else if($count>=5) {
+                    echo "<span class='badge badge-danger msg-label'>";
+                    echo "5+";
+                    echo "</span>";
+                }
+            ?>
+            <i class="fa fa-fw fa-envelope"></i>
+        </button>
+        <div class="dropdown-menu" aria-labelledby="msg-menu">
+            <?php
+                if ($count > 0) {
+                    while($dataRow = $messages->fetch_assoc()) {
+                        ?>
+                        <a class="dropdown-item" href="./admin-chat.php?user_id=<?php echo base64_encode($dataRow['sender_id']);?>&msg_ids=<?php echo base64_encode($dataRow['msg_ids']);?>">From : <?php echo $dataRow['sender_name'];?></a>
+                        <?php
+                    }
+                }
+                else {
+                    ?>
+                        <a class="dropdown-item" href="#">No Messages</a>
+                    <?php
+                }
+            ?>
+
+        </div>
+    </div>
 
     <!-- Success message -->
     <?php

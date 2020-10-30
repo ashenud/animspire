@@ -14,6 +14,7 @@
          
             include '../../../model/user_model.php';
             $adminObj = new Admin();
+            $userObj = new User();
             $dbTables = $adminObj->getAllDbTables();
 
             $user_id = $_SESSION["user"]["user_id"];

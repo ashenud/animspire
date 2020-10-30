@@ -178,6 +178,36 @@ class User{
         return $results;
     }
 
+    function getNotifyMessages($user_id) {
+
+        $user_id = base64_decode($user_id);
+
+        $con = $GLOBALS['con'];
+        $sql = "SELECT
+                    GROUP_CONCAT(c.msg_id) AS msg_ids,
+                    c.sender_id AS sender_id,
+                    u2.user_fname AS sender_name,
+                    c.message
+                FROM 
+                    communication c 
+                        INNER JOIN
+                    user u1 ON c.receiver_id = u1.user_id
+                        INNER JOIN
+                    user u2 ON c.sender_id = u2.user_id
+                WHERE
+                    u1.user_status = 1
+                    AND c.receiver_id = '$user_id'
+                    AND c.status = 0
+                GROUP BY
+                    c.sender_id
+                ORDER BY 
+                    c.send_date DESC
+                LIMIT 5";
+
+        $results = $con->query($sql);
+        return $results;
+    }
+
     function getMessages($user_id,$chat_id) {
 
         $con = $GLOBALS['con'];
@@ -238,6 +268,27 @@ class User{
                     (sender_id, receiver_id, message)
                 VALUES
                     ('$sender_id', '$receiver_id', '$message')";
+        $results = $con->query($sql);
+
+        if ($results) {
+            return 1;
+        }
+        else {
+            return 0;
+        }
+    }
+
+    function messageMarkAsReaded($user_id,$chat_id) {
+
+        $con = $GLOBALS['con'];
+        $sql = "UPDATE
+                    communication
+                SET 
+                    status = 1
+                WHERE
+                    status = 0
+                    AND sender_id = '$chat_id'
+                    AND receiver_id = '$user_id'";
         $results = $con->query($sql);
 
         if ($results) {
