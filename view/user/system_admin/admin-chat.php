@@ -63,7 +63,7 @@
                     ?>
                 </div>
                 <div class="chat-section">
-                    <form method="post" id="msg-form" action="../../../controller/usercontroller.php?status=send_message">
+                    <form method="post" id="msg-form" action="../../../controller/adminController.php?status=send_message">
                         <?php
                             if(isset($_GET["user_id"])) {
                                 $contact_details = $userObj->getUserDetails($chat_id)->fetch_assoc();
