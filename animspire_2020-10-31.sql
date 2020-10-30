@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 192.168.1.110
--- Generation Time: Oct 30, 2020 at 05:04 AM
+-- Generation Time: Oct 30, 2020 at 09:58 PM
 -- Server version: 10.4.15-MariaDB-1:10.4.15+maria~bionic-log
 -- PHP Version: 7.4.11
 
@@ -46,7 +46,45 @@ INSERT INTO `backup_details` (`backup_id`, `user_id`, `backup_reference`, `descr
 (4, 1, 539896341774, 'Backup done by Damith Menaka', '2020-10-29 22:31:10'),
 (5, 1, 124618088591, 'Backup done by Damith Menaka', '2020-10-29 22:34:08'),
 (6, 1, 709423907556, 'Backup done by Damith Menaka', '2020-10-29 22:37:44'),
-(7, 1, 776526063494, 'Backup done by Damith Menaka', '2020-10-29 23:31:11');
+(7, 1, 776526063494, 'Backup done by Damith Menaka', '2020-10-29 23:31:11'),
+(8, 1, 676554783591, 'Backup done by Damith Menaka', '2020-10-30 10:24:00');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `communication`
+--
+
+CREATE TABLE `communication` (
+  `msg_id` int(11) NOT NULL,
+  `sender_id` int(11) NOT NULL,
+  `receiver_id` int(11) NOT NULL,
+  `message` varchar(1000) NOT NULL,
+  `send_date` timestamp NOT NULL DEFAULT current_timestamp(),
+  `status` tinyint(4) NOT NULL DEFAULT 0 COMMENT '1-read, 0-unread'
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `communication`
+--
+
+INSERT INTO `communication` (`msg_id`, `sender_id`, `receiver_id`, `message`, `send_date`, `status`) VALUES
+(1, 2, 1, 'Did you contact Mr. Nimal?', '2020-10-30 08:33:50', 1),
+(2, 3, 1, 'Did you contact Mr. Niru?', '2020-10-30 08:33:50', 1),
+(3, 4, 1, 'Hi Damith, Did you got the issue fixed?', '2020-10-30 08:35:24', 1),
+(4, 3, 1, 'Will you come tomorrow meeting?', '2020-10-30 08:35:24', 1),
+(5, 1, 3, 'I will contact him today.', '2020-10-30 08:34:31', 0),
+(6, 1, 3, 'Yes. Meet you at there.', '2020-10-30 08:59:56', 0),
+(7, 1, 2, 'Nope. I will do.', '2020-10-30 10:48:42', 1),
+(8, 1, 3, 'Where are You ?', '2020-10-30 10:51:51', 0),
+(9, 1, 3, 'Please call me now', '2020-10-30 10:52:30', 0),
+(10, 1, 4, 'Yes.', '2020-10-30 10:54:54', 0),
+(11, 1, 3, 'Did you receive my letter??', '2020-10-30 15:15:13', 0),
+(12, 2, 1, 'Please call me now', '2020-10-30 16:10:13', 1),
+(13, 1, 2, 'Ok. wait a minutes.', '2020-10-30 16:18:37', 0),
+(14, 1, 2, 'Whats is your tomorrow plans  ?', '2020-10-30 16:22:53', 0),
+(15, 6, 1, 'Hi. Damith', '2020-10-30 16:25:20', 0),
+(16, 6, 2, 'Hellow Yuresh!', '2020-10-30 16:25:52', 0);
 
 -- --------------------------------------------------------
 
@@ -273,6 +311,12 @@ ALTER TABLE `backup_details`
   ADD PRIMARY KEY (`backup_id`);
 
 --
+-- Indexes for table `communication`
+--
+ALTER TABLE `communication`
+  ADD PRIMARY KEY (`msg_id`);
+
+--
 -- Indexes for table `customer`
 --
 ALTER TABLE `customer`
@@ -328,7 +372,13 @@ ALTER TABLE `user_role`
 -- AUTO_INCREMENT for table `backup_details`
 --
 ALTER TABLE `backup_details`
-  MODIFY `backup_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+  MODIFY `backup_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
+
+--
+-- AUTO_INCREMENT for table `communication`
+--
+ALTER TABLE `communication`
+  MODIFY `msg_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=17;
 
 --
 -- AUTO_INCREMENT for table `customer`
