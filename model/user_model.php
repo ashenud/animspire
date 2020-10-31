@@ -48,6 +48,39 @@ class User{
         $userLoginId = $con->insert_id;
         return $userLoginId;
     }
+
+    function checkUser($role_id) {
+
+        $msg = "You have no permission to vist there !";
+        $msg = base64_encode($msg);
+
+        if ($role_id == 1) {
+            ?>
+                <script> window.location = "../system_admin/admin-dashboard.php?msg=<?php echo $msg; ?>"</script>
+            <?php
+        }
+        elseif ($role_id == 2) {
+            ?>
+                <script> window.location = "../project_manager/pro-manager-dashboard.php?msg=<?php echo $msg; ?>"</script>
+            <?php
+        }
+        elseif ($role_id == 3) {
+            ?>
+                <script> window.location = "../finance_manager/finance-manager-dashboard.php?msg=<?php echo $msg; ?>"</script>
+            <?php
+        }
+        elseif ($role_id == 4) {
+            ?>
+                <script> window.location = "../marketing_manager/marketing-manager-dashboard.php?msg=<?php echo $msg; ?>"</script>
+            <?php
+        }
+        else {
+            ?>
+                <script> window.location = "../../../index.php?msg=<?php echo $msg; ?>"</script>
+            <?php
+        }
+    }
+
     public function getUserRoles()
     {
         $con = $GLOBALS['con'];

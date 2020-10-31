@@ -15,14 +15,13 @@
         <?php
          
             include '../../../model/user_model.php';
-            $userObj = new User(); //must need for navbar
-            $adminObj = new Admin(); //must need for navbar
+            $userObj = new User();
 
             /* permission check */
             if(!isset($_SESSION["user"]["role_id"])) {
                 $userObj->checkUser('0');
             }
-            elseif(($_SESSION["user"]["role_id"]) != 1){
+            elseif(($_SESSION["user"]["role_id"]) != 3){
                 $userObj->checkUser($_SESSION["user"]["role_id"]);
             }
             /* end permission check */
@@ -79,7 +78,7 @@
                     ?>
                 </div>
                 <div class="chat-section">
-                    <form method="post" id="msg-form" action="../../../controller/adminController.php?status=send_message">
+                    <form method="post" id="msg-form" action="../../../controller/financeManagerController.php?status=send_message">
                         <?php
                             if(isset($_GET["user_id"])) {
                                 $contact_details = $userObj->getUserDetails($chat_id)->fetch_assoc();

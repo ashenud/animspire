@@ -15,6 +15,16 @@
             
             $userObj = new User(); //must need for navbar
             $adminObj = new Admin(); //must need for navbar
+
+            /* permission check */
+            if(!isset($_SESSION["user"]["role_id"])) {
+                $userObj->checkUser('0');
+            }
+            elseif(($_SESSION["user"]["role_id"]) != 1){
+                $userObj->checkUser($_SESSION["user"]["role_id"]);
+            }
+            /* end permission check */
+            
             $userRoleResult = $userObj->getAllUsers();
             
             $user_id = $_SESSION["user"]["user_id"];

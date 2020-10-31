@@ -115,7 +115,7 @@
 </style>
 <div class="sidebar">
     <a href="./pro-manager-dashboard.php"><img src="../../../images/Animspire-Logo.png" id="logo"></a>
-    <!--- Admin functions  --->
+    <!--- Project Manager functions  --->
     <a href="./pro-manager-project-management.php"><i class="fa fa-fw fa-tasks"></i><br>Projects</a>
     <hr>
     <a href="./pro-manager-reports-management.php"><i class="fa fa-fw fa-file-alt"></i><br>Reports</a>
@@ -135,16 +135,6 @@
             src="../../../images/Avatars/user_images/<?php echo $_SESSION["user"]["user_image"]; ?>" id="prfile-pic"
             style="height: 50px; width: 50px; border: 2px solid white; border-radius: 50px;" /></a>
     <a href="./pro-manager-dashboard.php" name="home" class="btn btn-primary home-btn">Home</a>
-    <div class="dropdown">
-        <button id="notiyf-menu" class="dropdown-toggle notify-btn" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-            <i class="fa fa-fw fa-bell"></i>
-        </button>
-        <div class="dropdown-menu" aria-labelledby="notiyf-menu">
-            <a class="dropdown-item" href="#">Action</a>
-            <a class="dropdown-item" href="#">Another action</a>
-            <a class="dropdown-item" href="#">View All Notifications</a>
-        </div>
-    </div>
     <div class="dropdown">
         <button id="msg-menu" class="dropdown-toggle notify-btn" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
             <?php

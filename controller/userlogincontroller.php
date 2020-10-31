@@ -54,13 +54,13 @@
               if($role_id==3)
               {
             ?>
-            <script>window.location = "../view/user/finance_manager/finance-manager-dashoboard.php"</script>
+            <script>window.location = "../view/user/finance_manager/finance-manager-dashboard.php"</script>
             <?php
               }
               if($role_id==4)
               {
             ?>
-            <script>window.location = "../view/user/marketing_manager/marketing-manager-dashoboard.php"</script>
+            <script>window.location = "../view/user/marketing_manager/marketing-manager-dashboard.php"</script>
             <?php
               }
           }

@@ -15,6 +15,16 @@
             include '../../../model/user_model.php';
             $userObj = new User(); //must need for navbar
             $adminObj = new Admin(); //must need for navbar
+
+            /* permission check */
+            if(!isset($_SESSION["user"]["role_id"])) {
+                $userObj->checkUser('0');
+            }
+            elseif(($_SESSION["user"]["role_id"]) != 1){
+                $userObj->checkUser($_SESSION["user"]["role_id"]);
+            }
+            /* end permission check */
+
             $userResults = $userObj->getAllUsers();
             
             $userId = $_SESSION["user"]["user_id"];
@@ -55,7 +65,7 @@
                     <div class="col-md-12">&nbsp;</div>
                 </div>
               <div id="data_section" class="scroll" style="display: box; overflow-y:scroll;"> 
-                <table id="user-table" border="1" style="overflow-y:scroll;">
+                <table class="user-table" border="1" style="overflow-y:scroll;">
                     <tr>
                     <th ></th>
                     <th width="30px">&nbsp;ID</th>

@@ -3,7 +3,7 @@
 ?>
 <html>
     <head>
-        <title>Project Manager Dashboard</title>
+        <title>Marketing Manager Dashboard</title>
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <?php include '../../../includes/dashboard_includes_css.php';?>
@@ -20,12 +20,11 @@
             if(!isset($_SESSION["user"]["role_id"])) {
                 $userObj->checkUser('0');
             }
-            elseif(($_SESSION["user"]["role_id"]) != 2){
+            elseif(($_SESSION["user"]["role_id"]) != 4){
                 $userObj->checkUser($_SESSION["user"]["role_id"]);
             }
             /* end permission check */
 
-            
             $userRoleResult = $userObj->getAllUsers();
             
             $userId = $_SESSION["user"]["user_id"];
@@ -45,7 +44,7 @@
                 <img src="../../../images/Avatars/user_images/<?php echo $_SESSION["user"]["user_image"]; ?>" alt="Avatar" style="width: 180px; height: 170px">
                 <div class="info">
                     <h6><b><?php echo $_SESSION["user"]["firstname"]." ".$_SESSION["user"]["lastname"]; ?></b></h6>
-                    <p>Project Manager</p>
+                    <p>Marketing Manager</p>
                 </div>
             </div>
             <div class="welcome-message" style="background-image:url('../../../images/user-welcome-msg-bg-2.png');">

@@ -1,7 +1,7 @@
 <?php
     include '../commons/session.php';
     include '../model/user_model.php';
-    
+
     $userObj = new User();
     
     $status = $_REQUEST["status"];
@@ -23,7 +23,7 @@
                 $chat_id = base64_encode($receiver_id);
                 
                 ?>
-                    <script>window.location = "../view/user/project_manager/pro-manager-chat.php?user_id=<?php echo $chat_id; ?>&msgSuccess=<?php echo $msgSuccess; ?>" </script>  
+                    <script>window.location = "../view/user/finance_manager/finance-manager-chat.php?user_id=<?php echo $chat_id; ?>&msgSuccess=<?php echo $msgSuccess; ?>" </script>  
                 <?php
     
             }
@@ -33,7 +33,7 @@
                 $chat_id = base64_encode($receiver_id);
                 
                 ?>
-                    <script>window.location = "../view/user/project_manager/pro-manager-chat.php?user_id=<?php echo $chat_id; ?>&msg=<?php echo $msg; ?>" </script>  
+                    <script>window.location = "../view/user/finance_manager/finance-manager-chat.php?user_id=<?php echo $chat_id; ?>&msg=<?php echo $msg; ?>" </script>  
                 <?php
             }
             

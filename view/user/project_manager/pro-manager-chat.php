@@ -16,7 +16,16 @@
          
             include '../../../model/user_model.php';
             $userObj = new User();
-            $adminObj = new Admin();
+
+            /* permission check */
+            if(!isset($_SESSION["user"]["role_id"])) {
+                $userObj->checkUser('0');
+            }
+            elseif(($_SESSION["user"]["role_id"]) != 2){
+                $userObj->checkUser($_SESSION["user"]["role_id"]);
+            }
+            /* end permission check */
+
             $userResults = $userObj->getAllUsers();
             
             $user_id = $_SESSION["user"]["user_id"];

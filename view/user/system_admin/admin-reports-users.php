@@ -17,6 +17,17 @@
             include '../../../model/user_model.php';
             $userObj = new User(); //must need for navbar
             $adminObj = new Admin(); //must need for navbar
+
+            /* permission check */
+            if(!isset($_SESSION["user"]["role_id"])) {
+                $userObj->checkUser('0');
+            }
+            elseif(($_SESSION["user"]["role_id"]) != 1){
+                $userObj->checkUser($_SESSION["user"]["role_id"]);
+            }
+            /* end permission check */
+
+            
             $userResults = $userObj->getAllUsers();
             $allRoles = $userObj->getRoles();
             
