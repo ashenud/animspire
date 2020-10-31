@@ -135,12 +135,34 @@
     <a href="./admin-dashboard.php" name="home" class="btn btn-primary home-btn">Home</a>
     <div class="dropdown">
         <button id="notiyf-menu" class="dropdown-toggle notify-btn" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            <?php
+                $reqCount = $adminObj->freelancerRequest()->num_rows;
+                if(0<$reqCount && $reqCount<5) {
+                    echo "<span class='badge badge-danger msg-label'>";
+                    echo $reqCount;
+                    echo "</span>";
+                }
+                else if($reqCount>=5) {
+                    echo "<span class='badge badge-danger msg-label'>";
+                    echo "5+";
+                    echo "</span>";
+                }
+            ?>
             <i class="fa fa-fw fa-bell"></i>
         </button>
         <div class="dropdown-menu" aria-labelledby="notiyf-menu">
-            <a class="dropdown-item" href="#">Action</a>
-            <a class="dropdown-item" href="#">Another action</a>
-            <a class="dropdown-item" href="#">View All Notifications</a>
+            <?php
+                if ($reqCount > 0) {
+                    ?>
+                        <a class="dropdown-item" href="./admin-notification.php">View Notifications</a>
+                    <?php
+                }
+                else {
+                    ?>
+                        <a class="dropdown-item" href="#">No New Notifications</a>
+                    <?php
+                }
+            ?>
         </div>
     </div>
     <div class="dropdown">

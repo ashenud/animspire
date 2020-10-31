@@ -15,7 +15,8 @@
         <?php
          
             include '../../../model/user_model.php';
-            $userObj = new User();
+            $userObj = new User(); //must need for navbar
+            $adminObj = new Admin(); //must need for navbar
             $userResults = $userObj->getAllUsers();
             $allRoles = $userObj->getRoles();
             

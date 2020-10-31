@@ -1,108 +1,76 @@
 <?php
-    include '../../commons/session.php';
+    include '../../../commons/session.php';
 ?>
 <html>
     <head>
+                
+        <title>Admin Dashboard</title>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel='stylesheet' type="text/css" href="../../../css/style-notification-management.css"/>
+        <?php include '../../../includes/dashboard_includes_css.php';?>
+        <?php include '../../../includes/dashboard_includes_script.php'; ?>
+
         <?php
          
-            include '../../model/user_model.php';
-            $userObj = new User();
+            include '../../../model/user_model.php';
+            $userObj = new User(); //must need for navbar
+            $adminObj = new Admin(); //must need for navbar
             $userResults = $userObj->getAllUsers();
             
             $user_id = $_SESSION["user"]["user_id"];
             $userId = base64_encode($user_id);
         
         ?>
-        
-        <title>Admin Dashboard</title>
-        <meta charset="utf-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1">
-        <link rel='stylesheet' type="text/css" href="../../css/style-user-dasboard.css"/>
-        <link rel='stylesheet' type="text/css" href="../../css/style-notification-management.css"/>
-        <link rel='stylesheet' type="text/css" href="../../bootstrap/css/mdb.min.css"/>
-        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css">
-        <!-- Font Awesome -->
-        <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.11.2/css/all.css">
-        <!-- Google Fonts Roboto -->
-        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700&display=swap">
       
     </head>
     
-    <body  style="background-image: url('../../images/background-image.png');">
+    <body  style="background-image: url('../../../images/background-image.png');">
         <div class="cont">
-            <div class="sidebar">
-                <a><img src="../../images/Animspire-Logo.png" id="logo"></a>
-                <a href="user-management.php"><i class="fa fa-fw fa-home"></i><br>User Mng</a>
-                <hr>
-                <a href="admin-reports-management.php"><i class="fa fa-fw fa-wrench"></i><br>Reports</a>
-                <hr>
-                <a href="#clients"><i class="fa fa-fw fa-user"></i><br>Backup</a>
-                <hr>
-                <a href="#contact"><i class="fa fa-fw fa-envelope"></i><br>Chat</a>
-                <hr>
-                <a href="../../controller/userlogincontroller.php?status=logout"><img src="../../images/icons/logout.png" alt="Logout" style="width:50px;height:50px;margin-top: 140px; margin-left: 5px"></a>
-                
-            </div>
-            <div class="top-navbar">
-                <a href="user-profile.php?user_id=<?php echo $userId; ?>"><img src="../../images/Avatars/user_images/M5.png" id="prfile-pic" style="height: 50px; width: 50px; border: 2px solid white; border-radius: 50px;"/></a>
-                <button onclick="document.location='admin-dashboard.php'" name="home" class="btn btn-primary">Home</button>
-                <a href="admin-notification.php"><i class="fa fa-fw fa-bell" ></i></a>
-                <a href="#Chat"><i class="fa fa-fw fa-envelope" style="margin: 25px auto 20px 30px;"></i></a>
-                
-                <!-- Success message -->
-                <?php
-                if(isset($_GET["msgSuccess"]))
-                {
-                $msgSuccess=  base64_decode($_GET["msgSuccess"]);
-                ?>
-                <div class="alert alert-success" style="padding: 10px; height: 45px;">
-                    <p><?php
-                        echo $msgSuccess;
-                        ?>
-                    </p>
-                </div>
-                <?php
-                }
-                ?>
-                
-            </div>
+            <?php
+                  include './includes/dashboard-navbar.php';
+            ?>
             
             <div class="user-details">
                 
               <div id="data_section" class="scroll" style="overflow-y:scroll;"> 
                 <table id="notification-table" border="1"  >
                    <tr>
-                    <th>Notifications</th>
-                    <th width="50px"></th>
+                        <th>Notifications</th>
+                        <th width="50px"></th>
                     </tr>
                     
-                    <tr>
-                        <td>&nbsp;New freelancer wants to join to the system</td>
-                    <td>
-                        <a href="#"><button type="button" class="btn btn-success" style="width: 30px; height: 30px;" >
-                                <span class="fas fa-check-circle"></span></button></a>
-                    </td>
-                    </tr>
+                    <?php
+                    $request = $adminObj->freelancerRequest();
+                    if ($request->num_rows > 0) {
+                        while ($req = $request->fetch_assoc()) {
+                            ?>
+                            <tr>
+                                <td>&nbsp;New freelancer, <?php echo $req['freelancer_fname']?> wants to join to the system</td>
+                                <td>
+                                    <a href="../../../controller/adminController.php?status=activate_user&free_id=<?php echo base64_encode($req['freelancer_login_id']);?>"><button type="button" class="btn btn-success" style="width: 30px; height: 30px;" >
+                                            <span class="fas fa-check-circle"></span></button></a>
+                                </td>
+                            </tr>
+                            <?php
+                        }
+                    }
+                    else {
+                        ?>
+                        <tr>
+                            <td colspan="2" align="center">&nbsp;No new Notifications</td>
+                        </tr>
+                        <?php
+                    }
+                    
+                    ?>
                    
                 </table>
               </div>
             </div>
             
-            
-            
-            
         </div>
         
-        
     </body>
-   <?php
-     include '../../includes/bootstrap_script_includes.php';
-   
-   ?>
     
-    
-    
-            <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-            <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
-            <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"></script>
 </html>

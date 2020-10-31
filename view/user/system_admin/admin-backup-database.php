@@ -13,8 +13,8 @@
         <?php
          
             include '../../../model/user_model.php';
-            $adminObj = new Admin();
-            $userObj = new User();
+            $userObj = new User(); //must need for navbar
+            $adminObj = new Admin(); //must need for navbar
             $dbTables = $adminObj->getAllDbTables();
 
             $user_id = $_SESSION["user"]["user_id"];

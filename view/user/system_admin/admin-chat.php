@@ -15,8 +15,8 @@
         <?php
          
             include '../../../model/user_model.php';
-            $userObj = new User();
-            $adminObj = new Admin();
+            $userObj = new User(); //must need for navbar
+            $adminObj = new Admin(); //must need for navbar
             $userResults = $userObj->getAllUsers();
             
             $user_id = $_SESSION["user"]["user_id"];

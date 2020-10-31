@@ -254,6 +254,36 @@
         
     break;
 
+    case "activate_user":
+    
+        $free_id = $_REQUEST["free_id"];
+        $freelancer_id = base64_decode($free_id);
+        
+        $result = $adminObj->acceptFreelancer($freelancer_id);
+
+        if ($result == 1) {
+
+            $msgSuccess = "Freelancer Successfully Accepted!";
+            $msgSuccess = base64_encode($msgSuccess);
+            $chat_id = base64_encode($receiver_id);
+            
+            ?>
+                <script>window.location = "../view/user/system_admin/admin-notification.php?msgSuccess=<?php echo $msgSuccess; ?>" </script>  
+            <?php
+
+        }
+        else {
+            $msg = "Error while Accepting";
+            $msg = base64_encode($msg);
+            $chat_id = base64_encode($receiver_id);
+            
+            ?>
+                <script>window.location = "../view/user/system_admin/admin-notification.php?msg=<?php echo $msg; ?>" </script>  
+            <?php
+        }
+        
+    break;
+
  
     default:
      echo "Invalid Parameters";

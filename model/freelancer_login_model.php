@@ -10,7 +10,8 @@ class freelancerLogin{
         $sql = "SELECT * FROM freelancer f , freelancer_login l"
                 . " WHERE f.freelancer_id = l.freelancer_id"
                 . " AND l.freelancer_login_username = '$username'"
-                . " AND l.freelancer_login_password = '$password'";
+                . " AND l.freelancer_login_password = '$password'"
+                . " AND f.freelancer_status = 1";
         $result = $con->query($sql);
         return $result;
     }

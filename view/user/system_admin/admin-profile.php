@@ -13,7 +13,8 @@
         <?php
             include '../../../model/user_model.php';
             
-            $userObj = new User(); /// create user   object
+            $userObj = new User(); //must need for navbar
+            $adminObj = new Admin(); //must need for navbar
             
             if(!isset($_REQUEST["user_id"]))
             {

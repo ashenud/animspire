@@ -352,4 +352,40 @@ class Admin {
         $results = $con->query($sql);
         return $results;
     }
+
+    function freelancerRequest(){
+        $con = $GLOBALS['con'];
+        $sql = "SELECT 
+                    f.freelancer_id,
+                    fl.freelancer_login_id,
+                    f.freelancer_fname
+                FROM
+                    freelancer f 
+                        INNER JOIN
+                    freelancer_login fl ON f.freelancer_id = fl.freelancer_id
+                WHERE 
+                    fl.freelancer_login_status = 0
+                    AND f.freelancer_status = 1";
+
+        $results = $con->query($sql);
+        return $results;
+    }
+
+    function acceptFreelancer($fl_login_id){
+        $con = $GLOBALS['con'];
+        $sql = "UPDATE
+                    freelancer_login
+                SET
+                    freelancer_login_status = 1
+                WHERE
+                    freelancer_login_id = '$fl_login_id'";
+        $result = $con->query($sql);
+
+        if ($result) {
+            return 1;
+        }
+        else {
+            return 0;
+        }
+    }
 }
