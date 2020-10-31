@@ -62,7 +62,7 @@
                 <div>
                     <div class="col-md-12">&nbsp;</div>
                 </div>
-                <div align="center" id="loading_div" class="scroll" style="display: box; overflow-y:scroll;"> </div>
+                <div align="center" id="loading_div"> </div>
             </div>
         </div>
 

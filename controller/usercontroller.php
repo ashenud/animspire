@@ -27,105 +27,105 @@ if(isset($_REQUEST["status"]))
             
             $phone = $_POST["phone"];
             
-        try
-        {
-            if($firstName=="")
+            try
             {
-                throw new Exception("First Name cannot be Empty!");
-            }
-            if($lastName=="")
-            {
-                throw new Exception("Last Name cannot be Empty!");
-            }
-            if($email=="")
-            {
-                throw new Exception("Email cannot be Empty!");
-            }
-            if($password=="")
-            {
-                throw new Exception("Password cannot be Empty!");
-            }
-            if($role=="")
-            {
-                throw new Exception("Role cannot be Empty!");
-            }
-            if($dob=="")
-            {
-                throw new Exception("DOB cannot be Empty!");
-            }
-            if($gender=="")
-            {
-                throw new Exception("Gender cannot be Empty!");
-            }
-            if($phone=="")
-            {
-                throw new Exception("Phone Number cannot be Empty!");
-            }
-            
-            $patemail = "/^([a-zA-Z0-9_\.\-])+\@(([a-zA-Z0-9\-])+\.)+([a-zA-Z]{2,6})+$/";  // validating email
-            $patphone="/^[0-9]{10}$/";  /// validating phone number
-            
-            if(!preg_match($patemail, $email))
-            {
-                throw new Exception("Invalid Email Addess");
-            }
-            if(!preg_match($patphone, $phone))
-            {
-                throw new Exception("Invalid Phone Number");
-            }
-            
-            if($_FILES["image"]["name"]!="")
-            {
-                $img = $_FILES["image"]["name"];
-                $img = "".time()."_".$img;
-                // Obtain temporary location
-                $tmp = $_FILES["image"]["tmp_name"];
-                $destination = "../../images/Avatars/user_images/$img";
-                move_uploaded_file($tmp, $destination);
+                if($firstName=="")
+                {
+                    throw new Exception("First Name cannot be Empty!");
+                }
+                if($lastName=="")
+                {
+                    throw new Exception("Last Name cannot be Empty!");
+                }
+                if($email=="")
+                {
+                    throw new Exception("Email cannot be Empty!");
+                }
+                if($password=="")
+                {
+                    throw new Exception("Password cannot be Empty!");
+                }
+                if($role=="")
+                {
+                    throw new Exception("Role cannot be Empty!");
+                }
+                if($dob=="")
+                {
+                    throw new Exception("DOB cannot be Empty!");
+                }
+                if($gender=="")
+                {
+                    throw new Exception("Gender cannot be Empty!");
+                }
+                if($phone=="")
+                {
+                    throw new Exception("Phone Number cannot be Empty!");
+                }
+                
+                $patemail = "/^([a-zA-Z0-9_\.\-])+\@(([a-zA-Z0-9\-])+\.)+([a-zA-Z]{2,6})+$/";  // validating email
+                $patphone="/^[0-9]{10}$/";  /// validating phone number
+                
+                if(!preg_match($patemail, $email))
+                {
+                    throw new Exception("Invalid Email Addess");
+                }
+                if(!preg_match($patphone, $phone))
+                {
+                    throw new Exception("Invalid Phone Number");
+                }
+                
+                if($_FILES["image"]["name"]!="")
+                {
+                    $img = $_FILES["image"]["name"];
+                    $img = "".time()."_".$img;
+                    // Obtain temporary location
+                    $tmp = $_FILES["image"]["tmp_name"];
+                    $destination = dirname(__FILE__) ."../../images/Avatars/user_images/$img";
+                    move_uploaded_file($tmp, $destination);
+                    
+                }
+                else 
+                {
+                    $img = "defaultImage.png";
+                }
+                
+                ///// Validating the existence of the email address
+                
+                $isValid = $userObj->validateUserEmail($email);
+                
+                if($isValid==false)
+                {
+                    throw new Exception("Email Address is already taken!");
+                }
+                
+                $userId = $userObj->addUser($firstName, $lastName, $email, $role, $dob, $gender, $phone, $img, 1);
+                
+                if($userId)
+                {
+                $pw = sha1($password); ///Encrypting the password
+                
+                $userObj->addUserLogin($email, $pw, $userId, 1);
+                
+                $msgSuccess = "User Added Successfully!";
+                $msgSuccess = base64_encode($msgSuccess);
+                
+                ?>
+                <script>window.location = "../view/user/system_admin/admin-user-management.php?msgSuccess=<?php echo $msgSuccess; ?>" </script>
+                <?php
+                }
+                
                 
             }
-            else 
+            catch (Exception $ex)
             {
-                $img = "defaultImage.png";
+                $msg = $ex->getMessage();
+                
+                $msg = base64_encode($msg);
+                
+                ?>
+                <script>window.location = "../view/user/system_admin/admin-user-add.php?msg=<?php echo $msg; ?>" </script>
+                <?php
             }
-            
-            ///// Validating the existence of the email address
-            
-            $isValid = $userObj->validateUserEmail($email);
-            
-            if($isValid==false)
-            {
-                throw new Exception("Email Address is already taken!");
-            }
-            
-            $userId = $userObj->addUser($firstName, $lastName, $email, $role, $dob, $gender, $phone, $img, 1);
-            
-            if($userId)
-            {
-             $pw = sha1($password); ///Encrypting the password
-             
-             $userObj->addUserLogin($email, $pw, $userId, 1);
-             
-             $msgSuccess = "User Added Successfully!";
-             $msgSuccess = base64_encode($msgSuccess);
-             
-             ?>
-              <script>window.location = "../view/user/system_admin/admin-user-management.php?msgSuccess=<?php echo $msgSuccess; ?>" </script>
-             <?php
-            }
-            
-            
-        }
-        catch (Exception $ex)
-        {
-            $msg = $ex->getMessage();
-            
-            $msg = base64_encode($msg);
-            
-            ?>
-              <script>window.location = "../view/user/system_admin/admin-user-add.php?msg=<?php echo $msg; ?>" </script>
-            <?php
-        }
             
         break;
         
