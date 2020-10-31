@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 192.168.1.110
--- Generation Time: Oct 30, 2020 at 09:58 PM
+-- Generation Time: Nov 01, 2020 at 02:14 AM
 -- Server version: 10.4.15-MariaDB-1:10.4.15+maria~bionic-log
 -- PHP Version: 7.4.11
 
@@ -47,7 +47,9 @@ INSERT INTO `backup_details` (`backup_id`, `user_id`, `backup_reference`, `descr
 (5, 1, 124618088591, 'Backup done by Damith Menaka', '2020-10-29 22:34:08'),
 (6, 1, 709423907556, 'Backup done by Damith Menaka', '2020-10-29 22:37:44'),
 (7, 1, 776526063494, 'Backup done by Damith Menaka', '2020-10-29 23:31:11'),
-(8, 1, 676554783591, 'Backup done by Damith Menaka', '2020-10-30 10:24:00');
+(8, 1, 676554783591, 'Backup done by Damith Menaka', '2020-10-30 10:24:00'),
+(9, 5, 483154468334, 'Backup done by Kashun Thilina', '2020-10-31 20:41:09'),
+(10, 5, 308452327334, 'Backup done by Kashun Thilina', '2020-10-31 20:43:00');
 
 -- --------------------------------------------------------
 
@@ -73,18 +75,33 @@ INSERT INTO `communication` (`msg_id`, `sender_id`, `receiver_id`, `message`, `s
 (2, 3, 1, 'Did you contact Mr. Niru?', '2020-10-30 08:33:50', 1),
 (3, 4, 1, 'Hi Damith, Did you got the issue fixed?', '2020-10-30 08:35:24', 1),
 (4, 3, 1, 'Will you come tomorrow meeting?', '2020-10-30 08:35:24', 1),
-(5, 1, 3, 'I will contact him today.', '2020-10-30 08:34:31', 0),
-(6, 1, 3, 'Yes. Meet you at there.', '2020-10-30 08:59:56', 0),
+(5, 1, 3, 'I will contact him today.', '2020-10-30 08:34:31', 1),
+(6, 1, 3, 'Yes. Meet you at there.', '2020-10-30 08:59:56', 1),
 (7, 1, 2, 'Nope. I will do.', '2020-10-30 10:48:42', 1),
-(8, 1, 3, 'Where are You ?', '2020-10-30 10:51:51', 0),
-(9, 1, 3, 'Please call me now', '2020-10-30 10:52:30', 0),
-(10, 1, 4, 'Yes.', '2020-10-30 10:54:54', 0),
-(11, 1, 3, 'Did you receive my letter??', '2020-10-30 15:15:13', 0),
+(8, 1, 3, 'Where are You ?', '2020-10-30 10:51:51', 1),
+(9, 1, 3, 'Please call me now', '2020-10-30 10:52:30', 1),
+(10, 1, 4, 'Yes.', '2020-10-30 10:54:54', 1),
+(11, 1, 3, 'Did you receive my letter??', '2020-10-30 15:15:13', 1),
 (12, 2, 1, 'Please call me now', '2020-10-30 16:10:13', 1),
 (13, 1, 2, 'Ok. wait a minutes.', '2020-10-30 16:18:37', 0),
 (14, 1, 2, 'Whats is your tomorrow plans  ?', '2020-10-30 16:22:53', 0),
 (15, 6, 1, 'Hi. Damith', '2020-10-30 16:25:20', 0),
-(16, 6, 2, 'Hellow Yuresh!', '2020-10-30 16:25:52', 0);
+(16, 6, 2, 'Hellow Yuresh!', '2020-10-30 16:25:52', 1),
+(17, 3, 1, 'Sorry', '2020-10-31 16:56:35', 0),
+(18, 3, 1, 'I was busy those days', '2020-10-31 16:56:49', 0),
+(19, 3, 1, 'I will call you tomorrow ', '2020-10-31 16:57:21', 0),
+(20, 3, 5, 'Hellow Kasun !', '2020-10-31 16:57:43', 0),
+(21, 3, 4, 'Hi Madumika!', '2020-10-31 16:59:51', 1),
+(22, 4, 3, 'Hi Rushan', '2020-10-31 17:15:28', 0),
+(23, 4, 3, 'How are you??', '2020-10-31 17:15:41', 0),
+(24, 4, 8, 'Hellow Janaka!', '2020-10-31 17:16:00', 0),
+(25, 7, 1, 'Please call me now', '2020-10-31 17:18:24', 0),
+(26, 7, 1, 'Did you receive my files??', '2020-10-31 17:23:08', 0),
+(27, 7, 3, 'Hellow Rushan !', '2020-10-31 18:16:15', 0),
+(28, 6, 7, 'Hellow Sachintha!', '2020-10-31 18:17:57', 0),
+(29, 2, 6, 'Hellow whts up ?', '2020-10-31 18:19:21', 0),
+(30, 5, 1, 'Hi Damith!', '2020-10-31 20:39:54', 0),
+(31, 5, 1, 'I am the another admin', '2020-10-31 20:40:23', 0);
 
 -- --------------------------------------------------------
 
@@ -169,7 +186,9 @@ CREATE TABLE `freelancer` (
 --
 
 INSERT INTO `freelancer` (`freelancer_id`, `freelancer_fname`, `freelancer_lname`, `freelancer_email`, `freelancer_country`, `freelancer_dob`, `freelancer_gender`, `freelancer_phone`, `freelancer_image`, `freelancer_create_date`, `freelancer_update_date`, `freelancer_status`) VALUES
-(1, 'Imesha', 'De Silva', 'imesha.desilva@gmail.com', 'Sri Lanka', '1988-10-25', 1, '0776592630', '1595922420_F7.png', '2020-07-28 13:17:00', '2020-07-28 07:47:00', 1);
+(1, 'Imesha', 'De Silva', 'imesha.desilva@gmail.com', 'Sri Lanka', '1988-10-25', 1, '0776592630', '1595922420_F7.png', '2020-07-28 13:17:00', '2020-07-28 07:47:00', 1),
+(2, 'Ashen', 'Udithamal', 'udithamal.lk@gmail.com', 'Sri Lanka', '1995-03-16', 0, '0712758810', '1604143768_K8.jpg', '2020-10-31 16:59:28', '2020-10-31 11:29:28', 1),
+(3, 'Samith', 'Perera', 'samith@gmail.com', 'Sri Lanka', '1995-10-04', 0, '0712758813', '1604176625_profile-pic.png', '2020-11-01 02:07:05', '2020-10-31 20:37:05', 1);
 
 -- --------------------------------------------------------
 
@@ -190,7 +209,9 @@ CREATE TABLE `freelancer_login` (
 --
 
 INSERT INTO `freelancer_login` (`freelancer_login_id`, `freelancer_login_username`, `freelancer_login_password`, `freelancer_id`, `freelancer_login_status`) VALUES
-(1, 'imesha.desilva@gmail.com', '40bd001563085fc35165329ea1ff5c5ecbdbbeef', 1, 1);
+(1, 'imesha.desilva@gmail.com', '40bd001563085fc35165329ea1ff5c5ecbdbbeef', 1, 1),
+(2, 'udithamal.lk@gmail.com', '40bd001563085fc35165329ea1ff5c5ecbdbbeef', 2, 1),
+(3, 'samith@gmail.com', '40bd001563085fc35165329ea1ff5c5ecbdbbeef', 3, 0);
 
 -- --------------------------------------------------------
 
@@ -218,15 +239,15 @@ CREATE TABLE `user` (
 --
 
 INSERT INTO `user` (`user_id`, `user_fname`, `user_lname`, `user_email`, `user_role`, `user_dob`, `user_gender`, `user_phone`, `user_image`, `user_create_date`, `user_update_date`, `user_status`) VALUES
-(1, 'Damith', 'Menaka', 'damith@gmail.com', '1', '1997-08-09', 0, '0712974466', '1604014460_K8.jpg', '2020-06-26 14:54:39', '2020-10-29 23:34:20', 1),
+(1, 'Damith', 'Menaka', 'damith@gmail.com', '1', '1997-08-09', 0, '0712974466', '1604014460_K8.jpg', '2020-06-26 14:54:39', '2020-10-31 12:58:43', 1),
 (2, 'Yuresh', 'Yasintha', 'yuresh@gmail.com', '2', '1997-12-03', 0, '0758996325', '1596361541_M1.png', '2020-07-03 12:06:02', '2020-08-05 15:19:07', 1),
 (3, 'Rushan', 'Tharanga', 'rushan.tharanga@gmail.com', '3', '1991-06-15', 0, '0776859696', '1595930399_M3.png', '2020-07-28 15:29:59', '2020-07-28 09:59:59', 1),
 (4, 'Madumika', 'Vithange', 'madumika.v@gmail.com', '4', '1994-02-09', 1, '0756665544', '1596442575_F8.png', '2020-08-03 13:46:15', '2020-08-03 13:54:02', 1),
-(5, 'Kashun', 'Thilina', 'kashun.thilina@gmail.com', '1', '1988-02-03', 0, '0772224142', '1603816798_M8.png', '2020-10-27 08:27:20', '2020-10-27 16:39:58', 1),
+(5, 'Kashun', 'Thilina', 'kashun.thilina@gmail.com', '1', '1988-02-03', 0, '0772224142', '1603816798_M8.png', '2020-10-27 08:27:20', '2020-10-31 19:41:35', 1),
 (6, 'Imesha', 'Thilini', 'imesha.thilini@gmail.com', '2', '1989-12-08', 1, '0716364666', '1603820673_F8.png', '2020-10-27 08:29:36', '2020-10-27 17:44:33', 1),
 (7, 'Sachitha', 'Maduranga', 'sachitha.m@gmail.com', '3', '1994-12-08', 0, '0778887799', '1603767657_M8.png', '2020-10-27 08:30:57', '2020-10-27 03:00:57', 1),
 (8, 'Janaka', 'Rukantha', 'janaka.r@gmail.com', '4', '1994-10-07', 0, '0771234455', '1603767718_M4.png', '2020-10-27 08:31:58', '2020-10-27 03:01:58', 1),
-(9, 'Nimal', 'Perera', 'Nimal@gmail.com', '2', '1981-06-01', 0, '0712758810', '1604014235_M8.png', '2020-10-29 23:46:36', '2020-10-29 23:30:35', 1);
+(9, 'Nimal', 'Perera', 'Nimal@gmail.com', '2', '1981-06-01', 0, '0712758810', '1604014235_M8.png', '2020-10-29 23:46:36', '2020-10-31 19:38:49', 1);
 
 -- --------------------------------------------------------
 
@@ -372,13 +393,13 @@ ALTER TABLE `user_role`
 -- AUTO_INCREMENT for table `backup_details`
 --
 ALTER TABLE `backup_details`
-  MODIFY `backup_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
+  MODIFY `backup_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
 
 --
 -- AUTO_INCREMENT for table `communication`
 --
 ALTER TABLE `communication`
-  MODIFY `msg_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=17;
+  MODIFY `msg_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=32;
 
 --
 -- AUTO_INCREMENT for table `customer`
@@ -396,13 +417,13 @@ ALTER TABLE `customer_login`
 -- AUTO_INCREMENT for table `freelancer`
 --
 ALTER TABLE `freelancer`
-  MODIFY `freelancer_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `freelancer_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT for table `freelancer_login`
 --
 ALTER TABLE `freelancer_login`
-  MODIFY `freelancer_login_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `freelancer_login_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT for table `user`

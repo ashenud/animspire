@@ -4,26 +4,27 @@ include '../../../../commons/session.php';
 include '../../../../model/user_model.php';
 $adminObj = new Admin();
 
-$role ="";
-if ($_REQUEST['role_id'] != "") {
-    $role = "AND ur.role_id ='". $_REQUEST['role_id'] ."'";
+$admin_id ="";
+if ($_REQUEST['admin_id'] != "") {
+    $admin_id = "AND u.user_id ='". $_REQUEST['admin_id'] ."'";
 }
 
-$db_backup = $adminObj->getDbBackupData($role);
+$db_backup = $adminObj->getDbBackupData($admin_id);
 
 if($_SESSION["user"]["role_id"]==1) {
 ?>
 
-    <div id="data_section" class="scroll mt-3" style="overflow-y:scroll;">
-        <table id="printarea" width="98%" border="1" align="center">
-            <tr style="background: #cfb3e9;">
-                <th align="center" width="70px">Backup ID</th>
-                <th align="center" width="90px">Reference</th>
-                <th align="center" width="100px">Date</th>
-                <th align="center" width="100px">Time</th>
-                <th align="left" width="160px">description</th>
-            </tr>
-        <?php
+   
+    <table id="printarea" width="98%" border="1" align="center">
+        <tr style="background: #cfb3e9;">
+            <th align="center" width="70px">Backup ID</th>
+            <th align="center" width="90px">Reference</th>
+            <th align="center" width="100px">Date</th>
+            <th align="center" width="100px">Time</th>
+            <th align="left" width="160px">description</th>
+        </tr>
+    <?php
+    if($db_backup->num_rows >0) {
         while($dataRow = $db_backup->fetch_assoc()) {
         ?>
             <tr>
@@ -35,12 +36,20 @@ if($_SESSION["user"]["role_id"]==1) {
             </tr>
         <?php
         }
+    }
+    else {
         ?>
-        </table>
-        <button name="download-btn" class="btn btn-danger float-right" id="download-btn" onclick="generate_pdf()">
-            <i class="fas fa-print"></i> Print
-        </button>
-    </div>
+        <tr>
+            <td align="center" style="text-align:center; color:red" colspan="5">No result found</td>
+        </tr>
+        <?php
+    }
+    ?>
+    </table>
+    <button name="download-btn" class="btn btn-danger float-right" id="download-btn" onclick="generate_pdf()">
+        <i class="fas fa-print"></i> Print
+    </button>
+    
 
     <script>
 

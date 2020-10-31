@@ -27,7 +27,7 @@
             /* end permission check */
 
             
-            $userResults = $userObj->getAllUsers();
+            $admins = $userObj->getAllAdmins();
             
             $userId = $_SESSION["user"]["user_id"];
             $userId = base64_encode($userId);
@@ -47,8 +47,15 @@
                 <div class="top-buttons">
                     <div class="row">
                        <div class="col-md-4">
-                           <select id="role_id" class="form-control admin-name" required="required">
-                               <option value="1">Select System Admin</option>
+                           <select id="admin_id" class="form-control admin-name" required="required">
+                               <option value="">All Admins</option>
+                               <?php
+                                while($admin = $admins->fetch_assoc()) {
+                                ?>
+                                <option value="<?php echo $admin["user_id"]; ?>"><?php echo $admin["user_fname"].' '.$admin["user_lname"]; ?></option>
+                                <?php
+                                }
+                                ?>
                            </select>
                         </div>
                         <div class="col-md-4">
@@ -56,7 +63,10 @@
                         </div>
                    </div>
                </div> 
-               <div align="center" id="loading_div"> </div>             
+               <div>
+                    <div class="col-md-12">&nbsp;</div>
+                </div>
+               <div align="center" id="loading_div" class="scroll mt-3" style="overflow-y:scroll;"> </div>             
             </div>            
         </div>
 
@@ -65,14 +75,14 @@
     <script language="javascript">
 
         function generate_report(page) {
-            var role_name = $('#role_id :selected').text();
-            var role_id = $('#role_id').val();
-            console.log(role_id+'-'+role_name);
+            var admin_name = $('#admin_id :selected').text();
+            var admin_id = $('#admin_id').val();
+            // console.log(admin_name+'-'+admin_id);
 
             $('#loading_div').html('<p><img src="../../../images/loading.gif"  /></p>');
             $('#loading_div').load("./loadings/report-backup-history.php", {
-                'role_name': role_name,
-                'role_id': role_id,
+                'admin_name': admin_name,
+                'admin_id': admin_id,
                 'page': page
             });  
         }

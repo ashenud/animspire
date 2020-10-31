@@ -2,115 +2,102 @@
 <?php
 include '../../../../commons/session.php';
 include '../../../../model/user_model.php';
-$userObj = new User();
+$adminObj = new Admin();
 
-$role ="";
-if ($_REQUEST['role_id'] != "") {
-    $role = "AND ur.role_id ='". $_REQUEST['role_id'] ."'";
+$fname ="";
+if ($_REQUEST['fname'] != "") {
+    $fname = "AND u.user_fname LIKE '".$_REQUEST['fname']."%'";
 }
 
-$userResults = $userObj->getAllUsers();
-$roleUsers = $userObj->getUsersForRole($role);
+$current_user_id = $_SESSION["user"]["user_id"];
+
+$userResults = $adminObj->getUsersForAdmin($current_user_id,$fname);
 
 if($_SESSION["user"]["role_id"]==1) {
 ?>
 
-    <div id="data_section" class="scroll mt-3" style="overflow-y:scroll;">
-        <table id="printarea" width="98%" border="1" align="center">
-            <tr style="background: #cfb3e9;">
-                <th align="center" width="50px">User ID</th>
-                <th align="left" width="90px">Name</th>
-                <th align="left" width="180px">Email</th>
-                <th align="center" width="165px">Phone</th>
-                <th align="left" width="80px">Designation</th>
-                <th align="left" width="90px">Department</th>
-                <th align="center" width="60px">Gender</th>
-            </tr>
+    <table class="user-table" border="1" style="overflow-y:scroll;">
+        <tr>
+            <th></th>
+            <th width="30px">&nbsp;ID</th>
+            <th width="90px">&nbsp;First Name</th>
+            <th width="90px">&nbsp;Last Name</th>
+            <th width="180px">&nbsp;Email</th>
+            <th width="165px">&nbsp;Role</th>
+            <th width="80px">&nbsp;Phone</th>
+            <th width="90px">&nbsp;DOB</th>
+            <th width="60px">Gender</th>
+            <th width="100px"></th>
+        </tr>
         <?php
-        while($userRow = $roleUsers->fetch_assoc()) {
-        ?>
+        if($userResults->num_rows >0) {
+            while($userRow = $userResults->fetch_assoc()) {
+            ?>
             <tr>
-                <td align="center" > <?php echo $userRow["id"]; ?></td>
-                <td align="left" > <?php echo $userRow["name"]; ?></td>
-                <td align="left" > <?php echo $userRow["email"]; ?></td>
-                <td align="center" > <?php echo $userRow["phone"]; ?></td>
-                <td align="left" > <?php echo $userRow["designation"]; ?></td>
-                <td align="left" > <?php echo $userRow["department"]; ?></td>
-                <td align="center" > <?php echo $userRow["gender"]; ?></td>
+                <td><img src="../../../images/Avatars/user_images/<?php echo $userRow["user_image"]; ?>"
+                        style="height: 40px; width: 40px; "></td>
+                <td style="text-align:center"><?php echo $userRow["user_id"]; ?></td>
+                <td>&nbsp; <?php echo $userRow["user_fname"]; ?></td>
+                <td>&nbsp; <?php echo $userRow["user_lname"]; ?></td>
+                <td>&nbsp; <?php echo $userRow["user_email"]; ?></td>
+                <td>&nbsp; <?php echo $userRow["role_name"]; ?></td>
+                <td>&nbsp; <?php echo $userRow["user_phone"]; ?></td>
+                <td> <?php echo $userRow["user_dob"]; ?></td>
+                <td>&nbsp;
+                    <?php 
+                    if($userRow["user_gender"]==0) {
+                    ?>
+                        Male
+                    <?php
+                    }
+                    if($userRow["user_gender"]==1) {
+                    ?>
+                        Female
+                    <?php
+                    }
+                    ?>
+                </td>
+                <td>
+                    <a href="admin-user-edit.php?user_id=<?php echo base64_encode($userRow["user_id"]); ?>"><button
+                            type="button" class="btn btn-warning" style="color:white">
+                            <span class="fa fa-fw fa-edit"></span>Edit</button>
+                    </a>
+                    <?php
+                    if($userRow["user_status"]==0) {
+                    ?>
+                    <a
+                        href="../../../controller/usercontroller.php?status=activateUser&user_id=<?php echo base64_encode($userRow["user_id"]); ?>"><button
+                            type="button" class="btn btn-success" style="width: 30px; height: 30px;">
+                            <span class="fa fa-fw fa-toggle-on"></span></button></a>
+                    <?php
+                    }        
+                    ?>
+                    <?php
+                    if($userRow["user_status"]==1) {
+                    ?>
+                    <a
+                        href="../../../controller/usercontroller.php?status=deactivateUser&user_id=<?php echo base64_encode($userRow["user_id"]); ?>"><button
+                            type="button" class="btn btn-danger" style="width: 30px; height: 30px;">
+                            <span class="fa fa-fw fa-power-off"></span></button></a>
+                    <?php
+                    }        
+                    ?>
+
+
+                </td>
             </tr>
-        <?php
+            <?php
+            }
+        }
+        else {
+            ?>
+            <tr>
+                <td align="center" style="text-align:center; color:red" colspan="10">No result found</td>
+            </tr>
+            <?php
         }
         ?>
-        </table>
-        <button name="download-btn" class="btn btn-danger float-right" id="download-btn" onclick="generate_pdf()">
-            <i class="fas fa-print"></i> Print
-        </button>
-    </div>
-
-    <script>
-
-        function generate_pdf() {
-
-            $("#printarea").attr("border", "");
-            var print_area = $("#printarea")[0].outerHTML;
-
-            var filters =   "<h1 align='center'>Animspire Freelancer Management System</h1>" +
-                            "<div style='margin-bottom:45px'>" +
-                                "<table width='100%' align='center'>" +
-                                    "<tr class='body_text'>" +
-                                        "<td align='center'><h2 style=''>Employee Information by Role</h2></td>" +
-                                    "</tr>" +
-                                "</table>"+
-                            "</div>";
-
-            var pdf_name = "employee information by role.pdf";
-
-            var layout = "A4";
-
-
-            var mapForm = document.createElement("form");
-            mapForm.target = "Map";
-            mapForm.method = "POST"; 
-            mapForm.action = "./loadings/report_template.php";
-
-            var mapInput = document.createElement("input");
-            mapInput.type = "hidden";
-            mapInput.name = "x";
-            mapInput.value = print_area;
-            mapForm.appendChild(mapInput);
-
-            var mapInput2 = document.createElement("input");
-            mapInput2.type = "hidden";
-            mapInput2.name = "y";
-            mapInput2.value = filters;
-            mapForm.appendChild(mapInput2);
-
-            var mapInput3 = document.createElement("input");
-            mapInput3.type = "hidden";
-            mapInput3.name = "z";
-            mapInput3.value = pdf_name;
-            mapForm.appendChild(mapInput3);
-
-            var mapInput4 = document.createElement("input");
-            mapInput4.type = "hidden";
-            mapInput4.name = "layout";
-            mapInput4.value = layout;
-            mapForm.appendChild(mapInput4);
-
-            document.body.appendChild(mapForm);
-
-            map = window.open("", "Map", "status=0,title=0,height=1600,width=1800,scrollbars=1");
-
-            if (map) {
-                mapForm.submit();
-            } else {
-                alert('Please Retry.');
-            }
-
-
-        }
-
-    </script>
+    </table>
 
 <?php
 } else {

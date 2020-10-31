@@ -5,8 +5,7 @@ $dbConnObj = new dbConnetion();
 
 class User{
     
-    function validateUserEmail($email)
-    {
+    function validateUserEmail($email) {
         $con = $GLOBALS['con'];
         $sql = "SELECT 1 FROM user WHERE user_email = '$email'";
         $result = $con->query($sql);
@@ -19,8 +18,8 @@ class User{
             return true;
         }
     }
-    function addUser($user_fname, $user_lname, $user_email, $user_role, $user_dob, $user_gender, $user_phone, $user_image, $user_status)
-    {
+    
+    function addUser($user_fname, $user_lname, $user_email, $user_role, $user_dob, $user_gender, $user_phone, $user_image, $user_status) {
         $con = $GLOBALS['con'];
         $sql = "INSERT INTO user(user_fname,
                                     user_lname,
@@ -81,41 +80,26 @@ class User{
         }
     }
 
-    public function getUserRoles()
-    {
-        $con = $GLOBALS['con'];
-        $sql = "SELECT * FROM user_role";
-        $results = $con->query($sql);
-        return $results;
-    }
-    public function getAllUsers()
-    {
-        $con = $GLOBALS['con'];
-        $sql = "SELECT * FROM user u, user_role r WHERE u.user_role = r.role_id";
-        $userResults = $con->query($sql);
-        return $userResults;
-    }
-    function deactivateUser($userId)
-    {
+    function deactivateUser($userId) {
         $con = $GLOBALS['con'];
         $sql = "UPDATE user SET user_status='0' WHERE user_id = '$userId'";
         $results = $con->query($sql);
     }
-    function activateUser($userId)
-    {
+
+    function activateUser($userId) {
         $con = $GLOBALS['con'];
         $sql = "UPDATE user SET user_status='1' WHERE user_id = '$userId'";
         $results = $con->query($sql);
     }
-    function viewUser($userId)
-    {
+
+    function viewUser($userId) {
         $con = $GLOBALS['con'];
         $sql = "SELECT * FROM user u, user_role r WHERE u.user_role = r.role_id AND u.user_id = '$userId'";
         $results = $con->query($sql);
         return $results;
     }
-    function updateEmailValidation($userId, $email)
-    {
+
+    function updateEmailValidation($userId, $email) {
         $con = $GLOBALS['con'];
         $sql = "SELECT 1 FROM user WHERE user_email = '$email' AND user_id != '$userId'";
         $result = $con->query($sql);
@@ -128,8 +112,8 @@ class User{
             return true;
         }
     }
-    function updateUser($userId, $user_fname, $user_lname, $user_email, $user_role, $user_dob, $user_gender, $user_phone, $user_image, $user_status)
-    {
+
+    function updateUser($userId, $user_fname, $user_lname, $user_email, $user_role, $user_dob, $user_gender, $user_phone, $user_image, $user_status) {
         $con = $GLOBALS['con'];
         
         if($user_image!="defaultImage.png")
@@ -158,6 +142,40 @@ class User{
                 . "WHERE user_id = '$userId'";
         }
         $result = $con->query($sql) or die($con->error);
+    }
+    
+    public function getAllUsers() {
+        $con = $GLOBALS['con'];
+        $sql = "SELECT 
+                    * 
+                FROM 
+                    user u,
+                    user_role r 
+                WHERE 
+                    u.user_role = r.role_id
+                    AND u.user_status =1";
+        $userResults = $con->query($sql);
+        return $userResults;
+    }
+
+    public function getAllAdmins() {
+        $con = $GLOBALS['con'];
+        $sql = "SELECT 
+                    * 
+                FROM 
+                    user u
+                WHERE 
+                    u.user_status = 1
+                    AND u.user_role = 1";
+        $userResults = $con->query($sql);
+        return $userResults;
+    }
+
+    public function getUserRoles() {
+        $con = $GLOBALS['con'];
+        $sql = "SELECT * FROM user_role";
+        $results = $con->query($sql);
+        return $results;
     }
 
     function getRoles() {
@@ -332,7 +350,6 @@ class User{
         }
     }
 
-
 }
 
 class Admin {
@@ -364,7 +381,7 @@ class Admin {
         }
     }
 
-    function getDbBackupData($role){
+    function getDbBackupData($admin_id){
         $con = $GLOBALS['con'];
         $sql = "SELECT
                     bd.backup_id,
@@ -380,7 +397,7 @@ class Admin {
                     backup_details bd ON bd.user_id = u.user_id
                 WHERE
                     u.user_status = 1
-                    $role";
+                    $admin_id";
 
         $results = $con->query($sql);
         return $results;
@@ -420,5 +437,23 @@ class Admin {
         else {
             return 0;
         }
+    }
+
+    function getUsersForAdmin($user_id,$fname){
+        $con = $GLOBALS['con'];
+        $sql = "SELECT 
+                    * 
+                FROM 
+                    user u
+                        INNER JOIN 
+                    user_role r ON u.user_role = r.role_id
+                WHERE 
+                    u.user_id != '$user_id'
+                    AND u.user_status =1
+                    {$fname}
+                ORDER BY
+                    u.user_id";
+        $userResults = $con->query($sql);
+        return $userResults;
     }
 }
