@@ -32,12 +32,13 @@
             $user_id = $_SESSION["user"]["user_id"];
             $userId = base64_encode($user_id);
 
-            $chat_id=  base64_decode($_GET["user_id"]);
             if (isset($_GET['msg_ids'])) {
                 $msg_ids=  base64_decode($_GET["msg_ids"]);
             }
-
-            $userObj->messageMarkAsReaded($user_id,$chat_id);
+            if(isset($_GET["user_id"])) {
+                $chat_id=  base64_decode($_GET["user_id"]);
+                $userObj->messageMarkAsReaded($user_id,$chat_id);
+            }
         
         ?>
       
