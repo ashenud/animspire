@@ -103,7 +103,7 @@
                  $userId = base64_encode($userId);  /// encoding user id
             ?>
                 <script> alert("Please Enter different password!");</script>
-                <script>window.location = "../view/user/user-profile.php?user_id=<?php echo $userId; ?>" </script>
+                <script>window.location = "<?php echo $_POST["redirect"]; ?>?user_id=<?php echo $userId; ?>" </script>
              <?php
              }
              else
@@ -117,18 +117,18 @@
                     $userId = base64_encode($userId);  /// encoding user id
                 
                   ?>
-                    <script>window.location = "../view/user/user-profile.php?user_id=<?php echo $userId; ?>&msgSuccess=<?php echo $msgSuccess; ?>" </script>
+                    <script>window.location = "<?php echo $_POST["redirect"]; ?>?user_id=<?php echo $userId; ?>&msgSuccess=<?php echo $msgSuccess; ?>" </script>
                   <?php
                     
                  }
                  else 
                  {
-//                     $msg="Confirm password is incorrect!";
-//                     $msg=base64_encode($msg);
+                      // $msg="Confirm password is incorrect!";
+                      // $msg=base64_encode($msg);
                      $userId = base64_encode($userId);   /// encoding user id
                  ?>
                     <script> alert("Confirm password is incorrect!");</script>
-                    <script>window.location = "../view/user/user-profile.php?user_id=<?php echo $userId; ?>" </script>
+                    <script>window.location = "<?php echo $_POST["redirect"]; ?>?user_id=<?php echo $userId; ?>" </script>
                  <?php
                  }
              }
@@ -136,12 +136,12 @@
          }
          else
          {
-//             $msg="Current Password is incorret!";
-//             $msg=base64_encode($msg);
+              // $msg="Current Password is incorret!";
+              // $msg=base64_encode($msg);
              $userId = base64_encode($userId);   /// encoding user id
           ?>   
            <script> alert("Current Password is incorret!"); </script>    
-           <script>window.location = "../view/user/user-profile.php?user_id=<?php echo $userId; ?>" </script>
+           <script>window.location = "<?php echo $_POST["redirect"]; ?>?user_id=<?php echo $userId; ?>" </script>
            <?php  
          }
          

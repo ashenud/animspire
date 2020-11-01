@@ -3,7 +3,7 @@
 ?>
 <html>
     <head>        
-        <title>Admin Dashboard</title>
+        <title>Marketing Manager Profile</title>
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <link rel='stylesheet' type="text/css" href="../../../css/style-user-profile.css"/>
@@ -20,7 +20,7 @@
             if(!isset($_SESSION["user"]["role_id"])) {
                 $userObj->checkUser('0');
             }
-            elseif(($_SESSION["user"]["role_id"]) != 1){
+            elseif(($_SESSION["user"]["role_id"]) != 3){
                 $userObj->checkUser($_SESSION["user"]["role_id"]);
             }
             /* end permission check */
@@ -79,7 +79,7 @@
                 </div>
                 <hr>
                 <div class="button">
-                    <a href="admin-profile-update.php?user_id=<?php echo base64_encode($userRow["user_id"]); ?>" type="button" class="btn btn-success" style="width: 220px; text-align: center">
+                    <a href="finance-manager-profile-update.php?user_id=<?php echo base64_encode($userRow["user_id"]); ?>" type="button" class="btn btn-success" style="width: 220px; text-align: center">
                         <span class="fa fa-fw fa-user"></span>&nbsp;&nbsp;UPDATE PROFILE</a>&nbsp;&nbsp;&nbsp;
                         <button type="button" data-toggle="modal" data-target="#passwordChangeModal" class="btn btn-danger" style="width: 220px">
                       <span class="fa fa-fw fa-pencil"></span>&nbsp;&nbsp;CHANGE PASSWORD</button>
@@ -126,7 +126,7 @@
                                     <input type="password" class="form-control" id="confirm_pw" name="confirm_pw" placeholder="Confirm New Password" required="required"/>
                                 </div>
                                 <input type="hidden" value="<?php echo $user_id; ?>" id="user_id" name="user_id">
-                                <input type="hidden" value="../view/user/system_admin/admin-profile.php" id="redirect" name="redirect">
+                                <input type="hidden" value="../view/user/finance_manager/finance-manager-profile.php" id="redirect" name="redirect">
                             </div>
                         </div>
                         <div class="modal-footer">

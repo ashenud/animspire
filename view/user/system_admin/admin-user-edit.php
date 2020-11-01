@@ -60,6 +60,7 @@
                     </div>
                     <div class="col-md-8">
                         <!-- Alert message -->
+                        <div id="alertDiv"></div>
                         <?php
                         if(isset($_GET["msg"]))
                         {
@@ -73,10 +74,19 @@
                         </div>
                         <?php
                         }
+                        if(isset($_GET["msgSuccess"]))
+                        {
+                            $msgSuccess=  base64_decode($_GET["msgSuccess"]);
                         ?>
-                    </div>
-                    <div class="col-md-7">
-                        <div id="alertDiv"></div>
+                            <div class="alert alert-success" style="padding: 15px; height: 55px; margin-top: 5px">
+                                <p><?php
+                                    echo $msgSuccess;
+                                    ?>
+                                </p>
+                            </div>
+                        <?php
+                        }
+                        ?>
                     </div>
                 </div>
                 <hr>
@@ -195,7 +205,7 @@
         
     </body>
 
-    <script src="../../js/user_validation.js"></script>
+    <script src="../../../js/user_validation.js"></script>
     <script type="text/javascript">
         function readURL(input) {
           if (input.files && input.files[0]) {

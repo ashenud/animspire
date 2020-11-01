@@ -147,6 +147,7 @@
                 }
             });
         });
+        $('.chat-history').scrollTop($('.chat-history').height()); 
     </script>
     
 </html>

@@ -20,7 +20,7 @@
             if(!isset($_SESSION["user"]["role_id"])) {
                 $userObj->checkUser('0');
             }
-            elseif(($_SESSION["user"]["role_id"]) != 1){
+            elseif(($_SESSION["user"]["role_id"]) != 3){
                 $userObj->checkUser($_SESSION["user"]["role_id"]);
             }
             /* end permission check */
@@ -50,7 +50,7 @@
         <form id="editUser" enctype="multipart/form-data" method="post" action="../../../controller/usercontroller.php?status=edit_self">
               <div class="cont">
                   <input type="hidden" name="user_id" value="<?php echo $userId ?>"/>
-                  <input type="hidden" value="../view/user/system_admin/admin-profile-update.php" id="redirect" name="redirect">
+                  <input type="hidden" value="../view/user/finance_manager/finance-manager-profile-update.php" id="redirect" name="redirect">
                <div class="row">
                     <div class="col-md-4">
                     <h3>Update</h3>
@@ -97,11 +97,11 @@
                 </div>
              
                 <div class="row">
-                <div class="form-group" style="margin-top: 8px; margin-left: 15px; width: 47%"">
+                <div class="form-group" style="margin-top: 8px; margin-left: 15px; width: 47%">
                   <label for="email">Email :</label>
                   <input type="email" class="form-control" id="email" value="<?php echo $userRow["user_email"]; ?>" name="email" readonly="readonly">
                 </div>
-                <div class="form-group" style="margin-top: 8px; margin-left: 27px; width: 47%"">
+                <div class="form-group" style="margin-top: 8px; margin-left: 27px; width: 47%">
                   <label for="role">User Role :</label>
                   <select id="role" name="role" class="form-control">
                       <?php
@@ -129,14 +129,14 @@
                 </div>  
              
                 <div class="row">
-                  <div class="form-group" style="margin-top: 8px; margin-left: 15px; width: 47%"">
+                  <div class="form-group" style="margin-top: 8px; margin-left: 15px; width: 47%">
                     <label for="email">Date Of Birth :</label>
                     <input type="date" name="dob" class="form-control" id="dob" value="<?php echo $userRow["user_dob"]; ?>"/>
                         <span class="input-group-addon">
                             <span class="glyphicon glyphicon-calendar"></span>
                         </span>
                   </div>
-                    <div class="form-group" style="margin-top: 8px; margin-left: 27px; width: 47%"">
+                    <div class="form-group" style="margin-top: 8px; margin-left: 27px; width: 47%">
                     <label for="gender" style="margin-left:8px">Gender :</label>
                     <div class="row" style="margin-top:8px; margin-left: 10px;">
                       <div class="form-check-inline">
@@ -200,7 +200,7 @@
                    </div>
                 </div>
              <div class="clearfix">
-                 <button onclick="document.location='admin-dashboard.php'" type="button" class="btn btn-danger" style="width: 440px">Cancel</button>&nbsp;&nbsp;&nbsp;
+                 <button onclick="document.location='finance-manager-dashboard.php'" type="button" class="btn btn-danger" style="width: 440px">Cancel</button>&nbsp;&nbsp;&nbsp;
                  <button type="submit" class="btn btn-success" style="width: 440px">Update</button>
              </div>
               </div>
