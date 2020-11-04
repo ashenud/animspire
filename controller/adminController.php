@@ -164,7 +164,7 @@
     
     case "backup_db":
 
-        $connect = new PDO("mysql:host=192.168.1.110;dbname=animspire", "root", "2486");
+        $connect = new PDO("mysql:host=192.168.1.101;dbname=animspire", "root", "2486");
          
         $all_tables = $_POST['table'];  ///collecting tables from post
         $output = '';

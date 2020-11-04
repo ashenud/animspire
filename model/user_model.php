@@ -355,7 +355,7 @@ class User{
 class Admin {
 
     function getAllDbTables() {
-        $connect = new PDO("mysql:host=192.168.1.110;dbname=animspire", "root", "2486");
+        $connect = new PDO("mysql:host=192.168.1.101;dbname=animspire", "root", "2486");
         $get_all_table_query = "SHOW TABLES";
         $statement = $connect->prepare($get_all_table_query);
         $statement->execute();

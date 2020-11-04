@@ -30,10 +30,10 @@
                     $userArray = array(
                         "firstname"=>$firstname, 
                         "lastname"=>$lastname, 
-                        "user_image"=>$user_image, 
-                        "user_id"=>$user_id);
+                        "freelancer_image"=>$user_image, 
+                        "freelancer_id"=>$user_id);
                     
-                    $_SESSION["user"] = $userArray;
+                    $_SESSION["freelancer"] = $userArray;
 
                     ?>
                     <script>window.location = "../view/freelancer/freelancer-dashboard.php"</script>

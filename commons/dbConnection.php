@@ -3,7 +3,7 @@
 class dbConnetion{
     
     public $conn;
-    private $hostname = "192.168.1.110";
+    private $hostname = "192.168.1.101";
     private $dbusername = "root";
     private $dbpassword = "2486";
     private $db = "animspire";

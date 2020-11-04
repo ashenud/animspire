@@ -55,7 +55,11 @@ $status=$_REQUEST["status"];
      break;
      
      case "logout":
+        session_destroy();
          
+        ?>
+            <script>window.location = "../index.php"</script>
+        <?php
      break;
  
     default:

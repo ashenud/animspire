@@ -114,7 +114,7 @@
 
 </style>
 <div class="sidebar">
-    <a href="./freelancer-dashboard.php" ><img src="../../images/Animspire-Logo.png" id="logo"></a>
+    <a href="./customer-dashboard.php" ><img src="../../images/Animspire-Logo.png" id="logo"></a>
     <a href="#"><i class="fa fa-fw fa-home"></i><br>User Mng</a>
     <hr>
     <a href="#services"><i class="fa fa-fw fa-wrench"></i><br>Services</a>
@@ -123,14 +123,14 @@
     <hr>
     <a href="#contact"><i class="fa fa-fw fa-wrench"></i><br>Reports</a>
     <hr>
-    <a href="../../controller/freelancerlogincontrol.php?status=logout"><img src="../../images/icons/logout.png"
+    <a href="../../controller/customerlogincontroller.php?status=logout"><img src="../../images/icons/logout.png"
             alt="Logout" style="width:50px;height:50px;margin-top: 140px; margin-left: 5px"></a></a>
 </div>
 <div class="top-navbar">
-    <a href="./freelancer-profile.php?freelancer_id=<?php echo $freelancerId; ?>"><img
-            src="../../images/Avatars/freelancer_images/<?php echo $_SESSION["freelancer"]["freelancer_image"]; ?>" id="prfile-pic"
+    <a href="./customer-profile.php?customer_id=<?php echo $customerId; ?>"><img
+            src="../../images/Avatars/customer_images/<?php echo $_SESSION["customer"]["customer_image"]; ?>" id="prfile-pic"
             style="height: 50px; width: 50px; border: 2px solid white; border-radius: 50px;" /></a>
-    <a href="./freelancer-dashboard.php" name="home" class="btn btn-primary home-btn">Home</a>
+    <a href="./customer-dashboard.php" name="home" class="btn btn-primary home-btn">Home</a>
     <!-- Success message -->
     <?php
         if(isset($_GET["msgSuccess"]))

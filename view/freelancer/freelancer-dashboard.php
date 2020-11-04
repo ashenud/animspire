@@ -6,24 +6,17 @@
         <title>Freelancer Dashboard</title>
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
-        <?php include '../../includes/freelancer_dashboard_includes_css.php';?>
-        <?php include '../../includes/freelancer_dashboard_includes_script.php'; ?>
+        <?php include '../../includes/other_dashboard_includes_css.php';?>
+        <?php include '../../includes/other_dashboard_includes_script.php'; ?>
 
         <?php
         
             include '../../../model/freelancer_model.php';
             
-            //$freelancerObj = new Freelancer(); /// create feelancer object
-            
-            if(!isset($_SESSION["user"]["user_id"]))
-            {
-                ?>
-                  <script> window.location = "../../index.php"</script>
-               <?php
-            }
+            $freelancerObj = new Freelancer(); /// create feelancer object
 
-            $user_id = $_SESSION["user"]["user_id"];
-            $userId = base64_encode($user_id); 
+            $freelancer_id = $_SESSION["freelancer"]["freelancer_id"];
+            $freelancerId = base64_encode($freelancer_id); 
             
         ?>
         
