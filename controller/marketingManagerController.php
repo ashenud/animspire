@@ -3,6 +3,7 @@
     include '../model/user_model.php';
     
     $userObj = new User();
+    $projectManagerObj = new ProjectManager();
     
     $status = $_REQUEST["status"];
 
@@ -37,11 +38,38 @@
                 <?php
             }
             
-            break;
+        break;
     
-     
-        default:
+        case "send_quote":
+    
+            $quotation_id = $_REQUEST["quotation_id"];
+            $remarks = $_REQUEST["remarks"];
+            
+            $result = $projectManagerObj->sendQuote($quotation_id,$remarks);
+    
+            if ($result == 1) {
+    
+                $msgSuccess = "Quotation Successfully Send!";
+                $msgSuccess = base64_encode($msgSuccess);
+                $chat_id = base64_encode($receiver_id);
+                
+                ?>
+                    <script>window.location = "../view/user/marketing_manager/marketing-manager-quotations.php?msgSuccess=<?php echo $msgSuccess; ?>" </script>  
+                <?php
+    
+            }
+            else {
+                $msg = "Quotation not Send!";
+                $msg = base64_encode($msg);
+                $chat_id = base64_encode($receiver_id);
+                
+                ?>
+                    <script>window.location = "../view/user/marketing_manager/marketing-manager-quotations.php?msg=<?php echo $msg; ?>" </script>  
+                <?php
+            }
+            
+        break;
 
-            echo "Invalid Parameters";
+        default: echo "Invalid Parameters";
 
     }

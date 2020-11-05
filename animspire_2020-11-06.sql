@@ -2,8 +2,8 @@
 -- version 5.0.4
 -- https://www.phpmyadmin.net/
 --
--- Host: 192.168.1.110
--- Generation Time: Nov 01, 2020 at 02:14 AM
+-- Host: 192.168.1.101
+-- Generation Time: Nov 06, 2020 at 12:48 AM
 -- Server version: 10.4.15-MariaDB-1:10.4.15+maria~bionic-log
 -- PHP Version: 7.4.11
 
@@ -87,9 +87,9 @@ INSERT INTO `communication` (`msg_id`, `sender_id`, `receiver_id`, `message`, `s
 (14, 1, 2, 'Whats is your tomorrow plans  ?', '2020-10-30 16:22:53', 0),
 (15, 6, 1, 'Hi. Damith', '2020-10-30 16:25:20', 0),
 (16, 6, 2, 'Hellow Yuresh!', '2020-10-30 16:25:52', 1),
-(17, 3, 1, 'Sorry', '2020-10-31 16:56:35', 0),
-(18, 3, 1, 'I was busy those days', '2020-10-31 16:56:49', 0),
-(19, 3, 1, 'I will call you tomorrow ', '2020-10-31 16:57:21', 0),
+(17, 3, 1, 'Sorry', '2020-10-31 16:56:35', 1),
+(18, 3, 1, 'I was busy those days', '2020-10-31 16:56:49', 1),
+(19, 3, 1, 'I will call you tomorrow ', '2020-10-31 16:57:21', 1),
 (20, 3, 5, 'Hellow Kasun !', '2020-10-31 16:57:43', 0),
 (21, 3, 4, 'Hi Madumika!', '2020-10-31 16:59:51', 1),
 (22, 4, 3, 'Hi Rushan', '2020-10-31 17:15:28', 0),
@@ -97,11 +97,19 @@ INSERT INTO `communication` (`msg_id`, `sender_id`, `receiver_id`, `message`, `s
 (24, 4, 8, 'Hellow Janaka!', '2020-10-31 17:16:00', 0),
 (25, 7, 1, 'Please call me now', '2020-10-31 17:18:24', 0),
 (26, 7, 1, 'Did you receive my files??', '2020-10-31 17:23:08', 0),
-(27, 7, 3, 'Hellow Rushan !', '2020-10-31 18:16:15', 0),
+(27, 7, 3, 'Hellow Rushan !', '2020-10-31 18:16:15', 1),
 (28, 6, 7, 'Hellow Sachintha!', '2020-10-31 18:17:57', 0),
 (29, 2, 6, 'Hellow whts up ?', '2020-10-31 18:19:21', 0),
 (30, 5, 1, 'Hi Damith!', '2020-10-31 20:39:54', 0),
-(31, 5, 1, 'I am the another admin', '2020-10-31 20:40:23', 0);
+(31, 5, 1, 'I am the another admin', '2020-10-31 20:40:23', 0),
+(32, 1, 3, 'Hey, Did you receive my files?', '2020-11-01 12:55:03', 1),
+(33, 10, 1, 'Where are You ?', '2020-11-01 14:45:51', 1),
+(34, 10, 2, 'Hellow Bro !!', '2020-11-01 14:47:06', 0),
+(35, 10, 3, 'Hellow Rushan !', '2020-11-01 14:48:37', 1),
+(36, 10, 4, 'Hellow whts up ?', '2020-11-01 14:49:11', 0),
+(37, 3, 10, 'Hellow whts up ?', '2020-11-01 14:50:15', 0),
+(38, 3, 7, 'Hellow Sachintha!', '2020-11-01 14:50:32', 0),
+(39, 1, 10, 'I am at meeting now', '2020-11-01 14:51:42', 0);
 
 -- --------------------------------------------------------
 
@@ -129,10 +137,10 @@ CREATE TABLE `customer` (
 --
 
 INSERT INTO `customer` (`customer_id`, `customer_fname`, `customer_lname`, `customer_email`, `customer_country`, `customer_dob`, `customer_gender`, `customer_phone`, `customer_image`, `customer_create_date`, `customer_update_date`, `customer_status`) VALUES
-(2, 'Dhanushka', 'Lakshan', 'dhanushka.lakshan@gmail.com', 'Sri Lanka', '1994-05-25', 0, '+94778965925', 'defaultImage.jpg', '2020-07-01 19:04:31', '2020-07-01 13:34:31', 1),
-(3, 'Ashan', 'Gunawardena', 'ashan.guna@gmail.com', 'Sri Lanka', '1994-06-27', 0, '5555555', 'defaultImage.jpg', '2020-07-02 17:19:48', '2020-07-02 11:49:48', 1),
-(4, 'Kasun', 'Gayantha', 'kasun@gmail.com', 'Sri Lanka', '1990-05-10', 0, '+94786958654', 'defaultImage.jpg', '2020-07-02 21:16:06', '2020-07-02 15:46:06', 1),
-(5, 'Lasith', 'De Silva', 'lasith.de@gmail.com', 'Sri Lanka', '1991-06-25', 0, '+94775698425', 'defaultImage.jpg', '2020-07-03 17:45:47', '2020-07-03 12:15:47', 1),
+(2, 'Dhanushka', 'Lakshan', 'dhanushka.lakshan@gmail.com', 'Sri Lanka', '1994-05-25', 0, '+94778965925', 'defaultImage.png', '2020-07-01 19:04:31', '2020-11-04 16:17:26', 1),
+(3, 'Ashan', 'Gunawardena', 'ashan.guna@gmail.com', 'Sri Lanka', '1994-06-27', 0, '5555555', 'defaultImage.png', '2020-07-02 17:19:48', '2020-11-04 16:17:30', 1),
+(4, 'Kasun', 'Gayantha', 'kasun@gmail.com', 'Sri Lanka', '1990-05-10', 0, '+94786958654', 'defaultImage.png', '2020-07-02 21:16:06', '2020-11-04 16:17:34', 1),
+(5, 'Lasith', 'De Silva', 'lasith.de@gmail.com', 'Sri Lanka', '1991-06-25', 0, '+94775698425', 'defaultImage.png', '2020-07-03 17:45:47', '2020-11-04 16:17:39', 1),
 (6, 'Sachin', 'Rukshan', 'sachin.rukshan@gmail.com', 'Sri Lanka', '1994-12-05', 0, '0778889345', '1595851369_M9.png', '2020-07-27 17:32:49', '2020-07-27 12:02:49', 1);
 
 -- --------------------------------------------------------
@@ -216,6 +224,33 @@ INSERT INTO `freelancer_login` (`freelancer_login_id`, `freelancer_login_usernam
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `quotations`
+--
+
+CREATE TABLE `quotations` (
+  `quotation_id` int(11) NOT NULL,
+  `customer_id` int(11) NOT NULL,
+  `subject` varchar(255) NOT NULL,
+  `requirements` varchar(1000) NOT NULL,
+  `remarks` varchar(1000) DEFAULT NULL,
+  `date created` timestamp NOT NULL DEFAULT current_timestamp(),
+  `date_updated` timestamp NOT NULL DEFAULT current_timestamp(),
+  `status` int(2) NOT NULL DEFAULT 1 COMMENT '1-pending, 2-submitted, 3-approved, 4-rejected'
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `quotations`
+--
+
+INSERT INTO `quotations` (`quotation_id`, `customer_id`, `subject`, `requirements`, `remarks`, `date created`, `date_updated`, `status`) VALUES
+(1, 2, 'Logo Design', 'My budget is around $5', 'OK', '2020-11-04 17:30:10', '2020-11-04 17:30:10', 2),
+(2, 2, 'Graphical Contest', 'Need a better place', 'Ok', '2020-11-04 17:32:23', '2020-11-05 17:56:47', 3),
+(3, 2, 'Java Project', 'My budget is around $7', 'Our budget is $5', '2020-11-04 19:00:26', '2020-11-05 17:46:47', 4),
+(4, 2, 'HTML Project', 'My cost is around 20$', NULL, '2020-11-05 19:17:12', '2020-11-05 19:17:12', 1);
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `user`
 --
 
@@ -239,15 +274,17 @@ CREATE TABLE `user` (
 --
 
 INSERT INTO `user` (`user_id`, `user_fname`, `user_lname`, `user_email`, `user_role`, `user_dob`, `user_gender`, `user_phone`, `user_image`, `user_create_date`, `user_update_date`, `user_status`) VALUES
-(1, 'Damith', 'Menaka', 'damith@gmail.com', '1', '1997-08-09', 0, '0712974466', '1604014460_K8.jpg', '2020-06-26 14:54:39', '2020-10-31 12:58:43', 1),
-(2, 'Yuresh', 'Yasintha', 'yuresh@gmail.com', '2', '1997-12-03', 0, '0758996325', '1596361541_M1.png', '2020-07-03 12:06:02', '2020-08-05 15:19:07', 1),
-(3, 'Rushan', 'Tharanga', 'rushan.tharanga@gmail.com', '3', '1991-06-15', 0, '0776859696', '1595930399_M3.png', '2020-07-28 15:29:59', '2020-07-28 09:59:59', 1),
-(4, 'Madumika', 'Vithange', 'madumika.v@gmail.com', '4', '1994-02-09', 1, '0756665544', '1596442575_F8.png', '2020-08-03 13:46:15', '2020-08-03 13:54:02', 1),
-(5, 'Kashun', 'Thilina', 'kashun.thilina@gmail.com', '1', '1988-02-03', 0, '0772224142', '1603816798_M8.png', '2020-10-27 08:27:20', '2020-10-31 19:41:35', 1),
+(1, 'Damith', 'Menaka', 'damith@gmail.com', '1', '1997-08-09', 0, '0712974466', '1604014460_K8.jpg', '2020-06-26 14:54:39', '2020-11-01 13:58:27', 1),
+(2, 'Yuresh', 'Yasintha', 'yuresh@gmail.com', '2', '1997-12-03', 0, '0758996325', '1596361541_M1.png', '2020-07-03 12:06:02', '2020-11-01 14:01:17', 1),
+(3, 'Rushan', 'Tharanga', 'rushan.tharanga@gmail.com', '3', '1991-06-15', 0, '0776859696', '1595930399_M3.png', '2020-07-28 15:29:59', '2020-11-01 14:30:13', 1),
+(4, 'Madumika', 'Vithange', 'madumika.v@gmail.com', '4', '1994-02-09', 1, '0756665544', '1596442575_F8.png', '2020-08-03 13:46:15', '2020-11-01 14:23:35', 1),
+(5, 'Kasun', 'Thilina', 'kashun.thilina@gmail.com', '1', '1988-02-03', 0, '0772224142', '1603816798_M8.png', '2020-10-27 08:27:20', '2020-10-31 20:50:50', 1),
 (6, 'Imesha', 'Thilini', 'imesha.thilini@gmail.com', '2', '1989-12-08', 1, '0716364666', '1603820673_F8.png', '2020-10-27 08:29:36', '2020-10-27 17:44:33', 1),
 (7, 'Sachitha', 'Maduranga', 'sachitha.m@gmail.com', '3', '1994-12-08', 0, '0778887799', '1603767657_M8.png', '2020-10-27 08:30:57', '2020-10-27 03:00:57', 1),
 (8, 'Janaka', 'Rukantha', 'janaka.r@gmail.com', '4', '1994-10-07', 0, '0771234455', '1603767718_M4.png', '2020-10-27 08:31:58', '2020-10-27 03:01:58', 1),
-(9, 'Nimal', 'Perera', 'Nimal@gmail.com', '2', '1981-06-01', 0, '0712758810', '1604014235_M8.png', '2020-10-29 23:46:36', '2020-10-31 19:38:49', 1);
+(9, 'Nimal', 'Perera', 'Nimal@gmail.com', '2', '1981-06-01', 0, '0712758810', '1604014235_M8.png', '2020-10-29 23:46:36', '2020-10-31 19:38:49', 1),
+(10, 'Nadeera', 'Nishan', 'nadeera@gmail.com', '1', '1992-12-01', 0, '0712758819', '1604177973_defaultImage.png', '2020-11-01 02:22:53', '2020-10-31 20:59:33', 1),
+(11, 'Chamari', 'Athapattu', 'chamari@gmail.com', '2', '1990-02-13', 1, '0712758811', '1604177911_1595922420_F7.png', '2020-11-01 02:28:31', '2020-11-01 13:49:39', 1);
 
 -- --------------------------------------------------------
 
@@ -297,7 +334,9 @@ INSERT INTO `user_login` (`user_login_id`, `user_login_username`, `user_login_pa
 (6, 'imesha.thilini@gmail.com', '40bd001563085fc35165329ea1ff5c5ecbdbbeef', 6, 1),
 (7, 'sachitha.m@gmail.com', '40bd001563085fc35165329ea1ff5c5ecbdbbeef', 7, 1),
 (8, 'janaka.r@gmail.com', '40bd001563085fc35165329ea1ff5c5ecbdbbeef', 8, 1),
-(9, 'Nimal@gmail.com', '40bd001563085fc35165329ea1ff5c5ecbdbbeef', 9, 1);
+(9, 'Nimal@gmail.com', '40bd001563085fc35165329ea1ff5c5ecbdbbeef', 9, 1),
+(10, 'nadeera@gmail.com', '40bd001563085fc35165329ea1ff5c5ecbdbbeef', 10, 1),
+(11, 'chamari@gmail.com', '40bd001563085fc35165329ea1ff5c5ecbdbbeef', 11, 1);
 
 -- --------------------------------------------------------
 
@@ -362,6 +401,12 @@ ALTER TABLE `freelancer_login`
   ADD PRIMARY KEY (`freelancer_login_id`);
 
 --
+-- Indexes for table `quotations`
+--
+ALTER TABLE `quotations`
+  ADD PRIMARY KEY (`quotation_id`);
+
+--
 -- Indexes for table `user`
 --
 ALTER TABLE `user`
@@ -399,7 +444,7 @@ ALTER TABLE `backup_details`
 -- AUTO_INCREMENT for table `communication`
 --
 ALTER TABLE `communication`
-  MODIFY `msg_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=32;
+  MODIFY `msg_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=40;
 
 --
 -- AUTO_INCREMENT for table `customer`
@@ -426,10 +471,16 @@ ALTER TABLE `freelancer_login`
   MODIFY `freelancer_login_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
+-- AUTO_INCREMENT for table `quotations`
+--
+ALTER TABLE `quotations`
+  MODIFY `quotation_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+
+--
 -- AUTO_INCREMENT for table `user`
 --
 ALTER TABLE `user`
-  MODIFY `user_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
+  MODIFY `user_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
 
 --
 -- AUTO_INCREMENT for table `user_department`
@@ -441,7 +492,7 @@ ALTER TABLE `user_department`
 -- AUTO_INCREMENT for table `user_login`
 --
 ALTER TABLE `user_login`
-  MODIFY `user_login_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
+  MODIFY `user_login_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

@@ -457,3 +457,70 @@ class Admin {
         return $userResults;
     }
 }
+
+class ProjectManager {
+
+    function getQuoteForStatus($status) {
+
+        $con = $GLOBALS['con'];
+        $sql = "SELECT
+                    q.quotation_id,
+                    c.customer_id,
+                    CONCAT(c.customer_fname, ' ', c.customer_lname) AS name,
+                    q.subject,
+                    q.requirements,
+                    IFNULL(q.remarks,'') AS remarks,
+                    q.status AS status_id,
+                    IF(q.status=1,'Pending',
+                    IF(q.status=2,'Submitted',
+                        IF(q.status=3, 'Approved',
+                        IF(q.status=4, 'Rejected','')))) AS status
+                FROM
+                    quotations q
+                        INNER JOIN
+                    customer c ON c.customer_id = q.customer_id
+                WHERE
+                    c.customer_status = 1
+                    $status";
+        $results = $con->query($sql);
+
+        return $results;
+    }
+
+    function sendQuote($quotation_id,$remarks) {
+
+        $con = $GLOBALS['con'];
+        $sql = "UPDATE
+                    quotations
+                SET
+                    remarks = '$remarks',
+                    status = 2
+                WHERE
+                    quotation_id = '$quotation_id'";
+        $results = $con->query($sql);
+
+        if ($results) {
+            return 1;
+        }
+        else {
+            return 0;
+        }
+
+    }
+
+    function qouteCount() {
+
+        $con = $GLOBALS['con'];
+        $sql = "SELECT 
+                    quotation_id 
+                FROM 
+                    quotations
+                WHERE
+                    status = 1";
+        $results = $con->query($sql);
+        
+        return $results;       
+
+    }
+
+}

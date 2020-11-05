@@ -138,7 +138,7 @@ class Customer{
                     q.quotation_id,
                     q.subject,
                     q.requirements,
-                    IFNULL(q.remarks,'No') AS remarks,
+                    IFNULL(q.remarks,'No remarks') AS remarks,
                     q.status AS status_id,
                     IF(q.status=1,'Pending',
                     IF(q.status=2,'Submitted',
@@ -152,6 +152,21 @@ class Customer{
         $results = $con->query($sql);
 
         return $results;
+    }
+
+    function qouteCount() {
+
+        $con = $GLOBALS['con'];
+        $sql = "SELECT 
+                    quotation_id 
+                FROM 
+                    quotations
+                WHERE
+                    status = 2";
+        $results = $con->query($sql);
+        
+        return $results;       
+
     }
     
 }

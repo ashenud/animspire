@@ -28,8 +28,8 @@
 
         <?php
          
-            // include '../../../model/customer_model.php';
-            // $customerObj = new Customer();
+            include '../../model/customer_model.php';
+            $customerObj = new Customer(); //must need for navbar
 
             $customer_id = $_SESSION["customer"]["customer_id"];
             $customerId = base64_encode($customer_id); 
@@ -97,9 +97,7 @@
                             <div class="row">
                                 <div class="form-group" style="margin-top: 8px; margin-left: 35px; width: 85%">
                                     <label for="requirements">What are your requirements?</label>
-                                    <textarea class="form-control" rows="6" cols="30" id="requirements" name="requirements" placeholder="Enter your requirements" required="required">
-                                        
-                                    </textarea>
+                                    <textarea class="form-control" rows="6" cols="30" id="requirements" name="requirements" placeholder="Enter your requirements" required="required"></textarea>
                                 </div>
                             </div>
                             
@@ -201,7 +199,7 @@
                             <div class="row">
                                 <div class="form-group" style="margin-top: 2px; margin-left: 35px; width: 85%">
                                     <label for="status">Status :</label>
-                                    <input type="text" class="form-control" id="edit-status" name="status" placeholder="Enter Subject" disabled/>
+                                    <input type="text" class="form-control" id="edit-status" name="status" disabled/>
                                 </div>
                             </div>
                             
@@ -282,7 +280,7 @@
     <script language="javascript">
 
         $(document).ready(function() {
-            load_quotations('0','1');
+            load_quotations('0','2');
         });
 
         function load_quotations(page,type) {

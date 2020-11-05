@@ -132,6 +132,38 @@
             src="../../images/Avatars/customer_images/<?php echo $_SESSION["customer"]["customer_image"]; ?>" id="prfile-pic"
             style="height: 50px; width: 50px; border: 2px solid white; border-radius: 50px;" /></a>
     <a href="./customer-dashboard.php" name="home" class="btn btn-primary home-btn">Home</a>
+    <div class="dropdown">
+        <button id="notiyf-menu" class="dropdown-toggle notify-btn" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            <?php
+                $qouteCount = $customerObj->qouteCount()->num_rows;
+                if(0<$qouteCount && $qouteCount<5) {
+                    echo "<span class='badge badge-danger msg-label'>";
+                    echo $qouteCount;
+                    echo "</span>";
+                }
+                else if($qouteCount>=5) {
+                    echo "<span class='badge badge-danger msg-label'>";
+                    echo "5+";
+                    echo "</span>";
+                }
+            ?>
+            <i class="fa fa-fw fa-bell"></i>
+        </button>
+        <div class="dropdown-menu" aria-labelledby="notiyf-menu">
+            <?php
+                if ($qouteCount > 0) {
+                    ?>
+                        <a class="dropdown-item" href="./customer-quotations.php">View Quotations</a>
+                    <?php
+                }
+                else {
+                    ?>
+                        <a class="dropdown-item" href="#">No New Notifications</a>
+                    <?php
+                }
+            ?>
+        </div>
+    </div>
     <!-- Success message -->
     <?php
         if(isset($_GET["msgSuccess"]))

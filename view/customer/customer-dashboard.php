@@ -10,11 +10,12 @@
         <?php include '../../includes/other_dashboard_includes_script.php'; ?>
       
       <?php
-      
-     include '../../includes/bootstrap_includes_css.php';
      
-     $customerId = $_SESSION["customer"]["customer_id"];
-     $customerId = base64_encode($customerId);
+        include '../../model/customer_model.php';
+        $customerObj = new Customer(); //must need for navbar
+     
+        $customerId = $_SESSION["customer"]["customer_id"];
+        $customerId = base64_encode($customerId);
      
       ?>
         
@@ -46,14 +47,5 @@
         
         
     </body>
-   <?php
-     include '../../includes/bootstrap_script_includes.php';
-   
-   ?>
     
-    
-    
-            <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-            <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
-            <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"></script>
 </html>
