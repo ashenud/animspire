@@ -115,11 +115,12 @@
 </style>
 <div class="sidebar">
     <a href="./customer-dashboard.php" ><img src="../../images/Animspire-Logo.png" id="logo"></a>
-    <a href="#"><i class="fa fa-fw fa-home"></i><br>User Mng</a>
     <hr>
-    <a href="#services"><i class="fa fa-fw fa-wrench"></i><br>Services</a>
+    <a href="./customer-quotations.php"><i class="fas fa-file-invoice"></i><br>Quotations</a>
     <hr>
-    <a href="#clients"><i class="fa fa-fw fa-user"></i><br>Clients</a>
+    <a href="#services"><i class="fas fa-file-invoice-dollar"></i><br>Payments</a>
+    <hr>
+    <a href="#clients"><i class="fas fa-laptop"></i><br>Projects</a>
     <hr>
     <a href="#contact"><i class="fa fa-fw fa-wrench"></i><br>Reports</a>
     <hr>

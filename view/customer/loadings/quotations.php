@@ -40,17 +40,17 @@ if(isset($_SESSION["customer"])) {
                     ?>
                     <td>
                         <div class="btn-group d-flex">
-                            <button type="button" class="btn btn-info btn-sm" style="padding: 0; margin: 2px; width: 35px;" ><i class="far fa-eye" style="font-size: 18px" ></i></button>
-                            <button type="button" class="btn btn-success btn-sm" style="padding: 0; margin: 2px; width: 35px;" ><i class="far fa-check-circle" style="font-size: 18px" ></i></button>
-                            <button type="button" class="btn btn-warning btn-sm" style="padding: 0; margin: 2px; width: 35px;" ><i class="far fa-edit" style="font-size: 18px" ></i></button>
-                            <button type="button" class="btn btn-danger btn-sm" style="padding: 0; margin: 2px; width: 35px;" ><i class="far fa-times-circle" style="font-size: 18px" ></i></button>
+                            <button type="button" id='view-quote-btn' href='#view-quote' data-toggle='modal' data-subject='<?php echo $quotation["subject"];?>' data-requirements='<?php echo $quotation["requirements"];?>' data-remarks='<?php echo $quotation["remarks"];?>' data-status='<?php echo $quotation["status"];?>' class="btn btn-info btn-sm" style="padding: 0; margin: 2px; width: 35px;" ><i class="far fa-eye" style="font-size: 18px" ></i></button>
+                            <button type="button" id='approve-quote-btn' href='#approve-quote' data-toggle='modal' data-id='<?php echo $quotation["quotation_id"];?>' class="btn btn-success btn-sm" style="padding: 0; margin: 2px; width: 35px;" ><i class="far fa-check-circle" style="font-size: 18px" ></i></button>
+                            <button type="button" id='edit-quote-btn' href='#edit-quote' data-toggle='modal' data-id='<?php echo $quotation["quotation_id"];?>' data-subject='<?php echo $quotation["subject"];?>' data-requirements='<?php echo $quotation["requirements"];?>' data-remarks='<?php echo $quotation["remarks"];?>' data-status='<?php echo $quotation["status"];?>' class="btn btn-warning btn-sm" style="padding: 0; margin: 2px; width: 35px;" ><i class="far fa-edit" style="font-size: 18px" ></i></button>
+                            <button type="button" id='reject-quote-btn' href='#reject-quote' data-toggle='modal' data-id='<?php echo $quotation["quotation_id"];?>' class="btn btn-danger btn-sm" style="padding: 0; margin: 2px; width: 35px;" ><i class="far fa-times-circle" style="font-size: 18px" ></i></button>
                         </div>
                     </td>
                     <?php
                 }
                 else {
                     ?>
-                    <td>No actions</td>
+                    <td>No actions needed</td>
                     <?php
                 }
                 ?>

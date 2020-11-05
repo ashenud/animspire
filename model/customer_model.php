@@ -68,6 +68,69 @@ class Customer{
 
     }
 
+    function editQuote($quotation_id,$subject,$requirements) {
+
+        $con = $GLOBALS['con'];
+        $sql = "UPDATE
+                    quotations
+                SET
+                    subject = '$subject',
+                    requirements = '$requirements',
+                    date_updated = now(),
+                    status = 1
+                WHERE
+                    quotation_id = '$quotation_id'";
+        $results = $con->query($sql);
+
+        if ($results) {
+            return 1;
+        }
+        else {
+            return 0;
+        }
+
+    }
+
+    function approveQuote($quotation_id) {
+
+        $con = $GLOBALS['con'];
+        $sql = "UPDATE
+                    quotations
+                SET
+                    status = 3
+                WHERE
+                    quotation_id = '$quotation_id'";
+        $results = $con->query($sql);
+
+        if ($results) {
+            return 1;
+        }
+        else {
+            return 0;
+        }
+
+    }
+
+    function rejectQuote($quotation_id) {
+
+        $con = $GLOBALS['con'];
+        $sql = "UPDATE
+                    quotations
+                SET
+                    status = 4
+                WHERE
+                    quotation_id = '$quotation_id'";
+        $results = $con->query($sql);
+
+        if ($results) {
+            return 1;
+        }
+        else {
+            return 0;
+        }
+
+    }
+
     function getQuoteForStatus($status,$customer_id) {
 
         $con = $GLOBALS['con'];

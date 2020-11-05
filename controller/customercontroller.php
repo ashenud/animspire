@@ -158,5 +158,94 @@ if(isset($_REQUEST["status"]))
             }
             
         break;
+
+        case "edit_quote":
+    
+            $quotation_id = $_REQUEST["quotation_id"];
+            $subject = $_REQUEST["subject"];
+            $requirements = $_REQUEST["requirements"];
+            
+            $result = $customerObj->editQuote($quotation_id,$subject,$requirements);
+    
+            if ($result == 1) {
+    
+                $msgSuccess = "Quotation Successfully Edited!";
+                $msgSuccess = base64_encode($msgSuccess);
+                $chat_id = base64_encode($receiver_id);
+                
+                ?>
+                    <script>window.location = "../view/customer/customer-quotations.php?msgSuccess=<?php echo $msgSuccess; ?>" </script>  
+                <?php
+    
+            }
+            else {
+                $msg = "Quotation not Edited!";
+                $msg = base64_encode($msg);
+                $chat_id = base64_encode($receiver_id);
+                
+                ?>
+                    <script>window.location = "../view/customer/customer-quotations.php?msg=<?php echo $msg; ?>" </script>  
+                <?php
+            }
+            
+        break;
+
+        case "approve_quote":
+    
+            $quotation_id = $_REQUEST["quotation_id"];
+            
+            $result = $customerObj->approveQuote($quotation_id);
+    
+            if ($result == 1) {
+    
+                $msgSuccess = "Quotation Successfully Approved!";
+                $msgSuccess = base64_encode($msgSuccess);
+                $chat_id = base64_encode($receiver_id);
+                
+                ?>
+                    <script>window.location = "../view/customer/customer-quotations.php?msgSuccess=<?php echo $msgSuccess; ?>" </script>  
+                <?php
+    
+            }
+            else {
+                $msg = "Quotation not Approved!";
+                $msg = base64_encode($msg);
+                $chat_id = base64_encode($receiver_id);
+                
+                ?>
+                    <script>window.location = "../view/customer/customer-quotations.php?msg=<?php echo $msg; ?>" </script>  
+                <?php
+            }
+            
+        break;
+
+        case "reject_quote":
+    
+            $quotation_id = $_REQUEST["quotation_id"];
+            
+            $result = $customerObj->rejectQuote($quotation_id);
+    
+            if ($result == 1) {
+    
+                $msgSuccess = "Quotation Successfully Reject!";
+                $msgSuccess = base64_encode($msgSuccess);
+                $chat_id = base64_encode($receiver_id);
+                
+                ?>
+                    <script>window.location = "../view/customer/customer-quotations.php?msgSuccess=<?php echo $msgSuccess; ?>" </script>  
+                <?php
+    
+            }
+            else {
+                $msg = "Quotation not Reject!";
+                $msg = base64_encode($msg);
+                $chat_id = base64_encode($receiver_id);
+                
+                ?>
+                    <script>window.location = "../view/customer/customer-quotations.php?msg=<?php echo $msg; ?>" </script>  
+                <?php
+            }
+            
+        break;
     }
 }

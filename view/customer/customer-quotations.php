@@ -73,21 +73,18 @@
         </div>
         
         <!--- Request Quote modal -->
-                    
         <div class="modal fade" id="requestQuoteModal" role="dialog">
             <div class="modal-dialog">
                 <form action="../../controller/customercontroller.php?status=request_quote" method="post" name="req-quote" id="req-quote"> 
                     <div class="modal-content">
-                        <div class="modal-header">
+                        <div class="modal-header">     
                             <h4 class="col-12 modal-title text-center" style="padding-top: 10px">Request Quote</h4>
                         </div>
                         <div class="modal-body">
-                            
+                       
                             <div class="row">
                                 <!-- Alert message -->
-                                 <div id="alertDiv" style="margin-left: 35px; width: 420px; height: 45px">
-                                       
-                                    </div>
+                                 <div id="alertDiv" style="margin-left: 35px; width: 420px; height: 45px"></div>
                                
                             </div>
                             
@@ -117,13 +114,175 @@
             
             </div>
         </div>
+
+        <!-- view quote modal -->
+        <div class="modal fade" id="view-quote" role="dialog">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">     
+                        <h4 class="col-12 modal-title text-center" style="padding-top: 10px">View Quote</h4>
+                    </div>
+                    <div class="modal-body">
+                    
+                        <div class="row">
+                            <!-- Alert message -->
+                                <div id="alertDiv" style="margin-left: 35px; width: 420px; height: 45px"></div>
+                            
+                        </div>
+                        
+                        <div class="row">
+                            <div class="form-group" style="margin-top: 2px; margin-left: 35px; width: 85%">
+                                <label for="view-subject">Subject :</label>
+                                <input type="text" class="form-control" id="view-subject" name="subject" placeholder="Enter Subject" disabled>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="form-group" style="margin-top: 8px; margin-left: 35px; width: 85%">
+                                <label for="view-requirements">What are your requirements?</label>
+                                <textarea class="form-control" rows="4" cols="30" id="view-requirements" name="requirements" placeholder="Enter your requirements" disabled>
+                                    
+                                </textarea>
+                            </div>
+                        </div>
+                            <div class="row">
+                                <div class="form-group" style="margin-top: 8px; margin-left: 35px; width: 85%">
+                                    <label for="view-remarks">Remarks</label>
+                                    <textarea class="form-control" rows="3" cols="30" id="view-remarks" name="remarks" disabled></textarea>
+                                </div>
+                            </div>
+                        <div class="row">
+                            <div class="form-group" style="margin-top: 2px; margin-left: 35px; width: 85%">
+                                <label for="status">Status :</label>
+                                <input type="text" class="form-control" id="view-status" name="status" placeholder="Enter Subject" disabled/>
+                            </div>
+                        </div>
+                        
+                    </div>
+                    <div class="modal-footer">
+                    </div>    
+                </div>
+            </div>
+        </div>
+
+        <!-- edit quote modal -->
+        <div class="modal fade" id="edit-quote" role="dialog">
+            <div class="modal-dialog">
+                <form action="../../controller/customercontroller.php?status=edit_quote" method="post"> 
+                    <div class="modal-content">
+                        <div class="modal-header">     
+                            <h4 class="col-12 modal-title text-center" style="padding-top: 10px">Edit Quote</h4>
+                        </div>
+                        <div class="modal-body">
+                       
+                            <div class="row">
+                                <!-- Alert message -->
+                                 <div id="alertDiv" style="margin-left: 35px; width: 420px; height: 45px"></div>
+                               
+                            </div>
+                            
+                            <div class="row">
+                                <div class="form-group" style="margin-top: 2px; margin-left: 35px; width: 85%">
+                                    <label for="edit-subject">Subject :</label>
+                                    <input type="text" class="form-control" id="edit-subject" name="subject" placeholder="Enter Subject" required="required"/>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="form-group" style="margin-top: 8px; margin-left: 35px; width: 85%">
+                                    <label for="edit-requirements">What are your requirements?</label>
+                                    <textarea class="form-control" rows="4" cols="30" id="edit-requirements" name="requirements" placeholder="Enter your requirements" required="required"></textarea>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="form-group" style="margin-top: 8px; margin-left: 35px; width: 85%">
+                                    <label for="edit-remarks">Remarks</label>
+                                    <textarea class="form-control" rows="3" cols="30" id="edit-remarks" name="remarks" disabled></textarea>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="form-group" style="margin-top: 2px; margin-left: 35px; width: 85%">
+                                    <label for="status">Status :</label>
+                                    <input type="text" class="form-control" id="edit-status" name="status" placeholder="Enter Subject" disabled/>
+                                </div>
+                            </div>
+                            
+                        </div>
+                        <div class="modal-footer">
+                            <input type="hidden" name="quotation_id" id="edit-id">
+                            <button type="submit" name="submit" class="btn btn-success" style="width: 200px; text-align: center; margin-right: 135px">
+                            Edit Quote</button>
+                        </div>    
+                    </div>
+                </form>
+            
+            </div>
+        </div>
+
+        <!-- approve quote modal -->
+        <div class="modal fade" id="approve-quote" role="dialog">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">     
+                        <h4 class="col-12 modal-title text-center" style="padding-top: 10px">Approve Quote</h4>
+                    </div>
+                    <div class="modal-body">
+                    
+                        <div class="row">
+                            <!-- Alert message -->
+                                <div id="alertDiv" style="margin-left: 35px; width: 420px; height: 45px"></div>
+                            
+                        </div>
+                        
+                        <div class="row d-flex justify-content-center">
+                            <p> Are you sure?, You want to approve this quote?</p>
+                        </div>                            
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-info" data-dismiss="modal">Close</button>
+                        <form action="../../controller/customercontroller.php?status=approve_quote" method="POST">
+                            <input type="hidden" name="quotation_id" id="approve-id">
+                            <button name="submit" type="submit" class="btn btn-danger">Approve</button>
+                        </form>
+                    </div>    
+                </div>            
+            </div>
+        </div>
+
+        <!-- reject quote modal -->
+        <div class="modal fade" id="reject-quote" role="dialog">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">     
+                        <h4 class="col-12 modal-title text-center" style="padding-top: 10px">Reject Quote</h4>
+                    </div>
+                    <div class="modal-body">
+                    
+                        <div class="row">
+                            <!-- Alert message -->
+                                <div id="alertDiv" style="margin-left: 35px; width: 420px; height: 45px"></div>
+                            
+                        </div>
+                        
+                        <div class="row d-flex justify-content-center">
+                            <p> Are you sure?, You want to reject this quote?</p>
+                        </div>                            
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-info" data-dismiss="modal">Close</button>
+                        <form action="../../controller/customercontroller.php?status=reject_quote" method="POST">
+                            <input type="hidden" name="quotation_id" id="reject-id">
+                            <button name="submit" type="submit" class="btn btn-danger">Reject</button>
+                        </form>
+                    </div>    
+                </div>            
+            </div>
+        </div>
         
     </body>
 
     <script language="javascript">
 
         $(document).ready(function() {
-            // load_quotations('0','1');
+            load_quotations('0','1');
         });
 
         function load_quotations(page,type) {
@@ -136,6 +295,48 @@
                 'page': page
             });  
         }
+
+        // <!-- send data to modal scripts -->
+        $(document).on("click", "#edit-quote-btn", function () {
+            var id = $(this).data('id');
+            var subject= $(this).data('subject');
+            var requirements= $(this).data('requirements');
+            var remarks= $(this).data('remarks');
+            var status= $(this).data('status');
+            
+            $("#edit-id").val(id);
+            $("#edit-subject").val(subject);
+            $("#edit-remarks").val(remarks);
+            $("#edit-requirements").val(requirements);
+            $("#edit-status").val(status);
+        });
+
+        $(document).on("click", "#view-quote-btn", function () {
+            var subject= $(this).data('subject');
+            var requirements= $(this).data('requirements');
+            var remarks= $(this).data('remarks');
+            var status= $(this).data('status');
+            
+            $("#view-subject").val(subject);
+            $("#view-remarks").val(remarks);
+            $("#view-requirements").val(requirements);
+            $("#view-status").val(status);
+        });
+
+        $(document).on("click", "#approve-quote-btn", function () {
+            var id= $(this).data('id');
+            
+            $("#approve-id").val(id);
+        });
+
+        $(document).on("click", "#reject-quote-btn", function () {
+            var id= $(this).data('id');
+            
+            $("#reject-id").val(id);
+        });
+        // <!-- end of send data to modal scripts -->
+
+
     </script>
     
 </html>
