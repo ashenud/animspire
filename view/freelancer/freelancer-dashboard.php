@@ -11,8 +11,7 @@
 
         <?php
         
-            include '../../../model/freelancer_model.php';
-            
+            include '../../model/freelancer_model.php';
             $freelancerObj = new Freelancer(); /// create feelancer object
 
             $freelancer_id = $_SESSION["freelancer"]["freelancer_id"];
@@ -29,6 +28,21 @@
             <?php
                 include './includes/dashboard-navbar.php';
             ?>
+
+            <div class="profile-info">
+                <img src="../../images/Avatars/freelancer_images/<?php echo $_SESSION["freelancer"]["freelancer_image"]; ?>" alt="Avatar" style="width: 180px; height: 170px">
+                <div class="info">
+                    <h6><b><?php echo $_SESSION["freelancer"]["firstname"]." ".$_SESSION["freelancer"]["lastname"]; ?></b></h6>
+                    <p>Freelancer</p>
+                </div>
+            </div>
+            <div class="welcome-message" style="background-image:url('../../images/user-welcome-msg-bg.png');">
+                <div class="welcome">
+                    <h3><b>Hello,&nbsp; <?php echo $_SESSION["freelancer"]["firstname"]." ".$_SESSION["freelancer"]["lastname"]; ?></b></h3>
+                    <h5>Welcome Home..</h5>
+                </div>
+            </div>
+
         </div>        
         
     </body>

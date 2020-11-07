@@ -1,44 +1,34 @@
 <?php
-    include '../../../commons/session.php';
+    include '../../commons/session.php';
 ?>
 <html>
     <head>        
-        <title>Admin Dashboard</title>
+        <title>Customer Profile</title>
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
-        <link rel='stylesheet' type="text/css" href="../../../css/style-user-profile.css"/>
-        <?php include '../../../includes/dashboard_includes_css.php';?>
-        <?php include '../../../includes/dashboard_includes_script.php'; ?>
+        <link rel='stylesheet' type="text/css" href="../../css/style-user-profile.css"/>
+        <?php include '../../includes/other_dashboard_includes_css.php';?>
+        <?php include '../../includes/other_dashboard_includes_script.php'; ?>
 
         <?php
-            include '../../../model/user_model.php';
             
-            $userObj = new User(); //must need for navbar
-            $adminObj = new Admin(); //must need for navbar
-
-            /* permission check */
-            if(!isset($_SESSION["user"]["role_id"])) {
-                $userObj->checkUser('0');
-            }
-            elseif(($_SESSION["user"]["role_id"]) != 1){
-                $userObj->checkUser($_SESSION["user"]["role_id"]);
-            }
-            /* end permission check */
+            include '../../model/customer_model.php';
+            $customerObj = new Customer(); //must need for navbar
             
-            $user_id = $_REQUEST["user_id"];
-            $user_id = base64_decode($user_id);
-            $userId = base64_encode($user_id);
+            $customer_id = $_REQUEST["customer_id"];
+            $customer_id = base64_decode($customer_id);
+            $customerId = base64_encode($customer_id);
             
             /// get the specific user information
-            $userResult = $userObj->viewUser($user_id);
+            $customerResult = $customerObj->viewCustomer($customer_id);
             ///convert into an assosiative arry
-            $userRow = $userResult->fetch_assoc();
+            $customerRow = $customerResult->fetch_assoc();
         ?>
         
         
     </head>
     
-    <body  style="background-image: url('../../../images/background-image.png');">
+    <body  style="background-image: url('../../images/background-image.png');">
         <div class="cont">
 
             <?php
@@ -47,32 +37,29 @@
                         
             <div class="profile" style="color: #777378">
                 <div class="profile-image">
-                    <img src="../../../images/Avatars/user_images/<?php echo $userRow["user_image"]; ?>" alt="Profile Image" style="height: 180px; width: 180px">
+                    <img src="../../images/Avatars/customer_images/<?php echo $customerRow["customer_image"]; ?>" alt="Profile Image" style="height: 180px; width: 180px">
                 </div>
                 
                 <div class="v1"></div>  <!---Vertical Line-->
                 
                 <div class="name">
-                    <h5><span class="fa fa-fw fa-user" style="padding-right: 35px" ></span><?php echo $userRow["user_fname"]." ".$userRow["user_lname"]; ?></h5>
+                    <h5><span class="fa fa-fw fa-user" style="padding-right: 35px" ></span><?php echo $customerRow["customer_fname"]." ".$customerRow["customer_lname"]; ?></h5>
                 </div>
                 <div class="email">
-                    <h5><span class="fa fa-fw fa-envelope" style="padding-right: 35px"></span><?php echo $userRow["user_email"]; ?></h5>
+                    <h5><span class="fa fa-fw fa-envelope" style="padding-right: 35px"></span><?php echo $customerRow["customer_email"]; ?></h5>
                 </div>
                 <div class="role">
-                    <h5><span class="fa fa-fw fa-briefcase" style="padding-right: 35px"></span><?php echo $userRow["role_name"]; ?></h5>
+                    <h5><span class="fa fa-fw fa-briefcase" style="padding-right: 35px"></span><?php echo $customerRow["customer_country"]; ?></h5>
                 </div>
                 <div class="dob">
-                    <h5><span class="fa fa-fw fa-birthday-cake" style="padding-right: 35px"></span><?php echo $userRow["user_dob"]; ?></h5>
+                    <h5><span class="fa fa-fw fa-birthday-cake" style="padding-right: 35px"></span><?php echo $customerRow["customer_dob"]; ?></h5>
                 </div>
                 <div class="phone">
-                    <h5><span class="fa fa-fw fa-phone" style="padding-right: 35px"></span><?php echo $userRow["user_phone"]; ?></h5>
-                </div>
-                <div class="gender">
-                    <h5><span class="fa fa-fw fa-transgender-alt" style="padding-right: 35px"></span><?php echo $gender=($userRow["user_gender"]==0)?"Male":"Female" ?></h5>
+                    <h5><span class="fa fa-fw fa-phone" style="padding-right: 35px"></span><?php echo $customerRow["customer_phone"]; ?></h5>
                 </div>
                 <hr>
                 <div class="button">
-                    <a href="admin-profile-update.php?user_id=<?php echo base64_encode($userRow["user_id"]); ?>" type="button" class="btn btn-success" style="width: 220px; text-align: center">
+                    <a href="customer-profile-update.php?customer_id=<?php echo base64_encode($customerRow["customer_id"]); ?>" type="button" class="btn btn-success" style="width: 220px; text-align: center">
                         <span class="fa fa-fw fa-user"></span>&nbsp;&nbsp;UPDATE PROFILE</a>&nbsp;&nbsp;&nbsp;
                         <button type="button" data-toggle="modal" data-target="#passwordChangeModal" class="btn btn-danger" style="width: 220px">
                       <span class="fa fa-fw fa-pencil"></span>&nbsp;&nbsp;CHANGE PASSWORD</button>
@@ -86,20 +73,12 @@
                     
         <div class="modal fade" id="passwordChangeModal" role="dialog">
             <div class="modal-dialog">
-                <form action="../../../controller/userlogincontroller.php?status=change_password" method="post" name="pw_change" id="pw_change"> 
+                <form action="../../controller/customercontroller.php?status=change_password" method="post" name="pw_change" id="pw_change"> 
                     <div class="modal-content">
                         <div class="modal-header">
                             <h4 class="col-12 modal-title text-center" style="padding-top: 10px">CHANGE PASSWORD</h4>
                         </div>
                         <div class="modal-body">
-                            
-                            <!-- <div class="row">
-                                Alert message
-                                 <div id="alertDiv" style="margin-left: 35px; width: 420px; height: 45px">
-                                       
-                                    </div>
-                               
-                            </div> -->
                             
                             <div class="row">
                                 <div class="form-group" style="margin-top: 2px; margin-left: 35px; width: 85%">
@@ -118,8 +97,8 @@
                                     <label for="confirm_password">Confirm Password :</label>
                                     <input type="password" class="form-control" id="confirm_pw" name="confirm_pw" placeholder="Confirm New Password" required="required"/>
                                 </div>
-                                <input type="hidden" value="<?php echo $user_id; ?>" id="user_id" name="user_id">
-                                <input type="hidden" value="../view/user/system_admin/admin-profile.php" id="redirect" name="redirect">
+                                <input type="hidden" value="<?php echo $customer_id; ?>" id="customer_id" name="customer_id">
+                                <input type="hidden" value="../view/customer/customer-profile.php" id="redirect" name="redirect">
                             </div>
                         </div>
                         <div class="modal-footer">
@@ -135,6 +114,6 @@
         
     </body>
    
-    <!-- <script //src="../../../js/pw_change_validation.js"></script> -->
+   <!--  <script src="../../../js/pw_change_validation.js"></script> -->
     
 </html>

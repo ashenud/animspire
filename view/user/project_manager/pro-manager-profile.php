@@ -14,7 +14,6 @@
             include '../../../model/user_model.php';
             
             $userObj = new User(); //must need for navbar
-            $adminObj = new Admin(); //must need for navbar
 
             /* permission check */
             if(!isset($_SESSION["user"]["role_id"])) {
@@ -24,14 +23,7 @@
                 $userObj->checkUser($_SESSION["user"]["role_id"]);
             }
             /* end permission check */
-            
-            if(!isset($_REQUEST["user_id"]))
-            {
-                ?>
-                  <script> window.location = "../../../index.php"</script>
-               <?php
-            }
-            
+
             $user_id = $_REQUEST["user_id"];
             $user_id = base64_decode($user_id);
             $userId = base64_encode($user_id);
@@ -101,14 +93,6 @@
                         <div class="modal-body">
                             
                             <div class="row">
-                                <!-- Alert message -->
-                                 <div id="alertDiv" style="margin-left: 35px; width: 420px; height: 45px">
-                                       
-                                    </div>
-                               
-                            </div>
-                            
-                            <div class="row">
                                 <div class="form-group" style="margin-top: 2px; margin-left: 35px; width: 85%">
                                     <label for="current_password">Current Password :</label>
                                     <input type="password" class="form-control" id="current_pw" name="current_pw" placeholder="Enter Current Password" required="required"/>
@@ -142,6 +126,6 @@
         
     </body>
    
-    <script src="../../../js/pw_change_validation.js"></script>
+    <!-- <script src="../../../js/pw_change_validation.js"></script> -->
     
 </html>

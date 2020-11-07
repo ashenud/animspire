@@ -48,6 +48,60 @@ class Customer{
         return $customerLoginId;
     }
 
+    function viewCustomer($customer_id) {
+        $con = $GLOBALS['con'];
+        $sql = "SELECT 
+                    * 
+                FROM 
+                    customer c 
+                WHERE 
+                    c.customer_id = '$customer_id'
+                LIMIT 1";
+        $results = $con->query($sql);
+        return $results;
+    }
+
+    function updateEmailValidation($userId, $email) {
+        $con = $GLOBALS['con'];
+        $sql = "SELECT 1 FROM customer WHERE customer_email = '$email' AND customer_id != '$userId'";
+        $result = $con->query($sql);
+        if($result->num_rows>0)
+        {
+            return false;
+        }
+        else
+        {
+            return true;
+        }
+    }
+
+    function updateCustomer($customerId, $customer_fname, $customer_lname, $customer_email, $customer_dob, $customer_phone, $customer_image, $customer_status) {
+        $con = $GLOBALS['con'];
+        
+        if($customer_image!="defaultImage.png")
+        {
+        $sql = "UPDATE customer SET "
+                . "customer_fname = '$customer_fname',"
+                . "customer_lname = '$customer_lname',"
+                . "customer_email = '$customer_email',"
+                . "customer_dob = '$customer_dob',"
+                . "customer_phone = '$customer_phone',"
+                . "customer_image = '$customer_image'"
+                . "WHERE customer_id = '$customerId'";
+        }
+        else 
+        {
+            $sql = "UPDATE customer SET "
+                . "customer_fname = '$customer_fname',"
+                . "customer_lname = '$customer_lname',"
+                . "customer_email = '$customer_email',"
+                . "customer_dob = '$customer_dob',"
+                . "customer_phone = '$customer_phone'"
+                . "WHERE customer_id = '$customerId'";
+        }
+        $result = $con->query($sql) or die($con->error);
+    }
+
     function requestQuote($customer_id,$subject,$requirements) {
 
         $con = $GLOBALS['con'];
