@@ -1,4 +1,22 @@
 <html>
+
+<?php 
+session_start();
+if(isset($_GET["code"])) {
+    $_SESSION['code']=$_GET["code"];
+}
+
+if(!isset($_SESSION['code'])) {	
+    $msg = "You have no permition";
+    $msg = base64_encode($msg);
+    
+    ?>
+    <script>window.location = "../home.php?msg=<?php echo $msg; ?>" </script>
+    <?php
+}
+?>
+
+
     <head>
         <title>Login Form</title>
         <meta charset="utf-8">
@@ -19,10 +37,10 @@
     
     <body  style="background-image: url('../../images/background-image.png');">
         <div class="cont">
-            <form method="post" action="../../controller/userlogincontroller.php?status=login"  id="user_loginform">
+            <form method="post" action="../../controller/userlogincontroller.php?status=change_froget_password"  id="user_loginform">
               <div class="form">
-                <h3 style="font-size: 45px;"><b>Hello!</b></h3>
-                <p style="font-size: 20px;">Sign in to your account</p>
+                <h3 style="font-size: 35px;"><b>Password Change</b></h3>
+                <p style="font-size: 20px;">Set up new password</p>
                 
                 <!-- Danger message -->
                 <?php
@@ -56,15 +74,15 @@
                 ?>
                 <div class="input-data">
                     <label>
-                        <span>Username:</span>
-                        <input type="text" class="form-control" name="username" id="username" required="required"/>
+                        <span style="margin-left: 65px">New Password:</span>
+                        <input type="password" class="form-control" name="new_password" id="new_password" required="required"/>
                     </label>
                     <label>
-                        <span>Password:</span>
-                        <input type="password" class="form-control" name="password" id="password" required="required"/>
+                        <span style="margin-left: 50px">Confirm Password:</span>
+                        <input type="password" class="form-control" name="confirm_password" id="confirm_password" required="required"/>
                     </label>
-                    <button type="submit" class="btn btn-success" style="width: 220px; margin: 30px 62px 15px 62px">Sign In</button>
-                    <a href="user-forgot-password.php" style="margin-left: 113px">Forgot Password</a>
+                    <button type="submit" name="submit" class="btn btn-success" style="width: 220px; margin: 30px 62px 15px 62px">Save</button>
+                    
                 </div>
                 
             </div>  

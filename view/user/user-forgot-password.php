@@ -15,14 +15,20 @@
         <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
         <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"></script>
         
+        <style>
+            .cont .form{
+                margin-top: 65px;
+            }
+        </style>
+        
     </head>
     
     <body  style="background-image: url('../../images/background-image.png');">
         <div class="cont">
-            <form method="post" action="../../controller/userlogincontroller.php?status=login"  id="user_loginform">
+            <form method="post" action="../../controller/userlogincontroller.php?status=send_code_to_mail"  id="user_loginform">
               <div class="form">
-                <h3 style="font-size: 45px;"><b>Hello!</b></h3>
-                <p style="font-size: 20px;">Sign in to your account</p>
+                <h3 style="font-size: 35px;"><b>Password Recovery</b></h3>
+                <p style="font-size: 20px;">Enter your email</p>
                 
                 <!-- Danger message -->
                 <?php
@@ -56,15 +62,11 @@
                 ?>
                 <div class="input-data">
                     <label>
-                        <span>Username:</span>
-                        <input type="text" class="form-control" name="username" id="username" required="required"/>
+                        <span style="margin-left: 105px">Email:</span>
+                        <input type="email" class="form-control" name="email" id="email" required="required"/>
                     </label>
-                    <label>
-                        <span>Password:</span>
-                        <input type="password" class="form-control" name="password" id="password" required="required"/>
-                    </label>
-                    <button type="submit" class="btn btn-success" style="width: 220px; margin: 30px 62px 15px 62px">Sign In</button>
-                    <a href="user-forgot-password.php" style="margin-left: 113px">Forgot Password</a>
+                    
+                    <button type="submit" class="btn btn-success" style="width: 220px; margin: 30px 62px 15px 62px">Send</button>
                 </div>
                 
             </div>  
