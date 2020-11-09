@@ -31,7 +31,7 @@
             include '../../../model/user_model.php';
             
             $userObj = new User(); //must need for navbar
-            $projectManagerObj = new ProjectManager(); //must need for navbar
+            $marketingManagerObj = new MarketingManager(); //must need for navbar
             /* permission check */
             if(!isset($_SESSION["user"]["role_id"])) {
                 $userObj->checkUser('0');
@@ -163,6 +163,152 @@
             
             </div>
         </div>
+
+        <!-- payment modal1 (view only) -->
+        <div class="modal fade" id="payment1" role="dialog">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">     
+                        <h4 class="col-12 modal-title text-center" style="padding-top: 10px">Payment Request</h4>
+                    </div>
+                    <div class="modal-body">
+
+                        <!-- <div class="row">
+                            <button type="submit" name="view-quote" class="btn btn-info btn-sm" style="width: 90px; padding: 4px; text-align: center; margin-left: 370px">
+                            View Quote
+                            </button>
+                        </div> -->
+                        
+                        <div class="row">
+                            <div class="form-group" style="margin-left: 35px; width: 40%">
+                                <label for="date1">Date :</label>
+                                <input type="date" name="date1" class="form-control" id="date1" disabled/>
+                            </div>
+                            <div class="form-group" style="margin-left: 25px; width: 40%">
+                                <label for="customer1">Customer :</label>
+                                <input type="text" class="form-control" id="customer1"  name="customer1" disabled>
+                            </div>
+                        </div>
+                        
+                        <div class="row">
+                            <div class="form-group" style="margin-top: 8px; margin-left: 35px; width: 85%">
+                                <label for="description1">Description</label>
+                                <textarea class="form-control" rows="3" cols="30" id="description1" name="description1" disabled></textarea>
+                            </div>
+                        </div> 
+                        <div class="row">
+                            <div class="form-group" style="margin-left: 35px; width: 40%">
+                                <img src="../../../images/icons/unpaid.png" style=" height: 60px; width: 120px; margin: 10px 20px 10px 20px;">
+                            </div>
+                            <div class="form-group" style="margin-left: 25px; width: 40%">
+                                <label for="total1">Total :</label>
+                                <input type="text" class="form-control" id="total1"  name="total1" disabled>
+                            </div>
+                        </div>
+                    </div>    
+                </div>
+            </div>
+        </div>
+
+        <!-- payment modal2 (view only) -->
+        <div class="modal fade" id="payment2" role="dialog">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">     
+                        <h4 class="col-12 modal-title text-center" style="padding-top: 10px">Payment Request</h4>
+                    </div>
+                    <div class="modal-body">
+
+                        <!-- <div class="row">
+                            <button type="submit" name="view-quote" class="btn btn-info btn-sm" style="width: 90px; padding: 4px; text-align: center; margin-left: 370px">
+                            View Quote
+                            </button>
+                        </div> -->
+                        
+                        <div class="row">
+                            <div class="form-group" style="margin-left: 35px; width: 40%">
+                                <label for="date2">Date :</label>
+                                <input type="date2" name="date2" class="form-control" id="date2" disabled>
+                            </div>
+                            <div class="form-group" style="margin-left: 25px; width: 40%">
+                                <label for="customer2">Customer :</label>
+                                <input type="text" class="form-control" id="customer2"  name="customer2" disabled>
+                            </div>
+                        </div>
+                        
+                        <div class="row">
+                            <div class="form-group" style="margin-top: 8px; margin-left: 35px; width: 85%">
+                                <label for="description2">Description</label>
+                                <textarea class="form-control" rows="3" cols="30" id="description2" name="description2" disabled></textarea>
+                            </div>
+                        </div> 
+                        <div class="row">
+                            <div class="form-group" style="margin-left: 35px; width: 40%">
+                                <img src="../../../images/icons/unpaid.png" style=" height: 60px; width: 120px; margin: 10px 20px 10px 20px;">
+                            </div>
+                            <div class="form-group" style="margin-left: 25px; width: 40%">
+                                <label for="total2">Total :</label>
+                                <input type="text" class="form-control" id="total2"  name="total2" disabled>
+                            </div>
+                        </div>
+                    </div>    
+                </div>
+            </div>
+        </div>
+
+        <!-- payment modal3 (request payment) -->
+        <div class="modal fade" id="payment3" role="dialog">
+            <div class="modal-dialog">
+                <form action="../../../controller/marketingManagerController.php?status=payment_request" method="POST"> 
+                    <div class="modal-content">
+                        <div class="modal-header">     
+                            <h4 class="col-12 modal-title text-center" style="padding-top: 10px">Payment Request</h4>
+                        </div>
+                        <div class="modal-body">
+
+                            <!-- <div class="row">
+                                <button type="submit" name="view-quote" class="btn btn-info btn-sm" style="width: 90px; padding: 4px; text-align: center; margin-left: 370px">
+                                View Quote
+                                </button>
+                            </div> -->
+                            
+                            <div class="row">
+                                <div class="form-group" style="margin-left: 35px; width: 40%">
+                                  <label for="date3">Date :</label>
+                                  <input type="date" name="date" class="form-control" id="date" value="<?php echo date('Y-m-d')?>" disabled/>
+                                </div>
+                                <div class="form-group" style="margin-left: 25px; width: 40%">
+                                  <label for="customer">Customer :</label>
+                                  <input type="text" class="form-control" id="customer"  name="customer" disabled>
+                                </div>
+                            </div>
+                            
+                            <div class="row">
+                                <div class="form-group" style="margin-top: 8px; margin-left: 35px; width: 85%">
+                                    <label for="description">Description</label>
+                                    <textarea class="form-control" rows="3" cols="30" id="description" name="description" required></textarea>
+                                </div>
+                            </div> 
+                            <div class="row">
+                                <div class="form-group" style="margin-left: 35px; width: 40%">
+                                    <img src="../../../images/icons/unpaid.png" style=" height: 60px; width: 120px; margin: 10px 20px 10px 20px;">
+                                </div>
+                                <div class="form-group" style="margin-left: 25px; width: 40%">
+                                  <label for="total">Total :</label>
+                                  <input type="number" class="form-control" min="0" id="total"  name="total" required>
+                                </div>
+                            </div>
+                            <div class="modal-footer">
+                                <input type="hidden" name="quote_id" id="quote_id">
+                                <input type="hidden" name="customer_id" id="customer_id">
+                                <button type="submit" name="submit" class="btn btn-success" style="width: 200px; text-align: center; margin-right: 135px">
+                                Request Payment</button>
+                            </div>
+                        </div>    
+                    </div>
+                </form>
+            </div>
+        </div>
         
     </body>
 
@@ -202,6 +348,40 @@
             
             $("#send-id").val(id);
             $("#send-remarks").val(remarks);
+        });
+
+        $(document).on("click", "#payment-btn1", function () {
+            var customer1= $(this).data('name');
+            var date1= $(this).data('date');
+            var description1= $(this).data('description');
+            var total1= $(this).data('total');
+            
+            $("#customer1").val(customer1);
+            $("#date1").val(date1);
+            $("#description1").val(description1);
+            $("#total1").val(total1);
+        });
+
+        $(document).on("click", "#payment-btn2", function () {
+            var customer2= $(this).data('name');
+            var date2= $(this).data('date');
+            var description2= $(this).data('description');
+            var total2= $(this).data('total');
+            
+            $("#customer2").val(customer2);
+            $("#date2").val(date2);
+            $("#description2").val(description2);
+            $("#total2").val(total2);
+        });
+
+        $(document).on("click", "#payment-btn3", function () {
+            var customer= $(this).data('name');
+            var customerID= $(this).data('customer');
+            var quoteID= $(this).data('id');
+            
+            $("#customer").val(customer);
+            $("#customer_id").val(customerID);
+            $("#quote_id").val(quoteID);
         });
         // <!-- end of send data to modal scripts -->
 

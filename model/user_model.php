@@ -38,8 +38,7 @@ class User{
         return $userId;
     }
     
-    function addUserLogin($user_login_username, $user_login_password, $user_id, $user_login_status)
-    {
+    function addUserLogin($user_login_username, $user_login_password, $user_id, $user_login_status) {
         $con = $GLOBALS['con'];
         $sql = "INSERT INTO user_login(user_login_username, user_login_password, user_id, user_login_status)
                VALUES('$user_login_username', '$user_login_password', '$user_id', '1')";
@@ -458,7 +457,7 @@ class Admin {
     }
 }
 
-class ProjectManager {
+class MarketingManager {
 
     function getQuoteForStatus($status) {
 
@@ -486,6 +485,31 @@ class ProjectManager {
 
         return $results;
     }
+    
+    function getPaymentForQuoteId($id) {
+
+        $con = $GLOBALS['con'];
+        $sql = "SELECT 
+                    p.payment_id,
+                    p.quotation_id,
+                    CONCAT(c.customer_fname, ' ', c.customer_lname) AS name,
+                    p.payment_description,
+                    p.amount,
+                    p.paid_amount,
+                    DATE(p.requested_date) AS requested_date,
+                    IFNULL(DATE(p.paid_date),'-') AS paid_date,
+                    p.status
+                FROM 
+                    payment p
+                        INNER JOIN
+                    customer c ON c.customer_id = p.customer_id
+                WHERE
+                    p.quotation_id = '$id'
+                LIMIT 1";
+        $results = $con->query($sql);
+
+        return $results;
+    }
 
     function sendQuote($quotation_id,$remarks) {
 
@@ -497,6 +521,25 @@ class ProjectManager {
                     status = 2
                 WHERE
                     quotation_id = '$quotation_id'";
+        $results = $con->query($sql);
+
+        if ($results) {
+            return 1;
+        }
+        else {
+            return 0;
+        }
+
+    }
+
+    function requestPayment($quote_id,$customer_id,$description,$total) {
+
+        $con = $GLOBALS['con'];
+        $sql = "INSERT INTO
+                    payment
+                    (quotation_id,customer_id,payment_description,amount)
+                VALUE
+                    ('$quote_id', '$customer_id', '$description', '$total')";
         $results = $con->query($sql);
 
         if ($results) {

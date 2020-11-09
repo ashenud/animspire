@@ -29,8 +29,6 @@ class customerLogin{
         return $results;
     }
 
-    
-
     public function updateFrogetPassword($email, $newPw) {
         $con = $GLOBALS['con'];
         $sql = "UPDATE customer_login SET customer_login_password = '$newPw' WHERE customer_login_username = '$email'";

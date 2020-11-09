@@ -16,7 +16,7 @@
          
             include '../../../model/user_model.php';
             $userObj = new User(); //must need for navbar
-            $projectManagerObj = new ProjectManager(); //must need for navbar
+            $marketingManagerObj = new MarketingManager(); //must need for navbar
 
             /* permission check */
             if(!isset($_SESSION["user"]["role_id"])) {

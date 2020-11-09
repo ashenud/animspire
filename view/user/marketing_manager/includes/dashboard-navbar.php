@@ -136,7 +136,7 @@
     <div class="dropdown">
         <button id="notiyf-menu" class="dropdown-toggle notify-btn" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
             <?php
-                $qouteCount = $projectManagerObj->qouteCount()->num_rows;
+                $qouteCount = $marketingManagerObj->qouteCount()->num_rows;
                 if(0<$qouteCount && $qouteCount<5) {
                     echo "<span class='badge badge-danger msg-label'>";
                     echo $qouteCount;

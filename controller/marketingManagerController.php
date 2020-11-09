@@ -3,7 +3,7 @@
     include '../model/user_model.php';
     
     $userObj = new User();
-    $projectManagerObj = new ProjectManager();
+    $marketingManagerObj = new MarketingManager();
     
     $status = $_REQUEST["status"];
 
@@ -45,7 +45,7 @@
             $quotation_id = $_REQUEST["quotation_id"];
             $remarks = $_REQUEST["remarks"];
             
-            $result = $projectManagerObj->sendQuote($quotation_id,$remarks);
+            $result = $marketingManagerObj->sendQuote($quotation_id,$remarks);
     
             if ($result == 1) {
     
@@ -60,6 +60,38 @@
             }
             else {
                 $msg = "Quotation not Send!";
+                $msg = base64_encode($msg);
+                $chat_id = base64_encode($receiver_id);
+                
+                ?>
+                    <script>window.location = "../view/user/marketing_manager/marketing-manager-quotations.php?msg=<?php echo $msg; ?>" </script>  
+                <?php
+            }
+            
+        break;
+    
+        case "payment_request":
+    
+            $quote_id = $_REQUEST["quote_id"];
+            $customer_id = $_REQUEST["customer_id"];
+            $description = $_REQUEST["description"];
+            $total = $_REQUEST["total"];
+            
+            $result = $marketingManagerObj->requestPayment($quote_id,$customer_id,$description,$total);
+    
+            if ($result == 1) {
+    
+                $msgSuccess = "Payment Request Successfully Send!";
+                $msgSuccess = base64_encode($msgSuccess);
+                $chat_id = base64_encode($receiver_id);
+                
+                ?>
+                    <script>window.location = "../view/user/marketing_manager/marketing-manager-quotations.php?msgSuccess=<?php echo $msgSuccess; ?>" </script>  
+                <?php
+    
+            }
+            else {
+                $msg = "Payment Request not Send!";
                 $msg = base64_encode($msg);
                 $chat_id = base64_encode($receiver_id);
                 

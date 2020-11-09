@@ -3,14 +3,14 @@
 include '../../../../commons/session.php';
 include '../../../../model/user_model.php';
 
-$projectManagerObj = new ProjectManager();
+$marketingManagerObj = new MarketingManager();
 
 $status ="";
 if ($_REQUEST['status'] != "") {
     $status = "AND q.status = '".$_REQUEST['status']."'";
 }
 
-$quotations = $projectManagerObj->getQuoteForStatus($status);
+$quotations = $marketingManagerObj->getQuoteForStatus($status);
 
 if(isset($_SESSION["user"])) {
 ?>
@@ -45,6 +45,44 @@ if(isset($_SESSION["user"])) {
                         </div>
                     </td>
                     <?php
+                }
+                elseif($quotation["status_id"] == 3) {
+
+                    $payment_data = $marketingManagerObj->getPaymentForQuoteId($quotation["quotation_id"]);
+                    $payment = $payment_data->fetch_assoc();
+                    
+                    if($payment_data->num_rows > 0) {
+                        if($payment['status'] == 1) {
+                            ?>
+                            <td>
+                                <div class="btn-group d-flex">
+                                    <button type="button" id='view-quote-btn' href='#view-quote' data-toggle='modal' data-subject='<?php echo $quotation["subject"];?>' data-requirements='<?php echo $quotation["requirements"];?>' data-remarks='<?php echo $quotation["remarks"];?>' data-status='<?php echo $quotation["status"];?>' class="btn btn-info btn-sm" style="padding: 0; margin: 2px; width: 35px;" ><i class="far fa-eye" style="font-size: 18px" ></i></button>
+                                    <button type="button" id='payment-btn1' href='#payment1' data-toggle='modal' data-name='<?php echo $payment["name"];?>' data-date='<?php echo $payment["requested_date"];?>' data-description='<?php echo $payment["payment_description"];?>' data-total='<?php echo $payment["amount"];?>' class="btn btn-warning btn-sm" style="padding: 0; margin: 2px; width: 35px;" ><i class="fas fa-dollar-sign" style="font-size: 18px; color: white" ></i></button>
+                                </div>
+                            </td>
+                            <?php
+                        }
+                        else {
+                            ?>
+                            <td>
+                                <div class="btn-group d-flex">
+                                    <button type="button" id='view-quote-btn' href='#view-quote' data-toggle='modal' data-subject='<?php echo $quotation["subject"];?>' data-requirements='<?php echo $quotation["requirements"];?>' data-remarks='<?php echo $quotation["remarks"];?>' data-status='<?php echo $quotation["status"];?>' class="btn btn-info btn-sm" style="padding: 0; margin: 2px; width: 35px;" ><i class="far fa-eye" style="font-size: 18px" ></i></button>
+                                    <button type="button" id='payment-btn2' href='#payment2' data-toggle='modal' data-name='<?php echo $payment["name"];?>' data-date='<?php echo $payment["paid_date"];?>' data-description='<?php echo $payment["payment_description"];?>' data-total='<?php echo $payment["paid_amount"];?>' class="btn btn-warning btn-sm" style="padding: 0; margin: 2px; width: 35px;" ><i class="fas fa-dollar-sign" style="font-size: 18px; color: white" ></i></button>
+                                </div>
+                            </td>
+                            <?php
+                        }
+                    }
+                    else {
+                        ?>
+                        <td>
+                            <div class="btn-group d-flex">
+                                <button type="button" id='view-quote-btn' href='#view-quote' data-toggle='modal' data-subject='<?php echo $quotation["subject"];?>' data-requirements='<?php echo $quotation["requirements"];?>' data-remarks='<?php echo $quotation["remarks"];?>' data-status='<?php echo $quotation["status"];?>' class="btn btn-info btn-sm" style="padding: 0; margin: 2px; width: 35px;" ><i class="far fa-eye" style="font-size: 18px" ></i></button>
+                                <button type="button" id='payment-btn3' href='#payment3' data-toggle='modal' data-id='<?php echo $quotation["quotation_id"];?>' data-customer='<?php echo $quotation["customer_id"];?>' data-name='<?php echo $quotation["name"];?>' class="btn btn-danger btn-sm" style="padding: 0; margin: 2px; width: 35px;" ><i class="fas fa-dollar-sign" style="font-size: 18px; color: white" ></i></button>
+                            </div>
+                        </td>
+                        <?php
+                    }
                 }
                 else {
                     ?>
