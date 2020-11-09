@@ -222,7 +222,7 @@
     case "change_froget_password":
 
         if(!isset($_SESSION['code'])) {
-            exit("සබැඳිය කල් ඉකුත් වී ඇත");
+            exit("Link Has Expired");
         }
         
         $code=$_SESSION['code'];
@@ -230,7 +230,7 @@
         $result = $userLoginObj->checkResetCode($code);
         
         if($result->num_rows == 0) {
-            exit("සබැඳිය කල් ඉකුත් වී ඇත");
+            exit("Link Has Expired");
         }
         
         if(isset($_POST['submit'])) {

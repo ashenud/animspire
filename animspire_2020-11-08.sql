@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 192.168.1.101
--- Generation Time: Nov 06, 2020 at 12:48 AM
+-- Generation Time: Nov 08, 2020 at 04:30 AM
 -- Server version: 10.4.15-MariaDB-1:10.4.15+maria~bionic-log
 -- PHP Version: 7.4.11
 
@@ -49,7 +49,8 @@ INSERT INTO `backup_details` (`backup_id`, `user_id`, `backup_reference`, `descr
 (7, 1, 776526063494, 'Backup done by Damith Menaka', '2020-10-29 23:31:11'),
 (8, 1, 676554783591, 'Backup done by Damith Menaka', '2020-10-30 10:24:00'),
 (9, 5, 483154468334, 'Backup done by Kashun Thilina', '2020-10-31 20:41:09'),
-(10, 5, 308452327334, 'Backup done by Kashun Thilina', '2020-10-31 20:43:00');
+(10, 5, 308452327334, 'Backup done by Kashun Thilina', '2020-10-31 20:43:00'),
+(11, 1, 891183605949, 'Backup done by Damith Menaka', '2020-11-05 19:21:16');
 
 -- --------------------------------------------------------
 
@@ -137,7 +138,7 @@ CREATE TABLE `customer` (
 --
 
 INSERT INTO `customer` (`customer_id`, `customer_fname`, `customer_lname`, `customer_email`, `customer_country`, `customer_dob`, `customer_gender`, `customer_phone`, `customer_image`, `customer_create_date`, `customer_update_date`, `customer_status`) VALUES
-(2, 'Dhanushka', 'Lakshan', 'dhanushka.lakshan@gmail.com', 'Sri Lanka', '1994-05-25', 0, '+94778965925', 'defaultImage.png', '2020-07-01 19:04:31', '2020-11-04 16:17:26', 1),
+(2, 'Dhanushka', 'Lakshan', 'dhanushka.lakshan@gmail.com', 'Sri Lanka', '1994-05-25', 0, '0778965925', '1604780980_profile-pic.png', '2020-07-01 19:04:31', '2020-11-07 20:29:40', 1),
 (3, 'Ashan', 'Gunawardena', 'ashan.guna@gmail.com', 'Sri Lanka', '1994-06-27', 0, '5555555', 'defaultImage.png', '2020-07-02 17:19:48', '2020-11-04 16:17:30', 1),
 (4, 'Kasun', 'Gayantha', 'kasun@gmail.com', 'Sri Lanka', '1990-05-10', 0, '+94786958654', 'defaultImage.png', '2020-07-02 21:16:06', '2020-11-04 16:17:34', 1),
 (5, 'Lasith', 'De Silva', 'lasith.de@gmail.com', 'Sri Lanka', '1991-06-25', 0, '+94775698425', 'defaultImage.png', '2020-07-03 17:45:47', '2020-11-04 16:17:39', 1),
@@ -194,7 +195,7 @@ CREATE TABLE `freelancer` (
 --
 
 INSERT INTO `freelancer` (`freelancer_id`, `freelancer_fname`, `freelancer_lname`, `freelancer_email`, `freelancer_country`, `freelancer_dob`, `freelancer_gender`, `freelancer_phone`, `freelancer_image`, `freelancer_create_date`, `freelancer_update_date`, `freelancer_status`) VALUES
-(1, 'Imesha', 'De Silva', 'imesha.desilva@gmail.com', 'Sri Lanka', '1988-10-25', 1, '0776592630', '1595922420_F7.png', '2020-07-28 13:17:00', '2020-07-28 07:47:00', 1),
+(1, 'Imesha', 'De Silva', 'imesha.desilva@gmail.com', 'Sri Lanka', '1988-10-25', 1, '0776592630', '1604782839_1596442575_F8.png', '2020-07-28 13:17:00', '2020-11-07 21:00:39', 1),
 (2, 'Ashen', 'Udithamal', 'udithamal.lk@gmail.com', 'Sri Lanka', '1995-03-16', 0, '0712758810', '1604143768_K8.jpg', '2020-10-31 16:59:28', '2020-10-31 11:29:28', 1),
 (3, 'Samith', 'Perera', 'samith@gmail.com', 'Sri Lanka', '1995-10-04', 0, '0712758813', '1604176625_profile-pic.png', '2020-11-01 02:07:05', '2020-10-31 20:37:05', 1);
 
@@ -251,6 +252,18 @@ INSERT INTO `quotations` (`quotation_id`, `customer_id`, `subject`, `requirement
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `reset_password`
+--
+
+CREATE TABLE `reset_password` (
+  `reset_id` int(3) DEFAULT NULL,
+  `reset_code` varchar(100) DEFAULT NULL,
+  `reset_email` varchar(50) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `user`
 --
 
@@ -274,7 +287,7 @@ CREATE TABLE `user` (
 --
 
 INSERT INTO `user` (`user_id`, `user_fname`, `user_lname`, `user_email`, `user_role`, `user_dob`, `user_gender`, `user_phone`, `user_image`, `user_create_date`, `user_update_date`, `user_status`) VALUES
-(1, 'Damith', 'Menaka', 'damith@gmail.com', '1', '1997-08-09', 0, '0712974466', '1604014460_K8.jpg', '2020-06-26 14:54:39', '2020-11-01 13:58:27', 1),
+(1, 'Damith', 'Menaka', 'damith@gmail.com', '1', '1997-08-09', 0, '0712974466', '1604014460_K8.jpg', '2020-06-26 14:54:39', '2020-11-07 22:55:40', 1),
 (2, 'Yuresh', 'Yasintha', 'yuresh@gmail.com', '2', '1997-12-03', 0, '0758996325', '1596361541_M1.png', '2020-07-03 12:06:02', '2020-11-01 14:01:17', 1),
 (3, 'Rushan', 'Tharanga', 'rushan.tharanga@gmail.com', '3', '1991-06-15', 0, '0776859696', '1595930399_M3.png', '2020-07-28 15:29:59', '2020-11-01 14:30:13', 1),
 (4, 'Madumika', 'Vithange', 'madumika.v@gmail.com', '4', '1994-02-09', 1, '0756665544', '1596442575_F8.png', '2020-08-03 13:46:15', '2020-11-01 14:23:35', 1),
@@ -438,7 +451,7 @@ ALTER TABLE `user_role`
 -- AUTO_INCREMENT for table `backup_details`
 --
 ALTER TABLE `backup_details`
-  MODIFY `backup_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
+  MODIFY `backup_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
 
 --
 -- AUTO_INCREMENT for table `communication`
