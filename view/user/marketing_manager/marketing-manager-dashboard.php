@@ -3,6 +3,7 @@
 ?>
 <html>
     <head>
+
         <title>Marketing Manager Dashboard</title>
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -14,7 +15,7 @@
             include '../../../model/user_model.php';
                 
             $userObj = new User(); //must need for navbar
-            $marketingManager = new MarketingManager(); //must need for navbar
+            $marketingManagerObj = new MarketingManager(); //must need for navbar
 
             /* permission check */
             if(!isset($_SESSION["user"]["role_id"])) {
@@ -24,8 +25,6 @@
                 $userObj->checkUser($_SESSION["user"]["role_id"]);
             }
             /* end permission check */
-
-            $userRoleResult = $userObj->getAllUsers();
             
             $userId = $_SESSION["user"]["user_id"];
             $userId = base64_encode($userId);

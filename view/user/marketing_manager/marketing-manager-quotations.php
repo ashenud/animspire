@@ -77,7 +77,7 @@
                <div>
                     <div class="col-md-12">&nbsp;</div>
                 </div>
-               <div align="center" id="loading_div" class="scroll mt-3" style="overflow-y:scroll;"> </div>  
+                <div align="center" id="loading_div" class="scroll mt-3" style="overflow-y:scroll;"> </div>  
             </div>
             
         </div>
@@ -244,7 +244,7 @@
                         </div> 
                         <div class="row">
                             <div class="form-group" style="margin-left: 35px; width: 40%">
-                                <img src="../../../images/icons/unpaid.png" style=" height: 60px; width: 120px; margin: 10px 20px 10px 20px;">
+                                <img src="../../../images/icons/paid.png" style=" height: 60px; width: 120px; margin: 10px 20px 10px 20px;">
                             </div>
                             <div class="form-group" style="margin-left: 25px; width: 40%">
                                 <label for="total2">Total :</label>

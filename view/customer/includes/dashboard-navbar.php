@@ -118,9 +118,9 @@
     <hr>
     <a href="./customer-quotations.php"><i class="fas fa-file-invoice"></i><br>Quotations</a>
     <hr>
-    <a href="#services"><i class="fas fa-file-invoice-dollar"></i><br>Payments</a>
+    <a href="./customer-payments.php"><i class="fas fa-file-invoice-dollar"></i><br>Payments</a>
     <hr>
-    <a href="#clients"><i class="fas fa-laptop"></i><br>Projects</a>
+    <a href="./customer-projects.php"><i class="fas fa-laptop"></i><br>Projects</a>
     <hr>
     <a href="#contact"><i class="fa fa-fw fa-wrench"></i><br>Reports</a>
     <hr>
@@ -135,13 +135,18 @@
     <div class="dropdown">
         <button id="notiyf-menu" class="dropdown-toggle notify-btn" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
             <?php
-                $qouteCount = $customerObj->qouteCount()->num_rows;
-                if(0<$qouteCount && $qouteCount<5) {
+
+                $notifyCount = 0;
+                $paymentReqCount = $customerObj->paymentReqCount($_SESSION["customer"]["customer_id"])->num_rows;
+                $qouteCount = $customerObj->qouteCount($_SESSION["customer"]["customer_id"])->num_rows;
+                $notifyCount = $paymentReqCount + $qouteCount;
+
+                if(0<$notifyCount && $notifyCount<5) {
                     echo "<span class='badge badge-danger msg-label'>";
-                    echo $qouteCount;
+                    echo $notifyCount;
                     echo "</span>";
                 }
-                else if($qouteCount>=5) {
+                else if($notifyCount>=5) {
                     echo "<span class='badge badge-danger msg-label'>";
                     echo "5+";
                     echo "</span>";
@@ -154,6 +159,11 @@
                 if ($qouteCount > 0) {
                     ?>
                         <a class="dropdown-item" href="./customer-quotations.php">View Quotations</a>
+                    <?php
+                }
+                if ($paymentReqCount > 0) {
+                    ?>
+                        <a class="dropdown-item" href="./customer-payments.php">View Payments</a>
                     <?php
                 }
                 else {

@@ -416,5 +416,35 @@ if(isset($_REQUEST["status"]))
             }
             
         break;
+
+        case "settle_payment":
+    
+            $payment_id = $_REQUEST["payment_id"];
+            $total = $_REQUEST["total"];
+            
+            $result = $customerObj->settlePayment($payment_id,$total);
+    
+            if ($result == 1) {
+    
+                $msgSuccess = "Payment Settled Successfully !";
+                $msgSuccess = base64_encode($msgSuccess);
+                $chat_id = base64_encode($receiver_id);
+                
+                ?>
+                    <script>window.location = "../view/customer/customer-payments.php?msgSuccess=<?php echo $msgSuccess; ?>" </script>  
+                <?php
+    
+            }
+            else {
+                $msg = "Payment not Settled!";
+                $msg = base64_encode($msg);
+                $chat_id = base64_encode($receiver_id);
+                
+                ?>
+                    <script>window.location = "../view/customer/customer-payments.php?msg=<?php echo $msg; ?>" </script>  
+                <?php
+            }
+            
+        break;
     }
 }

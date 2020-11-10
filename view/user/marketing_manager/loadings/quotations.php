@@ -67,7 +67,7 @@ if(isset($_SESSION["user"])) {
                             <td>
                                 <div class="btn-group d-flex">
                                     <button type="button" id='view-quote-btn' href='#view-quote' data-toggle='modal' data-subject='<?php echo $quotation["subject"];?>' data-requirements='<?php echo $quotation["requirements"];?>' data-remarks='<?php echo $quotation["remarks"];?>' data-status='<?php echo $quotation["status"];?>' class="btn btn-info btn-sm" style="padding: 0; margin: 2px; width: 35px;" ><i class="far fa-eye" style="font-size: 18px" ></i></button>
-                                    <button type="button" id='payment-btn2' href='#payment2' data-toggle='modal' data-name='<?php echo $payment["name"];?>' data-date='<?php echo $payment["paid_date"];?>' data-description='<?php echo $payment["payment_description"];?>' data-total='<?php echo $payment["paid_amount"];?>' class="btn btn-warning btn-sm" style="padding: 0; margin: 2px; width: 35px;" ><i class="fas fa-dollar-sign" style="font-size: 18px; color: white" ></i></button>
+                                    <button type="button" id='payment-btn2' href='#payment2' data-toggle='modal' data-name='<?php echo $payment["name"];?>' data-date='<?php echo $payment["paid_date"];?>' data-description='<?php echo $payment["payment_description"];?>' data-total='<?php echo $payment["paid_amount"];?>' class="btn btn-success btn-sm" style="padding: 0; margin: 2px; width: 35px;" ><i class="fas fa-dollar-sign" style="font-size: 18px; color: white" ></i></button>
                                 </div>
                             </td>
                             <?php

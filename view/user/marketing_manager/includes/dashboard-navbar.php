@@ -118,7 +118,7 @@
     <!--- Marketing Manager functions  --->
     <a href="./marketing-manager-quotations.php"><i class="fa fa-fw fa-clipboard-list"></i><br>Quotation</a>
     <hr>
-    <a href="./marketing-manager-marketing-management.php"><i class="fa fa-fw fa-user"></i><br>Clients</a>
+    <a href="./marketing-manager-client-management.php"><i class="fa fa-fw fa-user"></i><br>Clients</a>
     <hr>
     <a href="./marketing-manager-report.php"><i class="fa fa-fw fa-file-alt"></i><br>Reports</a>
     <hr>

@@ -208,7 +208,7 @@ class Customer{
         return $results;
     }
 
-    function qouteCount() {
+    function qouteCount($customer_id) {
 
         $con = $GLOBALS['con'];
         $sql = "SELECT 
@@ -216,11 +216,106 @@ class Customer{
                 FROM 
                     quotations
                 WHERE
-                    status = 2";
+                    status = 2
+                    AND customer_id = '$customer_id'";
         $results = $con->query($sql);
         
         return $results;       
 
     }
+
+    function paymentReqCount($customer_id) {
+
+        $con = $GLOBALS['con'];
+        $sql = "SELECT 
+                    payment_id 
+                FROM 
+                    payment
+                WHERE
+                    status = 1
+                    AND customer_id = '$customer_id'";
+        $results = $con->query($sql);
+        
+        return $results;       
+
+    }
+
+    function getPaymentDetails($customer_id) {
+
+        $con = $GLOBALS['con'];
+        $sql = "SELECT 
+                    p.payment_id,
+                    p.quotation_id,
+                    CONCAT(c.customer_fname, ' ', c.customer_lname) AS name,
+                    p.payment_description,
+                    p.amount,
+                    p.paid_amount,
+                    p.payment_method,
+                    DATE(p.requested_date) AS requested_date,
+                    IFNULL(DATE(p.paid_date),'-') AS paid_date,
+                    p.status
+                FROM 
+                    payment p
+                        INNER JOIN
+                    customer c ON c.customer_id = p.customer_id
+                WHERE
+                    p.customer_id = '$customer_id'";
+        $results = $con->query($sql);
+
+        return $results;
+    }
+    
+    function getQuoteForPaymentId($id) {
+
+        $con = $GLOBALS['con'];
+        $sql = "SELECT
+                    q.quotation_id,
+                    c.customer_id,
+                    CONCAT(c.customer_fname, ' ', c.customer_lname) AS name,
+                    q.subject,
+                    q.requirements,
+                    IFNULL(q.remarks,'') AS remarks,
+                    q.status AS status_id,
+                    IF(q.status=1,'Pending',
+                    IF(q.status=2,'Submitted',
+                        IF(q.status=3, 'Approved',
+                        IF(q.status=4, 'Rejected','')))) AS status
+                FROM
+                    quotations q
+                        INNER JOIN
+                    customer c ON c.customer_id = q.customer_id
+                        INNER JOIN
+                    payment p ON p.quotation_id = q.quotation_id
+                WHERE
+                    p.payment_id = '$id'
+                LIMIT 1";
+        $results = $con->query($sql);
+
+        return $results;
+    }
+
+    function settlePayment($payment_id,$total) {
+
+        $con = $GLOBALS['con'];
+        $sql = "UPDATE
+                    payment
+                SET
+                    paid_amount = '$total',
+                    payment_method = 'PayPal',
+                    paid_date = now(),
+                    status = 2
+                WHERE
+                    payment_id = '$payment_id'";
+        $results = $con->query($sql);
+
+        if ($results) {
+            return 1;
+        }
+        else {
+            return 0;
+        }
+
+    }
+
     
 }
