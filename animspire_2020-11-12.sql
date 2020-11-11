@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 192.168.1.101
--- Generation Time: Nov 08, 2020 at 04:30 AM
+-- Generation Time: Nov 12, 2020 at 12:48 AM
 -- Server version: 10.4.15-MariaDB-1:10.4.15+maria~bionic-log
 -- PHP Version: 7.4.11
 
@@ -225,6 +225,34 @@ INSERT INTO `freelancer_login` (`freelancer_login_id`, `freelancer_login_usernam
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `payment`
+--
+
+CREATE TABLE `payment` (
+  `payment_id` int(11) NOT NULL,
+  `quotation_id` int(11) NOT NULL,
+  `customer_id` int(11) NOT NULL,
+  `payment_description` varchar(1000) NOT NULL,
+  `amount` decimal(10,2) NOT NULL,
+  `paid_amount` decimal(10,2) NOT NULL DEFAULT 0.00,
+  `payment_method` varchar(30) DEFAULT NULL,
+  `requested_date` timestamp NOT NULL DEFAULT current_timestamp(),
+  `paid_date` timestamp NULL DEFAULT NULL,
+  `status` int(2) NOT NULL DEFAULT 1 COMMENT '1-requested, 2-paid'
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `payment`
+--
+
+INSERT INTO `payment` (`payment_id`, `quotation_id`, `customer_id`, `payment_description`, `amount`, `paid_amount`, `payment_method`, `requested_date`, `paid_date`, `status`) VALUES
+(1, 2, 2, 'This is description', '1000.00', '1000.00', 'PayPal', '2020-11-09 17:53:44', '2020-11-10 19:18:56', 2),
+(2, 1, 2, 'Pay this amount', '1000.00', '0.00', NULL, '2020-11-09 19:36:56', NULL, 1),
+(3, 5, 2, 'This is our budget', '67500.00', '67500.00', 'PayPal', '2020-11-11 19:03:42', '2020-11-11 19:04:28', 2);
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `quotations`
 --
 
@@ -244,10 +272,15 @@ CREATE TABLE `quotations` (
 --
 
 INSERT INTO `quotations` (`quotation_id`, `customer_id`, `subject`, `requirements`, `remarks`, `date created`, `date_updated`, `status`) VALUES
-(1, 2, 'Logo Design', 'My budget is around $5', 'OK', '2020-11-04 17:30:10', '2020-11-04 17:30:10', 2),
+(1, 2, 'Logo Design', 'My budget is around $5', 'OK', '2020-11-04 17:30:10', '2020-11-04 17:30:10', 3),
 (2, 2, 'Graphical Contest', 'Need a better place', 'Ok', '2020-11-04 17:32:23', '2020-11-05 17:56:47', 3),
 (3, 2, 'Java Project', 'My budget is around $7', 'Our budget is $5', '2020-11-04 19:00:26', '2020-11-05 17:46:47', 4),
-(4, 2, 'HTML Project', 'My cost is around 20$', NULL, '2020-11-05 19:17:12', '2020-11-05 19:17:12', 1);
+(4, 2, 'HTML Project', 'My cost is around 20$', 'Our Budget is 5000.00', '2020-11-05 19:17:12', '2020-11-05 19:17:12', 3),
+(5, 2, 'Laravel Project', 'Laravel Passport', 'OK', '2020-11-09 19:16:18', '2020-11-09 19:16:18', 3),
+(6, 2, 'NodJs Project ', '7 weeks of time', 'Ok. We can manage it', '2020-11-11 18:59:44', '2020-11-11 18:59:44', 2),
+(7, 2, 'Photoshop work', 'Logo Designs and vectors\r\nDo it on 1000.00', 'Our Budget is 1500.00', '2020-11-11 19:00:30', '2020-11-11 19:17:12', 1),
+(8, 2, 'Cover Page Design', 'A4 size page', NULL, '2020-11-11 19:12:03', '2020-11-11 19:12:03', 1),
+(9, 2, 'Sticker Offset out', 'Bulk size is 12', NULL, '2020-11-11 19:15:34', '2020-11-11 19:15:34', 1);
 
 -- --------------------------------------------------------
 
@@ -414,6 +447,12 @@ ALTER TABLE `freelancer_login`
   ADD PRIMARY KEY (`freelancer_login_id`);
 
 --
+-- Indexes for table `payment`
+--
+ALTER TABLE `payment`
+  ADD PRIMARY KEY (`payment_id`);
+
+--
 -- Indexes for table `quotations`
 --
 ALTER TABLE `quotations`
@@ -484,10 +523,16 @@ ALTER TABLE `freelancer_login`
   MODIFY `freelancer_login_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
+-- AUTO_INCREMENT for table `payment`
+--
+ALTER TABLE `payment`
+  MODIFY `payment_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+
+--
 -- AUTO_INCREMENT for table `quotations`
 --
 ALTER TABLE `quotations`
-  MODIFY `quotation_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `quotation_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
 
 --
 -- AUTO_INCREMENT for table `user`

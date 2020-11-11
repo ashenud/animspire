@@ -246,6 +246,36 @@ class Customer{
         $sql = "SELECT 
                     p.payment_id,
                     p.quotation_id,
+                    q.subject,
+                    CONCAT(c.customer_fname, ' ', c.customer_lname) AS name,
+                    c.customer_country AS address,
+                    p.payment_description,
+                    p.amount,
+                    p.paid_amount,
+                    p.payment_method,
+                    DATE(p.requested_date) AS requested_date,
+                    IFNULL(DATE(p.paid_date),'-') AS paid_date,
+                    p.status
+                FROM 
+                    payment p
+                        INNER JOIN
+                    customer c ON c.customer_id = p.customer_id
+                        INNER JOIN
+                    quotations q ON q.quotation_id = p.quotation_id
+                WHERE
+                    p.customer_id = '$customer_id'";
+        $results = $con->query($sql);
+
+        return $results;
+    }
+
+    function getPaymentForPaymentId($payment_id) {
+
+        $con = $GLOBALS['con'];
+        $sql = "SELECT 
+                    p.payment_id,
+                    p.quotation_id,
+                    q.subject,
                     CONCAT(c.customer_fname, ' ', c.customer_lname) AS name,
                     p.payment_description,
                     p.amount,
@@ -258,8 +288,10 @@ class Customer{
                     payment p
                         INNER JOIN
                     customer c ON c.customer_id = p.customer_id
+                        INNER JOIN
+                    quotations q ON q.quotation_id = p.quotation_id
                 WHERE
-                    p.customer_id = '$customer_id'";
+                    p.payment_id = '$payment_id'";
         $results = $con->query($sql);
 
         return $results;

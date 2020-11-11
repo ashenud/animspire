@@ -95,7 +95,7 @@
                                             <td>
                                                 <div class="btn-group d-flex">
                                                     <button type="button" id='view-quote-btn' href='#view-quote' data-toggle='modal' data-subject='<?php echo $quotation["subject"];?>' data-requirements='<?php echo $quotation["requirements"];?>' data-remarks='<?php echo $quotation["remarks"];?>' data-status='<?php echo $quotation["status"];?>' class="btn btn-info btn-sm" style="padding: 0; margin: 2px; width: 35px;" ><i class="far fa-eye" style="font-size: 18px" ></i></button>
-                                                    <button type="button" id='payment-btn2' href='#payment2' data-toggle='modal' data-name='<?php echo $payment["name"];?>' data-date='<?php echo $payment["paid_date"];?>' data-description='<?php echo $payment["payment_description"];?>' data-total='<?php echo $payment["amount"];?>' class="btn btn-success btn-sm" style="padding: 0; margin: 2px; width: 35px;" ><i class="fas fa-dollar-sign" style="font-size: 18px; color: white" ></i></button>
+                                                    <button type="button" id='payment-btn2' href='#payment2' data-toggle='modal' data-id='<?php echo $payment["payment_id"];?>' data-subject='<?php echo $quotation["subject"];?>' data-name='<?php echo $payment["name"];?>' data-date='<?php echo $payment["paid_date"];?>' data-description='<?php echo $payment["payment_description"];?>' data-total='<?php echo $payment["amount"];?>' data-method='<?php echo $payment["payment_method"];?>' data-address='<?php echo $payment["address"];?>' class="btn btn-success btn-sm" style="padding: 0; margin: 2px; width: 35px;" ><i class="fas fa-dollar-sign" style="font-size: 18px; color: white" ></i></button>
                                                 </div>
                                             </td>
                                         <?php
@@ -234,6 +234,9 @@
                                 <input type="text" class="form-control" id="total2"  name="total2" disabled>
                             </div>
                         </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" id="print-btn" class="btn btn-info" onclick="generate_pdf()"><i class="fas fa-print"></i>Print Reciept</button>
                     </div>    
                 </div>
             </div>
@@ -275,14 +278,117 @@
             var date2= $(this).data('date');
             var description2= $(this).data('description');
             var total2= $(this).data('total');
+            var id= $(this).data('id');
+            var subject= $(this).data('subject');
+            var method= $(this).data('method');
+            var address= $(this).data('address');
             
             $("#customer2").val(customer2);
             $("#date2").val(date2);
             $("#description2").val(description2);
             $("#total2").val(total2);
+            $('#print-btn').attr('data-date', date2);
+            $('#print-btn').attr('data-id', id);
+            $('#print-btn').attr('data-name', customer2);
+            $('#print-btn').attr('data-address', address);
+            $('#print-btn').attr('data-method', method);
+            $('#print-btn').attr('data-subject', subject);
+            $('#print-btn').attr('data-total', total2);
         });
         // <!-- end of send data to modal scripts -->
+    
 
+        // print receipt
+        $(document).on("click", "#print-btn", function () {
+
+            var date= $(this).data('date');
+            var id= $(this).data('id');
+            var name= $(this).data('name');
+            var address= $(this).data('address');
+            var method= $(this).data('method');
+            var subject= $(this).data('subject');
+            var total= $(this).data('total');
+
+            var filters =  '<div class="receipt" style="width: 350px; padding: 20px; border: 4px solid black;">'+
+                                '<div class="header">'+
+                                    '<div class="h-text">'+
+                                        '<h1>Receipt</h1>'+
+                                    '</div>'+
+                                    '<br>'+
+                                    '<div class="h-details" style="text-align: right; margin-top: -70px;">'+
+                                        '<p style="margin: 0 0 5px 0;">Payment Date : '+date+'</p>'+
+                                        '<p style="margin: 0 0 5px 0;">Payment ID : '+id+'</p>'+
+                                    '</div>'+
+                                '</div>'+
+                                '<div class="address" style="margin: 50px 0 35px 0;">'+
+                                    '<p style="margin: 0 0 5px 0;">'+name+'</p>'+
+                                    '<p style="margin: 0 0 5px 0;">'+address+'</p>'+
+                                '</div>'+
+                                '<table style="width: 350px;">'+
+                                    '<tr style="background: #5eb7f5; height: 30px;">'+
+                                        '<th style="text-align: left; padding-left: 10px;">Payment Method</th>'+
+                                    '</tr>'+
+                                    '<tr>'+
+                                        '<td style="text-align: left; padding-left: 10px;">'+method+'</td>'+
+                                    '</tr>'+
+                                '</table>'+
+                                '<table style="width: 350px; margin: 30px 0 26px 0;">'+
+                                    '<tr style="background: #5eb7f5; height: 30px;">'+
+                                        '<th style="text-align: left; padding-left: 10px;">Product</th>'+
+                                        '<th style="text-align: right; padding-right: 10px;">Price</th>'+
+                                    '</tr>'+
+                                    '<tr>'+
+                                        '<td style="text-align: left; padding-left: 10px;">'+subject+'</td>'+
+                                        '<td style="text-align: right; padding-right: 10px;">Rs '+total+'</td>'+
+                                    '</tr>'+
+                                '</table>'+
+                            '</div>'
+
+            var pdf_name = "payment receipt.pdf";
+
+            var layout = "A4";
+
+
+            var mapForm = document.createElement("form");
+            mapForm.target = "Map";
+            mapForm.method = "POST"; 
+            mapForm.action = "./loadings/reciept_template.php";
+
+            /* var mapInput = document.createElement("input");
+            mapInput.type = "hidden";
+            mapInput.name = "x";
+            mapInput.value = print_area;
+            mapForm.appendChild(mapInput); */
+
+            var mapInput2 = document.createElement("input");
+            mapInput2.type = "hidden";
+            mapInput2.name = "y";
+            mapInput2.value = filters;
+            mapForm.appendChild(mapInput2);
+
+            var mapInput3 = document.createElement("input");
+            mapInput3.type = "hidden";
+            mapInput3.name = "z";
+            mapInput3.value = pdf_name;
+            mapForm.appendChild(mapInput3);
+
+            var mapInput4 = document.createElement("input");
+            mapInput4.type = "hidden";
+            mapInput4.name = "layout";
+            mapInput4.value = layout;
+            mapForm.appendChild(mapInput4);
+
+            document.body.appendChild(mapForm);
+
+            map = window.open("", "Map", "status=0,title=0,height=1600,width=1800,scrollbars=1");
+
+            if (map) {
+                mapForm.submit();
+            } else {
+                alert('Please Retry.');
+            }
+
+        });
 
     </script>
 
