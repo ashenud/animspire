@@ -70,6 +70,44 @@
             
         break;
     
+        case "assign_project":
+    
+            $quotation_id = $_REQUEST["quotation_id"];
+            $payment_id = $_REQUEST["payment_id"];
+            $project_name = $_REQUEST["project_name"];
+            $customer_id = $_REQUEST["customer_id"];
+            $project_manager_id = $_REQUEST["project_manager"];
+            $description = $_REQUEST["description"];
+            $start_date = $_REQUEST["start_date"];
+            $end_date = $_REQUEST["end_date"];
+            
+            $result = $marketingManagerObj->assignProject($project_name,$description,$quotation_id,$customer_id,$project_manager_id,$start_date,$end_date);
+    
+            if ($result == 1) {
+
+                $marketingManagerObj->updateProjectStatus($payment_id);
+    
+                $msgSuccess = "Project Successfully Assigned!";
+                $msgSuccess = base64_encode($msgSuccess);
+                $chat_id = base64_encode($receiver_id);
+                
+                ?>
+                    <script>window.location = "../view/user/marketing_manager/marketing-manager-project-management.php?msgSuccess=<?php echo $msgSuccess; ?>" </script>  
+                <?php
+    
+            }
+            else {
+                $msg = "Quotation not Assigned!";
+                $msg = base64_encode($msg);
+                $chat_id = base64_encode($receiver_id);
+                
+                ?>
+                    <script>window.location = "../view/user/marketing_manager/marketing-manager-project-management.php?msg=<?php echo $msg; ?>" </script>  
+                <?php
+            }
+            
+        break;
+    
         case "payment_request":
     
             $quote_id = $_REQUEST["quote_id"];

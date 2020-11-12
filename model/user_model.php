@@ -485,6 +485,68 @@ class MarketingManager {
 
         return $results;
     }
+
+    function getPaidQuote() {
+
+        $con = $GLOBALS['con'];
+        $sql = "SELECT
+                    q.quotation_id,
+                    p.payment_id,
+                    c.customer_id,
+                    c.customer_image,
+                    CONCAT(c.customer_fname, ' ', c.customer_lname) AS name,
+                    q.subject,
+                    q.requirements,
+                    IFNULL(q.remarks,'') AS remarks,
+                    q.status AS status_id,
+                    IF(q.status=1,'Pending',
+                    IF(q.status=2,'Submitted',
+                        IF(q.status=3, 'Approved',
+                        IF(q.status=4, 'Rejected','')))) AS status
+                FROM
+                    quotations q
+                        INNER JOIN
+                    customer c ON c.customer_id = q.customer_id
+                        INNER JOIN
+                    payment p ON p.quotation_id = q.quotation_id
+                WHERE
+                    c.customer_status = 1
+                    AND q.status = 3
+                    AND p.status = 2
+                    AND p.project_status = 0";
+        $results = $con->query($sql);
+
+        return $results;
+    }
+
+    function getAssignedProjects() {
+
+        $con = $GLOBALS['con'];
+        $sql = "SELECT
+                    p.project_id,
+                    p.project_name,
+                    p.description,
+                    p.quotation_id,
+                    c.customer_id,
+                    c.customer_image,
+                    CONCAT(c.customer_fname, ' ', c.customer_lname) AS cus_name,
+                    p.project_manager_id,
+                    CONCAT(u.user_fname, ' ', u.user_lname) AS pro_name,
+                    p.start_date,
+                    p.end_date
+                FROM
+                    project p
+                        INNER JOIN
+                    customer c ON c.customer_id = p.customer_id
+                        INNER JOIN
+                    user u ON u.user_id = p.project_manager_id
+                WHERE
+                    c.customer_status = 1
+                    AND p.project_status = 0";
+        $results = $con->query($sql);
+
+        return $results;
+    }
     
     function getPaymentForQuoteId($id) {
 
@@ -540,6 +602,45 @@ class MarketingManager {
                     (quotation_id,customer_id,payment_description,amount)
                 VALUE
                     ('$quote_id', '$customer_id', '$description', '$total')";
+        $results = $con->query($sql);
+
+        if ($results) {
+            return 1;
+        }
+        else {
+            return 0;
+        }
+
+    }
+
+    function assignProject($project_name,$description,$quotation_id,$customer_id,$project_manager_id,$start_date,$end_date) {
+
+        $con = $GLOBALS['con'];
+        $sql = "INSERT INTO
+                    project
+                    (project_name,description,quotation_id,customer_id,project_manager_id,start_date,end_date)
+                VALUE
+                    ('$project_name', '$description', '$quotation_id', '$customer_id', '$project_manager_id', '$start_date', '$end_date')";
+        $results = $con->query($sql);
+
+        if ($results) {
+            return 1;
+        }
+        else {
+            return 0;
+        }
+
+    }
+
+    function updateProjectStatus($payment_id) {
+
+        $con = $GLOBALS['con'];
+        $sql = "UPDATE
+                    payment
+                SET
+                    project_status = 1
+                WHERE
+                    payment_id = '$payment_id'";
         $results = $con->query($sql);
 
         if ($results) {

@@ -120,7 +120,7 @@
     <hr>
     <a href="./marketing-manager-client-management.php"><i class="fa fa-fw fa-user"></i><br>Clients</a>
     <hr>
-    <a href="./marketing-manager-report.php"><i class="fa fa-fw fa-file-alt"></i><br>Reports</a>
+    <a href="./marketing-manager-project-management.php"><i class="fa fa-fw fa-file-alt"></i><br>Project</a>
     <hr>
     <a href="./marketing-manager-chat.php"><i class="fa fa-fw fa-envelope"></i><br>Chat</a>
     <hr>

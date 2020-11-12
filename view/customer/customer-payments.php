@@ -110,8 +110,8 @@
             
         </div>
 
-         <!-- view quote modal -->
-         <div class="modal fade" id="view-quote" role="dialog">
+        <!-- view quote modal -->
+        <div class="modal fade" id="view-quote" role="dialog">
             <div class="modal-dialog">
                 <div class="modal-content">
                     <div class="modal-header">     
