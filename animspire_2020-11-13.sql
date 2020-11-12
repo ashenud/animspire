@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 192.168.1.101
--- Generation Time: Nov 12, 2020 at 12:48 AM
+-- Generation Time: Nov 12, 2020 at 11:32 PM
 -- Server version: 10.4.15-MariaDB-1:10.4.15+maria~bionic-log
 -- PHP Version: 7.4.11
 
@@ -238,17 +238,48 @@ CREATE TABLE `payment` (
   `payment_method` varchar(30) DEFAULT NULL,
   `requested_date` timestamp NOT NULL DEFAULT current_timestamp(),
   `paid_date` timestamp NULL DEFAULT NULL,
-  `status` int(2) NOT NULL DEFAULT 1 COMMENT '1-requested, 2-paid'
+  `status` int(2) NOT NULL DEFAULT 1 COMMENT '1-requested, 2-paid',
+  `project_status` int(2) NOT NULL DEFAULT 0 COMMENT '0-not assign, 1-assigned'
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `payment`
 --
 
-INSERT INTO `payment` (`payment_id`, `quotation_id`, `customer_id`, `payment_description`, `amount`, `paid_amount`, `payment_method`, `requested_date`, `paid_date`, `status`) VALUES
-(1, 2, 2, 'This is description', '1000.00', '1000.00', 'PayPal', '2020-11-09 17:53:44', '2020-11-10 19:18:56', 2),
-(2, 1, 2, 'Pay this amount', '1000.00', '0.00', NULL, '2020-11-09 19:36:56', NULL, 1),
-(3, 5, 2, 'This is our budget', '67500.00', '67500.00', 'PayPal', '2020-11-11 19:03:42', '2020-11-11 19:04:28', 2);
+INSERT INTO `payment` (`payment_id`, `quotation_id`, `customer_id`, `payment_description`, `amount`, `paid_amount`, `payment_method`, `requested_date`, `paid_date`, `status`, `project_status`) VALUES
+(1, 2, 2, 'This is description', '1000.00', '1000.00', 'PayPal', '2020-11-09 17:53:44', '2020-11-10 19:18:56', 2, 1),
+(2, 1, 2, 'Pay this amount', '1000.00', '1000.00', 'PayPal', '2020-11-09 19:36:56', '2020-11-12 16:36:48', 2, 1),
+(3, 5, 2, 'This is our budget', '67500.00', '67500.00', 'PayPal', '2020-11-11 19:03:42', '2020-11-11 19:04:28', 2, 0),
+(4, 4, 2, 'Pay this', '15000.00', '0.00', NULL, '2020-11-12 16:41:15', NULL, 1, 0);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `project`
+--
+
+CREATE TABLE `project` (
+  `project_id` int(11) NOT NULL,
+  `project_name` varchar(50) NOT NULL,
+  `description` varchar(1000) NOT NULL,
+  `quotation_id` int(11) NOT NULL,
+  `customer_id` int(11) NOT NULL,
+  `project_manager_id` int(11) NOT NULL,
+  `freelancer_id` int(11) DEFAULT NULL,
+  `task_id` int(11) DEFAULT NULL,
+  `start_date` date NOT NULL,
+  `end_date` date NOT NULL,
+  `created_time` timestamp NOT NULL DEFAULT current_timestamp(),
+  `project_status` int(11) NOT NULL DEFAULT 0 COMMENT '0-active, 1-deleted'
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `project`
+--
+
+INSERT INTO `project` (`project_id`, `project_name`, `description`, `quotation_id`, `customer_id`, `project_manager_id`, `freelancer_id`, `task_id`, `start_date`, `end_date`, `created_time`, `project_status`) VALUES
+(1, 'Logo Design', 'Use any freelancer', 1, 2, 2, NULL, NULL, '2020-11-15', '2020-11-28', '2020-11-12 16:25:28', 0),
+(2, 'Graphical Contest', 'This is the biggest in summer ', 2, 2, 6, NULL, NULL, '2020-11-29', '2020-12-12', '2020-11-12 16:46:40', 0);
 
 -- --------------------------------------------------------
 
@@ -453,6 +484,12 @@ ALTER TABLE `payment`
   ADD PRIMARY KEY (`payment_id`);
 
 --
+-- Indexes for table `project`
+--
+ALTER TABLE `project`
+  ADD PRIMARY KEY (`project_id`);
+
+--
 -- Indexes for table `quotations`
 --
 ALTER TABLE `quotations`
@@ -526,7 +563,13 @@ ALTER TABLE `freelancer_login`
 -- AUTO_INCREMENT for table `payment`
 --
 ALTER TABLE `payment`
-  MODIFY `payment_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `payment_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+
+--
+-- AUTO_INCREMENT for table `project`
+--
+ALTER TABLE `project`
+  MODIFY `project_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT for table `quotations`
