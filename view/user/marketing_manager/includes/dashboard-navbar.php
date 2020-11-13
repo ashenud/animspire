@@ -122,10 +122,12 @@
     <hr>
     <a href="./marketing-manager-project-management.php"><i class="fa fa-fw fa-file-alt"></i><br>Project</a>
     <hr>
+    <a href="./marketing-manager-reports-management.php"><i class="fa fa-fw fa-file-alt"></i><br>Reports</a>
+    <hr>
     <a href="./marketing-manager-chat.php"><i class="fa fa-fw fa-envelope"></i><br>Chat</a>
     <hr>
     <a href="../../../controller/userlogincontroller.php?status=logout"><img src="../../../images/icons/logout.png"
-            alt="Logout" style="width:50px;height:50px;margin-top: 140px; margin-left: 5px"></a>
+            alt="Logout" style="width:50px;height:50px;margin-top: 65px; margin-left: 5px"></a>
 
 </div>
 <div class="top-navbar">

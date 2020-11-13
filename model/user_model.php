@@ -176,6 +176,18 @@ class User{
         $results = $con->query($sql);
         return $results;
     }
+    
+    function getAllCustomers() {
+        $con = $GLOBALS['con'];
+        $sql = "SELECT 
+                    * 
+                FROM 
+                    customer c
+                WHERE 
+                    c.customer_status =1";
+        $results = $con->query($sql);
+        return $results;
+    }
 
     function getRoles() {
         $con = $GLOBALS['con'];
@@ -621,6 +633,29 @@ class MarketingManager {
                     (project_name,description,quotation_id,customer_id,project_manager_id,start_date,end_date)
                 VALUE
                     ('$project_name', '$description', '$quotation_id', '$customer_id', '$project_manager_id', '$start_date', '$end_date')";
+        $results = $con->query($sql);
+
+        if ($results) {
+            return 1;
+        }
+        else {
+            return 0;
+        }
+
+    }
+
+    function editProject($project_id,$description,$project_manager_id,$start_date,$end_date) {
+
+        $con = $GLOBALS['con'];
+        $sql = "UPDATE
+                    project
+                SET
+                    description = '$description',
+                    project_manager_id = '$project_manager_id',
+                    start_date = '$start_date',
+                    end_date = '$end_date'
+                WHERE 
+                    project_id = '$project_id'";
         $results = $con->query($sql);
 
         if ($results) {

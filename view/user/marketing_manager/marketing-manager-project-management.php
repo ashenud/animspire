@@ -284,9 +284,8 @@
                         <div class="modal-body">
                             <div class="row">
                                 <div class="col-md-2" style="margin-left: 50px; width: 30%">
-                                  <label for="project_id2">Quotation ID :</label>
+                                  <label for="project_id2">Project ID :</label>
                                   <input type="text" class="form-control" id="project_id2"  name="project_id" readonly>
-                                  <input type="hidden" name="payment_id" id="payment_id2">
                                 </div>
                                 <div class="col-md-4" style="margin-left: 25px; width: 30%">
                                   <label for="customer2">Customer :</label>
@@ -362,7 +361,7 @@
                     <div class="modal-body">
                         <div class="row">
                             <div class="col-md-2" style="margin-left: 50px; width: 30%">
-                                <label for="project_id3">Quotation ID :</label>
+                                <label for="project_id3">Project ID :</label>
                                 <input type="text" class="form-control" id="project_id3"  name="project_id" disabled>
                             </div>
                             <div class="col-md-4" style="margin-left: 25px; width: 30%">
