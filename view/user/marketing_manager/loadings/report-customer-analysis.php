@@ -12,10 +12,14 @@
             success: function (data) {
 
                 var customer = JSON.parse(data);
-                // console.log(customer);
-                var series = customer['series'];
 
-                drowChart(series);
+                if(customer.quote_count > 0) {
+                    // console.log(customer);
+                    drowChart(customer.series);
+                }
+                else {
+                    swal("Someting went wrong!", `No data for customer ${customer_name} !`, "error");
+                }
             }
 
         });
