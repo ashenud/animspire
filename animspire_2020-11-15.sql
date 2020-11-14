@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 192.168.1.101
--- Generation Time: Nov 12, 2020 at 11:32 PM
+-- Generation Time: Nov 15, 2020 at 12:32 AM
 -- Server version: 10.4.15-MariaDB-1:10.4.15+maria~bionic-log
 -- PHP Version: 7.4.11
 
@@ -250,7 +250,8 @@ INSERT INTO `payment` (`payment_id`, `quotation_id`, `customer_id`, `payment_des
 (1, 2, 2, 'This is description', '1000.00', '1000.00', 'PayPal', '2020-11-09 17:53:44', '2020-11-10 19:18:56', 2, 1),
 (2, 1, 2, 'Pay this amount', '1000.00', '1000.00', 'PayPal', '2020-11-09 19:36:56', '2020-11-12 16:36:48', 2, 1),
 (3, 5, 2, 'This is our budget', '67500.00', '67500.00', 'PayPal', '2020-11-11 19:03:42', '2020-11-11 19:04:28', 2, 0),
-(4, 4, 2, 'Pay this', '15000.00', '0.00', NULL, '2020-11-12 16:41:15', NULL, 1, 0);
+(4, 4, 2, 'Pay this', '15000.00', '0.00', NULL, '2020-11-12 16:41:15', NULL, 1, 0),
+(5, 10, 3, 'Pay advanced before next week', '6500.00', '6500.00', 'PayPal', '2020-11-14 10:58:53', '2020-11-14 10:59:42', 2, 1);
 
 -- --------------------------------------------------------
 
@@ -266,10 +267,10 @@ CREATE TABLE `project` (
   `customer_id` int(11) NOT NULL,
   `project_manager_id` int(11) NOT NULL,
   `freelancer_id` int(11) DEFAULT NULL,
-  `task_id` int(11) DEFAULT NULL,
   `start_date` date NOT NULL,
   `end_date` date NOT NULL,
   `created_time` timestamp NOT NULL DEFAULT current_timestamp(),
+  `project_timeline` int(2) NOT NULL DEFAULT 0 COMMENT 'o-pending,1-completed',
   `project_status` int(11) NOT NULL DEFAULT 0 COMMENT '0-active, 1-deleted'
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
@@ -277,9 +278,10 @@ CREATE TABLE `project` (
 -- Dumping data for table `project`
 --
 
-INSERT INTO `project` (`project_id`, `project_name`, `description`, `quotation_id`, `customer_id`, `project_manager_id`, `freelancer_id`, `task_id`, `start_date`, `end_date`, `created_time`, `project_status`) VALUES
-(1, 'Logo Design', 'Use any freelancer', 1, 2, 2, NULL, NULL, '2020-11-15', '2020-11-28', '2020-11-12 16:25:28', 0),
-(2, 'Graphical Contest', 'This is the biggest in summer ', 2, 2, 6, NULL, NULL, '2020-11-29', '2020-12-12', '2020-11-12 16:46:40', 0);
+INSERT INTO `project` (`project_id`, `project_name`, `description`, `quotation_id`, `customer_id`, `project_manager_id`, `freelancer_id`, `start_date`, `end_date`, `created_time`, `project_timeline`, `project_status`) VALUES
+(1, 'Logo Design', 'Use suitable freelancer', 1, 2, 2, NULL, '2020-11-15', '2020-11-29', '2020-11-12 16:25:28', 0, 0),
+(2, 'Graphical Contest', 'This is the biggest in summer ', 2, 2, 6, NULL, '2020-11-29', '2020-12-12', '2020-11-12 16:46:40', 0, 0),
+(3, 'Email 2000 Send', 'Use One freelancer', 10, 3, 9, 1, '2020-11-14', '2020-12-12', '2020-11-14 11:02:31', 0, 0);
 
 -- --------------------------------------------------------
 
@@ -311,7 +313,10 @@ INSERT INTO `quotations` (`quotation_id`, `customer_id`, `subject`, `requirement
 (6, 2, 'NodJs Project ', '7 weeks of time', 'Ok. We can manage it', '2020-11-11 18:59:44', '2020-11-11 18:59:44', 2),
 (7, 2, 'Photoshop work', 'Logo Designs and vectors\r\nDo it on 1000.00', 'Our Budget is 1500.00', '2020-11-11 19:00:30', '2020-11-11 19:17:12', 1),
 (8, 2, 'Cover Page Design', 'A4 size page', NULL, '2020-11-11 19:12:03', '2020-11-11 19:12:03', 1),
-(9, 2, 'Sticker Offset out', 'Bulk size is 12', NULL, '2020-11-11 19:15:34', '2020-11-11 19:15:34', 1);
+(9, 2, 'Sticker Offset out', 'Bulk size is 12', NULL, '2020-11-11 19:15:34', '2020-11-11 19:15:34', 1),
+(10, 3, 'Email 2000 Send', 'Send 2000 emails before 10/12/2020', 'We can send it', '2020-11-14 10:49:32', '2020-11-14 10:49:32', 3),
+(11, 3, 'TV commercial ', 'Computer shop advertisement ', NULL, '2020-11-14 10:50:41', '2020-11-14 10:50:41', 1),
+(12, 3, 'Cricket Campaign ', 'Need a best Organizer', NULL, '2020-11-14 10:52:37', '2020-11-14 10:52:37', 1);
 
 -- --------------------------------------------------------
 
@@ -324,6 +329,32 @@ CREATE TABLE `reset_password` (
   `reset_code` varchar(100) DEFAULT NULL,
   `reset_email` varchar(50) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `task`
+--
+
+CREATE TABLE `task` (
+  `task_id` int(11) NOT NULL,
+  `task_name` varchar(250) NOT NULL,
+  `project_id` int(11) NOT NULL,
+  `priority_level` int(2) NOT NULL DEFAULT 0 COMMENT '	1-Normal, 2-Urgent, 3-Top Urgent	',
+  `start_date` date NOT NULL,
+  `end_date` date NOT NULL,
+  `assigned_at` timestamp NOT NULL DEFAULT current_timestamp(),
+  `task_timeline` int(2) NOT NULL DEFAULT 0 COMMENT '0-pending, 1-completed',
+  `task_status` int(2) NOT NULL DEFAULT 0 COMMENT '0-active, 1-delete'
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `task`
+--
+
+INSERT INTO `task` (`task_id`, `task_name`, `project_id`, `priority_level`, `start_date`, `end_date`, `assigned_at`, `task_timeline`, `task_status`) VALUES
+(1, 'Create 100 emails', 3, 2, '2020-11-14', '2020-11-20', '2020-11-14 15:15:34', 0, 0),
+(2, 'Send 1st 100 emails', 3, 1, '2020-11-16', '2020-11-23', '2020-11-14 17:46:22', 0, 0);
 
 -- --------------------------------------------------------
 
@@ -496,6 +527,12 @@ ALTER TABLE `quotations`
   ADD PRIMARY KEY (`quotation_id`);
 
 --
+-- Indexes for table `task`
+--
+ALTER TABLE `task`
+  ADD PRIMARY KEY (`task_id`);
+
+--
 -- Indexes for table `user`
 --
 ALTER TABLE `user`
@@ -563,19 +600,25 @@ ALTER TABLE `freelancer_login`
 -- AUTO_INCREMENT for table `payment`
 --
 ALTER TABLE `payment`
-  MODIFY `payment_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `payment_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
 -- AUTO_INCREMENT for table `project`
 --
 ALTER TABLE `project`
-  MODIFY `project_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `project_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT for table `quotations`
 --
 ALTER TABLE `quotations`
-  MODIFY `quotation_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
+  MODIFY `quotation_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
+
+--
+-- AUTO_INCREMENT for table `task`
+--
+ALTER TABLE `task`
+  MODIFY `task_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT for table `user`

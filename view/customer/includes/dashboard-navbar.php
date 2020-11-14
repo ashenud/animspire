@@ -166,7 +166,7 @@
                         <a class="dropdown-item" href="./customer-payments.php">View Payments</a>
                     <?php
                 }
-                else {
+                if ($qouteCount == 0 && $paymentReqCount == 0) {
                     ?>
                         <a class="dropdown-item" href="#">No New Notifications</a>
                     <?php

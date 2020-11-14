@@ -137,7 +137,7 @@
                                         <div class="btn-group d-flex">
                                             <button type="button" id='project-view-btn' href='#project-view' data-toggle='modal' data-project_name='<?php echo $project["project_name"];?>' data-project_id='<?php echo $project["project_id"];?>' data-cus_name='<?php echo $project["cus_name"];?>' data-customer_image='<?php echo $project["customer_image"];?>' data-pro_name='<?php echo $project["pro_name"];?>' data-description='<?php echo $project["description"];?>' data-start_date='<?php echo $project["start_date"];?>' data-end_date='<?php echo $project["end_date"];?>' class="btn btn-info btn-sm" style="padding: 0; margin: 2px; width: 35px; font-size: 9px;" ><i class="fas fa-external-link-alt" style="font-size: 10px" ></i>&nbsp;View</button>
                                             <button type="button" id='project-edit-btn' href='#project-edit' data-toggle='modal' data-project_name='<?php echo $project["project_name"];?>' data-project_id='<?php echo $project["project_id"];?>' data-cus_name='<?php echo $project["cus_name"];?>' data-customer_image='<?php echo $project["customer_image"];?>' data-pro_name='<?php echo $project["pro_name"];?>' data-project_manager_id='<?php echo $project["project_manager_id"];?>' data-description='<?php echo $project["description"];?>' data-start_date='<?php echo $project["start_date"];?>' data-end_date='<?php echo $project["end_date"];?>' class="btn btn-warning btn-sm" style="padding: 0; margin: 2px; width: 35px; font-size: 9px;" ><i class="fas fa-plus" style="font-size: 10px; color: white" ></i>&nbsp;Edit</button>
-                                            <button type="button" id='project-edit-btn' href='#project-edit' data-toggle='modal' data-project_id='<?php echo $project["project_id"];?>' class="btn btn-danger btn-sm" style="padding: 0; margin: 2px; width: 35px; font-size: 9px;" ><i class="fa fa-fw fa-power-off" style="font-size: 10px; color: white" ></i></button>
+                                            <button type="button" id='project-delete-btn' href='#project-delete' data-toggle='modal' data-project_id='<?php echo $project["project_id"];?>' class="btn btn-danger btn-sm" style="padding: 0; margin: 2px; width: 35px; font-size: 9px;" ><i class="fa fa-fw fa-power-off" style="font-size: 10px; color: white" ></i></button>
                                         </div>
                                     </td>
                                 </tr>
@@ -226,7 +226,6 @@
                                 </div>
                                 <div class="col-md-4" style="margin-left: 10px; width: 250px;">
                                     <label for="project_manager">Project Manager :</label>
-                                    <!-- <input type="text" class="form-control" id="project_manager"  name="project_manager"> -->
                                     <select class="form-control" name="project_manager" id="project_manager" required>
                                         <option value="">Select a Project Manager</option>
                                         <?php 

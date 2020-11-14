@@ -3,7 +3,8 @@
     include '../model/user_model.php';
     
     $userObj = new User();
-    
+    $proManagerObj = new projectManager();
+
     $status = $_REQUEST["status"];
 
     switch ($status) {
@@ -37,11 +38,167 @@
                 <?php
             }
             
-            break;
-    
-     
-        default:
+        break;
 
-            echo "Invalid Parameters";
+        case "assign_freelancer":
+    
+            $project_id = $_REQUEST["project_id"];
+            $freelancer = $_REQUEST["freelancer"];
+            $task_name = $_REQUEST["task_name"];
+            $priority_level = $_REQUEST["priority_level"];
+            $start_date = $_REQUEST["start_date"];
+            $end_date = $_REQUEST["end_date"];
+            
+            $result = $proManagerObj->assignFreelancerToProject($project_id,$freelancer);
+    
+            if ($result == 1) {
+
+                $result2 = $proManagerObj->addTaskToProject($project_id,$task_name,$priority_level,$start_date,$end_date);
+    
+                if ($result2 == 1) {
+
+                    $msgSuccess = "Freelancer Successfully Assigned and Task added !";
+                    $msgSuccess = base64_encode($msgSuccess);
+                    
+                    ?>
+                        <script>window.location = "../view/user/project_manager/pro-manager-project-management.php?msgSuccess=<?php echo $msgSuccess; ?>" </script>  
+                    <?php
+                }
+                else {
+                    $msg = "Task not Added!";
+                    $msg = base64_encode($msg);
+                    
+                    ?>
+                        <script>window.location = "../view/user/project_manager/pro-manager-project-management.php?msg=<?php echo $msg; ?>" </script>  
+                    <?php
+                }
+    
+            }
+            else {
+                $msg = "Freelanser not Assigned!";
+                $msg = base64_encode($msg);
+                
+                ?>
+                    <script>window.location = "../view/user/project_manager/pro-manager-project-management.php?msg=<?php echo $msg; ?>" </script>  
+                <?php
+            }
+            
+        break;
+
+        case "add_task":
+    
+            $project_id = $_REQUEST["project_id"];
+            $task_name = $_REQUEST["task_name"];
+            $priority_level = $_REQUEST["priority_level"];
+            $start_date = $_REQUEST["start_date"];
+            $end_date = $_REQUEST["end_date"];
+            
+            $result = $proManagerObj->addTaskToProject($project_id,$task_name,$priority_level,$start_date,$end_date);
+    
+            if ($result == 1) {
+
+                $msgSuccess = "Task Successfully Added !";
+                $msgSuccess = base64_encode($msgSuccess);
+                
+                ?>
+                    <script>window.location = "../view/user/project_manager/pro-manager-view-project.php?project_id=<?php echo $project_id; ?>&msgSuccess=<?php echo $msgSuccess; ?>" </script>  
+                <?php
+            }
+            else {
+                $msg = "Task not Added!";
+                $msg = base64_encode($msg);
+                
+                ?>
+                    <script>window.location = "../view/user/project_manager/pro-manager-view-project.php?project_id=<?php echo $project_id; ?>&msg=<?php echo $msg; ?>" </script>  
+                <?php
+            }
+            
+        break;
+
+        case "edit_task":
+    
+            $project_id = $_REQUEST["project_id"];
+            $task_id = $_REQUEST["task_id"];
+            $task_name = $_REQUEST["task_name"];
+            $priority_level = $_REQUEST["priority_level"];
+            $start_date = $_REQUEST["start_date"];
+            $end_date = $_REQUEST["end_date"];
+            
+            $result = $proManagerObj->editTaskInProject($task_id,$task_name,$priority_level,$start_date,$end_date);
+    
+            if ($result == 1) {
+
+                $msgSuccess = "Task Successfully Edited !";
+                $msgSuccess = base64_encode($msgSuccess);
+                
+                ?>
+                    <script>window.location = "../view/user/project_manager/pro-manager-view-project.php?project_id=<?php echo $project_id; ?>&msgSuccess=<?php echo $msgSuccess; ?>" </script>  
+                <?php
+            }
+            else {
+                $msg = "Task not Edited!";
+                $msg = base64_encode($msg);
+                
+                ?>
+                    <script>window.location = "../view/user/project_manager/pro-manager-view-project.php?project_id=<?php echo $project_id; ?>&msg=<?php echo $msg; ?>" </script>  
+                <?php
+            }
+            
+        break;
+
+        case "stage_task":
+    
+            $project_id = $_REQUEST["project_id"];
+            $task_id = $_REQUEST["task_id"];
+            
+            $result = $proManagerObj->markTaskAsCompleted($task_id);
+    
+            if ($result == 1) {
+
+                $msgSuccess = "Task Successfully Marked as Completed !";
+                $msgSuccess = base64_encode($msgSuccess);
+                
+                ?>
+                    <script>window.location = "../view/user/project_manager/pro-manager-view-project.php?project_id=<?php echo $project_id; ?>&msgSuccess=<?php echo $msgSuccess; ?>" </script>  
+                <?php
+            }
+            else {
+                $msg = "Task not Marked as Completed!";
+                $msg = base64_encode($msg);
+                
+                ?>
+                    <script>window.location = "../view/user/project_manager/pro-manager-view-project.php?project_id=<?php echo $project_id; ?>&msg=<?php echo $msg; ?>" </script>  
+                <?php
+            }
+            
+        break;   
+
+        case "stage_project":
+    
+            $project_id = $_REQUEST["project_id"];
+            
+            $result = $proManagerObj->markProjectAsCompleted($project_id);
+    
+            if ($result == 1) {
+
+                $msgSuccess = "Project Successfully Marked as Completed !";
+                $msgSuccess = base64_encode($msgSuccess);
+                
+                ?>
+                    <script>window.location = "../view/user/project_manager/pro-manager-project-management.php?msgSuccess=<?php echo $msgSuccess; ?>" </script>  
+                <?php
+            }
+            else {
+                $msg = "Project not Marked as Completed!";
+                $msg = base64_encode($msg);
+                
+                ?>
+                    <script>window.location = "../view/user/project_manager/pro-manager-project-management.php?msg=<?php echo $msg; ?>" </script>  
+                <?php
+            }
+            
+        break;    
+     
+        default:echo "Invalid Parameters";
 
     }
