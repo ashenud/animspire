@@ -143,19 +143,8 @@
                                             <div class="btn-group d-flex">
                                                 <button type="button" id='task-view-btn' href='#task-view' data-toggle='modal' data-task_id='<?php echo $task["task_id"];?>' data-task_name='<?php echo $task["task_name"];?>' data-priority_id='<?php echo $task["priority_id"];?>' data-start_date='<?php echo $task["start_date"];?>' data-end_date='<?php echo $task["end_date"];?>' data-t_start_date='<?php echo $task["t_start_date"];?>' data-t_end_date='<?php echo $task["t_end_date"];?>' data-project_id='<?php echo $task["project_id"];?>' data-project_name='<?php echo $task["project_name"];?>' data-freelancer_id='<?php echo $task["freelancer_id"];?>' data-freelancer_name='<?php echo $task["freelancer_name"];?>' data-freelancer_image='<?php echo $task["freelancer_image"];?>' class="btn btn-info btn-sm" style="padding: 0; margin: 2px; width: 35px; font-size: 9px;" ><i class="fas fa-plus" style="font-size: 10px; color: white" ></i>&nbsp;View</button>
                                                 <button type="button" id='task-edit-btn' href='#task-edit' data-toggle='modal' data-task_id='<?php echo $task["task_id"];?>' data-task_name='<?php echo $task["task_name"];?>' data-priority_id='<?php echo $task["priority_id"];?>' data-start_date='<?php echo $task["start_date"];?>' data-end_date='<?php echo $task["end_date"];?>' data-t_start_date='<?php echo $task["t_start_date"];?>' data-t_end_date='<?php echo $task["t_end_date"];?>' data-project_id='<?php echo $task["project_id"];?>' data-project_name='<?php echo $task["project_name"];?>' data-freelancer_id='<?php echo $task["freelancer_id"];?>' data-freelancer_name='<?php echo $task["freelancer_name"];?>' data-freelancer_image='<?php echo $task["freelancer_image"];?>' class="btn btn-warning btn-sm" style="padding: 0; margin: 2px; width: 35px; font-size: 9px;" ><i class="fas fa-plus" style="font-size: 10px; color: white" ></i>&nbsp;Edit</button>
-                                                <?php
-                                                    if($task["task_timeline"]==0) {
-                                                        ?>
-                                                            <button type="button" id='task-stage-btn' href='#task-stage' data-toggle='modal' data-task_id='<?php echo $task["task_id"];?>' data-project_id='<?php echo $task["project_id"];?>' class="btn btn-danger btn-sm" style="padding: 0; margin: 2px; width: 35px; font-size: 9px;" ><i class="fa fa-fw fa-power-off" style="font-size: 10px; color: white" ></i></button>
-                                                        <?php
-                                                    }
-                                                    else {
-                                                        ?>
-                                                            <button type="button" class="btn btn-success btn-sm" style="padding: 0; margin: 2px; width: 35px; font-size: 9px;" ><i class="fa fa-fw fa-power-off" style="font-size: 10px; color: white" ></i></button>
-                                                        <?php
-                                                    } 
-                                                ?>
-                                                </div>
+                                                <button type="button" id='task-delete-btn' href='#task-delete' data-toggle='modal' data-task_id='<?php echo $task["task_id"];?>' data-project_id='<?php echo $task["project_id"];?>' class="btn btn-danger btn-sm" style="padding: 0; margin: 2px; width: 35px; font-size: 9px;" ><i class="fa fa-fw fa-power-off" style="font-size: 10px; color: white" ></i></button>
+                                            </div>
                                         </td>
                                     </tr>
                                     <?php
@@ -416,25 +405,25 @@
             </div>
         </div>
 
-        <!-- mark as completed modal -->
-        <div class="modal fade" id="task-stage" role="dialog">
+        <!-- mark as delete modal -->
+        <div class="modal fade" id="task-delete" role="dialog">
             <div class="modal-dialog">
                 <div class="modal-content">
                     <div class="modal-header">     
-                        <h4 class="col-12 modal-title text-center" style="padding-top: 10px">Stage Task</h4>
+                        <h4 class="col-12 modal-title text-center" style="padding-top: 10px">Delete Task</h4>
                     </div>
                     <div class="modal-body">
                         
                         <div class="row d-flex justify-content-center">
-                            <p> Are you sure?, You want to stage the task as completed ?</p>
+                            <p> Are you sure?, You want to delete the task ?</p>
                         </div>                            
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-info" data-dismiss="modal">Close</button>
-                        <form action="../../../controller/proManagerController.php?status=stage_task" method="POST">
+                        <form action="../../../controller/proManagerController.php?status=delete_task" method="POST">
                             <input type="hidden" name="task_id" id="task_id4">
                             <input type="hidden" id="project_id4"  name="project_id">
-                            <button name="submit" type="submit" class="btn btn-danger">Mark</button>
+                            <button name="submit" type="submit" class="btn btn-danger">Delete</button>
                         </form>
                     </div>    
                 </div>            
@@ -528,7 +517,7 @@
             $('#priority_level3').val(priority_id).trigger('change');
         });
 
-        $(document).on("click", "#task-stage-btn", function () {
+        $(document).on("click", "#task-delete-btn", function () {
             var task_id= $(this).data('task_id');
             var project_id= $(this).data('project_id');
             

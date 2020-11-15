@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 192.168.1.101
--- Generation Time: Nov 15, 2020 at 12:32 AM
+-- Generation Time: Nov 15, 2020 at 07:11 PM
 -- Server version: 10.4.15-MariaDB-1:10.4.15+maria~bionic-log
 -- PHP Version: 7.4.11
 
@@ -251,7 +251,8 @@ INSERT INTO `payment` (`payment_id`, `quotation_id`, `customer_id`, `payment_des
 (2, 1, 2, 'Pay this amount', '1000.00', '1000.00', 'PayPal', '2020-11-09 19:36:56', '2020-11-12 16:36:48', 2, 1),
 (3, 5, 2, 'This is our budget', '67500.00', '67500.00', 'PayPal', '2020-11-11 19:03:42', '2020-11-11 19:04:28', 2, 0),
 (4, 4, 2, 'Pay this', '15000.00', '0.00', NULL, '2020-11-12 16:41:15', NULL, 1, 0),
-(5, 10, 3, 'Pay advanced before next week', '6500.00', '6500.00', 'PayPal', '2020-11-14 10:58:53', '2020-11-14 10:59:42', 2, 1);
+(5, 10, 3, 'Pay advanced before next week', '6500.00', '6500.00', 'PayPal', '2020-11-14 10:58:53', '2020-11-14 10:59:42', 2, 1),
+(6, 13, 6, 'Use paypal method', '60000.00', '60000.00', 'PayPal', '2020-11-15 08:24:04', '2020-11-15 08:25:12', 2, 1);
 
 -- --------------------------------------------------------
 
@@ -281,7 +282,8 @@ CREATE TABLE `project` (
 INSERT INTO `project` (`project_id`, `project_name`, `description`, `quotation_id`, `customer_id`, `project_manager_id`, `freelancer_id`, `start_date`, `end_date`, `created_time`, `project_timeline`, `project_status`) VALUES
 (1, 'Logo Design', 'Use suitable freelancer', 1, 2, 2, NULL, '2020-11-15', '2020-11-29', '2020-11-12 16:25:28', 0, 0),
 (2, 'Graphical Contest', 'This is the biggest in summer ', 2, 2, 6, NULL, '2020-11-29', '2020-12-12', '2020-11-12 16:46:40', 0, 0),
-(3, 'Email 2000 Send', 'Use One freelancer', 10, 3, 9, 1, '2020-11-14', '2020-12-12', '2020-11-14 11:02:31', 0, 0);
+(3, 'Email 2000 Send', 'Use One freelancer', 10, 3, 9, 1, '2020-11-14', '2020-12-12', '2020-11-14 11:02:31', 0, 0),
+(4, 'Find 5000 advertisement ', 'Please complete as soon as possible', 13, 6, 9, 2, '2020-11-15', '2020-12-06', '2020-11-15 08:27:19', 0, 0);
 
 -- --------------------------------------------------------
 
@@ -316,7 +318,8 @@ INSERT INTO `quotations` (`quotation_id`, `customer_id`, `subject`, `requirement
 (9, 2, 'Sticker Offset out', 'Bulk size is 12', NULL, '2020-11-11 19:15:34', '2020-11-11 19:15:34', 1),
 (10, 3, 'Email 2000 Send', 'Send 2000 emails before 10/12/2020', 'We can send it', '2020-11-14 10:49:32', '2020-11-14 10:49:32', 3),
 (11, 3, 'TV commercial ', 'Computer shop advertisement ', NULL, '2020-11-14 10:50:41', '2020-11-14 10:50:41', 1),
-(12, 3, 'Cricket Campaign ', 'Need a best Organizer', NULL, '2020-11-14 10:52:37', '2020-11-14 10:52:37', 1);
+(12, 3, 'Cricket Campaign ', 'Need a best Organizer', NULL, '2020-11-14 10:52:37', '2020-11-14 10:52:37', 1),
+(13, 6, 'Find 5000 advertisement ', 'find advertisement for my by and sell web site', 'We can settle it', '2020-11-15 08:15:35', '2020-11-15 08:15:35', 3);
 
 -- --------------------------------------------------------
 
@@ -353,8 +356,11 @@ CREATE TABLE `task` (
 --
 
 INSERT INTO `task` (`task_id`, `task_name`, `project_id`, `priority_level`, `start_date`, `end_date`, `assigned_at`, `task_timeline`, `task_status`) VALUES
-(1, 'Create 100 emails', 3, 2, '2020-11-14', '2020-11-20', '2020-11-14 15:15:34', 0, 0),
-(2, 'Send 1st 100 emails', 3, 1, '2020-11-16', '2020-11-23', '2020-11-14 17:46:22', 0, 0);
+(1, 'Create 100 emails', 3, 2, '2020-11-14', '2020-11-20', '2020-11-14 15:15:34', 1, 0),
+(2, 'Send 1st 100 emails', 3, 1, '2020-11-16', '2020-11-23', '2020-11-14 17:46:22', 0, 0),
+(3, 'Find vehicle advertisement', 4, 3, '2020-11-15', '2020-11-19', '2020-11-15 08:30:41', 0, 0),
+(4, 'Find land advertisement', 4, 1, '2020-11-16', '2020-11-23', '2020-11-15 08:34:20', 0, 0),
+(5, 'Create 50 emails', 3, 1, '2020-11-18', '2020-11-24', '2020-11-15 09:30:57', 0, 0);
 
 -- --------------------------------------------------------
 
@@ -600,25 +606,25 @@ ALTER TABLE `freelancer_login`
 -- AUTO_INCREMENT for table `payment`
 --
 ALTER TABLE `payment`
-  MODIFY `payment_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `payment_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
 -- AUTO_INCREMENT for table `project`
 --
 ALTER TABLE `project`
-  MODIFY `project_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `project_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- AUTO_INCREMENT for table `quotations`
 --
 ALTER TABLE `quotations`
-  MODIFY `quotation_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
+  MODIFY `quotation_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
 
 --
 -- AUTO_INCREMENT for table `task`
 --
 ALTER TABLE `task`
-  MODIFY `task_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `task_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
 -- AUTO_INCREMENT for table `user`

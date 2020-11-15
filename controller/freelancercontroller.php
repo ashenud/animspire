@@ -299,5 +299,32 @@ if(isset($_REQUEST["status"]))
             
         break;
 
+        case "stage_task":
+    
+            $project_id = $_REQUEST["project_id"];
+            $task_id = $_REQUEST["task_id"];
+            
+            $result = $freelancerObj->markTaskAsCompleted($task_id);
+    
+            if ($result == 1) {
+
+                $msgSuccess = "Task Successfully Marked as Completed !";
+                $msgSuccess = base64_encode($msgSuccess);
+                
+                ?>
+                    <script>window.location = "../view/freelancer/freelancer-view-project.php?project_id=<?php echo $project_id; ?>&msgSuccess=<?php echo $msgSuccess; ?>" </script>  
+                <?php
+            }
+            else {
+                $msg = "Task not Marked as Completed!";
+                $msg = base64_encode($msg);
+                
+                ?>
+                    <script>window.location = "../view/freelancer/freelancer-view-project.php?project_id=<?php echo $project_id; ?>&msg=<?php echo $msg; ?>" </script>  
+                <?php
+            }
+            
+        break;
+
     }
 }

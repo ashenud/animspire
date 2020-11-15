@@ -146,16 +146,16 @@
             
         break;
 
-        case "stage_task":
+        case "delete_task":
     
             $project_id = $_REQUEST["project_id"];
             $task_id = $_REQUEST["task_id"];
             
-            $result = $proManagerObj->markTaskAsCompleted($task_id);
+            $result = $proManagerObj->deleteTask($task_id);
     
             if ($result == 1) {
 
-                $msgSuccess = "Task Successfully Marked as Completed !";
+                $msgSuccess = "Task Successfully Deleted !";
                 $msgSuccess = base64_encode($msgSuccess);
                 
                 ?>
@@ -163,7 +163,7 @@
                 <?php
             }
             else {
-                $msg = "Task not Marked as Completed!";
+                $msg = "Task not Deleted!";
                 $msg = base64_encode($msg);
                 
                 ?>

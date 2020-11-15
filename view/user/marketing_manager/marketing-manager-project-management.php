@@ -409,6 +409,30 @@
             </div>
         </div>
 
+        <!-- mark as delete modal -->
+        <div class="modal fade" id="project-delete" role="dialog">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">     
+                        <h4 class="col-12 modal-title text-center" style="padding-top: 10px">Delete Task</h4>
+                    </div>
+                    <div class="modal-body">
+                        
+                        <div class="row d-flex justify-content-center">
+                            <p> Are you sure?, You want to delete the project ?</p>
+                        </div>                            
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-info" data-dismiss="modal">Close</button>
+                        <form action="../../../controller/marketingManagerController.php?status=delete_project" method="POST">
+                            <input type="hidden" id="project_id4"  name="project_id">
+                            <button name="submit" type="submit" class="btn btn-danger">Delete</button>
+                        </form>
+                    </div>    
+                </div>            
+            </div>
+        </div>
+
     </body>
 
     <script language="javascript">
@@ -481,6 +505,11 @@
             $('#customer_img3').attr('src', '../../../images/Avatars/customer_images/'+customer_image);
             $("#start_date3").val(start_date);
             $("#end_date3").val(end_date);
+        });
+
+        $(document).on("click", "#project-delete-btn", function () {
+            var project_id= $(this).data('project_id');
+            $("#project_id4").val(project_id);
         });
         // <!-- end of send data to modal scripts -->
 

@@ -644,6 +644,26 @@ class MarketingManager {
 
     }
 
+    function updateProjectStatus($payment_id) {
+
+        $con = $GLOBALS['con'];
+        $sql = "UPDATE
+                    payment
+                SET
+                    project_status = 1
+                WHERE
+                    payment_id = '$payment_id'";
+        $results = $con->query($sql);
+
+        if ($results) {
+            return 1;
+        }
+        else {
+            return 0;
+        }
+
+    }  
+
     function editProject($project_id,$description,$project_manager_id,$start_date,$end_date) {
 
         $con = $GLOBALS['con'];
@@ -667,15 +687,15 @@ class MarketingManager {
 
     }
 
-    function updateProjectStatus($payment_id) {
+    function deleteProject($project_id) {
 
         $con = $GLOBALS['con'];
         $sql = "UPDATE
-                    payment
+                    project
                 SET
-                    project_status = 1
+                    project_status = '1'
                 WHERE
-                    payment_id = '$payment_id'";
+                    project_id = '$project_id'";
         $results = $con->query($sql);
 
         if ($results) {
@@ -684,7 +704,6 @@ class MarketingManager {
         else {
             return 0;
         }
-
     }
 
     function qouteCount() {
@@ -836,13 +855,13 @@ class projectManager {
 
     }  
 
-    function markTaskAsCompleted($task_id) {
+    function deleteTask($task_id) {
 
         $con = $GLOBALS['con'];
         $sql = "UPDATE
                     task
                 SET
-                    task_timeline = '1'
+                    task_status = '1'
                 WHERE
                     task_id = '$task_id'";
         $results = $con->query($sql);
@@ -853,7 +872,6 @@ class projectManager {
         else {
             return 0;
         }
-
     }    
 
     function getProjectDetails($project_id) {
@@ -929,6 +947,7 @@ class projectManager {
                     freelancer f ON f.freelancer_id = p.freelancer_id
                 WHERE
                     p.project_status = 0
+                    AND t.task_status = 0
                     AND p.project_id = '$project_id'";
         $results = $con->query($sql);
 

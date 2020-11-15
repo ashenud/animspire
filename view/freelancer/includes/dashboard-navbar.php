@@ -115,9 +115,9 @@
 </style>
 <div class="sidebar">
     <a href="./freelancer-dashboard.php" ><img src="../../images/Animspire-Logo.png" id="logo"></a>
-    <a href="#"><i class="fa fa-fw fa-home"></i><br>User Mng</a>
+    <a href="./freelancer-projects.php"><i class="fa fa-fw fa-wrench"></i><br>Projects</a>
     <hr>
-    <a href="#services"><i class="fa fa-fw fa-wrench"></i><br>Services</a>
+    <a href="#"><i class="fa fa-fw fa-home"></i><br>Other</a>
     <hr>
     <a href="#clients"><i class="fa fa-fw fa-user"></i><br>Clients</a>
     <hr>

@@ -102,51 +102,61 @@
                                                 }
                                             ?>
                                         </td>
-                                    <?php
+                                        <?php
 
-                                    if($project["freelancer_id"] == 0) {
-                                        ?>
-                                            <td>
-                                                <div class="btn-group d-flex">
-                                                    <button type="button" id='project-assign-btn' href='#project-assign' data-toggle='modal' data-project_name='<?php echo $project["project_name"];?>' data-project_id='<?php echo $project["project_id"];?>' data-cus_name='<?php echo $project["cus_name"];?>' data-customer_image='<?php echo $project["customer_image"];?>' data-pro_name='<?php echo $project["pro_name"];?>' data-project_manager_id='<?php echo $project["project_manager_id"];?>' data-description='<?php echo $project["description"];?>' data-start_date='<?php echo $project["start_date"];?>' data-end_date='<?php echo $project["end_date"];?>' class="btn btn-info btn-sm" style="padding: 0; margin: 2px; width: 35px; font-size: 9px;" ><i class="fas fa-plus" style="font-size: 10px; color: white" ></i>&nbsp;Asign</button>
-                                                    <?php
-                                                        if($project["project_timeline"]==0) {
-                                                            ?>
-                                                                <button type="button" class="btn btn-danger btn-sm" style="padding: 0; margin: 2px; width: 35px; font-size: 9px;" ><i class="fa fa-fw fa-power-off" style="font-size: 10px; color: white" ></i></button>
-                                                            <?php
-                                                        }
-                                                        else {
-                                                            ?>
-                                                                <button type="button" class="btn btn-success btn-sm" style="padding: 0; margin: 2px; width: 35px; font-size: 9px;" ><i class="fa fa-fw fa-power-off" style="font-size: 10px; color: white" ></i></button>
-                                                            <?php
-                                                        } 
-                                                    ?>
-                                                    </div>
-                                            </td>
-                                        <?php
-                                    }
-                                    else {
-                                        ?>
-                                            <td>
-                                                <div class="btn-group d-flex">
-                                                    <a id='project-view-btn' href='./pro-manager-view-project.php?project_id=<?php echo $project["project_id"]; ?>'  class="btn btn-warning btn-sm" style="padding: 0; padding-top: 8px; margin: 2px; width: 35px; font-size: 9px;" ><i class="fas fa-plus" style="font-size: 10px; color: white" ></i>&nbsp;View</a>
-                                                    <?php
-                                                        if($project["project_timeline"] == 0) {
-                                                            ?>
-                                                                <button type="button" id='project-stage-btn' href='#project-stage' data-toggle='modal' data-project_id='<?php echo $project["project_id"];?>' class="btn btn-danger btn-sm" style="padding: 0; margin: 2px; width: 35px; font-size: 9px;" ><i class="fa fa-fw fa-power-off" style="font-size: 10px; color: white" ></i></button>
-                                                            <?php
-                                                        }
-                                                        else {
-                                                            ?>
-                                                                <button type="button" class="btn btn-success btn-sm" style="padding: 0; margin: 2px; width: 35px; font-size: 9px;" ><i class="fa fa-fw fa-power-off" style="font-size: 10px; color: white" ></i></button>
-                                                            <?php
-                                                        } 
-                                                    ?>
-                                                    </div>
-                                            </td>
-                                        <?php
-                                    }
+                                        if($project["freelancer_id"] == 0) {
+                                            ?>
+                                                <td>
+                                                    <div class="btn-group d-flex">
+                                                        <button type="button" id='project-assign-btn' href='#project-assign' data-toggle='modal' data-project_name='<?php echo $project["project_name"];?>' data-project_id='<?php echo $project["project_id"];?>' data-cus_name='<?php echo $project["cus_name"];?>' data-customer_image='<?php echo $project["customer_image"];?>' data-pro_name='<?php echo $project["pro_name"];?>' data-project_manager_id='<?php echo $project["project_manager_id"];?>' data-description='<?php echo $project["description"];?>' data-start_date='<?php echo $project["start_date"];?>' data-end_date='<?php echo $project["end_date"];?>' class="btn btn-info btn-sm" style="padding: 0; margin: 2px; width: 35px; font-size: 9px;" ><i class="fas fa-plus" style="font-size: 10px; color: white" ></i>&nbsp;Asign</button>
+                                                        <?php
+                                                            if($project["project_timeline"]==0) {
+                                                                ?>
+                                                                    <button type="button" class="btn btn-danger btn-sm" style="padding: 0; margin: 2px; width: 35px; font-size: 9px;" ><i class="fa fa-fw fa-power-off" style="font-size: 10px; color: white" ></i></button>
+                                                                <?php
+                                                            }
+                                                            else {
+                                                                ?>
+                                                                    <button type="button" class="btn btn-success btn-sm" style="padding: 0; margin: 2px; width: 35px; font-size: 9px;" ><i class="fa fa-fw fa-power-off" style="font-size: 10px; color: white" ></i></button>
+                                                                <?php
+                                                            } 
+                                                        ?>
+                                                        </div>
+                                                </td>
+                                            <?php
+                                        }
+                                        else {
+                                            ?>
+                                                <td>
+                                                    <div class="btn-group d-flex">
+                                                        <a id='project-view-btn' href='./pro-manager-view-project.php?project_id=<?php echo $project["project_id"]; ?>'  class="btn btn-info btn-sm" style="padding: 0; padding-top: 8px; margin: 2px; width: 35px; font-size: 9px;" ><i class="fas fa-external-link-alt" style="font-size: 10px; color: white" ></i>&nbsp;View</a>
+                                                        <?php
+                                                            if($project["project_timeline"] == 0) {
+                                                                ?>
+                                                                    <button type="button" id='project-stage-btn' href='#project-stage' data-toggle='modal' data-project_id='<?php echo $project["project_id"];?>' class="btn btn-warning btn-sm" style="padding: 0; margin: 2px; width: 35px; font-size: 9px;" ><i class="fas fa-redo-alt" style="font-size: 10px; color: white" ></i></button>
+                                                                <?php
+                                                            }
+                                                            else {
+                                                                ?>
+                                                                    <button type="button" class="btn btn-success btn-sm" style="padding: 0; margin: 2px; width: 35px; font-size: 9px;" ><i class="fas fa-check" style="font-size: 10px; color: white" ></i></button>
+                                                                <?php
+                                                            } 
+                                                        ?>
+                                                        </div>
+                                                </td>
+                                            <?php
+                                        }
+                                    ?>
+                                    </tr>
+                                    <?php
                                 }
+                            }
+                            else {
+                                ?>
+                                <tr>
+                                    <td align="center" style="text-align:center; color:red" colspan="10">No result found</td>
+                                </tr>
+                                <?php
                             }
                         ?>
                     </table>

@@ -140,6 +140,32 @@
             }
             
         break;
+
+        case "delete_project":
+    
+            $project_id = $_REQUEST["project_id"];
+            
+            $result = $marketingManagerObj->deleteProject($project_id);
+    
+            if ($result == 1) {
+
+                $msgSuccess = "Project Successfully Deleted !";
+                $msgSuccess = base64_encode($msgSuccess);
+                
+                ?>
+                    <script>window.location = "../view/user/marketing_manager/marketing-manager-project-management.php?msgSuccess=<?php echo $msgSuccess; ?>" </script>  
+                <?php
+            }
+            else {
+                $msg = "Project not Deleted!";
+                $msg = base64_encode($msg);
+                
+                ?>
+                    <script>window.location = "../view/user/marketing_manager/marketing-manager-project-management.php?msg=<?php echo $msg; ?>" </script>  
+                <?php
+            }
+            
+        break;  
     
         case "payment_request":
     
