@@ -1,45 +1,53 @@
 <script type="text/javascript">
     
     $(document).ready(function () {
-        var customer_name = '<?php echo $_REQUEST['customer_name']; ?>';
-        var customer_id = '<?php echo $_REQUEST['customer_id']; ?>';
+        var freelancer1_id = '<?php echo $_REQUEST['freelancer1_id']; ?>';
+        var freelancer2_id = '<?php echo $_REQUEST['freelancer2_id']; ?>';
+        var freelancer1_name = '<?php echo $_REQUEST['freelancer1_name']; ?>';
+        var freelancer2_name = '<?php echo $_REQUEST['freelancer2_name']; ?>';
         $.ajax({
             type: 'POST',
-            url: 'loadings/customer-analysis.php',
+            url: 'loadings/freelancer-analysis.php',
             data: {
-                'customer_id': customer_id
+                'freelancer1_id': freelancer1_id,
+                'freelancer2_id': freelancer2_id,
+                'freelancer1_name': freelancer1_name,
+                'freelancer2_name': freelancer2_name
             },
             success: function (data) {
 
-                var customer = JSON.parse(data);
-
-                if(customer.quote_count > 0) {
-                    // console.log(customer);
-                    drowChart(customer.series);
-                }
-                else {
-                    swal("Someting went wrong!", `No data for customer ${customer_name} !`, "error");
-                }
+                var freelancers = JSON.parse(data);
+                // console.log(freelancers);
+                drowChart(freelancers.series,freelancer1_name,freelancer2_name);
             }
 
         });
 
     });
 
-    function drowChart(series) {
+
+    function drowChart(series,freelancer1_name,freelancer2_name) {
         var size=0;
 
         $('#chart_div').highcharts({
 
             chart: {
-                type: 'column'
+                type: 'bar'
             },
             title: {
-                text: 'CUSTOMER ANALYSIS',
+                text: 'Freelancer Comparison of Task',
                 x: -20, 
+                align: 'left',
+                x: -10,
+            },
+            subtitle: {
+                text: `Task Comparison of ${freelancer1_name} Vs. ${freelancer2_name}`,
+                align: 'left',
+                x: -10,
+
             },
             xAxis: {
-                categories: [ 'Analysis' ],
+                categories: [ freelancer1_name,freelancer2_name ],
                 crosshair: true
             },
             yAxis: {
@@ -48,7 +56,7 @@
                     text: 'Value()'
                 }
             },
-            colors: ['#0661af','#a569bd','#ff3547','#ffc107','#00c851'],
+            colors: ['#0661af','#00c851','#ffc107'],
             tooltip: {
                 headerFormat:   '<span style="font-size:15px; text-transform:uppercase">{point.key}</span><table style="width:200px">',
                 pointFormat:    '<tr><td style="color:{series.color};padding:0"><b style="font-size:12px"> {series.name} : </b></td>' +

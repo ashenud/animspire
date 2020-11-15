@@ -220,7 +220,7 @@
                 <form action="../../../controller/proManagerController.php?status=add_task" method="POST"> 
                     <div class="modal-content">
                         <div class="modal-header">     
-                            <h4 class="col-12 modal-title text-center" style="padding-top: 10px">Start Project</h4>
+                            <h4 class="col-12 modal-title text-center" style="padding-top: 10px">Add New Task</h4>
                         </div>
                         <div class="modal-body">
                             <div class="row">
@@ -289,7 +289,7 @@
                 <form action="../../../controller/proManagerController.php?status=edit_task" method="POST"> 
                     <div class="modal-content">
                         <div class="modal-header">     
-                            <h4 class="col-12 modal-title text-center" style="padding-top: 10px">Start Project</h4>
+                            <h4 class="col-12 modal-title text-center" style="padding-top: 10px">Edit Task</h4>
                         </div>
                         <div class="modal-body">
                             <div class="row">
@@ -358,7 +358,7 @@
             <div class="modal-dialog">
                 <div class="modal-content">
                     <div class="modal-header">     
-                        <h4 class="col-12 modal-title text-center" style="padding-top: 10px">Start Project</h4>
+                        <h4 class="col-12 modal-title text-center" style="padding-top: 10px">View Task</h4>
                     </div>
                     <div class="modal-body">
                         <div class="row">
