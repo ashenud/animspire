@@ -290,9 +290,7 @@
                                 </div>
                             </div> 
                             <div class="row">
-                                <div class="form-group" style="margin-left: 35px; width: 40%">
-                                    <img src="../../../images/icons/unpaid.png" style=" height: 60px; width: 120px; margin: 10px 20px 10px 20px;">
-                                </div>
+                                <div class="form-group" style="margin-left: 35px; width: 40%"> </div>
                                 <div class="form-group" style="margin-left: 25px; width: 40%">
                                   <label for="total">Total :</label>
                                   <input type="number" class="form-control" min="0" id="total"  name="total" required>

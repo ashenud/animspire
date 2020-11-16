@@ -51,7 +51,6 @@
     
                 $msgSuccess = "Quotation Successfully Send!";
                 $msgSuccess = base64_encode($msgSuccess);
-                $chat_id = base64_encode($receiver_id);
                 
                 ?>
                     <script>window.location = "../view/user/marketing_manager/marketing-manager-quotations.php?msgSuccess=<?php echo $msgSuccess; ?>" </script>  
@@ -61,7 +60,6 @@
             else {
                 $msg = "Quotation not Send!";
                 $msg = base64_encode($msg);
-                $chat_id = base64_encode($receiver_id);
                 
                 ?>
                     <script>window.location = "../view/user/marketing_manager/marketing-manager-quotations.php?msg=<?php echo $msg; ?>" </script>  
@@ -89,7 +87,6 @@
     
                 $msgSuccess = "Project Successfully Assigned!";
                 $msgSuccess = base64_encode($msgSuccess);
-                $chat_id = base64_encode($receiver_id);
                 
                 ?>
                     <script>window.location = "../view/user/marketing_manager/marketing-manager-project-management.php?msgSuccess=<?php echo $msgSuccess; ?>" </script>  
@@ -99,7 +96,6 @@
             else {
                 $msg = "Quotation not Assigned!";
                 $msg = base64_encode($msg);
-                $chat_id = base64_encode($receiver_id);
                 
                 ?>
                     <script>window.location = "../view/user/marketing_manager/marketing-manager-project-management.php?msg=<?php echo $msg; ?>" </script>  
@@ -122,7 +118,6 @@
     
                 $msgSuccess = "Project Successfully Edited!";
                 $msgSuccess = base64_encode($msgSuccess);
-                $chat_id = base64_encode($receiver_id);
                 
                 ?>
                     <script>window.location = "../view/user/marketing_manager/marketing-manager-project-management.php?msgSuccess=<?php echo $msgSuccess; ?>" </script>  
@@ -132,7 +127,6 @@
             else {
                 $msg = "Quotation not Edited!";
                 $msg = base64_encode($msg);
-                $chat_id = base64_encode($receiver_id);
                 
                 ?>
                     <script>window.location = "../view/user/marketing_manager/marketing-manager-project-management.php?msg=<?php echo $msg; ?>" </script>  
@@ -180,7 +174,6 @@
     
                 $msgSuccess = "Payment Request Successfully Send!";
                 $msgSuccess = base64_encode($msgSuccess);
-                $chat_id = base64_encode($receiver_id);
                 
                 ?>
                     <script>window.location = "../view/user/marketing_manager/marketing-manager-quotations.php?msgSuccess=<?php echo $msgSuccess; ?>" </script>  
@@ -190,7 +183,6 @@
             else {
                 $msg = "Payment Request not Send!";
                 $msg = base64_encode($msg);
-                $chat_id = base64_encode($receiver_id);
                 
                 ?>
                     <script>window.location = "../view/user/marketing_manager/marketing-manager-quotations.php?msg=<?php echo $msg; ?>" </script>  

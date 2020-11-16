@@ -1,7 +1,8 @@
 <?php
 include '../../../../commons/session.php';
-include '../../../../model/user_model.php';
-include_once realpath(dirname(__FILE__)."/../commons/dbConnection.php");
+$ds = DIRECTORY_SEPARATOR;
+$base_dir = realpath(dirname(__FILE__)  . $ds . '..' . $ds . '..' . $ds . '..' . $ds . '..') . $ds;
+require_once("{$base_dir}commons{$ds}dbConnection.php");
 $dbConnObj = new dbConnetion();
 
 $project1_id=$_POST['project1_id'];

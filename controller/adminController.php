@@ -265,7 +265,6 @@
 
             $msgSuccess = "Freelancer Successfully Accepted!";
             $msgSuccess = base64_encode($msgSuccess);
-            $chat_id = base64_encode($receiver_id);
             
             ?>
                 <script>window.location = "../view/user/system_admin/admin-notification.php?msgSuccess=<?php echo $msgSuccess; ?>" </script>  
@@ -275,7 +274,6 @@
         else {
             $msg = "Error while Accepting";
             $msg = base64_encode($msg);
-            $chat_id = base64_encode($receiver_id);
             
             ?>
                 <script>window.location = "../view/user/system_admin/admin-notification.php?msg=<?php echo $msg; ?>" </script>  

@@ -37,11 +37,9 @@
                 <?php
             }
             
-            break;
+        break;
     
      
-        default:
-
-            echo "Invalid Parameters";
+        default: echo "Invalid Parameters";
 
     }
