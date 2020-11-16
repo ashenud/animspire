@@ -7,6 +7,8 @@
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <link rel='stylesheet' type="text/css" href="../../../css/style-quote-details.css"/>
+        <?php include '../../../includes/dashboard_includes_css.php';?>
+        <?php include '../../../includes/dashboard_includes_script.php'; ?>
         <style>
             .modal-dialog{
                 padding-top: 30px;
@@ -21,10 +23,6 @@
             }
             
         </style>
-        
-        
-        <?php include '../../../includes/dashboard_includes_css.php';?>
-        <?php include '../../../includes/dashboard_includes_script.php'; ?>
       
         <?php
         
@@ -78,7 +76,7 @@
                <div>
                     <div class="col-md-12">&nbsp;</div>
                 </div>
-                <div align="center" id="loading_div" class="scroll mt-3"> </div>  
+                <div align="center" id="loading_div" class="scroll mt-3" style="overflow-y:scroll;"> </div>  
             </div>
             
         </div>
@@ -130,12 +128,42 @@
                     </div>    
                 </div>
             </div>
-        </div>
-            
-            
-        </div>
-        
+        </div>        
         
     </body>
+
+    <script language="javascript">
+
+        $(document).ready(function() {
+            load_quotations('0','1');
+        });
+
+        function load_quotations(page,type) {
+            var status = type;
+            // console.log(status);
+
+            $('#loading_div').html('<p><img src="../../../images/loading.gif"  /></p>');
+            $('#loading_div').load("./loadings/quotations.php", {
+                'status': status,
+                'page': page
+            });  
+        }
+
+        // <!-- send data to modal scripts -->
+        $(document).on("click", "#view-quote-btn", function () {
+            var subject= $(this).data('subject');
+            var requirements= $(this).data('requirements');
+            var remarks= $(this).data('remarks');
+            var status= $(this).data('status');
+            
+            $("#view-subject").val(subject);
+            $("#view-remarks").val(remarks);
+            $("#view-requirements").val(requirements);
+            $("#view-status").val(status);
+        });
+        // <!-- end of send data to modal scripts -->
+
+
+    </script>
 
 </html>

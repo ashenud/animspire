@@ -2,7 +2,7 @@
 <?php
 include '../../../../commons/session.php';
 include '../../../../model/user_model.php';
-$financeManagerObj = new FinanceManager(); //must need for navbar
+$financeManagerObj = new FinanceManager();
 
 $status ="";
 if ($_REQUEST['status'] != "") {

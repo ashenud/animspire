@@ -9,6 +9,11 @@
         <link rel='stylesheet' type="text/css" href="../../../css/style-report-management.css"/>
         <?php include '../../../includes/dashboard_includes_css.php';?>
         <?php include '../../../includes/dashboard_includes_script.php'; ?>
+
+        <script src="https://code.highcharts.com/highcharts.js"></script>
+        <script src="https://code.highcharts.com/modules/exporting.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/0.5.0-beta4/html2canvas.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/0.5.0-beta4/html2canvas.svg.js"></script>
       
         <?php
         
@@ -26,7 +31,7 @@
             }
             /* end permission check */
 
-            $userRoleResult = $userObj->getAllUsers();
+            $customers = $userObj->getAllCustomers();
             
             $user_id = $_SESSION["user"]["user_id"];
             $userId = base64_encode($user_id);
@@ -47,11 +52,17 @@
                        <div class="col-md-4">
                            <select id="customer_id" class="form-control admin-name">
                                 <option value="">Select Customer</option>
-                                
+                                <?php
+                                    while($customer = $customers->fetch_assoc()) {
+                                    ?>
+                                    <option value="<?php echo $customer["customer_id"]; ?>"><?php echo $customer["customer_fname"].' '.$customer["customer_lname"]; ?></option>
+                                    <?php
+                                    }
+                                ?>
                            </select>
                         </div>
                         <div class="col-md-4">
-                            <button name="report-generate-2" class="btn btn-success" id="report-generate-2" onclick="">Generate Report</button>
+                            <button name="report-generate-2" class="btn btn-success" id="report-generate-2" onclick="generate_report()">Generate Report</button>
                         </div>
                    </div>
                </div> 
@@ -62,5 +73,27 @@
             </div>
         </div>
     </body>
+
+    <script language="javascript">
+
+        function generate_report() {
+
+            if($('#customer_id').val() != '') {
+                var customer_name = $('#customer_id :selected').text();
+                var customer_id = $('#customer_id').val();
+
+                $('#chart_div').html('<p><img src="../../../images/loading.gif"  /></p>');
+                $('#chart_div').load("./loadings/report-customer-analysis.php", {
+                    'customer_name': customer_name,
+                    'customer_id': customer_id
+                });
+            }
+            else {
+                swal("Someting went wrong!", "Please Select a customer!", "error");
+            }
+              
+        }
+
+    </script>
 
 </html>
