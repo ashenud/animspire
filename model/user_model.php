@@ -958,6 +958,49 @@ class projectManager {
 
 class FinanceManager {
 
+    function getAllPaymentsDetailsSearch($status) {
+
+        $con = $GLOBALS['con'];
+        $sql = "SELECT 
+                    p.payment_id,
+                    p.quotation_id,
+                    IFNULL(pr.project_id,'-') AS project_id,
+                    IFNULL(pr.project_name,'Project Not Assign') AS project_name,
+                    (SELECT
+                        IFNULL(CONCAT(u.user_fname, ' ', u.user_lname),'') AS pro_man_name
+                    FROM
+                        user u
+                    WHERE
+                        u.user_id = pr.project_manager_id
+                        ) AS pro_man_name,
+                    IFNULL(pr.start_date,'-') AS start_date,
+                    IFNULL(pr.end_date,'-') AS end_date,
+                    q.subject,
+                    CONCAT(c.customer_fname, ' ', c.customer_lname) AS name,
+                    c.customer_country AS address,
+                    p.payment_description,
+                    p.amount,
+                    p.paid_amount,
+                    p.payment_method,
+                    DATE(p.requested_date) AS requested_date,
+                    IFNULL(DATE(p.paid_date),'-') AS paid_date,
+                    p.status
+                FROM 
+                    payment p
+                        INNER JOIN
+                    customer c ON c.customer_id = p.customer_id
+                        INNER JOIN
+                    quotations q ON q.quotation_id = p.quotation_id
+                        LEFT JOIN
+                    project pr ON pr.quotation_id = q.quotation_id
+                WHERE
+                    c.customer_status = 1
+                    $status";
+        $results = $con->query($sql);
+
+        return $results;
+    }
+
     function getAllProjectDetails($user_id) {
 
         $con = $GLOBALS['con'];
