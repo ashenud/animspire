@@ -14,7 +14,7 @@
       
             include '../../../model/user_model.php';
             $userObj = new User(); //must need for navbar
-            $adminObj = new Admin(); //must need for navbar
+            $financeManagerObj = new FinanceManager(); //must need for navbar
 
             /* permission check */
             if(!isset($_SESSION["user"]["role_id"])) {
@@ -34,8 +34,8 @@
                 <?php
             }
             
-            $userId = $_REQUEST["user_id"];
-            $userId = base64_decode($userId);
+            $user_id = $_REQUEST["user_id"];
+            $userId = base64_decode($user_id);
             
             $userResult = $userObj->viewUser($userId);
             

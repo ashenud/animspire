@@ -31,6 +31,7 @@
             include '../../../model/user_model.php';
             
             $userObj = new User();
+            $financeManagerObj = new FinanceManager(); //must need for navbar
 
             /* permission check */
             if(!isset($_SESSION["user"]["role_id"])) {
@@ -43,8 +44,8 @@
 
             $userRoleResult = $userObj->getAllUsers();
             
-            $userId = $_SESSION["user"]["user_id"];
-            $userId = base64_encode($userId);
+            $user_id = $_SESSION["user"]["user_id"];
+            $userId = base64_encode($user_id);
         
         ?>
         

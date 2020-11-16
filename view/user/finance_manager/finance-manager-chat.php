@@ -16,6 +16,7 @@
          
             include '../../../model/user_model.php';
             $userObj = new User();
+            $financeManagerObj = new FinanceManager(); //must need for navbar
 
             /* permission check */
             if(!isset($_SESSION["user"]["role_id"])) {

@@ -15,6 +15,7 @@
             include '../../../model/user_model.php';
             
             $userObj = new User();
+            $financeManagerObj = new FinanceManager(); //must need for navbar
 
             /* permission check */
             if(!isset($_SESSION["user"]["role_id"])) {
@@ -27,8 +28,8 @@
 
             $userRoleResult = $userObj->getAllUsers();
             
-            $userId = $_SESSION["user"]["user_id"];
-            $userId = base64_encode($userId);
+            $user_id = $_SESSION["user"]["user_id"];
+            $userId = base64_encode($user_id);
         
         ?>
         
@@ -47,8 +48,8 @@
                              <h4>FINANCE DETAILS</h4>
                      </div>
                      <div class="col-md-4" style="padding: 12px 20px 1px 100px;">
-                        <button type="button" class="btn btn-success btn-sm" onclick="#" style="width: 80px; padding: 4px; font-size: 15px">Paid</button>
-                        <button type="button" class="btn btn-warning btn-sm" onclick="#" style="width: 80px; padding: 4px; font-size: 15px; color: white">Pending</button>
+                        <button type="button" class="btn btn-success btn-sm" onclick="" style="width: 80px; padding: 4px; font-size: 15px">Paid</button>
+                        <button type="button" class="btn btn-warning btn-sm" onclick="" style="width: 80px; padding: 4px; font-size: 15px; color: white">Pending</button>
                      </div>
                    </div>
                </div>

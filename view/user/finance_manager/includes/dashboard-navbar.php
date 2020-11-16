@@ -118,11 +118,9 @@
     <!--- Finance Manager functions  --->
     <a href="./finance-manager-finance-management.php"><i class="fa fa-fw fa-file-invoice-dollar"></i><br>Finance</a>
     <hr>
-    <a href="./finance-manager-quotation.php"><i class="fa fa-fw fa-clipboard-list"></i><br>Quotation</a>
+    <a href="./finance-manager-quotation-management.php"><i class="fa fa-fw fa-clipboard-list"></i><br>Quotation</a>
     <hr>
-    <a href="./finance-manager-performance.php"><i class="fa fa-fw fa-user"></i><br>Performance</a>
-    <hr>
-    <a href="./finance-manager-report.php"><i class="fa fa-fw fa-file-alt"></i><br>Reports</a>
+    <a href="./finance-manager-report-management.php"><i class="fa fa-fw fa-file-alt"></i><br>Reports</a>
     <hr>
     <a href="./finance-manager-chat.php"><i class="fa fa-fw fa-envelope"></i><br>Chat</a>
     <hr>
