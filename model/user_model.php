@@ -545,7 +545,8 @@ class MarketingManager {
                     p.project_manager_id,
                     CONCAT(u.user_fname, ' ', u.user_lname) AS pro_name,
                     p.start_date,
-                    p.end_date
+                    p.end_date,
+                    p.project_status
                 FROM
                     project p
                         INNER JOIN
@@ -553,13 +554,25 @@ class MarketingManager {
                         INNER JOIN
                     user u ON u.user_id = p.project_manager_id
                 WHERE
-                    c.customer_status = 1
-                    AND p.project_status = 0";
+                    c.customer_status = 1";
         $results = $con->query($sql);
 
         return $results;
     }
-    
+
+    function getAllCustomersSearch($fname){
+        $con = $GLOBALS['con'];
+        $sql = "SELECT 
+                    * 
+                FROM 
+                    customer c
+                {$fname}
+                ORDER BY
+                    c.customer_id";
+        $userResults = $con->query($sql);
+        return $userResults;
+    }
+
     function getPaymentForQuoteId($id) {
 
         $con = $GLOBALS['con'];
@@ -696,6 +709,63 @@ class MarketingManager {
                     project_status = '1'
                 WHERE
                     project_id = '$project_id'";
+        $results = $con->query($sql);
+
+        if ($results) {
+            return 1;
+        }
+        else {
+            return 0;
+        }
+    }
+
+    function activateProject($project_id) {
+
+        $con = $GLOBALS['con'];
+        $sql = "UPDATE
+                    project
+                SET
+                    project_status = '0'
+                WHERE
+                    project_id = '$project_id'";
+        $results = $con->query($sql);
+
+        if ($results) {
+            return 1;
+        }
+        else {
+            return 0;
+        }
+    }
+
+    function deleteCustomer($customer_id) {
+
+        $con = $GLOBALS['con'];
+        $sql = "UPDATE
+                    customer
+                SET
+                    customer_status = '0'
+                WHERE
+                    customer_id = '$customer_id'";
+        $results = $con->query($sql);
+
+        if ($results) {
+            return 1;
+        }
+        else {
+            return 0;
+        }
+    }
+
+    function activateCustomer($customer_id) {
+
+        $con = $GLOBALS['con'];
+        $sql = "UPDATE
+                    customer
+                SET
+                    customer_status = '1'
+                WHERE
+                    customer_id = '$customer_id'";
         $results = $con->query($sql);
 
         if ($results) {
@@ -872,6 +942,25 @@ class projectManager {
         else {
             return 0;
         }
+    }  
+
+    function activateTask($task_id) {
+
+        $con = $GLOBALS['con'];
+        $sql = "UPDATE
+                    task
+                SET
+                    task_status = '0'
+                WHERE
+                    task_id = '$task_id'";
+        $results = $con->query($sql);
+
+        if ($results) {
+            return 1;
+        }
+        else {
+            return 0;
+        }
     }    
 
     function getProjectDetails($project_id) {
@@ -938,7 +1027,8 @@ class projectManager {
                     p.end_date,
                     t.start_date AS t_start_date,
                     t.end_date AS t_end_date,
-                    t.task_timeline
+                    t.task_timeline,
+                    t.task_status
                 FROM
                     task t
                         INNER JOIN
@@ -947,7 +1037,6 @@ class projectManager {
                     freelancer f ON f.freelancer_id = p.freelancer_id
                 WHERE
                     p.project_status = 0
-                    AND t.task_status = 0
                     AND p.project_id = '$project_id'";
         $results = $con->query($sql);
 

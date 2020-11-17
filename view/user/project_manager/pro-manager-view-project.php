@@ -143,7 +143,19 @@
                                             <div class="btn-group d-flex">
                                                 <button type="button" id='task-view-btn' href='#task-view' data-toggle='modal' data-task_id='<?php echo $task["task_id"];?>' data-task_name='<?php echo $task["task_name"];?>' data-priority_id='<?php echo $task["priority_id"];?>' data-start_date='<?php echo $task["start_date"];?>' data-end_date='<?php echo $task["end_date"];?>' data-t_start_date='<?php echo $task["t_start_date"];?>' data-t_end_date='<?php echo $task["t_end_date"];?>' data-project_id='<?php echo $task["project_id"];?>' data-project_name='<?php echo $task["project_name"];?>' data-freelancer_id='<?php echo $task["freelancer_id"];?>' data-freelancer_name='<?php echo $task["freelancer_name"];?>' data-freelancer_image='<?php echo $task["freelancer_image"];?>' class="btn btn-info btn-sm" style="padding: 0; margin: 2px; width: 35px; font-size: 9px;" ><i class="fas fa-plus" style="font-size: 10px; color: white" ></i>&nbsp;View</button>
                                                 <button type="button" id='task-edit-btn' href='#task-edit' data-toggle='modal' data-task_id='<?php echo $task["task_id"];?>' data-task_name='<?php echo $task["task_name"];?>' data-priority_id='<?php echo $task["priority_id"];?>' data-start_date='<?php echo $task["start_date"];?>' data-end_date='<?php echo $task["end_date"];?>' data-t_start_date='<?php echo $task["t_start_date"];?>' data-t_end_date='<?php echo $task["t_end_date"];?>' data-project_id='<?php echo $task["project_id"];?>' data-project_name='<?php echo $task["project_name"];?>' data-freelancer_id='<?php echo $task["freelancer_id"];?>' data-freelancer_name='<?php echo $task["freelancer_name"];?>' data-freelancer_image='<?php echo $task["freelancer_image"];?>' class="btn btn-warning btn-sm" style="padding: 0; margin: 2px; width: 35px; font-size: 9px;" ><i class="fas fa-plus" style="font-size: 10px; color: white" ></i>&nbsp;Edit</button>
-                                                <button type="button" id='task-delete-btn' href='#task-delete' data-toggle='modal' data-task_id='<?php echo $task["task_id"];?>' data-project_id='<?php echo $task["project_id"];?>' class="btn btn-danger btn-sm" style="padding: 0; margin: 2px; width: 35px; font-size: 9px;" ><i class="fa fa-fw fa-power-off" style="font-size: 10px; color: white" ></i></button>
+                                                <?php
+                                                if($task['task_status'] == 0){
+                                                    ?>
+                                                        <button type="button" id='task-delete-btn' href='#task-delete' data-toggle='modal' data-task_id='<?php echo $task["task_id"];?>' data-project_id='<?php echo $task["project_id"];?>' class="btn btn-danger btn-sm" style="padding: 0; margin: 2px; width: 35px; font-size: 9px;" ><i class="fa fa-fw fa-toggle-off" style="font-size: 22px; color: white" ></i></button>
+                                                    <?php
+                                                }
+                                                else {
+                                                    ?>
+                                                        <button type="button" id='task-activate-btn' href='#task-activate' data-toggle='modal' data-task_id='<?php echo $task["task_id"];?>' data-project_id='<?php echo $task["project_id"];?>' class="btn btn-secondary btn-sm" style="padding: 0; margin: 2px; width: 35px; font-size: 9px;" ><i class="fa fa-fw fa-toggle-on" style="font-size: 22px; color: white" ></i></button>
+                                                    <?php
+                                                }
+                                                ?>
+                                                
                                             </div>
                                         </td>
                                     </tr>
@@ -429,6 +441,31 @@
                 </div>            
             </div>
         </div>
+
+        <!-- mark as activate modal -->
+        <div class="modal fade" id="task-activate" role="dialog">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">     
+                        <h4 class="col-12 modal-title text-center" style="padding-top: 10px">Activate Task</h4>
+                    </div>
+                    <div class="modal-body">
+                        
+                        <div class="row d-flex justify-content-center">
+                            <p> Are you sure?, You want to activate the task ?</p>
+                        </div>                            
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-info" data-dismiss="modal">Close</button>
+                        <form action="../../../controller/proManagerController.php?status=activate_task" method="POST">
+                            <input type="hidden" name="task_id" id="task_id5">
+                            <input type="hidden" id="project_id5"  name="project_id">
+                            <button name="submit" type="submit" class="btn btn-danger">Activate</button>
+                        </form>
+                    </div>    
+                </div>            
+            </div>
+        </div>
         
     </body>
 
@@ -523,6 +560,14 @@
             
             $("#task_id4").val(task_id);
             $("#project_id4").val(project_id);
+        });
+
+        $(document).on("click", "#task-activate-btn", function () {
+            var task_id= $(this).data('task_id');
+            var project_id= $(this).data('project_id');
+            
+            $("#task_id5").val(task_id);
+            $("#project_id5").val(project_id);
         });
         // <!-- end of send data to modal scripts -->
 

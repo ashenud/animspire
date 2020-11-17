@@ -171,6 +171,33 @@
                 <?php
             }
             
+        break;
+
+        case "activate_task":
+    
+            $project_id = $_REQUEST["project_id"];
+            $task_id = $_REQUEST["task_id"];
+            
+            $result = $proManagerObj->activateTask($task_id);
+    
+            if ($result == 1) {
+
+                $msgSuccess = "Task Successfully Activated !";
+                $msgSuccess = base64_encode($msgSuccess);
+                
+                ?>
+                    <script>window.location = "../view/user/project_manager/pro-manager-view-project.php?project_id=<?php echo $project_id; ?>&msgSuccess=<?php echo $msgSuccess; ?>" </script>  
+                <?php
+            }
+            else {
+                $msg = "Task not Activated!";
+                $msg = base64_encode($msg);
+                
+                ?>
+                    <script>window.location = "../view/user/project_manager/pro-manager-view-project.php?project_id=<?php echo $project_id; ?>&msg=<?php echo $msg; ?>" </script>  
+                <?php
+            }
+            
         break;   
 
         case "stage_project":

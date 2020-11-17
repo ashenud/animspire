@@ -137,7 +137,19 @@
                                         <div class="btn-group d-flex">
                                             <button type="button" id='project-view-btn' href='#project-view' data-toggle='modal' data-project_name='<?php echo $project["project_name"];?>' data-project_id='<?php echo $project["project_id"];?>' data-cus_name='<?php echo $project["cus_name"];?>' data-customer_image='<?php echo $project["customer_image"];?>' data-pro_name='<?php echo $project["pro_name"];?>' data-description='<?php echo $project["description"];?>' data-start_date='<?php echo $project["start_date"];?>' data-end_date='<?php echo $project["end_date"];?>' class="btn btn-info btn-sm" style="padding: 0; margin: 2px; width: 35px; font-size: 9px;" ><i class="fas fa-external-link-alt" style="font-size: 10px" ></i>&nbsp;View</button>
                                             <button type="button" id='project-edit-btn' href='#project-edit' data-toggle='modal' data-project_name='<?php echo $project["project_name"];?>' data-project_id='<?php echo $project["project_id"];?>' data-cus_name='<?php echo $project["cus_name"];?>' data-customer_image='<?php echo $project["customer_image"];?>' data-pro_name='<?php echo $project["pro_name"];?>' data-project_manager_id='<?php echo $project["project_manager_id"];?>' data-description='<?php echo $project["description"];?>' data-start_date='<?php echo $project["start_date"];?>' data-end_date='<?php echo $project["end_date"];?>' class="btn btn-warning btn-sm" style="padding: 0; margin: 2px; width: 35px; font-size: 9px;" ><i class="fas fa-plus" style="font-size: 10px; color: white" ></i>&nbsp;Edit</button>
-                                            <button type="button" id='project-delete-btn' href='#project-delete' data-toggle='modal' data-project_id='<?php echo $project["project_id"];?>' class="btn btn-danger btn-sm" style="padding: 0; margin: 2px; width: 35px; font-size: 9px;" ><i class="fa fa-fw fa-power-off" style="font-size: 10px; color: white" ></i></button>
+                                            <?php
+                                            if($project['project_status'] == 0){
+                                                ?>
+                                                    <button type="button" id='project-delete-btn' href='#project-delete' data-toggle='modal' data-project_id='<?php echo $project["project_id"];?>' class="btn btn-danger btn-sm" style="padding: 0; margin: 2px; width: 35px; font-size: 9px;" ><i class="fas fa-fw fa-toggle-off" style="font-size: 22px; color: white" ></i></button>
+                                                <?php
+                                            }
+                                            else {
+                                                ?>
+                                                    <button type="button" id='project-activate-btn' href='#project-activate' data-toggle='modal' data-project_id='<?php echo $project["project_id"];?>' class="btn btn-secondary btn-sm" style="padding: 0; margin: 2px; width: 35px; font-size: 9px;" ><i class="fa fa-fw fa-toggle-on" style="font-size: 22px; color: white" ></i></button>
+                                                <?php
+                                            }
+                                            ?>                                            
+                                            
                                         </div>
                                     </td>
                                 </tr>
@@ -414,19 +426,43 @@
             <div class="modal-dialog">
                 <div class="modal-content">
                     <div class="modal-header">     
-                        <h4 class="col-12 modal-title text-center" style="padding-top: 10px">Delete Task</h4>
+                        <h4 class="col-12 modal-title text-center" style="padding-top: 10px">Inactivate Project</h4>
                     </div>
                     <div class="modal-body">
                         
                         <div class="row d-flex justify-content-center">
-                            <p> Are you sure?, You want to delete the project ?</p>
+                            <p> Are you sure?, You want to inactivate the project ?</p>
                         </div>                            
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-info" data-dismiss="modal">Close</button>
                         <form action="../../../controller/marketingManagerController.php?status=delete_project" method="POST">
                             <input type="hidden" id="project_id4"  name="project_id">
-                            <button name="submit" type="submit" class="btn btn-danger">Delete</button>
+                            <button name="submit" type="submit" class="btn btn-danger">Inactivate</button>
+                        </form>
+                    </div>    
+                </div>            
+            </div>
+        </div>
+
+        <!-- mark as activate modal -->
+        <div class="modal fade" id="project-activate" role="dialog">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">     
+                        <h4 class="col-12 modal-title text-center" style="padding-top: 10px">Activate Project</h4>
+                    </div>
+                    <div class="modal-body">
+                        
+                        <div class="row d-flex justify-content-center">
+                            <p> Are you sure?, You want to activate the project ?</p>
+                        </div>                            
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-info" data-dismiss="modal">Close</button>
+                        <form action="../../../controller/marketingManagerController.php?status=activate_project" method="POST">
+                            <input type="hidden" id="project_id5"  name="project_id">
+                            <button name="submit" type="submit" class="btn btn-danger">Activate</button>
                         </form>
                     </div>    
                 </div>            
@@ -510,6 +546,11 @@
         $(document).on("click", "#project-delete-btn", function () {
             var project_id= $(this).data('project_id');
             $("#project_id4").val(project_id);
+        });
+
+        $(document).on("click", "#project-activate-btn", function () {
+            var project_id= $(this).data('project_id');
+            $("#project_id5").val(project_id);
         });
         // <!-- end of send data to modal scripts -->
 

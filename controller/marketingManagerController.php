@@ -159,6 +159,84 @@
                 <?php
             }
             
+        break;
+
+        case "activate_project":
+    
+            $project_id = $_REQUEST["project_id"];
+            
+            $result = $marketingManagerObj->activateProject($project_id);
+    
+            if ($result == 1) {
+
+                $msgSuccess = "Project Successfully Activated !";
+                $msgSuccess = base64_encode($msgSuccess);
+                
+                ?>
+                    <script>window.location = "../view/user/marketing_manager/marketing-manager-project-management.php?msgSuccess=<?php echo $msgSuccess; ?>" </script>  
+                <?php
+            }
+            else {
+                $msg = "Project not Activated!";
+                $msg = base64_encode($msg);
+                
+                ?>
+                    <script>window.location = "../view/user/marketing_manager/marketing-manager-project-management.php?msg=<?php echo $msg; ?>" </script>  
+                <?php
+            }
+            
+        break; 
+
+        case "delete_customer":
+    
+            $customer_id = $_REQUEST["customer_id"];
+            
+            $result = $marketingManagerObj->deleteCustomer($customer_id);
+    
+            if ($result == 1) {
+
+                $msgSuccess = "Customer Successfully Deleted !";
+                $msgSuccess = base64_encode($msgSuccess);
+                
+                ?>
+                    <script>window.location = "../view/user/marketing_manager/marketing-manager-client-management.php?msgSuccess=<?php echo $msgSuccess; ?>" </script>  
+                <?php
+            }
+            else {
+                $msg = "Customer not Deleted!";
+                $msg = base64_encode($msg);
+                
+                ?>
+                    <script>window.location = "../view/user/marketing_manager/marketing-manager-client-management.php?msg=<?php echo $msg; ?>" </script>  
+                <?php
+            }
+            
+        break;
+
+        case "activate_customer":
+    
+            $customer_id = $_REQUEST["customer_id"];
+            
+            $result = $marketingManagerObj->activateCustomer($customer_id);
+    
+            if ($result == 1) {
+
+                $msgSuccess = "Customer Successfully Activated !";
+                $msgSuccess = base64_encode($msgSuccess);
+                
+                ?>
+                    <script>window.location = "../view/user/marketing_manager/marketing-manager-client-management.php?msgSuccess=<?php echo $msgSuccess; ?>" </script>  
+                <?php
+            }
+            else {
+                $msg = "Customer not Activated!";
+                $msg = base64_encode($msg);
+                
+                ?>
+                    <script>window.location = "../view/user/marketing_manager/marketing-manager-client-management.php?msg=<?php echo $msg; ?>" </script>  
+                <?php
+            }
+            
         break;  
     
         case "payment_request":
