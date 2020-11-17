@@ -114,27 +114,59 @@
 
 </style>
 <div class="sidebar">
-    <a href="./pro-manager-dashboard.php"><img src="../../../images/Animspire-Logo.png" id="logo"></a>
-    <!--- Project Manager functions  --->
-    <a href="./pro-manager-project-management.php"><i class="fa fa-fw fa-tasks"></i><br>Projects</a>
+    <a href="./admin-dashboard.php"><img src="../../../images/Animspire-Logo.png" id="logo"></a>
+    <!--- Admin functions  --->
+    <a href="./admin-user-management.php"><i class="fa fa-fw fa-home"></i><br>User Mng</a>
     <hr>
-    <a href="./pro-manager-reports-management.php"><i class="fa fa-fw fa-file-alt"></i><br>Reports</a>
+    <a href="./admin-reports-management.php"><i class="fa fa-fw fa-file-alt"></i><br>Reports</a>
     <hr>
-    <a href="./pro-manager-performance.php"><i class="fa fa-fw fa-user"></i><br>Performance</a>
+    <a href="./admin-backup-database.php"><i class="fas fa-file-download"></i><br>Backup</a>
     <hr>
-    <a href="./pro-manager-tools-management.php"><i class="fa fa-fw fa-tools"></i><br>Tools</a>
+    <a href="./admin-freelancer-management.php"><i class="fas fa-user"></i><br>Freelancers</a>
     <hr>
-    <a href="./pro-manager-chat.php"><i class="fa fa-fw fa-envelope"></i><br>Chat</a>
+    <a href="./admin-chat.php"><i class="fa fa-fw fa-envelope"></i><br>Chat</a>
     <hr>
     <a href="../../../controller/userlogincontroller.php?status=logout"><img src="../../../images/icons/logout.png"
-            alt="Logout" style="width:50px;height:50px;margin-top: 65px; margin-left: 5px"></a>
+            alt="Logout" style="width:50px;height:50px;margin-top: 90px; margin-left: 5px"></a>
 
 </div>
 <div class="top-navbar">
-    <a href="./pro-manager-profile.php?user_id=<?php echo $userId; ?>"><img
+    <a href="./admin-profile.php?user_id=<?php echo $userId; ?>"><img
             src="../../../images/Avatars/user_images/<?php echo $_SESSION["user"]["user_image"]; ?>" id="prfile-pic"
             style="height: 50px; width: 50px; border: 2px solid white; border-radius: 50px;" /></a>
-    <a href="./pro-manager-dashboard.php" name="home" class="btn btn-primary home-btn">Home</a>
+    <a href="./admin-dashboard.php" name="home" class="btn btn-primary home-btn">Home</a>
+    <div class="dropdown">
+        <button id="notiyf-menu" class="dropdown-toggle notify-btn" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            <?php
+                $reqCount = $adminObj->freelancerRequest()->num_rows;
+                if(0<$reqCount && $reqCount<5) {
+                    echo "<span class='badge badge-danger msg-label'>";
+                    echo $reqCount;
+                    echo "</span>";
+                }
+                else if($reqCount>=5) {
+                    echo "<span class='badge badge-danger msg-label'>";
+                    echo "5+";
+                    echo "</span>";
+                }
+            ?>
+            <i class="fa fa-fw fa-bell"></i>
+        </button>
+        <div class="dropdown-menu" aria-labelledby="notiyf-menu">
+            <?php
+                if ($reqCount > 0) {
+                    ?>
+                        <a class="dropdown-item" href="./admin-notification.php">View Notifications</a>
+                    <?php
+                }
+                else {
+                    ?>
+                        <a class="dropdown-item" href="#">No New Notifications</a>
+                    <?php
+                }
+            ?>
+        </div>
+    </div>
     <div class="dropdown">
         <button id="msg-menu" class="dropdown-toggle notify-btn" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
             <?php
@@ -158,7 +190,7 @@
                 if ($count > 0) {
                     while($dataRow = $messages->fetch_assoc()) {
                         ?>
-                        <a class="dropdown-item" href="./pro-manager-chat.php?user_id=<?php echo base64_encode($dataRow['sender_id']);?>&msg_ids=<?php echo base64_encode($dataRow['msg_ids']);?>">From : <?php echo $dataRow['sender_name'];?></a>
+                        <a class="dropdown-item" href="./admin-chat.php?user_id=<?php echo base64_encode($dataRow['sender_id']);?>&msg_ids=<?php echo base64_encode($dataRow['msg_ids']);?>">From : <?php echo $dataRow['sender_name'];?></a>
                         <?php
                     }
                 }

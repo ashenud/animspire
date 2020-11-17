@@ -198,6 +198,59 @@
                 <?php
             }
             
+        break;
+
+        case "delete_tool":
+    
+            $tool_id = $_REQUEST["tool_id"];
+            
+            $result = $proManagerObj->deleteTool($tool_id);
+    
+            if ($result == 1) {
+
+                $msgSuccess = "Tool Successfully Deleted !";
+                $msgSuccess = base64_encode($msgSuccess);
+                
+                ?>
+                    <script>window.location = "../view/user/project_manager/pro-manager-tools-management.php?msgSuccess=<?php echo $msgSuccess; ?>" </script>  
+                <?php
+            }
+            else {
+                $msg = "tool not Deleted!";
+                $msg = base64_encode($msg);
+                
+                ?>
+                    <script>window.location = "../view/user/project_manager/pro-manager-tools-management.php?msg=<?php echo $msg; ?>" </script>  
+                <?php
+            }
+            
+        break;
+
+        case "activate_tool":
+    
+            $project_id = $_REQUEST["project_id"];
+            $tool_id = $_REQUEST["tool_id"];
+            
+            $result = $proManagerObj->activateTool($tool_id);
+    
+            if ($result == 1) {
+
+                $msgSuccess = "Tool Successfully Activated !";
+                $msgSuccess = base64_encode($msgSuccess);
+                
+                ?>
+                    <script>window.location = "../view/user/project_manager/pro-manager-tools-management.php?msgSuccess=<?php echo $msgSuccess; ?>" </script>  
+                <?php
+            }
+            else {
+                $msg = "Tool not Activated!";
+                $msg = base64_encode($msg);
+                
+                ?>
+                    <script>window.location = "../view/user/project_manager/pro-manager-tools-management.php?msg=<?php echo $msg; ?>" </script>  
+                <?php
+            }
+            
         break;   
 
         case "stage_project":
@@ -225,6 +278,172 @@
             }
             
         break;    
+
+        case "add_tool":
+            
+            $tool_name = $_POST["tool_name"];
+            
+            $website = $_POST["website"];
+            
+            $category_id = $_POST["category_id"];
+            
+            try
+            {
+                if($tool_name=="")
+                {
+                    throw new Exception("First Name cannot be Empty!");
+                }
+                if($website=="")
+                {
+                    throw new Exception("Last Name cannot be Empty!");
+                }
+                if($category_id=="")
+                {
+                    throw new Exception("Email cannot be Empty!");
+                }
+                
+                $patwebsite = "%^((https?://)|(www\.))([a-z0-9-].?)+(:[0-9]+)?(/.*)?$%i";  // validating url
+                
+                if(!preg_match($patwebsite, $website))
+                {
+                    throw new Exception("Invalid Web Addess");
+                }
+                
+                if($_FILES["image"]["name"]!="")
+                {
+                    $img = $_FILES["image"]["name"];
+                    $img = "".time()."_".$img;
+                    // Obtain temporary location
+                    $tmp = $_FILES["image"]["tmp_name"];
+                    $destination = dirname(__FILE__) ."../../images/icons/tool_images/$img";
+                    move_uploaded_file($tmp, $destination);
+                    
+                }
+                else 
+                {
+                    $img = "defaultImage.png";
+                }
+                
+                $insert_tool = $proManagerObj->addTool($tool_name, $category_id, $website, $img);
+                
+                if($insert_tool == 1)
+                {
+                
+                    $msgSuccess = "Tool Added Successfully!";
+                    $msgSuccess = base64_encode($msgSuccess);
+                    
+                    ?>
+                    <script>window.location = "../view/user/project_manager/pro-manager-tools-management.php?msgSuccess=<?php echo $msgSuccess; ?>" </script>
+                    <?php
+                } {
+                    // echo $insert_tool; die();
+                    $msg = "Tool not Added!";
+                    $msg = base64_encode($msg);
+                    
+                    ?>
+                    <script>window.location = "../view/user/project_manager/pro-manager-tools-management.php?msg=<?php echo $msg; ?>" </script>
+                    <?php
+                }
+                
+                
+            }
+            catch (Exception $ex)
+            {
+                $msg = $ex->getMessage();
+                
+                $msg = base64_encode($msg);
+                
+                ?>
+                <script>window.location = "../view/user/project_manager/pro-manager-tools-management.php?msg=<?php echo $msg; ?>" </script>
+                <?php
+            }
+            
+        break; 
+
+        case "edit_tool":
+            
+            $tool_id = $_POST["tool_id"];
+
+            $tool_name = $_POST["tool_name"];
+            
+            $website = $_POST["website"];
+            
+            $category_id = $_POST["category_id"];
+
+            $tool_image = $_POST["tool_image"];
+            
+            try
+            {
+                if($tool_name=="")
+                {
+                    throw new Exception("First Name cannot be Empty!");
+                }
+                if($website=="")
+                {
+                    throw new Exception("Last Name cannot be Empty!");
+                }
+                if($category_id=="")
+                {
+                    throw new Exception("Email cannot be Empty!");
+                }
+                
+                $patwebsite = "%^((https?://)|(www\.))([a-z0-9-].?)+(:[0-9]+)?(/.*)?$%i";  // validating url
+                
+                if(!preg_match($patwebsite, $website))
+                {
+                    throw new Exception("Invalid Web Addess");
+                }
+                
+                if($_FILES["image"]["name"]!="")
+                {
+                    $img = $_FILES["image"]["name"];
+                    $img = "".time()."_".$img;
+                    // Obtain temporary location
+                    $tmp = $_FILES["image"]["tmp_name"];
+                    $destination = dirname(__FILE__) ."../../images/icons/tool_images/$img";
+                    move_uploaded_file($tmp, $destination);
+                    
+                }
+                else 
+                {
+                    $img = $tool_image;
+                }
+                
+                $edit_tool = $proManagerObj->editTool($tool_id,$tool_name, $category_id, $website, $img);
+                
+                if($edit_tool == 1)
+                {
+                
+                    $msgSuccess = "Tool Edited Successfully!";
+                    $msgSuccess = base64_encode($msgSuccess);
+                    
+                    ?>
+                    <script>window.location = "../view/user/project_manager/pro-manager-tools-management.php?msgSuccess=<?php echo $msgSuccess; ?>" </script>
+                    <?php
+                } {
+                    // echo $edit_tool; die();
+                    $msg = "Tool not Edited!";
+                    $msg = base64_encode($msg);
+                    
+                    ?>
+                    <script>window.location = "../view/user/project_manager/pro-manager-tools-management.php?msg=<?php echo $msg; ?>" </script>
+                    <?php
+                }
+                
+                
+            }
+            catch (Exception $ex)
+            {
+                $msg = $ex->getMessage();
+                
+                $msg = base64_encode($msg);
+                
+                ?>
+                <script>window.location = "../view/user/project_manager/pro-manager-tools-management.php?msg=<?php echo $msg; ?>" </script>
+                <?php
+            }
+            
+        break;
      
         default:echo "Invalid Parameters";
 

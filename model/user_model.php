@@ -882,6 +882,48 @@ class projectManager {
 
     }
 
+    function addTool($tool_name, $category_id, $website, $img) {
+
+        $con = $GLOBALS['con'];
+        $sql = "INSERT INTO
+                    tools
+                    (tool_name,category_id,website,tool_image)
+                VALUE
+                    ('$tool_name', '$category_id', '$website', '$img')";
+        $results = $con->query($sql);
+
+        if ($results) {
+            return 1;
+        }
+        else {
+            return 0;
+        }
+
+    }
+
+    function editTool($tool_id, $tool_name, $category_id, $website, $img) {
+
+        $con = $GLOBALS['con'];
+        $sql = "UPDATE
+                    tools
+                SET
+                    tool_name = '$tool_name',
+                    category_id = '$category_id',
+                    website = '$website',
+                    tool_image = '$img'
+                WHERE 
+                    tool_id = '$tool_id'";
+        $results = $con->query($sql);
+
+        if ($results) {
+            return 1;
+        }
+        else {
+            return 0;
+        }
+
+    }
+
     function editTaskInProject($task_id,$task_name,$priority_level,$start_date,$end_date) {
 
         $con = $GLOBALS['con'];
@@ -961,6 +1003,44 @@ class projectManager {
         else {
             return 0;
         }
+    }  
+
+    function deleteTool($tool_id) {
+
+        $con = $GLOBALS['con'];
+        $sql = "UPDATE
+                    tools
+                SET
+                    tool_status = '1'
+                WHERE
+                    tool_id = '$tool_id'";
+        $results = $con->query($sql);
+
+        if ($results) {
+            return 1;
+        }
+        else {
+            return 0;
+        }
+    }  
+
+    function activateTool($tool_id) {
+
+        $con = $GLOBALS['con'];
+        $sql = "UPDATE
+                    tools
+                SET
+                    tool_status = '0'
+                WHERE
+                    tool_id = '$tool_id'";
+        $results = $con->query($sql);
+
+        if ($results) {
+            return 1;
+        }
+        else {
+            return 0;
+        }
     }    
 
     function getProjectDetails($project_id) {
@@ -1002,6 +1082,29 @@ class projectManager {
                     AND p.project_status = 0
                     AND p.project_id = '$project_id'
                 LIMIT 1";
+        $results = $con->query($sql);
+
+        return $results;
+    }    
+
+    function getAllToolsSearch($cat_name) {
+
+        $con = $GLOBALS['con'];
+        $sql = "SELECT
+                    t.tool_id,
+                    t.tool_name,
+                    t.category_id,
+                    t.website,
+                    t.tool_image,
+                    t.tool_status,
+                    tc.category_name
+                FROM
+                    tools t
+                        INNER JOIN
+                    tool_category tc ON tc.category_id = t.category_id
+                WHERE
+                    tc.category_status = 0
+                    $cat_name";
         $results = $con->query($sql);
 
         return $results;
