@@ -2,6 +2,7 @@
 
 if(isset($_REQUEST["status"]))
 {
+    include '../commons/session.php';
     include '../model/freelancer_model.php';
     include '../model/freelancer_login_model.php';
     $freelancerObj = new Freelancer();
@@ -321,6 +322,34 @@ if(isset($_REQUEST["status"]))
                 
                 ?>
                     <script>window.location = "../view/freelancer/freelancer-view-project.php?project_id=<?php echo $project_id; ?>&msg=<?php echo $msg; ?>" </script>  
+                <?php
+            }
+            
+        break;
+
+        case "request_tool":
+    
+            $tool_id = $_REQUEST["tool_id"];
+            $freelancer_id = $_SESSION["freelancer"]["freelancer_id"];
+            
+            $result = $freelancerObj->requestTool($tool_id,$freelancer_id);
+    
+            if ($result == 1) {
+
+                $msgSuccess = "Tool Successfully Requested !";
+                $msgSuccess = base64_encode($msgSuccess);
+                
+                ?>
+                    <script>window.location = "../view/freelancer/freelancer-tools.php?msgSuccess=<?php echo $msgSuccess; ?>" </script>  
+                <?php
+            }
+            else {
+                // echo $result;die();
+                $msg = "tool not Requested!";
+                $msg = base64_encode($msg);
+                
+                ?>
+                    <script>window.location = "../view/freelancer/freelancer-tools.php?msg=<?php echo $msg; ?>" </script>  
                 <?php
             }
             

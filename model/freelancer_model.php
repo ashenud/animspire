@@ -233,6 +233,89 @@ class Freelancer{
             return 0;
         }
 
-    }   
+    }      
+
+    function getAllActiveTools($freelancer_id,$cat_name) {
+
+        $con = $GLOBALS['con'];
+        $sql = "SELECT
+                    t.tool_id,
+                    t.tool_name,
+                    t.category_id,
+                    t.website,
+                    t.tool_image,
+                    t.tool_status,
+                    tc.category_name,
+                    IF(ft.status = 0,'Requested','Accepted') AS permission,
+                    IF(ft.status = 0,'0','1') AS permission_id
+                FROM
+                    tools t
+                        INNER JOIN
+                    tool_category tc ON tc.category_id = t.category_id
+                        LEFT JOIN
+                    freelancer_tools ft ON ft.tool_id = t.tool_id
+                WHERE
+                    tc.category_status = 0
+                    AND t.tool_status = 0
+                    AND ft.freelancer_id = '$freelancer_id'
+                    AND ft.status <= 2
+                    $cat_name
+                GROUP BY
+                    t.tool_id
+            UNION (
+
+                SELECT
+                    t.tool_id,
+                    t.tool_name,
+                    t.category_id,
+                    t.website,
+                    t.tool_image,
+                    t.tool_status,
+                    tc.category_name,
+                    'Not-Requested' AS permission,
+                    '2' AS permission_id
+                FROM
+                    tools t
+                        INNER JOIN 
+                    tool_category tc ON tc.category_id = t.category_id
+                WHERE
+                    t.tool_id NOT IN (
+                        SELECT
+                            t1.tool_id
+                        FROM
+                            tools t1
+                                INNER JOIN
+                            freelancer_tools ft1 ON ft1.tool_id = t1.tool_id
+                        WHERE
+                            t.tool_status = 0
+                            AND ft1.freelancer_id = '$freelancer_id'
+                    )
+                    $cat_name
+                GROUP BY
+                    t.tool_id
+                )";
+        $results = $con->query($sql);
+
+        return $results;
+    } 
+
+    function requestTool($tool_id,$freelancer_id) {
+
+        $con = $GLOBALS['con'];
+        $sql = "INSERT INTO
+                    freelancer_tools
+                    (tool_id,freelancer_id)
+                VALUE
+                    ('$tool_id', '$freelancer_id')";
+        $results = $con->query($sql);
+
+        if ($results) {
+            return 1;
+        }
+        else {
+            return 0;
+        }
+
+    }
     
 }
