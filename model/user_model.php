@@ -1041,6 +1041,27 @@ class projectManager {
         else {
             return 0;
         }
+    } 
+
+    function giveToolAccess($request_id,$username,$password) {
+
+        $con = $GLOBALS['con'];
+        $sql = "UPDATE
+                    freelancer_tools
+                SET
+                    user_name = '$username',
+                    password = '$password',
+                    status = 1
+                WHERE
+                    id = '$request_id'";
+        $results = $con->query($sql);
+
+        if ($results) {
+            return 1;
+        }
+        else {
+            return 0;
+        }
     }    
 
     function getProjectDetails($project_id) {
@@ -1145,6 +1166,87 @@ class projectManager {
 
         return $results;
     }
+         
+    function getAllToolRequest() {
+
+        $con = $GLOBALS['con'];
+        $sql = "SELECT
+                    ft.id AS request_id,
+                    t.tool_id,
+                    t.tool_name,
+                    t.category_id,
+                    t.website,
+                    t.tool_image,
+                    t.tool_status,
+                    tc.category_name,
+                    f.freelancer_id,
+                    f.freelancer_email,
+                    CONCAT(f.freelancer_fname,' ',f.freelancer_lname) AS freelancer
+                FROM
+                    freelancer_tools ft
+                    INNER JOIN tools t ON t.tool_id = ft.tool_id
+                    INNER JOIN tool_category tc ON tc.category_id = t.category_id
+                    INNER JOIN freelancer f ON f.freelancer_id = ft.freelancer_id
+                WHERE
+                    ft.status = 0
+                ORDER BY
+                    f.freelancer_fname ASC";
+        $results = $con->query($sql);
+
+        return $results;
+    } 
+         
+    function toolsAllowedFreelancers() {
+
+        $con = $GLOBALS['con'];
+        $sql = "SELECT
+                    f.freelancer_id,
+                    CONCAT(f.freelancer_fname,' ',f.freelancer_lname) AS freelancer
+                FROM
+                    freelancer_tools ft
+                    INNER JOIN freelancer f ON f.freelancer_id = ft.freelancer_id
+                WHERE
+                    ft.status = 1
+                GROUP BY
+                    ft.freelancer_id
+                ORDER BY
+                    f.freelancer_fname ASC";
+        $results = $con->query($sql);
+
+        return $results;
+    } 
+         
+    function getAllowedToolsForFreelancers($freelancer_id) {
+
+        $con = $GLOBALS['con'];
+        $sql = "SELECT
+                    ft.id AS request_id,
+                    t.tool_id,
+                    t.tool_name,
+                    t.category_id,
+                    t.website,
+                    t.tool_image,
+                    t.tool_status,
+                    tc.category_name,
+                    f.freelancer_id,
+                    f.freelancer_email,
+                    CONCAT(f.freelancer_fname,' ',f.freelancer_lname) AS freelancer
+                FROM
+                    freelancer_tools ft
+                    INNER JOIN tools t ON t.tool_id = ft.tool_id
+                    INNER JOIN tool_category tc ON tc.category_id = t.category_id
+                    INNER JOIN freelancer f ON f.freelancer_id = ft.freelancer_id
+                WHERE
+                    ft.status = 1
+                    AND ft.freelancer_id = '$freelancer_id'
+                GROUP BY
+                    ft.tool_id
+                ORDER BY
+                    t.category_id ASC";
+        $results = $con->query($sql);
+
+        return $results;
+    } 
 
 }
 

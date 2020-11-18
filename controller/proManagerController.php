@@ -1,6 +1,7 @@
 <?php
     include '../commons/session.php';
     include '../model/user_model.php';
+    require '../libraries/PHPMailer/PHPMailerAutoload.php';
     
     $userObj = new User();
     $proManagerObj = new projectManager();
@@ -274,6 +275,81 @@
                 
                 ?>
                     <script>window.location = "../view/user/project_manager/pro-manager-project-management.php?msg=<?php echo $msg; ?>" </script>  
+                <?php
+            }
+            
+        break;  
+
+        case "give_tool_access":
+    
+            $request_id = $_REQUEST["request_id"];
+            $email = $_REQUEST["email"];
+            $username = $_REQUEST["username"];
+            $password = $_REQUEST["password"];
+            $tool_name = $_REQUEST["tool_name"];
+            $emailSend = "";
+            
+            $mail = new PHPMailer;
+
+            try {
+                //Server settings
+                $mail->SMTPDebug = 0;                       // Enable verbose debug output
+                $mail->isSMTP();                            // Set mailer to use SMTP
+                $mail->Host = 'smtp.mailtrap.io';             // Specify main and backup SMTP servers
+                $mail->SMTPAuth = true;                     // Enable SMTP authentication
+                $mail->Username = '5ca75b8fd9cb5f';     // SMTP username
+                $mail->Password = 'ce6416b388d94a';            // SMTP password
+                $mail->SMTPSecure = 'tls';                  // Enable TLS encryption, `ssl` also accepted
+                $mail->Port = 2525;                          // TCP port to connect to
+
+                //Recipients
+                $mail->setFrom('privacy@animspire.com', 'animspire');
+                $mail->addAddress($email);
+                $mail->addReplyTo('no-reply@ihms.com');
+
+                // Content
+                $mail->isHTML(true);
+                $mail->Subject = 'Access Details of Requested Tool';
+                $mail->Body    = "<h3>This is login details of tool $tool_name </h3> </br>
+                                <p>User Name :- <b>$username</b> </p>
+                                <p>Password  :- <b>$password</b> </p>";
+                $mail->AltBody = 'This is the body in plain text for non-HTML mail clients';
+
+                $mail->send();
+                
+            } 
+
+            catch (Exception $e) {
+                $emailSend = "Message could not be sent. Mailer Error: {$mail->ErrorInfo}";
+            }
+
+            if ($emailSend == "") {
+
+                $result = $proManagerObj->giveToolAccess($request_id,$username,$password);
+
+                if ($result == 1) {
+                    $msgSuccess = "Tool Accessed!";
+                    $msgSuccess = base64_encode($msgSuccess);
+                    
+                    ?>
+                        <script>window.location = "../view/user/project_manager/pro-manager-tools-requested.php?msgSuccess=<?php echo $msgSuccess; ?>" </script>  
+                    <?php
+                }
+                else {
+                    $msg = "Database Store Error";
+                    $msg = base64_encode($msg);
+                    
+                    ?>
+                        <script>window.location = "../view/user/project_manager/pro-manager-tools-requested.php?msg=<?php echo $msg; ?>" </script>  
+                    <?php
+                }
+            }
+            else {
+                $msg = $emailSend;
+                $msg = base64_encode($msg);
+                
+                ?>
+                    <script>window.location = "../view/user/project_manager/pro-manager-tools-requested.php?msg=<?php echo $msg; ?>" </script>  
                 <?php
             }
             

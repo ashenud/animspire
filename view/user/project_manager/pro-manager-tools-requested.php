@@ -58,61 +58,40 @@
                <div class="top-buttons">
                    <div class="row">
                         <div class="col-md-4">
-                            <div class="search" style="margin: 4px 4px 4px 15px">
+                            <!-- <div class="search" style="margin: 4px 4px 4px 15px">
                                 <div class="input-group mb-3">
                                     <input type="text" id="freelancer" name="freelancer" class="form-control" placeholder="Search by freelancer" style="margin-top: 5px; width: 140px">
                                     <div class="input-group-append" >
-                                        <button class="btn btn-success" type="submit" style="margin-top: 5px; padding: 10px" onclick="#"><span class="fa fa-lg fa-search" ></span></button>
+                                        <button class="btn btn-success" type="submit" style="margin-top: 5px; padding: 10px" onclick=""><span class="fa fa-lg fa-search" ></span></button>
                                     </div>
                                 </div>
-                            </div>
+                            </div> -->
                         </div>
                        <div class="col-md-4" style="text-align: center">
                              <h4>TOOLS</h4>
                         </div>
                        <div class="col-md-4">
                            <div class="btn-group" id="btngroup" style="margin:5px 10px auto 5px">
-                                <button type="button" class="btn btn-primary btn-sm" onclick="#" style="width: 180px; padding: 6px; font-size: 13px">Allowed Freelancers</button>
-                                <button type="button" class="btn btn-warning btn-sm" onclick="#" style="width: 90px; padding: 6px; font-size: 13px">Requested</button></div>
+                                <button type="button" class="btn btn-primary btn-sm" onclick="load_allowed_freelancers('0')" style="width: 180px; padding: 6px; font-size: 13px">Allowed Freelancers</button>
+                                <button type="button" class="btn btn-warning btn-sm" onclick="load_tools('1')" style="width: 90px; padding: 6px; font-size: 13px">Requested</button></div>
                         </div>
                    </div>
                </div>
-               <table class="tools-table" border="1" >
-                        <tr>
-                            <th width="40px"></th>
-                            <th width="110px">&nbsp;Freelancer ID</th>
-                            <th width="220px">&nbsp;Freelancer Name</th>
-                            <th width="220px">&nbsp;Tool Name</th>
-                            <th width="200px">&nbsp;Category</th>
-                            <th width="100px">&nbsp;Status</th>
-                            <th width="70px"></th>
-                        </tr>
-                        <tr>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                            <td>
-                                <button
-                                type="button" class="btn btn-info" href='#giveAccess' data-toggle='modal' data-id='#' data-customer='#' data-name='#' style="width: 30px; height: 30px;">
-                                <span class="fas fa-paper-plane"></span></button>
-                                <a
-                                href=""><button
-                                type="button" class="btn btn-danger" style="width: 30px; height: 30px;">
-                                <span class="fa fa-fw fa-power-off"></span></button></a>
-                            </td>
-                        </tr>
-                    </table>
+               
+               <div>
+                    <div class="col-md-12">&nbsp;</div>
+                </div>
+                <div align="center" id="loading_div"> </div>
+
+
             </div>
          </div>
         
         <!--- give access modal -->
                     
-        <div class="modal fade" id="giveAccess" role="dialog">
+        <div class="modal fade" id="tool-accept" role="dialog">
             <div class="modal-dialog">
-                <form action="#" method="post" name="pw_change" id=""> 
+                <form action="../../../controller/proManagerController.php?status=give_tool_access" method="post"> 
                     <div class="modal-content">
                         <div class="modal-header">
                             <h4 class="col-12 modal-title text-center" style="padding-top: 10px">CHANGE PASSWORD</h4>
@@ -122,7 +101,7 @@
                             <div class="row">
                                 <div class="form-group" style="margin-top: 2px; margin-left: 35px; width: 85%">
                                     <label for="current_password">Freelancer Email :</label>
-                                    <input type="password" class="form-control" id="email" name="email" required="required"/>
+                                    <input type="email" class="form-control" id="email" name="email" readonly/>
                                 </div>
                             </div>
                             <div class="row">
@@ -134,12 +113,13 @@
                             <div class="row">
                                 <div class="form-group" style="margin-top: 8px; margin-left: 35px; width: 85%">
                                     <label for="password">Password for Tool:</label>
-                                    <input type="password" class="form-control" id="password" name="password" required="required"/>
+                                    <input type="text" class="form-control" id="password" name="password" required="required"/>
                                 </div>
-                                
                             </div>
                         </div>
                         <div class="modal-footer">
+                            <input type="hidden" name="request_id" id="request_id">
+                            <input type="hidden" name="tool_name" id="tool_name">
                             <button type="submit" name="submit" class="btn btn-success" style="width: 200px; text-align: center; margin-right: 135px">
                             <i class="fas fa-paper-plane"></i>&nbsp;&nbsp;GIVE ACCESS</button>
                         </div>    
@@ -153,20 +133,37 @@
     </body>
     
     <script type="text/javascript">
-      function readURL(input) {
-        if (input.files && input.files[0]) {
-          var reader = new FileReader();
 
-          reader.onload = function (e) {
-            $('#prev_img')
-              .attr('src', e.target.result)
-              .height(50)
-              .width(50);
-          };
+        $(document).ready(function() {
+            load_tools('1');
+        });
 
-          reader.readAsDataURL(input.files[0]);
+        function load_tools(type) {
+
+            $('#loading_div').html('<p><img src="../../../images/loading.gif"  /></p>');
+            $('#loading_div').load("./loadings/tools-requested.php", {
+                'type': type
+            });  
         }
-      }
+
+        function load_allowed_freelancers(type) {
+
+            $('#loading_div').html('<p><img src="../../../images/loading.gif"  /></p>');
+            $('#loading_div').load("./loadings/tools-allowed-freelancers.php", {
+                'type': type
+            });  
+        }
+
+        $(document).on("click", "#tool-accept-btn", function () {
+            var request_id= $(this).data('request_id');
+            var freelancer_email= $(this).data('freelancer_email');
+            var tool_name= $(this).data('tool_name');
+
+            $("#request_id").val(request_id);
+            $("#email").val(freelancer_email);
+            $("#tool_name").val(tool_name);
+        });
+
     </script>
 
     
