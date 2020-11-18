@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 192.168.1.101
--- Generation Time: Nov 15, 2020 at 07:11 PM
+-- Generation Time: Nov 19, 2020 at 01:44 AM
 -- Server version: 10.4.15-MariaDB-1:10.4.15+maria~bionic-log
 -- PHP Version: 7.4.11
 
@@ -138,7 +138,7 @@ CREATE TABLE `customer` (
 --
 
 INSERT INTO `customer` (`customer_id`, `customer_fname`, `customer_lname`, `customer_email`, `customer_country`, `customer_dob`, `customer_gender`, `customer_phone`, `customer_image`, `customer_create_date`, `customer_update_date`, `customer_status`) VALUES
-(2, 'Dhanushka', 'Lakshan', 'dhanushka.lakshan@gmail.com', 'Sri Lanka', '1994-05-25', 0, '0778965925', '1604780980_profile-pic.png', '2020-07-01 19:04:31', '2020-11-07 20:29:40', 1),
+(2, 'Dhanushka', 'Lakshan', 'dhanushka.lakshan@gmail.com', 'Sri Lanka', '1994-05-25', 0, '0778965925', '1604780980_profile-pic.png', '2020-07-01 19:04:31', '2020-11-17 14:37:03', 1),
 (3, 'Ashan', 'Gunawardena', 'ashan.guna@gmail.com', 'Sri Lanka', '1994-06-27', 0, '5555555', 'defaultImage.png', '2020-07-02 17:19:48', '2020-11-04 16:17:30', 1),
 (4, 'Kasun', 'Gayantha', 'kasun@gmail.com', 'Sri Lanka', '1990-05-10', 0, '+94786958654', 'defaultImage.png', '2020-07-02 21:16:06', '2020-11-04 16:17:34', 1),
 (5, 'Lasith', 'De Silva', 'lasith.de@gmail.com', 'Sri Lanka', '1991-06-25', 0, '+94775698425', 'defaultImage.png', '2020-07-03 17:45:47', '2020-11-04 16:17:39', 1),
@@ -225,6 +225,54 @@ INSERT INTO `freelancer_login` (`freelancer_login_id`, `freelancer_login_usernam
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `freelancer_marks`
+--
+
+CREATE TABLE `freelancer_marks` (
+  `id` int(11) NOT NULL,
+  `group_id` int(11) NOT NULL,
+  `freelancer_id` int(11) NOT NULL,
+  `marks` int(11) NOT NULL,
+  `created_at` timestamp NOT NULL DEFAULT current_timestamp(),
+  `status` int(2) NOT NULL DEFAULT 0 COMMENT '0-active, 1-inactive'
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `freelancer_marks`
+--
+
+INSERT INTO `freelancer_marks` (`id`, `group_id`, `freelancer_id`, `marks`, `created_at`, `status`) VALUES
+(1, 1, 1, 100, '2020-11-18 19:57:54', 0),
+(2, 2, 1, 80, '2020-11-18 19:59:48', 0);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `freelancer_tools`
+--
+
+CREATE TABLE `freelancer_tools` (
+  `id` int(11) NOT NULL,
+  `tool_id` int(11) NOT NULL,
+  `freelancer_id` int(11) NOT NULL,
+  `user_name` varchar(100) DEFAULT NULL,
+  `password` varchar(100) DEFAULT NULL,
+  `status` int(2) NOT NULL DEFAULT 0 COMMENT '0-requested, 1-access given, 2-access denied '
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `freelancer_tools`
+--
+
+INSERT INTO `freelancer_tools` (`id`, `tool_id`, `freelancer_id`, `user_name`, `password`, `status`) VALUES
+(1, 1, 1, 'imasha', '123', 1),
+(2, 2, 1, 'imeshapr', 'lm3#ApR', 1),
+(3, 1, 2, NULL, NULL, 0),
+(4, 2, 2, 'ashen', '@sh3NPr', 1);
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `payment`
 --
 
@@ -280,10 +328,275 @@ CREATE TABLE `project` (
 --
 
 INSERT INTO `project` (`project_id`, `project_name`, `description`, `quotation_id`, `customer_id`, `project_manager_id`, `freelancer_id`, `start_date`, `end_date`, `created_time`, `project_timeline`, `project_status`) VALUES
-(1, 'Logo Design', 'Use suitable freelancer', 1, 2, 2, NULL, '2020-11-15', '2020-11-29', '2020-11-12 16:25:28', 0, 0),
+(1, 'Logo Design', 'Use suitable freelancer', 1, 2, 2, NULL, '2020-11-15', '2020-11-29', '2020-11-12 16:25:28', 0, 1),
 (2, 'Graphical Contest', 'This is the biggest in summer ', 2, 2, 6, NULL, '2020-11-29', '2020-12-12', '2020-11-12 16:46:40', 0, 0),
 (3, 'Email 2000 Send', 'Use One freelancer', 10, 3, 9, 1, '2020-11-14', '2020-12-12', '2020-11-14 11:02:31', 0, 0),
 (4, 'Find 5000 advertisement ', 'Please complete as soon as possible', 13, 6, 9, 2, '2020-11-15', '2020-12-06', '2020-11-15 08:27:19', 0, 0);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `questions`
+--
+
+CREATE TABLE `questions` (
+  `question_id` int(11) NOT NULL,
+  `group_id` int(11) NOT NULL,
+  `question` varchar(1000) NOT NULL,
+  `status` int(2) NOT NULL DEFAULT 0 COMMENT '0-active, 1-inactive	'
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `questions`
+--
+
+INSERT INTO `questions` (`question_id`, `group_id`, `question`, `status`) VALUES
+(1, 1, 'The PC keyboard command for turning on the ruler in PhotoShop is?', 0),
+(2, 1, 'A color of a triadic color scheme with red-violet in it is', 0),
+(3, 1, 'Vector based graphic work is', 0),
+(4, 1, 'What is the single most powerful tool of tradigital design?', 0),
+(5, 1, 'A triadic partner for yellow is', 0),
+(6, 2, 'What is the major purpose of social media metrics?', 0),
+(7, 2, 'Reddit, Delicious and Digg are examples of...', 0),
+(8, 2, 'Which of the following is the first step to creating an effective strategy?', 0),
+(9, 2, 'What is the function of the awareness metrics?', 0),
+(10, 2, 'Which of the following is the best for new brands?', 0),
+(11, 3, 'What does SEO Stand for?', 0),
+(12, 3, 'What is SEO?', 0),
+(13, 3, 'What is the \"secret recipe\" for turning websites into search results?', 0),
+(14, 3, 'What are some of the ingredients in a search algorithm?', 0),
+(15, 3, 'What does a site need to be considered a Reputable Site?', 0),
+(16, 4, 'Animating \"straight ahead action\" is', 0),
+(17, 4, 'Who is this Warner Brother creation?', 0),
+(18, 4, 'What is this type of sound that is characterized by two speakers?', 0),
+(19, 4, 'What is the dominant video effect used in this frame?', 0),
+(20, 4, 'What is the dominant video effect in this current frame?', 0),
+(21, 5, 'Identify this Cable', 0),
+(22, 5, 'Frequency is ...', 0),
+(23, 5, 'Speed of Sound equals', 0),
+(24, 5, 'Responsible for recording film/video production Sound', 0),
+(25, 5, 'Recreated by people matching live sound to the video in real time', 0),
+(26, 6, 'What is Wordpress?', 0),
+(27, 6, 'What is bluehost?', 0),
+(28, 6, 'Alt Text......', 0),
+(29, 6, 'Which data structure uses LIFO?', 0),
+(30, 6, 'A memory location that holds a single letter or number', 0),
+(31, 7, 'Paypal is an example of', 0),
+(32, 7, 'Who offer intangible products, value, and convenience to consumers?', 0),
+(33, 7, '________ is people who grew up during the digital revolution', 0),
+(34, 7, 'Buying and Selling the products over the Internet is called', 0),
+(35, 7, 'Cyworld is a(n) ________ site emerging from South Korea', 0),
+(36, 8, 'A cell can contain the following:', 0),
+(37, 8, 'A spreadsheet is a software program that allows one to:', 0),
+(38, 8, 'All money amounts should be formatted to how many decimal places?', 0),
+(39, 8, 'Page margins are:', 0),
+(40, 8, 'A bullet is:', 0);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `questions_group`
+--
+
+CREATE TABLE `questions_group` (
+  `group_id` int(11) NOT NULL,
+  `group_name` varchar(100) NOT NULL,
+  `status` int(2) NOT NULL DEFAULT 0 COMMENT '0-active, 1-inactive'
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `questions_group`
+--
+
+INSERT INTO `questions_group` (`group_id`, `group_name`, `status`) VALUES
+(1, 'Graphic & Design', 0),
+(2, 'Social Media Marketing', 0),
+(3, 'SEO', 0),
+(4, 'Video & Animation', 0),
+(5, 'Music & Audio', 0),
+(6, 'Programming', 0),
+(7, 'E-commerce', 0),
+(8, 'Word/Excel', 0);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `question_answers`
+--
+
+CREATE TABLE `question_answers` (
+  `answers_id` int(11) NOT NULL,
+  `question_id` int(11) NOT NULL,
+  `answers` varchar(200) NOT NULL,
+  `is_correct` int(2) NOT NULL COMMENT '1-correct, 0-incorrect',
+  `status` int(2) NOT NULL DEFAULT 0 COMMENT '0-active, 1-inactive'
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `question_answers`
+--
+
+INSERT INTO `question_answers` (`answers_id`, `question_id`, `answers`, `is_correct`, `status`) VALUES
+(5, 1, 'Option R', 0, 0),
+(6, 1, 'Command r', 0, 0),
+(7, 1, 'Shift R', 0, 0),
+(8, 1, 'Control r', 1, 0),
+(9, 2, 'Orange', 0, 0),
+(10, 2, 'Green', 0, 0),
+(11, 2, 'Blue-green', 1, 0),
+(12, 2, 'Red-orange', 0, 0),
+(13, 3, 'Limited by large file sizes', 0, 0),
+(14, 3, 'Scalable', 1, 0),
+(15, 3, 'Used by most digital photographers', 0, 0),
+(16, 3, 'Only used in Flash and PhotoShop', 0, 0),
+(17, 4, 'Layers', 1, 0),
+(18, 4, 'CMYK', 0, 0),
+(19, 4, 'PhotoShop', 0, 0),
+(20, 4, 'Illustrators', 0, 0),
+(21, 5, 'Green', 0, 0),
+(22, 5, 'Violet', 0, 0),
+(23, 5, 'Blue', 1, 0),
+(24, 5, 'Magenta', 0, 0),
+(25, 6, 'They give accurate number of engagements', 0, 0),
+(26, 6, 'They make it easy to track constant engages', 0, 0),
+(27, 6, 'They demonstrate the value and impacts of decisions made', 1, 0),
+(28, 6, 'They prevent vanity metrics', 0, 0),
+(29, 7, 'Social Bookmarking Sites', 1, 0),
+(30, 7, 'Online Video Sharing sites', 0, 0),
+(31, 7, 'Blog Platforms', 0, 0),
+(32, 7, 'Wikis', 0, 0),
+(33, 8, 'Lobbying', 0, 0),
+(34, 8, 'Establishing objectives', 1, 0),
+(35, 8, 'Attainability', 0, 0),
+(36, 8, 'Setting time', 0, 0),
+(37, 9, 'It illuminates current and potential audience', 1, 0),
+(38, 9, 'It helps marketers know the next step', 0, 0),
+(39, 9, 'It solidifies loyal advocates', 0, 0),
+(40, 9, 'It ensures feedback from customers', 0, 0),
+(41, 10, 'Telegram', 0, 0),
+(42, 10, 'Twitter', 0, 0),
+(43, 10, 'Pinterest', 0, 0),
+(44, 10, 'Instagram', 1, 0),
+(45, 11, 'Search Engine Optimization', 1, 0),
+(46, 11, 'Search Engine Optimizing', 0, 0),
+(47, 11, 'Search Equity Otego', 0, 0),
+(48, 11, 'Search Engine Options', 0, 0),
+(49, 12, 'A way to increase traffic on your website', 0, 0),
+(50, 12, 'A process to improve the visibility of your website on search engines', 1, 0),
+(51, 12, 'A Coding Language', 0, 0),
+(52, 12, 'Something Extremely Offensive', 0, 0),
+(53, 13, 'Keywords', 0, 0),
+(54, 13, 'Meta Tags', 0, 0),
+(55, 13, 'Algorithm', 1, 0),
+(56, 13, 'Search Engines', 0, 0),
+(57, 14, 'Keywords, Titles, Links, Words in Links, Reputation', 1, 0),
+(58, 14, 'Titles, Links, Word Stuffing, Social Media, Traffic', 0, 0),
+(59, 14, 'Keywords, Links, Search Engines, Search Results', 0, 0),
+(60, 14, 'Keywords, Anchor Text, Brown Sugar, Flour', 0, 0),
+(61, 15, 'Consistent and Engaging Content', 0, 0),
+(62, 15, 'Fresh Content', 0, 0),
+(63, 15, 'Growing Numbers of Quality Links', 0, 0),
+(64, 15, 'All of the Above', 1, 0),
+(65, 16, 'Drawing the animation one frame at a time', 1, 0),
+(66, 16, 'When a character walks straight', 0, 0),
+(67, 16, 'Drawing the animation one keyframe at a time', 0, 0),
+(68, 16, 'Drawing straight lines', 0, 0),
+(69, 17, 'The Little Black boy', 0, 0),
+(70, 17, 'Bosko', 1, 0),
+(71, 17, 'Bimbo', 0, 0),
+(72, 17, 'Jhon', 0, 0),
+(73, 18, 'Mono', 0, 0),
+(74, 18, '5.1', 0, 0),
+(75, 18, 'Stereo', 1, 0),
+(76, 18, 'Dolby Surround', 0, 0),
+(77, 19, 'Chroma key', 0, 0),
+(78, 19, 'Color key', 0, 0),
+(79, 19, 'Luma key', 1, 0),
+(80, 19, 'Ghost key', 0, 0),
+(81, 20, 'Lighting', 0, 0),
+(82, 20, 'Lightning', 1, 0),
+(83, 20, 'Lens flare', 0, 0),
+(84, 20, 'Thunder bolt', 0, 0),
+(85, 21, 'XLR', 1, 0),
+(86, 21, 'RCA', 0, 0),
+(87, 21, 'BNC', 0, 0),
+(88, 21, 'Mini', 0, 0),
+(89, 22, 'Pitch', 1, 0),
+(90, 22, 'Sound', 0, 0),
+(91, 22, 'Volume', 0, 0),
+(92, 22, 'Decibel', 0, 0),
+(93, 23, '1130 ft per second', 1, 0),
+(94, 23, '1130 ft per decible', 0, 0),
+(95, 23, '1130 miles per minute', 0, 0),
+(96, 23, '1150 ft per minute', 0, 0),
+(97, 24, 'Production Sound Mixer', 1, 0),
+(98, 24, 'Boom Operator', 0, 0),
+(99, 24, 'Cable Utility Guy', 0, 0),
+(100, 24, 'Audio Collector', 0, 0),
+(101, 25, 'ADR', 0, 0),
+(102, 25, 'Field Recording', 0, 0),
+(103, 25, 'Foley Sound', 1, 0),
+(104, 25, 'Sound Design', 0, 0),
+(105, 26, 'It is a social media management tool', 0, 0),
+(106, 26, 'It is a customer relationship management tool', 0, 0),
+(107, 26, 'It is a content management system', 1, 0),
+(108, 26, 'It is an online conferencing tool', 0, 0),
+(109, 27, 'A content management tool', 0, 0),
+(110, 27, 'A Theme', 0, 0),
+(111, 27, 'Hosting Account', 1, 0),
+(112, 27, 'Project Management Tool', 0, 0),
+(113, 28, 'Is the caption for the image', 0, 0),
+(114, 28, 'Shows when the page loads properly', 0, 0),
+(115, 28, 'Shows when a picture doesn\'t load properly', 1, 0),
+(116, 28, 'Is a place where we can link another page', 0, 0),
+(117, 29, 'Array', 0, 0),
+(118, 29, 'Int', 0, 0),
+(119, 29, 'Stacks', 1, 0),
+(120, 29, 'Queues', 0, 0),
+(121, 30, 'Double', 0, 0),
+(122, 30, 'Int', 0, 0),
+(123, 30, 'Char', 1, 0),
+(124, 30, 'Word', 0, 0),
+(125, 31, 'Financial cybermediary', 1, 0),
+(126, 31, 'Digital wallet', 0, 0),
+(127, 31, 'Electronic payment', 0, 0),
+(128, 31, 'Electronic check', 0, 0),
+(129, 32, 'Internet Marketers', 0, 0),
+(130, 32, 'Service Providers', 1, 0),
+(131, 32, 'Value Providers', 0, 0),
+(132, 32, 'Affiliate Marketers', 0, 0),
+(133, 33, 'Push', 0, 0),
+(134, 33, 'Public key', 0, 0),
+(135, 33, 'Digital natives', 1, 0),
+(136, 33, 'Screenagers', 0, 0),
+(137, 34, 'Electronic Market', 0, 0),
+(138, 34, 'Electronic Commerce', 1, 0),
+(139, 34, 'E-Shopping', 0, 0),
+(140, 34, 'None of the above', 0, 0),
+(141, 35, 'Web shopping', 0, 0),
+(142, 35, 'Social networking', 1, 0),
+(143, 35, 'Music downloading', 0, 0),
+(144, 35, 'None of these', 0, 0),
+(145, 36, 'Number', 0, 0),
+(146, 36, 'Formula', 0, 0),
+(147, 36, 'Text', 0, 0),
+(148, 36, 'All of the above', 1, 0),
+(149, 37, 'Organize data', 0, 0),
+(150, 37, 'Calculate answers', 0, 0),
+(151, 37, 'Chart data', 0, 0),
+(152, 37, 'All of the above', 1, 0),
+(153, 38, 'One', 0, 0),
+(154, 38, 'Two', 1, 0),
+(155, 38, 'Zero', 0, 0),
+(156, 38, 'It depends', 0, 0),
+(157, 39, 'Exact middle of page', 0, 0),
+(158, 39, 'Where page numbers are', 0, 0),
+(159, 39, '1 and 1/2 inches at top of page', 0, 0),
+(160, 39, 'Blank areas around the top, bottom and sides of a page', 1, 0),
+(161, 40, 'Something you use with a knife', 0, 0),
+(162, 40, 'A small character that appears before an item in a document', 1, 0),
+(163, 40, 'A dash', 0, 0),
+(164, 40, 'A period', 0, 0);
 
 -- --------------------------------------------------------
 
@@ -361,6 +674,54 @@ INSERT INTO `task` (`task_id`, `task_name`, `project_id`, `priority_level`, `sta
 (3, 'Find vehicle advertisement', 4, 3, '2020-11-15', '2020-11-19', '2020-11-15 08:30:41', 0, 0),
 (4, 'Find land advertisement', 4, 1, '2020-11-16', '2020-11-23', '2020-11-15 08:34:20', 0, 0),
 (5, 'Create 50 emails', 3, 1, '2020-11-18', '2020-11-24', '2020-11-15 09:30:57', 0, 0);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `tools`
+--
+
+CREATE TABLE `tools` (
+  `tool_id` int(11) NOT NULL,
+  `tool_name` varchar(50) NOT NULL,
+  `category_id` int(11) NOT NULL,
+  `website` varchar(200) NOT NULL,
+  `tool_image` varchar(200) NOT NULL,
+  `tool_status` int(11) NOT NULL DEFAULT 0 COMMENT '0-active, 1-inactive'
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `tools`
+--
+
+INSERT INTO `tools` (`tool_id`, `tool_name`, `category_id`, `website`, `tool_image`, `tool_status`) VALUES
+(1, 'Ilustrator Pro Package ', 1, 'https://www.adobe.com', '1605633462_adobe-ai.png', 0),
+(2, 'Premiere Pro  ', 2, 'https://www.adobe.com', '1605633400_adobe-pr.png', 0),
+(3, 'Gmail Optimizer', 5, 'https://www.mail.google.com', '1605636370_gmail.png', 0);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `tool_category`
+--
+
+CREATE TABLE `tool_category` (
+  `category_id` int(11) NOT NULL,
+  `category_name` varchar(50) NOT NULL,
+  `category_status` int(2) NOT NULL DEFAULT 0 COMMENT '0-active, 1-inactive'
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `tool_category`
+--
+
+INSERT INTO `tool_category` (`category_id`, `category_name`, `category_status`) VALUES
+(1, 'Graphic Design', 0),
+(2, 'Video & Animation', 0),
+(3, 'Search Engine Optimization', 0),
+(4, 'Social Media Marketing', 0),
+(5, 'Email Marketing', 0),
+(6, 'Photography Services', 0);
 
 -- --------------------------------------------------------
 
@@ -515,6 +876,18 @@ ALTER TABLE `freelancer_login`
   ADD PRIMARY KEY (`freelancer_login_id`);
 
 --
+-- Indexes for table `freelancer_marks`
+--
+ALTER TABLE `freelancer_marks`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `freelancer_tools`
+--
+ALTER TABLE `freelancer_tools`
+  ADD PRIMARY KEY (`id`);
+
+--
 -- Indexes for table `payment`
 --
 ALTER TABLE `payment`
@@ -527,6 +900,24 @@ ALTER TABLE `project`
   ADD PRIMARY KEY (`project_id`);
 
 --
+-- Indexes for table `questions`
+--
+ALTER TABLE `questions`
+  ADD PRIMARY KEY (`question_id`);
+
+--
+-- Indexes for table `questions_group`
+--
+ALTER TABLE `questions_group`
+  ADD PRIMARY KEY (`group_id`);
+
+--
+-- Indexes for table `question_answers`
+--
+ALTER TABLE `question_answers`
+  ADD PRIMARY KEY (`answers_id`);
+
+--
 -- Indexes for table `quotations`
 --
 ALTER TABLE `quotations`
@@ -537,6 +928,18 @@ ALTER TABLE `quotations`
 --
 ALTER TABLE `task`
   ADD PRIMARY KEY (`task_id`);
+
+--
+-- Indexes for table `tools`
+--
+ALTER TABLE `tools`
+  ADD PRIMARY KEY (`tool_id`);
+
+--
+-- Indexes for table `tool_category`
+--
+ALTER TABLE `tool_category`
+  ADD PRIMARY KEY (`category_id`);
 
 --
 -- Indexes for table `user`
@@ -603,6 +1006,18 @@ ALTER TABLE `freelancer_login`
   MODIFY `freelancer_login_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
+-- AUTO_INCREMENT for table `freelancer_marks`
+--
+ALTER TABLE `freelancer_marks`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+
+--
+-- AUTO_INCREMENT for table `freelancer_tools`
+--
+ALTER TABLE `freelancer_tools`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+
+--
 -- AUTO_INCREMENT for table `payment`
 --
 ALTER TABLE `payment`
@@ -615,6 +1030,24 @@ ALTER TABLE `project`
   MODIFY `project_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
+-- AUTO_INCREMENT for table `questions`
+--
+ALTER TABLE `questions`
+  MODIFY `question_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=41;
+
+--
+-- AUTO_INCREMENT for table `questions_group`
+--
+ALTER TABLE `questions_group`
+  MODIFY `group_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
+
+--
+-- AUTO_INCREMENT for table `question_answers`
+--
+ALTER TABLE `question_answers`
+  MODIFY `answers_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=165;
+
+--
 -- AUTO_INCREMENT for table `quotations`
 --
 ALTER TABLE `quotations`
@@ -625,6 +1058,18 @@ ALTER TABLE `quotations`
 --
 ALTER TABLE `task`
   MODIFY `task_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+
+--
+-- AUTO_INCREMENT for table `tools`
+--
+ALTER TABLE `tools`
+  MODIFY `tool_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+
+--
+-- AUTO_INCREMENT for table `tool_category`
+--
+ALTER TABLE `tool_category`
+  MODIFY `category_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
 -- AUTO_INCREMENT for table `user`

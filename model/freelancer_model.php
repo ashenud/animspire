@@ -297,7 +297,7 @@ class Freelancer{
         $results = $con->query($sql);
 
         return $results;
-    } 
+    }  
 
     function requestTool($tool_id,$freelancer_id) {
 
@@ -316,6 +316,71 @@ class Freelancer{
             return 0;
         }
 
+    }   
+
+    function checkGroup($group,$freelancer_id) {
+
+        $con = $GLOBALS['con'];
+        $sql = "SELECT
+                    fm.id
+                FROM
+                    freelancer_marks fm
+                WHERE
+                    fm.status = 0
+                    AND fm.group_id = '$group'
+                    AND fm.freelancer_id = '$freelancer_id'";
+        $results = $con->query($sql);
+
+        return $results;
+    } 
+
+    function getQuestionsForGroup($group) {
+
+        $con = $GLOBALS['con'];
+        $sql = "SELECT
+                    *
+                FROM
+                    questions q
+                WHERE
+                    q.status = 0
+                    AND q.group_id = '$group'";
+        $results = $con->query($sql);
+
+        return $results;
+    }  
+
+    function getAnswersForQuestion($question_id) {
+
+        $con = $GLOBALS['con'];
+        $sql = "SELECT
+                    *
+                FROM
+                    question_answers qw
+                WHERE
+                    qw.status = 0
+                    AND qw.question_id = '$question_id'
+                LIMIT 4";
+        $results = $con->query($sql);
+
+        return $results;
+    } 
+
+    function addFreelancerMarks($group,$freelancer_id,$marks) {
+
+        $con = $GLOBALS['con'];
+        $sql = "INSERT INTO
+                    freelancer_marks
+                    (group_id,freelancer_id,marks)
+                VALUE
+                    ('$group', '$freelancer_id', '$marks')";
+        $results = $con->query($sql);
+
+        if ($results) {
+            return 1;
+        }
+        else {
+            return 0;
+        }
+
     }
-    
 }

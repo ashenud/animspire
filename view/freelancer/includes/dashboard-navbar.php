@@ -118,13 +118,13 @@
     <a href="./freelancer-projects.php"><i class="fa fa-fw fa-home"></i><br>Projects</a>
     <hr>
     <a href="./freelancer-tools.php"><i class="fa fa-fw fa-wrench"></i><br>Tools</a>
-    <!-- <hr>
-    <a href="#clients"><i class="fa fa-fw fa-user"></i><br>Clients</a> -->
+    <hr>
+    <a href="freelancer-skill-upgrade.php"><i class="fas fa-diagnoses"></i></i><br>Skills</a>
     <!-- <hr>
     <a href="#contact"><i class="fa fa-fw fa-wrench"></i><br>Reports</a> -->
     <hr>
     <a href="../../controller/freelancerlogincontrol.php?status=logout"><img src="../../images/icons/logout.png"
-            alt="Logout" style="width:50px;height:50px;margin-top: 290px; margin-left: 5px"></a></a>
+            alt="Logout" style="width:50px;height:50px;margin-top: 215px; margin-left: 5px"></a></a>
 </div>
 <div class="top-navbar">
     <a href="./freelancer-profile.php?freelancer_id=<?php echo $freelancerId; ?>"><img

@@ -355,5 +355,46 @@ if(isset($_REQUEST["status"]))
             
         break;
 
+        case "skill_upgrade":
+    
+            $group = $_REQUEST["group"];
+            $questions_count = $_REQUEST["questions_count"];
+
+            $totalCorrect = 0;
+
+            for ($i=1; $i <= $questions_count; $i++) { 
+                if(base64_decode($_REQUEST['question_'.$i.'_answer']) == 1) {
+                    $totalCorrect++;
+                }
+            }
+            
+            $marks = ($totalCorrect/$questions_count)*100;
+
+            $_SESSION["freelancer_marks"]=$marks;
+
+            $freelancer_id = $_SESSION["freelancer"]["freelancer_id"];
+            
+            $result = $freelancerObj->addFreelancerMarks($group,$freelancer_id,$marks);
+
+            if ($result == 1) {
+
+                $msgSuccess = "Test Successfully Completed !";
+                $msgSuccess = base64_encode($msgSuccess);
+                
+                ?>
+                    <script>window.location = "../view/freelancer/freelancer-skill-upgrade.php?msgSuccess=<?php echo $msgSuccess; ?>" </script>  
+                <?php
+            }
+            else {
+                $msg = "Test not Complted!";
+                $msg = base64_encode($msg);
+                
+                ?>
+                    <script>window.location = "../view/freelancer/freelancer-skill-upgrade.php?msg=<?php echo $msg; ?>" </script>  
+                <?php
+            }
+            
+        break;
+
     }
 }
