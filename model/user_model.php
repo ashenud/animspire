@@ -467,6 +467,61 @@ class Admin {
         $userResults = $con->query($sql);
         return $userResults;
     }
+
+    function getFreelancersSearch($fname){
+        $con = $GLOBALS['con'];
+        $sql = "SELECT 
+                    * 
+                FROM 
+                    freelancer f
+                        INNER JOIN 
+                    freelancer_login fl ON fl.freelancer_id = f.freelancer_id
+                WHERE 
+                    fl.freelancer_login_status = 1
+                    {$fname}
+                ORDER BY
+                    f.freelancer_id";
+        $userResults = $con->query($sql);
+        return $userResults;
+    }
+
+    function deleteFreelancer($freelancer_id) {
+
+        $con = $GLOBALS['con'];
+        $sql = "UPDATE
+                    freelancer
+                SET
+                    freelancer_status = '0'
+                WHERE
+                    freelancer_id = '$freelancer_id'";
+        $results = $con->query($sql);
+
+        if ($results) {
+            return 1;
+        }
+        else {
+            return 0;
+        }
+    }
+
+    function activateFreelancer($freelancer_id) {
+
+        $con = $GLOBALS['con'];
+        $sql = "UPDATE
+                    freelancer
+                SET
+                    freelancer_status = '1'
+                WHERE
+                    freelancer_id = '$freelancer_id'";
+        $results = $con->query($sql);
+
+        if ($results) {
+            return 1;
+        }
+        else {
+            return 0;
+        }
+    }
 }
 
 class MarketingManager {
