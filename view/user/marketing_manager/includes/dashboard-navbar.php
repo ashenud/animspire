@@ -139,12 +139,14 @@
         <button id="notiyf-menu" class="dropdown-toggle notify-btn" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
             <?php
                 $qouteCount = $marketingManagerObj->qouteCount()->num_rows;
-                if(0<$qouteCount && $qouteCount<5) {
+                $paymentCount = $marketingManagerObj->getPaidQuoteCount()->num_rows;
+                $notifyCount = $paymentCount + $qouteCount;
+                if(0<$notifyCount && $notifyCount<5) {
                     echo "<span class='badge badge-danger msg-label'>";
-                    echo $qouteCount;
+                    echo $notifyCount;
                     echo "</span>";
                 }
-                else if($qouteCount>=5) {
+                else if($notifyCount>=5) {
                     echo "<span class='badge badge-danger msg-label'>";
                     echo "5+";
                     echo "</span>";
@@ -159,7 +161,12 @@
                         <a class="dropdown-item" href="./marketing-manager-quotations.php">View Quotations</a>
                     <?php
                 }
-                else {
+                if ($paymentCount > 0) {
+                    ?>
+                        <a class="dropdown-item" href="./marketing-manager-project-management.php">Paid Quotes</a>
+                    <?php
+                }
+                if ($qouteCount == 0 && $paymentCount == 0) {
                     ?>
                         <a class="dropdown-item" href="#">No New Notifications</a>
                     <?php

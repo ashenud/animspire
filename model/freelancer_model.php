@@ -397,4 +397,24 @@ class Freelancer{
         }
 
     }
+
+    function getDelayedTaskCount($freelancer_id) {
+
+        $con = $GLOBALS['con'];
+        $sql = "SELECT
+                    t.task_id,
+                    p.project_id
+                FROM
+                    task t
+                        INNER JOIN
+                    project p ON p.project_id = t.project_id
+                WHERE
+                    t.end_date < CURDATE()
+                    AND t.task_timeline = 0
+                    AND t.task_status = 0
+                    AND p.freelancer_id = '$freelancer_id'";
+        $results = $con->query($sql);
+
+        return $results;
+    }
 }

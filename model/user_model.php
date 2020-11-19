@@ -586,6 +586,27 @@ class MarketingManager {
         return $results;
     }
 
+    function getPaidQuoteCount() {
+
+        $con = $GLOBALS['con'];
+        $sql = "SELECT
+                    q.quotation_id
+                FROM
+                    quotations q
+                        INNER JOIN
+                    customer c ON c.customer_id = q.customer_id
+                        INNER JOIN
+                    payment p ON p.quotation_id = q.quotation_id
+                WHERE
+                    c.customer_status = 1
+                    AND q.status = 3
+                    AND p.status = 2
+                    AND p.project_status = 0";
+        $results = $con->query($sql);
+
+        return $results;
+    }
+
     function getAssignedProjects() {
 
         $con = $GLOBALS['con'];
@@ -876,6 +897,42 @@ class projectManager {
                 WHERE
                     c.customer_status = 1
                     AND p.project_status = 0
+                    AND p.project_manager_id = '$user_id'";
+        $results = $con->query($sql);
+
+        return $results;
+    }
+
+    function getProjectCount($user_id) {
+
+        $con = $GLOBALS['con'];
+        $sql = "SELECT
+                    p.project_id
+                FROM
+                    project p
+                WHERE
+                    p.freelancer_id IS NULL
+                    AND p.project_status = 0
+                    AND p.project_manager_id = '$user_id'";
+        $results = $con->query($sql);
+
+        return $results;
+    }
+
+    function getDelayedTaskCount($user_id) {
+
+        $con = $GLOBALS['con'];
+        $sql = "SELECT
+                    t.task_id,
+                    p.project_id
+                FROM
+                    task t
+                        INNER JOIN
+                    project p ON p.project_id = t.project_id
+                WHERE
+                    t.end_date < CURDATE()
+                    AND t.task_timeline = 0
+                    AND t.task_status = 0
                     AND p.project_manager_id = '$user_id'";
         $results = $con->query($sql);
 
@@ -1246,6 +1303,20 @@ class projectManager {
                     ft.status = 0
                 ORDER BY
                     f.freelancer_fname ASC";
+        $results = $con->query($sql);
+
+        return $results;
+    } 
+         
+    function getToolRequestCount() {
+
+        $con = $GLOBALS['con'];
+        $sql = "SELECT
+                    ft.id 
+                FROM
+                    freelancer_tools ft
+                WHERE
+                    ft.status = 0";
         $results = $con->query($sql);
 
         return $results;

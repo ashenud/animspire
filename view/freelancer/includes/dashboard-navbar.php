@@ -131,6 +131,42 @@
             src="../../images/Avatars/freelancer_images/<?php echo $_SESSION["freelancer"]["freelancer_image"]; ?>" id="prfile-pic"
             style="height: 50px; width: 50px; border: 2px solid white; border-radius: 50px;" /></a>
     <a href="./freelancer-dashboard.php" name="home" class="btn btn-primary home-btn">Home</a>
+
+    <div class="dropdown">
+        <button id="notiyf-menu" class="dropdown-toggle notify-btn" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            <?php
+
+                $DelayedTaskCount = $freelancerObj->getDelayedTaskCount($_SESSION["freelancer"]["freelancer_id"])->num_rows;
+
+                if(0<$DelayedTaskCount && $DelayedTaskCount<5) {
+                    echo "<span class='badge badge-danger msg-label'>";
+                    echo $DelayedTaskCount;
+                    echo "</span>";
+                }
+                else if($DelayedTaskCount>=5) {
+                    echo "<span class='badge badge-danger msg-label'>";
+                    echo "5+";
+                    echo "</span>";
+                }
+            ?>
+            <i class="fa fa-fw fa-bell"></i>
+        </button>
+        <div class="dropdown-menu" aria-labelledby="notiyf-menu">
+            <?php
+                if ($DelayedTaskCount > 0) {
+                    ?>
+                        <a class="dropdown-item" href="./freelancer-projects.php"><?php echo $DelayedTaskCount; ?> Delayed Task</a>
+                    <?php
+                }
+                if ($DelayedTaskCount == 0) {
+                    ?>
+                        <a class="dropdown-item" href="#">No New Notifications</a>
+                    <?php
+                }
+            ?>
+        </div>
+    </div>
+
     <!-- Success message -->
     <?php
         if(isset($_GET["msgSuccess"]))

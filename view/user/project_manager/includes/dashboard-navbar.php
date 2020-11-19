@@ -136,6 +136,51 @@
             style="height: 50px; width: 50px; border: 2px solid white; border-radius: 50px;" /></a>
     <a href="./pro-manager-dashboard.php" name="home" class="btn btn-primary home-btn">Home</a>
     <div class="dropdown">
+        <button id="notiyf-menu" class="dropdown-toggle notify-btn" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            <?php
+                $projectCount = $proManagerObj->getProjectCount($_SESSION["user"]["user_id"])->num_rows;
+                $DelayedTaskCount = $proManagerObj->getDelayedTaskCount($_SESSION["user"]["user_id"])->num_rows;
+                $toolResultsCount = $proManagerObj->getToolRequestCount()->num_rows;
+                $notifyCount = $DelayedTaskCount + $projectCount + $toolResultsCount;
+                if(0<$notifyCount && $notifyCount<5) {
+                    echo "<span class='badge badge-danger msg-label'>";
+                    echo $notifyCount;
+                    echo "</span>";
+                }
+                else if($notifyCount>=5) {
+                    echo "<span class='badge badge-danger msg-label'>";
+                    echo "5+";
+                    echo "</span>";
+                }
+            ?>
+            <i class="fa fa-fw fa-bell"></i>
+        </button>
+        <div class="dropdown-menu" aria-labelledby="notiyf-menu">
+            <?php
+                if ($projectCount > 0) {
+                    ?>
+                        <a class="dropdown-item" href="./pro-manager-project-management.php">You were assigned project(s)</a>
+                    <?php
+                }
+                if ($DelayedTaskCount > 0) {
+                    ?>
+                        <a class="dropdown-item" href="./pro-manager-project-management.php"><?php echo $DelayedTaskCount; ?> Delayed Task</a>
+                    <?php
+                }
+                if ($toolResultsCount > 0) {
+                    ?>
+                        <a class="dropdown-item" href="./pro-manager-tools-requested.php">Tool Requests</a>
+                    <?php
+                }
+                if ($projectCount == 0 && $DelayedTaskCount == 0 && $toolResultsCount == 0) {
+                    ?>
+                        <a class="dropdown-item" href="#">No New Notifications</a>
+                    <?php
+                }
+            ?>
+        </div>
+    </div>
+    <div class="dropdown">
         <button id="msg-menu" class="dropdown-toggle notify-btn" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
             <?php
                 $count = $userObj->getNotifyMessages($userId)->num_rows;

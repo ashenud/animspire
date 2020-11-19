@@ -15,7 +15,8 @@
         <?php
          
             include '../../../model/user_model.php';
-            $userObj = new User();
+            $userObj = new User(); //must need for navbar
+            $proManagerObj = new projectManager(); //must need for navbar
 
             /* permission check */
             if(!isset($_SESSION["user"]["role_id"])) {

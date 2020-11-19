@@ -81,20 +81,29 @@
                         </tr>
                         <?php
                             $paid_quote = $marketingManagerObj->getPaidQuote();
-                            while ($quotation = $paid_quote->fetch_assoc()) {
+                            if($paid_quote->num_rows >0) {
+                                while ($quotation = $paid_quote->fetch_assoc()) {
+                                    ?>
+                                    <tr>
+                                        <td>&nbsp;<?php echo $quotation['quotation_id']?></td>
+                                        <td>&nbsp;<?php echo $quotation['name']?></td>
+                                        <td>&nbsp;<?php echo $quotation['subject']?></td>
+                                        <td>&nbsp;<?php echo $quotation['subject']?></td>
+                                        <td>&nbsp;<?php echo $quotation['remarks']?></td>
+                                        <td>
+                                            <div class="btn-group d-flex">
+                                                <button type="button" id='view-quote-btn' href='#view-quote' data-toggle='modal' data-subject='<?php echo $quotation["subject"];?>' data-requirements='<?php echo $quotation["requirements"];?>' data-remarks='<?php echo $quotation["remarks"];?>' data-status='<?php echo $quotation["status"];?>' class="btn btn-info btn-sm" style="padding: 0; margin: 2px; width: 35px; font-size: 9px;" ><i class="fas fa-external-link-alt" style="font-size: 10px" ></i>&nbsp;View</button>
+                                                <button type="button" id='project-add-btn' href='#project-add' data-toggle='modal' data-subject='<?php echo $quotation["subject"];?>' data-id='<?php echo $quotation["quotation_id"];?>' data-payment_id='<?php echo $quotation["payment_id"];?>' data-image='<?php echo $quotation["customer_image"];?>' data-name='<?php echo $quotation["name"];?>' data-customer_id='<?php echo $quotation["customer_id"];?>' class="btn btn-success btn-sm" style="padding: 0; margin: 2px; width: 35px; font-size: 9px;" ><i class="fas fa-plus" style="font-size: 10px; color: white" ></i>&nbsp;Add Project</button>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                    <?php
+                                }
+                            }
+                            else {
                                 ?>
                                 <tr>
-                                    <td>&nbsp;<?php echo $quotation['quotation_id']?></td>
-                                    <td>&nbsp;<?php echo $quotation['name']?></td>
-                                    <td>&nbsp;<?php echo $quotation['subject']?></td>
-                                    <td>&nbsp;<?php echo $quotation['subject']?></td>
-                                    <td>&nbsp;<?php echo $quotation['remarks']?></td>
-                                    <td>
-                                        <div class="btn-group d-flex">
-                                            <button type="button" id='view-quote-btn' href='#view-quote' data-toggle='modal' data-subject='<?php echo $quotation["subject"];?>' data-requirements='<?php echo $quotation["requirements"];?>' data-remarks='<?php echo $quotation["remarks"];?>' data-status='<?php echo $quotation["status"];?>' class="btn btn-info btn-sm" style="padding: 0; margin: 2px; width: 35px; font-size: 9px;" ><i class="fas fa-external-link-alt" style="font-size: 10px" ></i>&nbsp;View</button>
-                                            <button type="button" id='project-add-btn' href='#project-add' data-toggle='modal' data-subject='<?php echo $quotation["subject"];?>' data-id='<?php echo $quotation["quotation_id"];?>' data-payment_id='<?php echo $quotation["payment_id"];?>' data-image='<?php echo $quotation["customer_image"];?>' data-name='<?php echo $quotation["name"];?>' data-customer_id='<?php echo $quotation["customer_id"];?>' class="btn btn-success btn-sm" style="padding: 0; margin: 2px; width: 35px; font-size: 9px;" ><i class="fas fa-plus" style="font-size: 10px; color: white" ></i>&nbsp;Add Project</button>
-                                        </div>
-                                    </td>
+                                    <td align="center" style="text-align:center; color:red" colspan="10">No result found</td>
                                 </tr>
                                 <?php
                             }
