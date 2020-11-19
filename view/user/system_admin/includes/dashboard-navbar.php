@@ -118,6 +118,8 @@
     <!--- Admin functions  --->
     <a href="./admin-user-management.php"><i class="fa fa-fw fa-home"></i><br>User Mng</a>
     <hr>
+    <a href="./admin-freelancer-management.php"><i class="fa fa-fw fa-home"></i><br>freelancer</a>
+    <hr>
     <a href="./admin-reports-management.php"><i class="fa fa-fw fa-file-alt"></i><br>Reports</a>
     <hr>
     <a href="./admin-backup-database.php"><i class="fa fa-fw fa-user"></i><br>Backup</a>
@@ -125,7 +127,7 @@
     <a href="./admin-chat.php"><i class="fa fa-fw fa-envelope"></i><br>Chat</a>
     <hr>
     <a href="../../../controller/userlogincontroller.php?status=logout"><img src="../../../images/icons/logout.png"
-            alt="Logout" style="width:50px;height:50px;margin-top: 140px; margin-left: 5px"></a>
+            alt="Logout" style="width:50px;height:50px;margin-top: 65px; margin-left: 5px"></a>
 
 </div>
 <div class="top-navbar">

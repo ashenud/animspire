@@ -32,7 +32,7 @@ if($_SESSION["freelancer"]) {
                     $j++
                 ?>
                 <div>
-                    <input type="radio" name="question_<?php echo $i;?>_answer" id="question_<?php echo $i;?>_answer_<?php echo $j;?>" value="<?php echo base64_encode($answer['is_correct']);?>" required/>
+                    <input type="radio" name="question_<?php echo $i;?>_answer" id="question_<?php echo $i;?>_answer_<?php echo $j;?>" value="<?php echo base64_encode(md5($answer['is_correct']));?>" required/>
                     <label for="question_<?php echo $i;?>_answer_<?php echo $j;?>"> <?php echo $j.") ".$answer['answers'];?> </label>
                 </div>
                 <?php

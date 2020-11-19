@@ -363,7 +363,7 @@ if(isset($_REQUEST["status"]))
             $totalCorrect = 0;
 
             for ($i=1; $i <= $questions_count; $i++) { 
-                if(base64_decode($_REQUEST['question_'.$i.'_answer']) == 1) {
+                if(base64_decode($_REQUEST['question_'.$i.'_answer']) == md5(1)) {
                     $totalCorrect++;
                 }
             }

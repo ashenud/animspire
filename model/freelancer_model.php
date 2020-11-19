@@ -347,6 +347,20 @@ class Freelancer{
         $results = $con->query($sql);
 
         return $results;
+    } 
+
+    function getQuestionGroups() {
+
+        $con = $GLOBALS['con'];
+        $sql = "SELECT
+                    *
+                FROM
+                    questions_group qg
+                WHERE
+                    qg.status = 0";
+        $results = $con->query($sql);
+
+        return $results;
     }  
 
     function getAnswersForQuestion($question_id) {

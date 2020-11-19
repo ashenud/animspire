@@ -19,6 +19,11 @@
             $freelancerId = base64_encode($freelancer_id); 
             
         ?>
+        <style>
+            .swal-icon--custom {
+                height: 250px !important;
+            }
+        </style>
         
         
     </head>
@@ -37,14 +42,14 @@
                 <hr>
               <div class="row">
                 <div class="btn-group-vertical" >
-                    <button type="button" onclick="load_question_group('1')" class="btn btn-pink" style="color: white;">Graphic & Design</button>
-                    <button type="button" onclick="load_question_group('2')" class="btn btn-primary">Social Media Marketing</button>
-                    <button type="button" onclick="load_question_group('3')" class="btn btn-danger">SEO</button>
-                    <button type="button" onclick="load_question_group('4')" class="btn btn-purple" style="color: white;">Video & Animation</button>
-                    <button type="button" onclick="load_question_group('5')" class="btn btn-success">Music & Audio</button>
-                    <button type="button" onclick="load_question_group('6')" class="btn btn-warning" style="color: white;">Programming</button>
-                    <button type="button" onclick="load_question_group('7')" class="btn btn-brown" style="color: white;">E-commerce</button>
-                    <button type="button" onclick="load_question_group('8')" class="btn btn-info">Word/Excel</button>
+                    <?php 
+                        $question_groups = $freelancerObj->getQuestionGroups();
+                        while ($group =$question_groups->fetch_assoc()) {
+                            ?>
+                                <button type="button" onclick="load_question_group('<?php echo $group['group_id']?>')" class="btn <?php echo $group['color_class']?>" style="color: white;"><?php echo $group['group_name']?></button>
+                            <?php
+                        }
+                    ?>                    
                 </div>
 
                 <div class="quiz" id="loading_div">
@@ -60,10 +65,6 @@
     </body>
     
     <script type="text/javascript">
-
-        $(document).ready(function() {
-            // load_question_group('1');
-        });
 
         function load_question_group(group) {
 
@@ -99,7 +100,12 @@
         <script type="text/javascript">
             $(document).ready(function() {
                 var marks = <?php echo $_SESSION["freelancer_marks"];?>;
-                swal("Good job!", `Your mark is ${marks}%`, "success");
+                swal({
+                    title: "Good job !",
+                    text: `Your mark is ${marks}%`,
+                    icon: "../../images/icons/trophy.png",
+                    iconSize: '300x300'
+                });
             });
         </script>
         <?php
