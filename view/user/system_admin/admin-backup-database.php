@@ -51,7 +51,7 @@
                     </div>
                 </div>
                 <div class="row ml-2">
-                    <div class="col-md-12">
+                    <div id="ckeckboxdiv" class="col-md-12">
                         <form method="post" id="export_form" action="../../../controller/adminController.php?status=backup_db">
                             <h5>Select Tables for Export</h5>
                                 <?php
@@ -66,6 +66,7 @@
                                 }
                             ?>
                             <div class="form-group">
+                                <input type="button" id="check-toggle" class="check btn btn-secondary" style="padding: 2px; font-size: 10px; background: #535659 !important;" value="check all" />
                                 <button type="submit" name="generate-sql" id="generate-sql" class="btn btn-danger" >Backup Database</button>
                             </div>
                         </form>
@@ -76,6 +77,7 @@
 
         <script>
             $(document).ready(function () {
+
                 $('#generate-sql').click(function () {
                     var count = 0;
                     $('.checkbox_table').each(function () {
@@ -90,7 +92,14 @@
                         return false;
                     }
                 });
+
+                $('#check-toggle').click(function(e){
+                    $(this).toggleClass('clicked');
+                    $('input[type="checkbox"]').prop('checked', $(this).hasClass('clicked'))
+                });
+
             });
+
         </script>
 
     </body>    

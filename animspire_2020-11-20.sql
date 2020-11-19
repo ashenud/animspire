@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 192.168.1.101
--- Generation Time: Nov 19, 2020 at 01:44 AM
+-- Generation Time: Nov 19, 2020 at 11:46 PM
 -- Server version: 10.4.15-MariaDB-1:10.4.15+maria~bionic-log
 -- PHP Version: 7.4.11
 
@@ -50,7 +50,8 @@ INSERT INTO `backup_details` (`backup_id`, `user_id`, `backup_reference`, `descr
 (8, 1, 676554783591, 'Backup done by Damith Menaka', '2020-10-30 10:24:00'),
 (9, 5, 483154468334, 'Backup done by Kashun Thilina', '2020-10-31 20:41:09'),
 (10, 5, 308452327334, 'Backup done by Kashun Thilina', '2020-10-31 20:43:00'),
-(11, 1, 891183605949, 'Backup done by Damith Menaka', '2020-11-05 19:21:16');
+(11, 1, 891183605949, 'Backup done by Damith Menaka', '2020-11-05 19:21:16'),
+(12, 1, 476953448281, 'Backup done by Damith Menaka', '2020-11-19 18:13:18');
 
 -- --------------------------------------------------------
 
@@ -84,8 +85,8 @@ INSERT INTO `communication` (`msg_id`, `sender_id`, `receiver_id`, `message`, `s
 (10, 1, 4, 'Yes.', '2020-10-30 10:54:54', 1),
 (11, 1, 3, 'Did you receive my letter??', '2020-10-30 15:15:13', 1),
 (12, 2, 1, 'Please call me now', '2020-10-30 16:10:13', 1),
-(13, 1, 2, 'Ok. wait a minutes.', '2020-10-30 16:18:37', 0),
-(14, 1, 2, 'Whats is your tomorrow plans  ?', '2020-10-30 16:22:53', 0),
+(13, 1, 2, 'Ok. wait a minutes.', '2020-10-30 16:18:37', 1),
+(14, 1, 2, 'Whats is your tomorrow plans  ?', '2020-10-30 16:22:53', 1),
 (15, 6, 1, 'Hi. Damith', '2020-10-30 16:25:20', 0),
 (16, 6, 2, 'Hellow Yuresh!', '2020-10-30 16:25:52', 1),
 (17, 3, 1, 'Sorry', '2020-10-31 16:56:35', 1),
@@ -195,8 +196,8 @@ CREATE TABLE `freelancer` (
 --
 
 INSERT INTO `freelancer` (`freelancer_id`, `freelancer_fname`, `freelancer_lname`, `freelancer_email`, `freelancer_country`, `freelancer_dob`, `freelancer_gender`, `freelancer_phone`, `freelancer_image`, `freelancer_create_date`, `freelancer_update_date`, `freelancer_status`) VALUES
-(1, 'Imesha', 'De Silva', 'imesha.desilva@gmail.com', 'Sri Lanka', '1988-10-25', 1, '0776592630', '1604782839_1596442575_F8.png', '2020-07-28 13:17:00', '2020-11-07 21:00:39', 1),
-(2, 'Ashen', 'Udithamal', 'udithamal.lk@gmail.com', 'Sri Lanka', '1995-03-16', 0, '0712758810', '1604143768_K8.jpg', '2020-10-31 16:59:28', '2020-10-31 11:29:28', 1),
+(1, 'Imesha', 'De Silva', 'imesha.desilva@gmail.com', 'Sri Lanka', '1988-10-25', 1, '0776592630', '1604782839_1596442575_F8.png', '2020-07-28 13:17:00', '2020-11-19 15:39:40', 1),
+(2, 'Ashen', 'Udithamal', 'udithamal.lk@gmail.com', 'Sri Lanka', '1995-03-16', 0, '0712758810', '1604143768_K8.jpg', '2020-10-31 16:59:28', '2020-11-19 15:39:48', 1),
 (3, 'Samith', 'Perera', 'samith@gmail.com', 'Sri Lanka', '1995-10-04', 0, '0712758813', '1604176625_profile-pic.png', '2020-11-01 02:07:05', '2020-10-31 20:37:05', 1);
 
 -- --------------------------------------------------------
@@ -243,7 +244,10 @@ CREATE TABLE `freelancer_marks` (
 
 INSERT INTO `freelancer_marks` (`id`, `group_id`, `freelancer_id`, `marks`, `created_at`, `status`) VALUES
 (1, 1, 1, 100, '2020-11-18 19:57:54', 0),
-(2, 2, 1, 80, '2020-11-18 19:59:48', 0);
+(2, 2, 1, 80, '2020-11-18 19:59:48', 0),
+(3, 1, 2, 100, '2020-11-19 13:43:31', 0),
+(4, 2, 2, 80, '2020-11-19 14:01:30', 0),
+(5, 3, 2, 60, '2020-11-19 14:19:24', 0);
 
 -- --------------------------------------------------------
 
@@ -268,7 +272,8 @@ INSERT INTO `freelancer_tools` (`id`, `tool_id`, `freelancer_id`, `user_name`, `
 (1, 1, 1, 'imasha', '123', 1),
 (2, 2, 1, 'imeshapr', 'lm3#ApR', 1),
 (3, 1, 2, NULL, NULL, 0),
-(4, 2, 2, 'ashen', '@sh3NPr', 1);
+(4, 2, 2, 'ashen', '@sh3NPr', 1),
+(5, 3, 1, NULL, NULL, 0);
 
 -- --------------------------------------------------------
 
@@ -401,6 +406,7 @@ INSERT INTO `questions` (`question_id`, `group_id`, `question`, `status`) VALUES
 CREATE TABLE `questions_group` (
   `group_id` int(11) NOT NULL,
   `group_name` varchar(100) NOT NULL,
+  `color_class` varchar(20) NOT NULL,
   `status` int(2) NOT NULL DEFAULT 0 COMMENT '0-active, 1-inactive'
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
@@ -408,15 +414,15 @@ CREATE TABLE `questions_group` (
 -- Dumping data for table `questions_group`
 --
 
-INSERT INTO `questions_group` (`group_id`, `group_name`, `status`) VALUES
-(1, 'Graphic & Design', 0),
-(2, 'Social Media Marketing', 0),
-(3, 'SEO', 0),
-(4, 'Video & Animation', 0),
-(5, 'Music & Audio', 0),
-(6, 'Programming', 0),
-(7, 'E-commerce', 0),
-(8, 'Word/Excel', 0);
+INSERT INTO `questions_group` (`group_id`, `group_name`, `color_class`, `status`) VALUES
+(1, 'Graphic & Design', 'btn-pink', 0),
+(2, 'Social Media Marketing', 'btn-primary', 0),
+(3, 'SEO', 'btn-danger', 0),
+(4, 'Video & Animation', 'btn-purple', 0),
+(5, 'Music & Audio', 'btn-success', 0),
+(6, 'Programming', 'btn-warning', 0),
+(7, 'E-commerce', 'btn-brown', 0),
+(8, 'Word/Excel', 'btn-info', 0);
 
 -- --------------------------------------------------------
 
@@ -437,166 +443,166 @@ CREATE TABLE `question_answers` (
 --
 
 INSERT INTO `question_answers` (`answers_id`, `question_id`, `answers`, `is_correct`, `status`) VALUES
-(5, 1, 'Option R', 0, 0),
-(6, 1, 'Command r', 0, 0),
-(7, 1, 'Shift R', 0, 0),
+(5, 1, 'Option R', 7, 0),
+(6, 1, 'Command r', 5, 0),
+(7, 1, 'Shift R', 6, 0),
 (8, 1, 'Control r', 1, 0),
-(9, 2, 'Orange', 0, 0),
-(10, 2, 'Green', 0, 0),
+(9, 2, 'Orange', 8, 0),
+(10, 2, 'Green', 4, 0),
 (11, 2, 'Blue-green', 1, 0),
-(12, 2, 'Red-orange', 0, 0),
-(13, 3, 'Limited by large file sizes', 0, 0),
+(12, 2, 'Red-orange', 3, 0),
+(13, 3, 'Limited by large file sizes', 9, 0),
 (14, 3, 'Scalable', 1, 0),
-(15, 3, 'Used by most digital photographers', 0, 0),
-(16, 3, 'Only used in Flash and PhotoShop', 0, 0),
+(15, 3, 'Used by most digital photographers', 3, 0),
+(16, 3, 'Only used in Flash and PhotoShop', 9, 0),
 (17, 4, 'Layers', 1, 0),
-(18, 4, 'CMYK', 0, 0),
-(19, 4, 'PhotoShop', 0, 0),
-(20, 4, 'Illustrators', 0, 0),
-(21, 5, 'Green', 0, 0),
-(22, 5, 'Violet', 0, 0),
+(18, 4, 'CMYK', 5, 0),
+(19, 4, 'PhotoShop', 9, 0),
+(20, 4, 'Illustrators', 8, 0),
+(21, 5, 'Green', 3, 0),
+(22, 5, 'Violet', 4, 0),
 (23, 5, 'Blue', 1, 0),
-(24, 5, 'Magenta', 0, 0),
-(25, 6, 'They give accurate number of engagements', 0, 0),
-(26, 6, 'They make it easy to track constant engages', 0, 0),
+(24, 5, 'Magenta', 3, 0),
+(25, 6, 'They give accurate number of engagements', 2, 0),
+(26, 6, 'They make it easy to track constant engages', 8, 0),
 (27, 6, 'They demonstrate the value and impacts of decisions made', 1, 0),
-(28, 6, 'They prevent vanity metrics', 0, 0),
+(28, 6, 'They prevent vanity metrics', 8, 0),
 (29, 7, 'Social Bookmarking Sites', 1, 0),
-(30, 7, 'Online Video Sharing sites', 0, 0),
-(31, 7, 'Blog Platforms', 0, 0),
-(32, 7, 'Wikis', 0, 0),
-(33, 8, 'Lobbying', 0, 0),
+(30, 7, 'Online Video Sharing sites', 4, 0),
+(31, 7, 'Blog Platforms', 5, 0),
+(32, 7, 'Wikis', 2, 0),
+(33, 8, 'Lobbying', 2, 0),
 (34, 8, 'Establishing objectives', 1, 0),
-(35, 8, 'Attainability', 0, 0),
-(36, 8, 'Setting time', 0, 0),
+(35, 8, 'Attainability', 4, 0),
+(36, 8, 'Setting time', 9, 0),
 (37, 9, 'It illuminates current and potential audience', 1, 0),
-(38, 9, 'It helps marketers know the next step', 0, 0),
-(39, 9, 'It solidifies loyal advocates', 0, 0),
-(40, 9, 'It ensures feedback from customers', 0, 0),
-(41, 10, 'Telegram', 0, 0),
-(42, 10, 'Twitter', 0, 0),
-(43, 10, 'Pinterest', 0, 0),
+(38, 9, 'It helps marketers know the next step', 3, 0),
+(39, 9, 'It solidifies loyal advocates', 2, 0),
+(40, 9, 'It ensures feedback from customers', 6, 0),
+(41, 10, 'Telegram', 7, 0),
+(42, 10, 'Twitter', 6, 0),
+(43, 10, 'Pinterest', 7, 0),
 (44, 10, 'Instagram', 1, 0),
 (45, 11, 'Search Engine Optimization', 1, 0),
-(46, 11, 'Search Engine Optimizing', 0, 0),
-(47, 11, 'Search Equity Otego', 0, 0),
-(48, 11, 'Search Engine Options', 0, 0),
-(49, 12, 'A way to increase traffic on your website', 0, 0),
+(46, 11, 'Search Engine Optimizing', 7, 0),
+(47, 11, 'Search Equity Otego', 4, 0),
+(48, 11, 'Search Engine Options', 6, 0),
+(49, 12, 'A way to increase traffic on your website', 9, 0),
 (50, 12, 'A process to improve the visibility of your website on search engines', 1, 0),
-(51, 12, 'A Coding Language', 0, 0),
-(52, 12, 'Something Extremely Offensive', 0, 0),
-(53, 13, 'Keywords', 0, 0),
-(54, 13, 'Meta Tags', 0, 0),
+(51, 12, 'A Coding Language', 8, 0),
+(52, 12, 'Something Extremely Offensive', 4, 0),
+(53, 13, 'Keywords', 2, 0),
+(54, 13, 'Meta Tags', 3, 0),
 (55, 13, 'Algorithm', 1, 0),
-(56, 13, 'Search Engines', 0, 0),
+(56, 13, 'Search Engines', 2, 0),
 (57, 14, 'Keywords, Titles, Links, Words in Links, Reputation', 1, 0),
-(58, 14, 'Titles, Links, Word Stuffing, Social Media, Traffic', 0, 0),
-(59, 14, 'Keywords, Links, Search Engines, Search Results', 0, 0),
-(60, 14, 'Keywords, Anchor Text, Brown Sugar, Flour', 0, 0),
-(61, 15, 'Consistent and Engaging Content', 0, 0),
-(62, 15, 'Fresh Content', 0, 0),
-(63, 15, 'Growing Numbers of Quality Links', 0, 0),
+(58, 14, 'Titles, Links, Word Stuffing, Social Media, Traffic', 6, 0),
+(59, 14, 'Keywords, Links, Search Engines, Search Results', 8, 0),
+(60, 14, 'Keywords, Anchor Text, Brown Sugar, Flour', 4, 0),
+(61, 15, 'Consistent and Engaging Content', 3, 0),
+(62, 15, 'Fresh Content', 8, 0),
+(63, 15, 'Growing Numbers of Quality Links', 8, 0),
 (64, 15, 'All of the Above', 1, 0),
 (65, 16, 'Drawing the animation one frame at a time', 1, 0),
-(66, 16, 'When a character walks straight', 0, 0),
-(67, 16, 'Drawing the animation one keyframe at a time', 0, 0),
-(68, 16, 'Drawing straight lines', 0, 0),
-(69, 17, 'The Little Black boy', 0, 0),
+(66, 16, 'When a character walks straight', 6, 0),
+(67, 16, 'Drawing the animation one keyframe at a time', 6, 0),
+(68, 16, 'Drawing straight lines', 8, 0),
+(69, 17, 'The Little Black boy', 4, 0),
 (70, 17, 'Bosko', 1, 0),
-(71, 17, 'Bimbo', 0, 0),
-(72, 17, 'Jhon', 0, 0),
-(73, 18, 'Mono', 0, 0),
-(74, 18, '5.1', 0, 0),
+(71, 17, 'Bimbo', 3, 0),
+(72, 17, 'Jhon', 8, 0),
+(73, 18, 'Mono', 8, 0),
+(74, 18, '5.1', 7, 0),
 (75, 18, 'Stereo', 1, 0),
-(76, 18, 'Dolby Surround', 0, 0),
-(77, 19, 'Chroma key', 0, 0),
-(78, 19, 'Color key', 0, 0),
+(76, 18, 'Dolby Surround', 7, 0),
+(77, 19, 'Chroma key', 5, 0),
+(78, 19, 'Color key', 9, 0),
 (79, 19, 'Luma key', 1, 0),
-(80, 19, 'Ghost key', 0, 0),
-(81, 20, 'Lighting', 0, 0),
+(80, 19, 'Ghost key', 5, 0),
+(81, 20, 'Lighting', 5, 0),
 (82, 20, 'Lightning', 1, 0),
-(83, 20, 'Lens flare', 0, 0),
-(84, 20, 'Thunder bolt', 0, 0),
+(83, 20, 'Lens flare', 8, 0),
+(84, 20, 'Thunder bolt', 8, 0),
 (85, 21, 'XLR', 1, 0),
-(86, 21, 'RCA', 0, 0),
-(87, 21, 'BNC', 0, 0),
-(88, 21, 'Mini', 0, 0),
+(86, 21, 'RCA', 8, 0),
+(87, 21, 'BNC', 4, 0),
+(88, 21, 'Mini', 5, 0),
 (89, 22, 'Pitch', 1, 0),
-(90, 22, 'Sound', 0, 0),
-(91, 22, 'Volume', 0, 0),
-(92, 22, 'Decibel', 0, 0),
+(90, 22, 'Sound', 4, 0),
+(91, 22, 'Volume', 3, 0),
+(92, 22, 'Decibel', 8, 0),
 (93, 23, '1130 ft per second', 1, 0),
-(94, 23, '1130 ft per decible', 0, 0),
-(95, 23, '1130 miles per minute', 0, 0),
-(96, 23, '1150 ft per minute', 0, 0),
+(94, 23, '1130 ft per decible', 5, 0),
+(95, 23, '1130 miles per minute', 8, 0),
+(96, 23, '1150 ft per minute', 6, 0),
 (97, 24, 'Production Sound Mixer', 1, 0),
-(98, 24, 'Boom Operator', 0, 0),
-(99, 24, 'Cable Utility Guy', 0, 0),
-(100, 24, 'Audio Collector', 0, 0),
-(101, 25, 'ADR', 0, 0),
-(102, 25, 'Field Recording', 0, 0),
+(98, 24, 'Boom Operator', 7, 0),
+(99, 24, 'Cable Utility Guy', 6, 0),
+(100, 24, 'Audio Collector', 9, 0),
+(101, 25, 'ADR', 7, 0),
+(102, 25, 'Field Recording', 7, 0),
 (103, 25, 'Foley Sound', 1, 0),
-(104, 25, 'Sound Design', 0, 0),
-(105, 26, 'It is a social media management tool', 0, 0),
-(106, 26, 'It is a customer relationship management tool', 0, 0),
+(104, 25, 'Sound Design', 6, 0),
+(105, 26, 'It is a social media management tool', 8, 0),
+(106, 26, 'It is a customer relationship management tool', 6, 0),
 (107, 26, 'It is a content management system', 1, 0),
-(108, 26, 'It is an online conferencing tool', 0, 0),
-(109, 27, 'A content management tool', 0, 0),
-(110, 27, 'A Theme', 0, 0),
+(108, 26, 'It is an online conferencing tool', 9, 0),
+(109, 27, 'A content management tool', 5, 0),
+(110, 27, 'A Theme', 3, 0),
 (111, 27, 'Hosting Account', 1, 0),
-(112, 27, 'Project Management Tool', 0, 0),
-(113, 28, 'Is the caption for the image', 0, 0),
-(114, 28, 'Shows when the page loads properly', 0, 0),
+(112, 27, 'Project Management Tool', 5, 0),
+(113, 28, 'Is the caption for the image', 7, 0),
+(114, 28, 'Shows when the page loads properly', 3, 0),
 (115, 28, 'Shows when a picture doesn\'t load properly', 1, 0),
-(116, 28, 'Is a place where we can link another page', 0, 0),
-(117, 29, 'Array', 0, 0),
-(118, 29, 'Int', 0, 0),
+(116, 28, 'Is a place where we can link another page', 7, 0),
+(117, 29, 'Array', 9, 0),
+(118, 29, 'Int', 8, 0),
 (119, 29, 'Stacks', 1, 0),
-(120, 29, 'Queues', 0, 0),
-(121, 30, 'Double', 0, 0),
-(122, 30, 'Int', 0, 0),
+(120, 29, 'Queues', 4, 0),
+(121, 30, 'Double', 2, 0),
+(122, 30, 'Int', 3, 0),
 (123, 30, 'Char', 1, 0),
-(124, 30, 'Word', 0, 0),
+(124, 30, 'Word', 7, 0),
 (125, 31, 'Financial cybermediary', 1, 0),
-(126, 31, 'Digital wallet', 0, 0),
-(127, 31, 'Electronic payment', 0, 0),
-(128, 31, 'Electronic check', 0, 0),
-(129, 32, 'Internet Marketers', 0, 0),
+(126, 31, 'Digital wallet', 9, 0),
+(127, 31, 'Electronic payment', 9, 0),
+(128, 31, 'Electronic check', 6, 0),
+(129, 32, 'Internet Marketers', 3, 0),
 (130, 32, 'Service Providers', 1, 0),
-(131, 32, 'Value Providers', 0, 0),
-(132, 32, 'Affiliate Marketers', 0, 0),
-(133, 33, 'Push', 0, 0),
-(134, 33, 'Public key', 0, 0),
+(131, 32, 'Value Providers', 5, 0),
+(132, 32, 'Affiliate Marketers', 4, 0),
+(133, 33, 'Push', 5, 0),
+(134, 33, 'Public key', 5, 0),
 (135, 33, 'Digital natives', 1, 0),
-(136, 33, 'Screenagers', 0, 0),
-(137, 34, 'Electronic Market', 0, 0),
+(136, 33, 'Screenagers', 6, 0),
+(137, 34, 'Electronic Market', 5, 0),
 (138, 34, 'Electronic Commerce', 1, 0),
-(139, 34, 'E-Shopping', 0, 0),
-(140, 34, 'None of the above', 0, 0),
-(141, 35, 'Web shopping', 0, 0),
+(139, 34, 'E-Shopping', 5, 0),
+(140, 34, 'None of the above', 8, 0),
+(141, 35, 'Web shopping', 9, 0),
 (142, 35, 'Social networking', 1, 0),
-(143, 35, 'Music downloading', 0, 0),
-(144, 35, 'None of these', 0, 0),
-(145, 36, 'Number', 0, 0),
-(146, 36, 'Formula', 0, 0),
-(147, 36, 'Text', 0, 0),
+(143, 35, 'Music downloading', 4, 0),
+(144, 35, 'None of these', 5, 0),
+(145, 36, 'Number', 5, 0),
+(146, 36, 'Formula', 2, 0),
+(147, 36, 'Text', 2, 0),
 (148, 36, 'All of the above', 1, 0),
-(149, 37, 'Organize data', 0, 0),
-(150, 37, 'Calculate answers', 0, 0),
-(151, 37, 'Chart data', 0, 0),
+(149, 37, 'Organize data', 9, 0),
+(150, 37, 'Calculate answers', 7, 0),
+(151, 37, 'Chart data', 6, 0),
 (152, 37, 'All of the above', 1, 0),
-(153, 38, 'One', 0, 0),
+(153, 38, 'One', 9, 0),
 (154, 38, 'Two', 1, 0),
-(155, 38, 'Zero', 0, 0),
-(156, 38, 'It depends', 0, 0),
-(157, 39, 'Exact middle of page', 0, 0),
-(158, 39, 'Where page numbers are', 0, 0),
-(159, 39, '1 and 1/2 inches at top of page', 0, 0),
+(155, 38, 'Zero', 8, 0),
+(156, 38, 'It depends', 2, 0),
+(157, 39, 'Exact middle of page', 8, 0),
+(158, 39, 'Where page numbers are', 2, 0),
+(159, 39, '1 and 1/2 inches at top of page', 7, 0),
 (160, 39, 'Blank areas around the top, bottom and sides of a page', 1, 0),
-(161, 40, 'Something you use with a knife', 0, 0),
+(161, 40, 'Something you use with a knife', 5, 0),
 (162, 40, 'A small character that appears before an item in a document', 1, 0),
-(163, 40, 'A dash', 0, 0),
-(164, 40, 'A period', 0, 0);
+(163, 40, 'A dash', 9, 0),
+(164, 40, 'A period', 5, 0);
 
 -- --------------------------------------------------------
 
@@ -669,8 +675,8 @@ CREATE TABLE `task` (
 --
 
 INSERT INTO `task` (`task_id`, `task_name`, `project_id`, `priority_level`, `start_date`, `end_date`, `assigned_at`, `task_timeline`, `task_status`) VALUES
-(1, 'Create 100 emails', 3, 2, '2020-11-14', '2020-11-20', '2020-11-14 15:15:34', 1, 0),
-(2, 'Send 1st 100 emails', 3, 1, '2020-11-16', '2020-11-23', '2020-11-14 17:46:22', 0, 0),
+(1, 'Create 100 emails', 3, 2, '2020-11-14', '2020-11-16', '2020-11-14 15:15:34', 1, 0),
+(2, 'Send 1st 100 emails', 3, 1, '2020-11-16', '2020-11-18', '2020-11-14 17:46:22', 0, 0),
 (3, 'Find vehicle advertisement', 4, 3, '2020-11-15', '2020-11-19', '2020-11-15 08:30:41', 0, 0),
 (4, 'Find land advertisement', 4, 1, '2020-11-16', '2020-11-23', '2020-11-15 08:34:20', 0, 0),
 (5, 'Create 50 emails', 3, 1, '2020-11-18', '2020-11-24', '2020-11-15 09:30:57', 0, 0);
@@ -973,7 +979,7 @@ ALTER TABLE `user_role`
 -- AUTO_INCREMENT for table `backup_details`
 --
 ALTER TABLE `backup_details`
-  MODIFY `backup_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
+  MODIFY `backup_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
 
 --
 -- AUTO_INCREMENT for table `communication`
@@ -1009,13 +1015,13 @@ ALTER TABLE `freelancer_login`
 -- AUTO_INCREMENT for table `freelancer_marks`
 --
 ALTER TABLE `freelancer_marks`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
 -- AUTO_INCREMENT for table `freelancer_tools`
 --
 ALTER TABLE `freelancer_tools`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
 -- AUTO_INCREMENT for table `payment`
