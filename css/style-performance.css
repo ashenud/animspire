@@ -1,0 +1,72 @@
+.cont .freelancer-performance {
+             height: 520px;
+             width: 960px;
+             position: absolute;
+             z-index: 1;
+             bottom: 20px;
+             right: 25px;
+             background-color: white;
+             overflow: hidden;
+             box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2), 0 6px 8px rgba(0, 0, 0, 0.19);
+             font-family: 'Roboto', sans-serif;
+}
+.freelancer-performance .freelancer-select{
+   
+    
+}
+.freelancer-performance .freelancer-info{
+    height: 160px;
+    width: 330px;
+    background-color: tomato;
+    margin: 20px 10px 10px 10px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2), 0 6px 8px rgba(0, 0, 0, 0.19);
+}
+.freelancer-performance .freelancer-rating{
+    height: 160px;
+    width: 290px;
+    background-color: dodgerblue;
+    margin: 20px 10px 10px 10px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2), 0 6px 8px rgba(0, 0, 0, 0.19);
+}
+.freelancer-performance .freelancer-awards{
+    height: 160px;
+    width: 250px;
+    background-color: yellowgreen;
+    margin: 20px 10px 10px 10px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2), 0 6px 8px rgba(0, 0, 0, 0.19);
+}
+.freelancer-performance .all-projects-block{
+    height: 120px;
+    width: 120px;
+    background-color: yellowgreen;
+    margin: 20px 10px 20px 10px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2), 0 6px 8px rgba(0, 0, 0, 0.19);
+}
+.freelancer-performance .all-task-block{
+    height: 120px;
+    width: 120px;
+    background-color: yellow;
+    margin: 20px 10px 20px 10px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2), 0 6px 8px rgba(0, 0, 0, 0.19);
+}
+.freelancer-performance .task-block{
+    height: 120px;
+    width: 490px;
+    background-color: tomato;
+    margin: 20px 10px 20px 10px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2), 0 6px 8px rgba(0, 0, 0, 0.19);
+}
+.freelancer-performance .task-delay-rate-block{
+    height: 120px;
+    width: 120px;
+    background-color: dodgerblue;
+    margin: 20px 10px 20px 10px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2), 0 6px 8px rgba(0, 0, 0, 0.19);
+}
+.freelancer-performance .task-progressbar-block{
+    height: 70px;
+    width: 910px;
+    background-color: purple;
+    margin: 10px 10px 10px 10px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2), 0 6px 8px rgba(0, 0, 0, 0.19);
+}

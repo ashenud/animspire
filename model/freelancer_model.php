@@ -412,7 +412,133 @@ class Freelancer{
                     t.end_date < CURDATE()
                     AND t.task_timeline = 0
                     AND t.task_status = 0
+                    AND p.project_status = 0
                     AND p.freelancer_id = '$freelancer_id'";
+        $results = $con->query($sql);
+
+        return $results;
+    }
+
+    function getTotalTaskCount($freelancer_id) {
+
+        $con = $GLOBALS['con'];
+        $sql = "SELECT
+                    t.task_id,
+                    p.project_id
+                FROM
+                    task t
+                        INNER JOIN
+                    project p ON p.project_id = t.project_id
+                WHERE
+                    t.task_status = 0
+                    AND p.project_status = 0
+                    AND p.freelancer_id = '$freelancer_id'";
+        $results = $con->query($sql);
+
+        return $results;
+    }
+
+    function getPendingTaskCount($freelancer_id) {
+
+        $con = $GLOBALS['con'];
+        $sql = "SELECT
+                    t.task_id,
+                    p.project_id
+                FROM
+                    task t
+                        INNER JOIN
+                    project p ON p.project_id = t.project_id
+                WHERE
+                    t.task_status = 0
+                    AND t.task_timeline = 0
+                    AND p.project_status = 0
+                    AND p.freelancer_id = '$freelancer_id'";
+        $results = $con->query($sql);
+
+        return $results;
+    }
+
+    function getCompletedTaskCount($freelancer_id) {
+
+        $con = $GLOBALS['con'];
+        $sql = "SELECT
+                    t.task_id,
+                    p.project_id
+                FROM
+                    task t
+                        INNER JOIN
+                    project p ON p.project_id = t.project_id
+                WHERE
+                    t.task_status = 0
+                    AND t.task_timeline = 1
+                    AND p.project_status = 0
+                    AND p.freelancer_id = '$freelancer_id'";
+        $results = $con->query($sql);
+
+        return $results;
+    }
+
+    function getTopUrgentTaskCount($freelancer_id) {
+
+        $con = $GLOBALS['con'];
+        $sql = "SELECT
+                    t.task_id,
+                    p.project_id
+                FROM
+                    task t
+                        INNER JOIN
+                    project p ON p.project_id = t.project_id
+                WHERE
+                    t.task_status = 0
+                    AND t.priority_level = 3
+                    AND p.project_status = 0
+                    AND p.freelancer_id = '$freelancer_id'";
+        $results = $con->query($sql);
+
+        return $results;
+    }
+
+    function getTotalProjectCount($freelancer_id) {
+
+        $con = $GLOBALS['con'];
+        $sql = "SELECT
+                    p.project_id
+                FROM
+                    project p
+                WHERE
+                    p.project_status = 0
+                    AND p.freelancer_id = '$freelancer_id'";
+        $results = $con->query($sql);
+
+        return $results;
+    }
+
+    function getTotalMarks($freelancer_id) {
+
+        $con = $GLOBALS['con'];
+        $sql = "SELECT
+                    ROUND(SUM(fm.marks/20)) AS marks
+                FROM
+                    freelancer_marks fm
+                WHERE
+                    fm.status = 0
+                    AND fm.freelancer_id = '$freelancer_id'";
+        $results = $con->query($sql);
+
+        return $results;
+    }
+
+    function getFreelancerDetatils($freelancer_id) {
+
+        $con = $GLOBALS['con'];
+        $sql = "SELECT
+                    f.freelancer_id,
+                    CONCAT(f.freelancer_fname,' ',f.freelancer_lname) AS name,
+                    f.freelancer_image
+                FROM
+                    freelancer f
+                WHERE
+                    f.freelancer_id =  '$freelancer_id'";
         $results = $con->query($sql);
 
         return $results;

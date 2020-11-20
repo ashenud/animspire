@@ -120,7 +120,7 @@
     <hr>
     <a href="./pro-manager-reports-management.php"><i class="fa fa-fw fa-file-alt"></i><br>Reports</a>
     <hr>
-    <a href="./pro-manager-performance.php"><i class="fa fa-fw fa-user"></i><br>Performance</a>
+    <a href="./pro-manager-performance-management.php"><i class="fa fa-fw fa-user"></i><br>Performance</a>
     <hr>
     <a href="./pro-manager-tools-management.php"><i class="fa fa-fw fa-tools"></i><br>Tools</a>
     <hr>
