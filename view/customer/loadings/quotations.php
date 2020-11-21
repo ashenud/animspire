@@ -50,7 +50,11 @@ if(isset($_SESSION["customer"])) {
                 }
                 else {
                     ?>
-                    <td>No actions needed</td>
+                    <td style="text-align: center;">
+                        <div class="btn-group">
+                            <button type="button" id='view-quote-btn' href='#view-quote' data-toggle='modal' data-subject='<?php echo $quotation["subject"];?>' data-requirements='<?php echo $quotation["requirements"];?>' data-remarks='<?php echo $quotation["remarks"];?>' data-status='<?php echo $quotation["status"];?>' class="btn btn-info btn-sm" style="padding: 0; margin: 2px; width: 35px;" ><i class="far fa-eye" style="font-size: 18px" ></i></button>
+                        </div>
+                    </td>
                     <?php
                 }
                 ?>

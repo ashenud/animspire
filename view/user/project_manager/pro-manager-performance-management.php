@@ -55,7 +55,7 @@
                                         $freelancers1 = $proManagerObj->getAllFreelancers();
                                         while($freelancer1 = $freelancers1->fetch_assoc()) {
                                             ?>
-                                            <option value="<?php echo $freelancer1["id"]; ?>">( ID - <?php echo $freelancer1["id"]; ?> ) <?php echo $freelancer1["name"]; ?></option>
+                                            <option value="<?php echo $freelancer1["id"]; ?>"><?php echo $freelancer1["id"]; ?> - <?php echo $freelancer1["name"]; ?></option>
                                             <?php
                                         }
                                     ?>

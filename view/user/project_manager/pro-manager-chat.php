@@ -98,7 +98,7 @@
                                     <?php
                                     while($dataRow = $messages->fetch_assoc()) {
                                     ?>
-                                        <p><span>'<?php echo $dataRow['sender']; ?>' To '<?php echo $dataRow['receiver']; ?>' :</span> <?php echo $dataRow['message']; ?></p>   
+                                        <p><span>'<?php echo $dataRow['sender']; ?>' :</span> <?php echo $dataRow['message']; ?></p>   
                                     <?php
                                     }
                                     ?>

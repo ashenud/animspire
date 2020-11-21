@@ -100,8 +100,14 @@
         <script type="text/javascript">
             $(document).ready(function() {
                 var marks = <?php echo $_SESSION["freelancer_marks"];?>;
+                if (marks<50) {
+                    var title = 'Try Again'
+                }
+                else {
+                    var title = 'Good job !'
+                }
                 swal({
-                    title: "Good job !",
+                    title: title,
                     text: `Your mark is ${marks}%`,
                     icon: "../../images/icons/trophy.png",
                     iconSize: '300x300'

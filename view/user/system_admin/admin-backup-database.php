@@ -26,6 +26,7 @@
             /* end permission check */
 
             $dbTables = $adminObj->getAllDbTables();
+            $num_of_tables = count($dbTables);
 
             $user_id = $_SESSION["user"]["user_id"];
             $userId = base64_encode($user_id);
@@ -50,28 +51,30 @@
                             <h3>Backup Database</h3>
                     </div>
                 </div>
-                <div class="row ml-2">
-                    <div id="ckeckboxdiv" class="col-md-12">
-                        <form method="post" id="export_form" action="../../../controller/adminController.php?status=backup_db">
-                            <h5>Select Tables for Export</h5>
-                                <?php
-                                foreach($dbTables as $table) {
-                                ?>
-                                    <div class="checkbox ml-2">
+                <form method="post" id="export_form" action="../../../controller/adminController.php?status=backup_db">
+                    <h5>Select Tables for Export</h5>
+                    <div class="row ml-2">
+                        
+                        <?php
+                        for($i=0; $i<=$num_of_tables; $i++) {
+                            ?>
+                            <div id="ckeckboxdiv" class="col-md-3">
+                                    <div class="checkbox ">
                                         <label>
-                                            <input type="checkbox" class="checkbox_table" name="table[]" value="<?php echo $table["Tables_in_animspire"]; ?>"> <?php echo $table["Tables_in_animspire"]; ?>
+                                            <input type="checkbox" class="checkbox_table" name="table[]" value="<?php echo $dbTables[$i]["Tables_in_animspire"]; ?>"> <?php echo $dbTables[$i]["Tables_in_animspire"]; ?>
                                         </label>
                                     </div>
-                                <?php
-                                }
-                            ?>
-                            <div class="form-group">
-                                <input type="button" id="check-toggle" class="check btn btn-secondary" style="padding: 2px; font-size: 10px; background: #535659 !important;" value="check all" />
-                                <button type="submit" name="generate-sql" id="generate-sql" class="btn btn-danger" >Backup Database</button>
                             </div>
-                        </form>
+                            <?php
+                        }
+                    ?>
+
+                    </div> 
+                    <div class="form-group">
+                        <input type="button" id="check-toggle" class="check btn btn-secondary" style="padding: 2px; font-size: 10px; background: #535659 !important;" value="check all" />
+                        <button type="submit" name="generate-sql" id="generate-sql" class="btn btn-danger" >Backup Database</button>
                     </div>
-                </div>              
+                </form>            
             </div>
         </div>
 

@@ -36,7 +36,8 @@ if($_SESSION["user"]) {
                 $top_urgent_tasks= $freelancerObj->getTopUrgentTaskCount($freelancer_id)->num_rows;
                 $pending_tasks= $freelancerObj->getPendingTaskCount($freelancer_id)->num_rows;
                 $completed_tasks= $freelancerObj->getCompletedTaskCount($freelancer_id)->num_rows;
-                $freelancer_rate = ($delayed_tasks/$all_tasks)*100;
+                $freelancer_rate = 100 - (($delayed_tasks/$all_tasks)*100);
+                $completed_rate =($completed_tasks/$all_tasks)*100;
 
                 if(100 == $freelancer_rate ) {
                     ?>
@@ -52,59 +53,31 @@ if($_SESSION["user"]) {
                         </div>
                     <?php
                 }
-                elseif(70 < $freelancer_rate) {
-                    ?>
-                        <div class="row rating-stars" style="margin: 25px 24.5px  ">
-                            <img src="../../../images/icons/star_1.png"/> &nbsp; <img src="../../../images/icons/star_1.png"/> &nbsp; <img src="../../../images/icons/star_1.png"/> &nbsp; <img src="../../../images/icons/star_1.png"/>
-                        </div>
-                    <?php
-                }
                 elseif(60 < $freelancer_rate) {
                     ?>
                         <div class="row rating-stars" style="margin: 25px 24.5px  ">
-                            <img src="../../../images/icons/star_1.png"/> &nbsp; <img src="../../../images/icons/star_1.png"/> &nbsp; <img src="../../../images/icons/star_1.png"/> &nbsp; <img src="../../../images/icons/star_dark.png"/>
-                        </div>
-                    <?php
-                }
-                elseif(50 < $freelancer_rate) {
-                    ?>
-                        <div class="row rating-stars" style="margin: 25px 24.5px  ">
-                            <img src="../../../images/icons/star_1.png"/> &nbsp; <img src="../../../images/icons/star_1.png"/> &nbsp; <img src="../../../images/icons/star_1.png"/>
+                            <img src="../../../images/icons/star_1.png"/> &nbsp; <img src="../../../images/icons/star_1.png"/> &nbsp; <img src="../../../images/icons/star_1.png"/>  &nbsp; <img src="../../../images/icons/star_dark.png"/>  &nbsp; <img src="../../../images/icons/star_dark.png"/>
                         </div>
                     <?php
                 }
                 elseif(40 < $freelancer_rate) {
                     ?>
                         <div class="row rating-stars" style="margin: 25px 24.5px  ">
-                            <img src="../../../images/icons/star_1.png"/> &nbsp; <img src="../../../images/icons/star_1.png"/> &nbsp; <img src="../../../images/icons/star_dark.png"/>
-                        </div>
-                    <?php
-                }
-                elseif(30 < $freelancer_rate) {
-                    ?>
-                        <div class="row rating-stars" style="margin: 25px 24.5px  ">
-                            <img src="../../../images/icons/star_1.png"/> &nbsp; <img src="../../../images/icons/star_1.png"/> 
+                            <img src="../../../images/icons/star_1.png"/> &nbsp; <img src="../../../images/icons/star_1.png"/>  &nbsp; <img src="../../../images/icons/star_dark.png"/>&nbsp; <img src="../../../images/icons/star_dark.png"/>  &nbsp; <img src="../../../images/icons/star_dark.png"/>
                         </div>
                     <?php
                 }
                 elseif(20 < $freelancer_rate) {
                     ?>
                         <div class="row rating-stars" style="margin: 25px 24.5px  ">
-                            <img src="../../../images/icons/star_1.png"/> &nbsp; <img src="../../../images/icons/star_dark.png"/>
-                        </div>
-                    <?php
-                }
-                elseif(10 < $freelancer_rate) {
-                    ?>
-                        <div class="row rating-stars" style="margin: 25px 24.5px  ">
-                            <img src="../../../images/icons/star_1.png"/>
+                            <img src="../../../images/icons/star_1.png"/>  &nbsp; <img src="../../../images/icons/star_dark.png"/> &nbsp; <img src="../../../images/icons/star_dark.png"/>  &nbsp; <img src="../../../images/icons/star_dark.png"/>  &nbsp; <img src="../../../images/icons/star_dark.png"/>
                         </div>
                     <?php
                 }
                 else {
                     ?>
                         <div class="row rating-stars" style="margin: 25px 24.5px  ">
-                            <img src="../../../images/icons/star_dark.png"/>
+                            <img src="../../../images/icons/star_dark.png"/>  &nbsp; <img src="../../../images/icons/star_dark.png"/> &nbsp; <img src="../../../images/icons/star_dark.png"/> &nbsp; <img src="../../../images/icons/star_dark.png"/> &nbsp; <img src="../../../images/icons/star_dark.png"/>
                         </div>
                     <?php
                 }
@@ -126,7 +99,7 @@ if($_SESSION["user"]) {
                             <img src="../../../images/icons/second.png" style="width: 80px; height: 80px; margin: 10px 100px 5px auto;"/>
                         <?php
                     }
-                    elseif(8 < $freelancer_point) {
+                    elseif(10 < $freelancer_point) {
                         ?>
                             <img src="../../../images/icons/third.png" style="width: 80px; height: 80px; margin: 10px 100px 5px auto;"/>
                         <?php
@@ -223,7 +196,7 @@ if($_SESSION["user"]) {
             </div>
             </div>
             <div class="progress-count">
-                <h1 style="font-size: 40px; margin: 25px 22px; color: white"><?php echo number_format($freelancer_rate);?>%</h1>
+                <h1 style="font-size: 40px; margin: 25px 22px; color: white"><?php echo number_format($completed_rate);?>%</h1>
             </div>
         </div>
     </div>
@@ -231,7 +204,7 @@ if($_SESSION["user"]) {
     <script type="text/javascript">
         $(document).ready(function() {
             $(".progress-bar").animate({
-                width: "<?php echo number_format($freelancer_rate);?>%"
+                width: "<?php echo number_format($completed_rate);?>%"
             }, 2500);
         });
     </script>

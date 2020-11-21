@@ -347,6 +347,80 @@ class Customer{
             return 0;
         }
 
+    }    
+    
+    function getCustomerProjectDetails($customer_id) {
+
+        $con = $GLOBALS['con'];
+        $sql = "SELECT
+                    p.project_id,
+                    p.project_name,
+                    p.description,
+                    p.quotation_id,
+                    py.paid_amount,
+                    c.customer_id,
+                    c.customer_image,
+                    CONCAT(c.customer_fname, ' ', c.customer_lname) AS cus_name,
+                    p.project_manager_id,
+                    CONCAT(u.user_fname, ' ', u.user_lname) AS pro_name,
+                    IFNULL(p.freelancer_id,0) AS freelancer_id,
+                    p.start_date,
+                    p.end_date,
+                    p.project_timeline
+                FROM
+                    project p
+                        INNER JOIN
+                    customer c ON c.customer_id = p.customer_id
+                        INNER JOIN
+                    user u ON u.user_id = p.project_manager_id
+                        INNER JOIN
+                    payment py ON py.quotation_id = p.quotation_id
+                WHERE
+                    c.customer_status = 1
+                    AND p.project_status = 0
+                    AND p.customer_id = '$customer_id'";
+        $results = $con->query($sql);
+
+        return $results;
+    }    
+    
+    function getTotalTaskCount($project_id) {
+
+        $con = $GLOBALS['con'];
+        $sql = "SELECT
+                    t.task_id,
+                    p.project_id
+                FROM
+                    task t
+                        INNER JOIN
+                    project p ON p.project_id = t.project_id
+                WHERE
+                    t.task_status = 0
+                    AND p.project_status = 0
+                    AND p.project_id = '$project_id'";
+        $results = $con->query($sql);
+
+        return $results;
+    }
+
+    function getCompletedTaskCount($project_id) {
+
+        $con = $GLOBALS['con'];
+        $sql = "SELECT
+                    t.task_id,
+                    p.project_id
+                FROM
+                    task t
+                        INNER JOIN
+                    project p ON p.project_id = t.project_id
+                WHERE
+                    t.task_status = 0
+                    AND t.task_timeline = 1
+                    AND p.project_status = 0
+                    AND p.project_id = '$project_id'";
+        $results = $con->query($sql);
+
+        return $results;
     }
 
     

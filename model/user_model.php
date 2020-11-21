@@ -762,7 +762,8 @@ class MarketingManager {
                     description = '$description',
                     project_manager_id = '$project_manager_id',
                     start_date = '$start_date',
-                    end_date = '$end_date'
+                    end_date = '$end_date',
+                    project_status = 0
                 WHERE 
                     project_id = '$project_id'";
         $results = $con->query($sql);
@@ -1045,7 +1046,8 @@ class projectManager {
                     task_name = '$task_name',
                     priority_level = '$priority_level',
                     start_date = '$start_date',
-                    end_date = '$end_date'
+                    end_date = '$end_date',
+                    task_status = 0
                 WHERE
                     task_id = '$task_id'";
         $results = $con->query($sql);

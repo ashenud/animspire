@@ -121,11 +121,11 @@
     <a href="./customer-payments.php"><i class="fas fa-file-invoice-dollar"></i><br>Payments</a>
     <hr>
     <a href="./customer-projects.php"><i class="fas fa-laptop"></i><br>Projects</a>
-    <hr>
-    <a href="#contact"><i class="fa fa-fw fa-wrench"></i><br>Reports</a>
+    <!-- <hr>
+    <a href="#contact"><i class="fa fa-fw fa-wrench"></i><br>Reports</a> -->
     <hr>
     <a href="../../controller/customerlogincontroller.php?status=logout"><img src="../../images/icons/logout.png"
-            alt="Logout" style="width:50px;height:50px;margin-top: 140px; margin-left: 5px"></a></a>
+            alt="Logout" style="width:50px;height:50px;margin-top: 215px; margin-left: 5px"></a></a>
 </div>
 <div class="top-navbar">
     <a href="./customer-profile.php?customer_id=<?php echo $customerId; ?>"><img
