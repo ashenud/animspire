@@ -1,0 +1,41 @@
+.cont .report-generation {
+             height: 520px;
+             width: 980px;
+             position: absolute;
+             z-index: 1;
+             bottom: 20px;
+             right: 15px;
+             background-color: white;
+             overflow-x: hidden;
+             box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2), 0 6px 8px rgba(0, 0, 0, 0.19);
+             font-family: 'Roboto', sans-serif;
+}
+.report-generation .top-buttons{
+    padding-top: 10px;
+}
+.top-buttons #report-generate{
+    padding: px;
+    margin-left: 95px;
+    margin-top: 20px;
+    width: 300px;
+}
+.top-buttons .admin-name{
+    padding: px;
+    margin-left: 35px;
+    margin-top: 21px;
+    width: 300px;
+}
+.top-buttons .form-control{
+    padding: px;
+    margin-left: 35px;
+    margin-top: 21px;
+    width: 300px;
+}
+.top-buttons #report-generate-2{
+    padding: px;
+    margin-left: 25px;
+    margin-top: 20px;
+    width: 200px;
+}
+
+

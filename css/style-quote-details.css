@@ -1,0 +1,57 @@
+.cont .quote-details {
+             height: 500px;
+             width: 950px;
+             position: absolute;
+             z-index: 1;
+             bottom: 40px;
+             right: 30px;
+             background-color: white;
+             overflow-x: hidden;
+             box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2), 0 6px 8px rgba(0, 0, 0, 0.19);
+             font-family: 'Roboto', sans-serif;
+}
+.quote-details .top-buttons{
+    padding-top: 10px;
+}
+.top-buttons #req-quote{
+    padding: 6px;
+    margin-left: 20px;
+    margin-top: 5px;
+    width: 100px;
+}
+.top-buttons h4{
+   padding: 8px;
+}
+.quote-details .quote-table{
+            border-collapse: collapse;
+            width: 100%;
+}
+.quote-table th{
+     padding: 3px 3px 3px 3px;
+     border: 1px solid #A569BD;
+     text-align: left;
+     background-color: #6C3483;
+     color: white;
+     font-weight: 600;
+     font-size: 15px;
+}
+.quote-table td{
+     border: 1px solid #A569BD;
+     text-align: left;
+     background-color: #9B59B6;
+     color: white;
+     font-weight: 600;
+     font-size: 15px;
+}
+.quote-table button{
+     font-size: 14px;
+     text-align: center;
+     text-decoration: none;
+     cursor: pointer;
+     width: 70px;
+     height: 30px;
+     padding: 2px;
+     margin: 2px;
+}
+.top-buttons #btngroup{
+}

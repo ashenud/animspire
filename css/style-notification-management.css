@@ -1,0 +1,61 @@
+.cont .user-details {
+             height: 520px;
+             width: 980px;
+             position: absolute;
+             z-index: 1;
+             bottom: 20px;
+             right: 15px;
+             background-color: white;
+             overflow-x: hidden;
+             box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2), 0 6px 8px rgba(0, 0, 0, 0.19);
+             font-family: 'Roboto', sans-serif;
+}
+.user-details .top-buttons{
+    padding-top: 10px;
+}
+.top-buttons #adduser{
+    padding: 6px;
+    margin-left: 25px;
+    margin-top: 10px;
+    width: 150px;
+}
+.top-buttons #search{
+    padding: 6px;
+    margin-right: 25px;
+    margin-top: 10px;
+    width: 120px;
+}
+.top-buttons h4{
+   padding: 8px;
+}
+.user-details #notification-table{
+            border-collapse: collapse;
+            width: 100%;
+}
+#notification-table th{
+     padding: 4px 3px 2px 4px;
+     border: 1px solid #A569BD;
+     text-align: center;
+     background-color: #6C3483;
+     color: white;
+     font-weight: 800;
+     font-size: 18px;
+     height: 40px;
+}
+#notification-table td{
+     border: 1px solid #A569BD;
+     background-color: #9B59B6;
+     color: white;
+     font-weight: 600;
+     font-size: 17px;
+     padding: 2px;
+     height: 30px;
+}
+#notification-table button{
+     font-size: 17px;
+     text-align: center;
+     text-decoration: none;
+     cursor: pointer;
+     padding: 1px;
+     
+}
